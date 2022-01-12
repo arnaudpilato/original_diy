@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
-<head>
-    <meta charset="UTF-8">
-    <title>Connection</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Connection</title>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <form id="loginForm" th:action="@{/login}" method="post">
+                    <label for="username">Utilisateur</label>
+                    <input id="username" name="username" type="text" placeholder="Utilisateur">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" name="password" type="text" placeholder="Mot de passe">
+                    <button type="submit">Validation</button>
+                </form>
+            </div>
 
-</body>
+        </div>
+    </body>
 </html>
