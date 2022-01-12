@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Nouvel Utilisateur</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <form id="createUserForm" th:action="@{/userCreate}" method="post" th:object="${user}">
+                <input name="id" th:field="*{id}" type="hidden">
+                <label for="username">Utilisateur</label>
+                <input id="username" name="username" th:field="*{username}" type="text"  placeholder="Utilisateur">
+                <label for="password">Mot de passe</label>
+                <input id="password" name="password" th:field="*{password}" type="password"  placeholder="Mot de passe">
+                <button type="submit">Valider</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
     <head>
         <meta charset="UTF-8">
         <title>Connection</title>
     </head>
-    <body>
-        <div class="container">
-            <div>
-                <form id="loginForm" th:action="@{/login}" method="post">
-                    <label for="username">Utilisateur</label>
-                    <input id="username" name="username" type="text" placeholder="Utilisateur">
-                    <label for="password">Mot de passe</label>
-                    <input id="password" name="password" type="text" placeholder="Mot de passe">
-                    <button type="submit">Validation</button>
-                </form>
-            </div>
 
+    <div layout:fragment="content">
+        <div class="container">
+            <form id="loginForm" th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="username">Utilisateur</label>
+                    <input id="username" class="form-control" name="username" type="text" placeholder="Utilisateur">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Mot de passe</label>
+                    <input id="password" class="form-control" name="password" type="password" placeholder="Mot de passe">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">Se connecter</button>
+                </div>
+            </form>
+            <a href="/user">Créer un compte</a>
         </div>
-    </body>
+    </div>
 </html>
