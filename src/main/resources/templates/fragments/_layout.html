@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8">
         <th:block th:replace="fragments/_bootstrap.html :: bootstrapHeadFragment"></th:block>
+        <th:block layout:fragment="head"></th:block>
+        <th:block th:replace="fragments/_jquerry.html :: jquerry"></th:block>
     </head>
     <body>
-        <div layout:fragment="content"></div>
+        <header th:replace="fragments/_header.html :: headerFragment"></header>
+        <div layout:fragment="body"></div>
         <th:block th:replace="fragments/_bootstrap.html :: bootstrapBodyFragment"></th:block>
     </body>
 </html>

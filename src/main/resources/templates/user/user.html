@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
-    <head>
-        <meta charset="UTF-8">
-        <title>Nouvel Utilisateur</title>
-    </head>
+
+    <th:block layout:fragment="head">
+        <title>Utilisateur</title>
+    </th:block>
+
     <body>
-        <div layout:fragment="content">
+        <div layout:fragment="body">
             <form id="createUserForm" th:action="@{/userCreate}" method="post" th:object="${user}">
                 <input name="id" th:field="*{id}" type="hidden">
                 <label for="username">Utilisateur</label>
