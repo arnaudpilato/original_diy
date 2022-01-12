@@ -28,7 +28,6 @@ public class UserController {
     @RequestMapping("/userCreate")
     public String postUser(@ModelAttribute DiyUser user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawRole = user.getRole();
         String rawPassword = user.getPassword();
         String encodedPassword = encoder.encode(rawPassword);
 
