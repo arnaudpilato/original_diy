@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Connection</title>
-    </head>
+    <th:block layout:fragment="head">
+        <title>Connexion</title>
+    </th:block>
 
-    <div layout:fragment="content">
+    <div layout:fragment="body">
         <div class="container">
             <form id="loginForm" th:action="@{/login}" method="post">
                 <div class="mb-3">

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div>Salut Michel!</div>
-</body>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <th:block layout:fragment="head">
+        <title>Index</title>
+    </th:block>
+
+    <body>
+        <div layout:fragment="body">
+            <h1>Salut Michel !</h1>
+        </div>
+    </body>
 </html>
