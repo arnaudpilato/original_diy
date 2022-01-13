@@ -1,0 +1,31 @@
+@startuml
+!pragma layout smetana
+!theme reddress-darkorange
+
+entity user {
+    id
+    username
+    password
+    mail
+    address | null
+    phone | null
+    role
+}
+
+entity atelier {
+    id
+    title
+    description
+    picture
+    comment
+    inscription
+    numberOfPeople
+}
+
+entity comment {
+    id
+}
+
+atelier "1.1" -- "1.n" comment
+
+@enduml
