@@ -5,15 +5,15 @@
         <th:block th:replace="fragments/_bootstrap.html :: bootstrapHeadFragment"></th:block>
         <th:block layout:fragment="head"></th:block>
         <th:block th:replace="fragments/_jquerry.html :: jquerry"></th:block>
-        <th:block th:replace="fragments/_leaflet.html :: leaflet"></th:block>
+        <link th:replace="fragments/_leaflet.html :: leaflet">
     </head>
     <body>
         <header th:replace="fragments/_header.html :: headerFragment"></header>
-        <div layout:fragment="body"></div>
-        <th:block th:replace="fragments/_bootstrap.html :: bootstrapBodyFragment"></th:block>
         <!-- Make sure you put this AFTER Leaflet's CSS -->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""></script>
+        <div layout:fragment="body"></div>
+        <th:block th:replace="fragments/_bootstrap.html :: bootstrapBodyFragment"></th:block>
     </body>
 </html>
