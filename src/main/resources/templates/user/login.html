@@ -7,20 +7,29 @@
 
     <div layout:fragment="body">
         <div class="container">
-            <form id="loginForm" th:action="@{/login}" method="post">
-                <div class="mb-3">
-                    <label class="form-label" for="username">Utilisateur</label>
-                    <input id="username" class="form-control" name="username" type="text" placeholder="Utilisateur">
+            <h1 class="text-center my-3">Connexion</h1>
+            <div class="row justify-content-center mt-4">
+                <div class="col-4">
+                    <form id="loginForm" th:action="@{/login}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Utilisateur :</label>
+                            <input id="username" class="form-control" name="username" type="text" placeholder="Utilisateur">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Mot de passe :</label>
+                            <input id="password" class="form-control" name="password" type="password" placeholder="Mot de passe">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="m-1">
+                                <button class="btn btn-primary" type="submit">Se connecter</button>
+                            </div>
+                            <div class="m-1">
+                                <a class="btn btn-secondary" href="/user">Créer un compte</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="password">Mot de passe</label>
-                    <input id="password" class="form-control" name="password" type="password" placeholder="Mot de passe">
-                </div>
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Se connecter</button>
-                </div>
-            </form>
-            <a href="/user">Créer un compte</a>
+            </div>
         </div>
     </div>
 </html>
