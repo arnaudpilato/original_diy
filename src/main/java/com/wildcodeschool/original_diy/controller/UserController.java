@@ -3,15 +3,18 @@ package com.wildcodeschool.original_diy.controller;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
-public class UserController {
+public class UserController implements WebMvcConfigurer {
     @Autowired
     private UserRepository userRepository;
 
@@ -25,22 +28,36 @@ public class UserController {
         return "user/login";
     }
 
-    @RequestMapping("/userCreate")
-    public String postUser(@ModelAttribute DiyUser user) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawPassword = user.getPassword();
-        String encodedPassword = encoder.encode(rawPassword);
-
-        user.setPassword(encodedPassword);
-
-        try {
-            user.setRole("USER");
-            userRepository.save(user);
-        } catch (Exception e) {
-            return "user/user";
+    @RequestMapping("/addUser")
+    public String addUser(@ModelAttribute("user") DiyUser user, BindingResult result, @Param("username") String username, @Param("password") String password) {
+        if (username.isEmpty()) {
+            result.rejectValue("username", "isEmpty", "Le champ nom est vide !");
+            result.hasErrors();
         }
 
-        return "redirect:/";
+        if (password.isEmpty()) {
+            result.hasErrors();
+            result.rejectValue("password", "isEmpty", "Le champ mot de passe est vide !");
+        }
+
+        if (result.hasErrors()) {
+            return "user/user";
+        } else {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String rawPassword = user.getPassword();
+            String encodedPassword = encoder.encode(rawPassword);
+
+            user.setPassword(encodedPassword);
+
+            try {
+                user.setRole("USER");
+                userRepository.save(user);
+            } catch (Exception e) {
+                return "user/user";
+            }
+
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/user")
