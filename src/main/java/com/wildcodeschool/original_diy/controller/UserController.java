@@ -11,10 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Controller
-public class UserController implements WebMvcConfigurer {
+public class UserController {
     @Autowired
     private UserRepository userRepository;
 

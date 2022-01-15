@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<DiyUser, Long> {
     @Query("SELECT u FROM DiyUser AS u WHERE u.username = :username")
     public DiyUser getByUsername(@Param("username") String username);
-
-    public DiyUser findByUsername(String username);
 }
