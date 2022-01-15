@@ -11,6 +11,5 @@ public class MapController {
     public String index() {
 
         return "map/map";
-
     }
 }
