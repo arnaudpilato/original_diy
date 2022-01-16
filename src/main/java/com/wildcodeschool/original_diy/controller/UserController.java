@@ -19,21 +19,25 @@ public class UserController {
 
     @GetMapping("/")
     public String index() {
+
         return "home/index";
     }
 
     @GetMapping("/login")
     public String login() {
+
         return "user/login";
     }
 
     @RequestMapping("/addUser")
     public String addUser(@ModelAttribute("user") DiyUser user, BindingResult result, @Param("username") String username, @Param("password") String password) {
+        // PIL : Message d'erreur si le champ nom est vide
         if (username.isEmpty()) {
             result.rejectValue("username", "isEmpty", "Le champ nom est vide !");
             result.hasErrors();
         }
 
+        // PIL : Message d'erreur si le champ password est vide
         if (password.isEmpty()) {
             result.hasErrors();
             result.rejectValue("password", "isEmpty", "Le champ mot de passe est vide !");
@@ -42,6 +46,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "user/user";
         } else {
+            // PIL : Encodage du mot de passe
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String rawPassword = user.getPassword();
             String encodedPassword = encoder.encode(rawPassword);
