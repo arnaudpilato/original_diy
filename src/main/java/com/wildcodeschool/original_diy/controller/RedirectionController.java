@@ -13,7 +13,7 @@ public class RedirectionController implements ErrorController {
 
     @GetMapping(value = "/error")
     public String handleError(HttpServletRequest request) {
-        // get error status
+        // PIL : Récupération des status d'erreurs
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
         // TODO: log error details here
@@ -21,7 +21,7 @@ public class RedirectionController implements ErrorController {
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
 
-            // display specific error page
+            // PIL : Redirection suivant le code erreur
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "redirection/404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
@@ -31,7 +31,7 @@ public class RedirectionController implements ErrorController {
             }
         }
 
-        // display generic error
+        // PIL : Page par défaut si erreur non reconnue
         return "redirection/error";
     }
 }
