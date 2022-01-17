@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+    <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <th:block layout:fragment="head">
+        <title>Contact</title>
+        <link href="/static/scss/admin.css" rel="stylesheet"/>
+    </th:block>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <h1 class="text-center my-4">Contact</h1>
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <table class="table table:hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="user, userStat : ${users}">
+                                <th scope="row" th:text="${userStat.index + 1}">Index</th>
+                                <td th:text="${user.username}">Nom</td>
+                                <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'">Role</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
