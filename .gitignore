@@ -37,3 +37,4 @@ build/
 
 ### Database ###
 .env
+.env.local

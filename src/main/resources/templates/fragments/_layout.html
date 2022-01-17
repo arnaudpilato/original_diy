@@ -2,13 +2,17 @@
 <html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta charset="UTF-8">
-        <th:block th:replace="fragments/_bootstrap.html :: bootstrapHeadFragment"></th:block>
-        <th:block layout:fragment="head"></th:block>
-        <th:block th:replace="fragments/_jquerry.html :: jquerry"></th:block>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <th:block th:replace="fragments/_bootstrap.html :: bootstrapHeadFragment">Bootstrap</th:block>
+        <th:block layout:fragment="head">Head</th:block>
+        <th:block th:replace="fragments/_jquerry.html :: jquerry">JQuerry</th:block>
+        <link th:replace="fragments/_leaflet.html :: leafletHeadFragment">
     </head>
-    <body>
-        <header th:replace="fragments/_header.html :: headerFragment"></header>
-        <div layout:fragment="body"></div>
-        <th:block th:replace="fragments/_bootstrap.html :: bootstrapBodyFragment"></th:block>
+    <body class="d-flex flex-column min-vh-100">
+        <header th:replace="fragments/_header.html :: headerFragment">Header</header>
+        <script th:replace="fragments/_leaflet.html :: leafletBodyFragment">Leaflet</script>
+        <div layout:fragment="body">Body</div>
+        <footer th:replace="fragments/_footer.html :: footerFragment">Footer</footer>
+        <th:block th:replace="fragments/_bootstrap.html :: bootstrapBodyFragment">Bootstrap</th:block>
     </body>
 </html>

@@ -11,15 +11,18 @@
                 <h1 class="text-center my-3">Création d'un nouvel utilisateur</h1>
                 <div class="row justify-content-center mt-4">
                     <div class="col-4">
-                        <form id="createUserForm" th:action="@{/userCreate}" method="post" th:object="${user}">
+                        <form th:action="@{/addUser}" method="post" th:object="${user}">
                             <input name="id" th:field="*{id}" type="hidden">
                             <div class="mb-3">
                                 <label class="form-label" for="username">Utilisateur :</label>
                                 <input class="form-control" id="username" name="username" th:field="*{username}" type="text"  placeholder="Utilisateur">
+                                <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                             </div>
+
                             <div class="mb-3">
                                 <label class="form-label" for="password">Mot de passe :</label>
                                 <input class="form-control" id="password" name="password" th:field="*{password}" type="password"  placeholder="Mot de passe">
+                                <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-primary" type="submit">Valider</button>
