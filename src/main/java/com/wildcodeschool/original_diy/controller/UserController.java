@@ -54,7 +54,7 @@ public class UserController {
             user.setPassword(encodedPassword);
 
             try {
-                user.setRole("USER");
+                user.setRole("ROLE_USER");
                 userRepository.save(user);
             } catch (Exception e) {
                 return "user/user";

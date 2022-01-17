@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
 
-<th:block layout:fragment="head">
-    <title>Index</title>
-</th:block>
+    <th:block layout:fragment="head">
+        <title>Espace administrateur</title>
+    </th:block>
 
-<body>
-<div layout:fragment="body">
-    <h1>Salut Admin</h1>
-</div>
-</body>
+    <body>
+        <div layout:fragment="body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <h1>Espace Administrateur</h1>
+                        <img src="/static/img/diy.jpg" alt="Image atelier">
+                        <p>Ateliers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
