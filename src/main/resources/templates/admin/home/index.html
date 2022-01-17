@@ -3,16 +3,28 @@
 
     <th:block layout:fragment="head">
         <title>Espace administrateur</title>
+        <link href="/static/scss/admin.css" rel="stylesheet"/>
     </th:block>
 
     <body>
         <div layout:fragment="body">
             <div class="container">
+                <h1 class="text-center">Espace Administrateur</h1>
                 <div class="row">
                     <div class="col-4">
-                        <h1>Espace Administrateur</h1>
-                        <img src="/static/img/diy.jpg" alt="Image atelier">
-                        <p>Ateliers</p>
+                        <div>
+                            <img class="workshop-picture" src="/static/img/workshop.jpg" alt="Image atelier">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div>
+                            <img class="workshop-picture" src="/static/img/contact.jpeg" alt="Image atelier">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div>
+                            <img class="workshop-picture" src="/static/img/reservation.jpeg" alt="Image atelier">
+                        </div>
                     </div>
                 </div>
             </div>
