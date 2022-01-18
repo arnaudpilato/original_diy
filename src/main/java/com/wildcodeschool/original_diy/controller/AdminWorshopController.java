@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminWorshopController {
     @GetMapping("/admin/workshop")
     public String getWorkshops() {
-        return "admin/worshop/worshop";
+        return "admin/workshop/workshop";
     }
 }
