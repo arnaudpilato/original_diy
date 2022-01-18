@@ -26,7 +26,7 @@
                                 <td th:text="${user.username}">Nom</td>
                                 <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'">Role</td>
                                 <td class="text-end td-edit"><a class="link" href="#"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
-                                <td class="td-delete"><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
+                                <td class="td-delete"><a class="link" th:href="@{/admin/delete/{id}(id=${user.id})}"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
                             </tr>
                         </tbody>
                     </table>
