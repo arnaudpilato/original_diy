@@ -9,4 +9,9 @@ public class AdminWorshopController {
     public String getWorkshops() {
         return "admin/workshop/workshop";
     }
+
+    @GetMapping("/admin/workshop/add")
+    public String addWorkshop() {
+        return "/admin/workshop/add";
+    }
 }

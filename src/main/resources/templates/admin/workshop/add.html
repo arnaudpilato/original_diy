@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <th:block layout:fragment="head">
+        <title>Ajout d'un atelier</title>
+        <link href="/static/scss/admin.css" rel="stylesheet"/>
+    </th:block>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
+            <div class="row justify-content-center">
+                <div class="col-11 col-md-8 col-lg-5">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="mb-3">
+                                <label class="form-label" for="workshop">Nom de l'atelier :</label>
+                                <input class="form-control" id="workshop" name="workshop" type="text" placeholder="Atelier design">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="picture">Photo :</label>
+                                <input class="form-control" id="picture" name="picture" type="file">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label" for="streetNumber">N° de rue :</label>
+                                <input class="form-control" id="streetNumber" name="streetNumber" type="number" placeholder="1">
+                            </div>
+                            <div class="col-md-9 mb-3">
+                                <label class="form-label" for="street">Rue :</label>
+                                <input class="form-control" id="street" name="street" type="text" placeholder="Avenue du Champ de Mars">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label" for="postCode">Code Postal :</label>
+                                <input class="form-control" id="postCode" name="postCode" type="number" placeholder="45074">
+                            </div>
+                            <div class="col-md-9 mb-3">
+                                <label class="form-label" for="city">Ville :</label>
+                                <input class="form-control" id="city" name="city" type="text" placeholder="Orléans">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="description">Description :</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

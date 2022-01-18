@@ -6,11 +6,10 @@
     <link href="/static/scss/admin.css" rel="stylesheet"/>
   </th:block>
 
-  <body>
-    <div layout:fragment="body">
-      <div class="container">
-        <h1 class="text-center my-4">Gestion des ateliers</h1>
-      </div>
+  <div layout:fragment="body">
+    <div class="container">
+      <h1 class="text-center my-4">Gestion des ateliers</h1>
+      <div class="text-end"><a class="btn btn-primary" th:href="@{/admin/workshop/add}">Ajout d'un atelier</a></div>
     </div>
-  </body>
+  </div>
 </html>
