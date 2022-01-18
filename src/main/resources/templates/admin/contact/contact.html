@@ -3,7 +3,7 @@
 
     <th:block layout:fragment="head">
         <title>Contact</title>
-        <link href="/static/scss/admin.css" rel="stylesheet"/>
+        <link href="/static/scss/contact.css" rel="stylesheet"/>
     </th:block>
 
     <div layout:fragment="body">
@@ -17,6 +17,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Role</th>
+                                <th colspan="2">Modifier</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,8 @@
                                 <th scope="row" th:text="${userStat.index + 1}">Index</th>
                                 <td th:text="${user.username}">Nom</td>
                                 <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'">Role</td>
+                                <td class="text-end td-edit"><a class="link" href="#"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
+                                <td class="td-delete"><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
                             </tr>
                         </tbody>
                     </table>
