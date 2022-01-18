@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.security.Principal;
 
 @Controller
 public class AdminContactController {
@@ -16,5 +19,13 @@ public class AdminContactController {
     public String getContact(Model model) {
         model.addAttribute("users", userRepository.getAllUsers());
         return "admin/contact/contact";
+    }
+
+    @GetMapping("/admin/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id, Principal principal) {
+        DiyUser user = userRepository.getById(id);
+        userRepository.delete(user);
+
+        return "redirect:/admin/contact";
     }
 }
