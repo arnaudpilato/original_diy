@@ -15,8 +15,13 @@ entity user {
 entity atelier {
     id
     title
-    description
     picture
+    street_number
+    street
+    postcode
+    city
+    description
+
     comment
     inscription
     numberOfPeople
