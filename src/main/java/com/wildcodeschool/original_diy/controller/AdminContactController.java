@@ -7,13 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.security.Principal;
-import java.util.Optional;
 
 @Controller
 public class AdminContactController {
@@ -35,7 +32,7 @@ public class AdminContactController {
     }
 
     @PostMapping("/admin/contact/update/{id}")
-    public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result, Model model) {
+    public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result) {
         if (result.hasErrors()) {
             user.setId(userId);
 
