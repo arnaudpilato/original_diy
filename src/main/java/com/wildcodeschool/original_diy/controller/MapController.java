@@ -20,6 +20,5 @@ public class MapController {
 
         System.out.println(response);
         return "map/map";
-
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <th:block layout:fragment="head">
+        <title>Erreur 404</title>
+    </th:block>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-8">
+                    <h1 class="text-center">Oups!!! Erreur 404...</h1>
+                    <h2 class="text-center">La page demandée est introuvable</h2>
+                    <p class="text-center mt-5">Veuillez nous excuser pour ce désagrément</p>
+                    <div class="text-center my-5">
+                        <a class="btn btn-primary" href="/">Retour à l'accueil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
