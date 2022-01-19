@@ -3,6 +3,8 @@ package com.wildcodeschool.original_diy.controller;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,11 +34,19 @@ public class AdminContactController {
     }
 
     @PostMapping("/admin/contact/update/{id}")
-    public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result) {
+    public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result, @Param("password") String password) {
         if (result.hasErrors()) {
             user.setId(userId);
 
             return "admin/contact/update";
+        }
+
+        if (password != null) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String rawPassword = user.getPassword();
+            String encodedPassword = encoder.encode(rawPassword);
+
+            user.setPassword(encodedPassword);
         }
 
         userRepository.save(user);
