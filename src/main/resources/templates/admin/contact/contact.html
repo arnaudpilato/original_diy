@@ -16,6 +16,9 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nom</th>
+                                <th scope="col">Prenom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telephone</th>
                                 <th scope="col">Role</th>
                                 <th colspan="2">Modifier</th>
                             </tr>
@@ -23,7 +26,10 @@
                         <tbody>
                             <tr th:each="user, userStat : ${users}">
                                 <th scope="row" th:text="${userStat.index + 1}">Index</th>
-                                <td th:text="${user.username}">Nom</td>
+                                <td th:text="${user.lastName}">Nom</td>
+                                <td th:text="${user.firstName}">Prenom</td>
+                                <td th:text="${user.email}">Email</td>
+                                <td th:text="${user.phone}">Telephone</td>
                                 <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'">Role</td>
                                 <td class="text-end td-edit"><a th:href="@{/admin/contact/edit/{id} (id = ${user.id})}" class="link" href="#"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
                                 <td class="td-delete"><a class="link" th:href="@{/admin/delete/{id} (id = ${user.id})}"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
