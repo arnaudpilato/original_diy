@@ -19,20 +19,42 @@ public class AdminContactController {
     @Autowired
     UserRepository userRepository;
 
+    // PIL : Affichage des contacts
     @GetMapping("/admin/contact")
     public String getUsers(Model model) {
         model.addAttribute("users", userRepository.getAllUsers());
         return "admin/contact/contact";
     }
 
-    @GetMapping("/admin/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        DiyUser user = userRepository.getById(id);
-        userRepository.delete(user);
+    // PIL : Ajout d'un contact
+    @PostMapping("/admin/contact/add")
+    public String addUser(@Valid DiyUser user, BindingResult result, @Param("password") String password) {
+        if (result.hasErrors()) {
+
+            return "admin/contact/new";
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String rawPassword = user.getPassword();
+        String encodedPassword = encoder.encode(rawPassword);
+
+        user.setPassword(encodedPassword);
+
+        userRepository.save(user);
 
         return "redirect:/admin/contact";
     }
 
+    @GetMapping("/admin/contact/new")
+    public String newUser(Model model) {
+        DiyUser user = new DiyUser();
+
+        model.addAttribute("user", user);
+
+        return "admin/contact/new";
+    }
+
+    // PIL : Modification d'un contact
     @PostMapping("/admin/contact/update/{id}")
     public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result, @Param("password") String password) {
         if (result.hasErrors()) {
@@ -41,7 +63,9 @@ public class AdminContactController {
             return "admin/contact/update";
         }
 
-        if (password != null) {
+        if(password == null || password.isEmpty()) {
+            user.setPassword(userRepository.getById(user.getId()).getPassword());
+        } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String rawPassword = user.getPassword();
             String encodedPassword = encoder.encode(rawPassword);
@@ -54,7 +78,7 @@ public class AdminContactController {
         return "redirect:/admin/contact";
     }
 
-    @GetMapping("/admin/contact/edit/{id}")
+    @GetMapping("/admin/contact/update/{id}")
     public String getUser(@PathVariable("id") Long id, Model model) {
         DiyUser user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id" + id));
@@ -62,5 +86,14 @@ public class AdminContactController {
         model.addAttribute("user", user);
 
         return "admin/contact/update";
+    }
+
+    // PIL : Suppression d'un contact
+    @GetMapping("/admin/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id) {
+        DiyUser user = userRepository.getById(id);
+        userRepository.delete(user);
+
+        return "redirect:/admin/contact";
     }
 }
