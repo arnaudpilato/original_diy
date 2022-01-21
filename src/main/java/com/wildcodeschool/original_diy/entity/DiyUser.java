@@ -1,9 +1,8 @@
 package com.wildcodeschool.original_diy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class DiyUser {
@@ -18,6 +17,9 @@ public class DiyUser {
     private String email;
     private Long phone;
     private String role;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<DiyWorkshop> workshops = new ArrayList<>();
 
     public DiyUser() {
     }

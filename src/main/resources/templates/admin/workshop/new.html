@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
 
-    <th:block layout:fragment="head">
+    <head>
         <title>Ajout d'un atelier</title>
         <link href="/static/scss/admin.css" rel="stylesheet"/>
-    </th:block>
+    </head>
 
     <div layout:fragment="body">
         <div class="container">
             <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
             <div class="row justify-content-center">
                 <div class="col-11 col-md-8 col-lg-5">
-                    <form method="post" enctype="multipart/form-data" th:object="${workshop}">
+                    <form method="post" th:action="@{/admin/workshop/add}" enctype="multipart/form-data" th:object="${workshop}">
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label" for="title">Nom de l'atelier :</label>
@@ -19,7 +19,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="picture">Photo :</label>
-                                <input class="form-control" id="picture" name="picture" th:field="*{picture}" type="file">
+                                <input class="form-control" id="picture" name="picture_file" type="file">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label" for="streetNumber">N° de rue :</label>
@@ -40,6 +40,9 @@
                             <div class="mb-3">
                                 <label class="form-label" for="description">Description :</label>
                                 <textarea class="form-control" id="description" name="description" th:field="*{description}" rows="3"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
                             </div>
                         </div>
                     </form>

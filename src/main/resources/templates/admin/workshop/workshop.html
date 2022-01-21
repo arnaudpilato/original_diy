@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
 
-  <th:block layout:fragment="head">
+  <head>
     <title>Gestion des ateliers</title>
     <link href="/static/scss/admin.css" rel="stylesheet"/>
-  </th:block>
+  </head>
 
   <div layout:fragment="body">
     <div class="container">
       <h1 class="text-center my-4">Gestion des ateliers</h1>
-      <div class="text-end"><a class="btn btn-primary" th:href="@{/admin/workshop/add}">Ajout d'un atelier</a></div>
+      <div class="text-end"><a class="btn btn-primary" th:href="@{/admin/workshop/new}">Ajout d'un atelier</a></div>
     </div>
   </div>
 </html>

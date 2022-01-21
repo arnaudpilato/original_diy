@@ -31,7 +31,7 @@ public class AdminContactController {
     public String addUser(@Valid DiyUser user, BindingResult result, @Param("password") String password) {
         if (result.hasErrors()) {
 
-            return "admin/contact/new";
+            return "/admin/contact/new";
         }
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
