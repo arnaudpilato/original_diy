@@ -54,12 +54,11 @@
               <th colspan="2"><img class="workshop-picture rounded img-fluid" th:src="${worshop.picture}" alt="Image de l'atelier"></th>
               <td class="text-wrap" th:text="${worshop.description}"></td>
               <td class="text-end td-edit"><a href="#" class="link"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
-              <td class="td-delete"><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
+              <td class="td-delete"><a class="link" th:href="@{/admin/workshop/delete/{id} (id = ${worshop.id})}"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
             </tr>
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 </html>
