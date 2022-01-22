@@ -22,7 +22,8 @@ public class AdminWorshopController {
 
     // PIL : Affichage des ateliers
     @GetMapping("/admin/workshop")
-    public String getWorkshops() {
+    public String getWorkshops(Model model) {
+        model.addAttribute("worshops", workshopRepository.getAllWorkshops());
 
         return "admin/workshop/workshop";
     }
@@ -30,9 +31,13 @@ public class AdminWorshopController {
     // PIL : Ajout d'un nouvel atelier
     @PostMapping("/admin/workshop/add")
     public String addWorkshop(@ModelAttribute DiyWorkshop workshop, @RequestParam(value = "picture_file") MultipartFile picture) throws IOException {
-        String filename = "static/data/" + picture.getOriginalFilename();
-        Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" + picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
-        workshop.setPicture(filename);
+        if (!picture.isEmpty()) {
+            String filename = "/static/data/" + picture.getOriginalFilename();
+            Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" + picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            workshop.setPicture(filename);
+        } else {
+            workshop.setPicture("/static/img/static-picture.png");
+        }
 
         workshopRepository.save(workshop);
 

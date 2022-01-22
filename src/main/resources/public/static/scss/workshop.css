@@ -1,14 +1,19 @@
 @import "style.css";
-
 .workshop-picture {
   width: 100%;
-  height: auto;
+  max-width: 300px;
+  max-height: 200px;
   object-fit: cover;
 }
 
-.wrap {
-  min-width:200px;
+.wrap-responsive {
+  min-width: 200px;
   max-width: 200px;
+  word-wrap: break-word;
+}
+
+.wrap {
+  max-width: 400px;
   word-wrap: break-word;
 }
 
@@ -17,7 +22,7 @@
 }
 
 .picture-link:hover {
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   transition: 0.3s;
 }
 
@@ -42,14 +47,8 @@
 }
 
 /***** Icons *****/
-
-
 /***** Lines *****/
-
-
-
 /***** Columns *****/
-
 .td-edit {
   width: 50px;
 }
@@ -57,3 +56,5 @@
 .td-delete {
   width: 80px;
 }
+
+/*# sourceMappingURL=workshop.css.map */
