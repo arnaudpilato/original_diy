@@ -5,10 +5,7 @@ import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -50,5 +47,13 @@ public class AdminWorshopController {
         model.addAttribute("workshop", workshop);
 
         return "/admin/workshop/new";
+    }
+
+    @GetMapping("/admin/workshop/delete/{id}")
+    public String deleteWorkshop(@PathVariable("id") Long id) {
+        DiyWorkshop workshop = workshopRepository.getById(id);
+        workshopRepository.delete(workshop);
+
+        return "redirect:/admin/workshop";
     }
 }
