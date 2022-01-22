@@ -1,54 +1,9 @@
 @import "style.css";
+/***** Worshop Section *****/
 .workshop-picture {
   width: 100%;
   height: auto;
   object-fit: cover;
-}
-
-.wrap {
-  min-width: 200px;
-  max-width: 200px;
-  word-wrap: break-word;
-}
-
-.picture-link {
-  transition: 0.3s;
-}
-
-.picture-link:hover {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  transition: 0.3s;
-}
-
-.icon {
-  width: 32px;
-  height: auto;
-  object-fit: cover;
-  transition: 0.3s;
-  margin: 5px 0;
-}
-
-.icon:hover {
-  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
-  width: 35px;
-  height: auto;
-  border-radius: 50px;
-}
-
-.workshop-picture-size {
-  width: 300px;
-  height: 200px;
-}
-
-/***** Icons *****/
-/***** Lines *****/
-/***** Columns *****/
-.td-edit {
-  width: 50px;
-}
-
-.td-delete {
-  width: 80px;
 }
 
 /*# sourceMappingURL=admin.css.map */
