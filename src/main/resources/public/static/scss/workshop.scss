@@ -2,13 +2,19 @@
 
 .workshop-picture {
   width: 100%;
-  height: auto;
+  max-width: 300px;
+  max-height: 200px;
   object-fit: cover;
 }
 
-.wrap {
-  min-width:200px;
+.wrap-responsive {
+  min-width: 200px;
   max-width: 200px;
+  word-wrap: break-word;
+}
+
+.wrap {
+  max-width: 400px;
   word-wrap: break-word;
 }
 
