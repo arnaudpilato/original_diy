@@ -25,7 +25,7 @@
             </tr>
             <tr>
               <th scope="row">Description</th>
-              <td class="wrap-responsive" th:text="${worshop.description}">Description</td>
+              <td class="text-wrap" th:text="${worshop.description}">Description</td>
             </tr>
             <tr>
               <th scope="row" colspan="2">
@@ -51,8 +51,8 @@
           <tbody>
             <tr th:each="worshop, workshopStat : ${worshops}">
               <th scope="row" th:text="${workshopStat.index + 1}"></th>
-              <th colspan="2"><img class="workshop-picture rounded" th:src="${worshop.picture}" alt="Image de l'atelier"></th>
-              <td class="wrap" th:text="${worshop.description}"></td>
+              <th colspan="2"><img class="workshop-picture rounded img-fluid" th:src="${worshop.picture}" alt="Image de l'atelier"></th>
+              <td class="text-wrap" th:text="${worshop.description}"></td>
               <td class="text-end td-edit"><a href="#" class="link"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
               <td class="td-delete"><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
             </tr>

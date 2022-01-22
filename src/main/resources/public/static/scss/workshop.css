@@ -6,17 +6,6 @@
   object-fit: cover;
 }
 
-.wrap-responsive {
-  min-width: 200px;
-  max-width: 200px;
-  word-wrap: break-word;
-}
-
-.wrap {
-  max-width: 400px;
-  word-wrap: break-word;
-}
-
 .picture-link {
   transition: 0.3s;
 }
@@ -39,11 +28,6 @@
   width: 35px;
   height: auto;
   border-radius: 50px;
-}
-
-.workshop-picture-size {
-  width: 300px;
-  height: 200px;
 }
 
 .td-edit {
