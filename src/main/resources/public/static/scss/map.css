@@ -1,6 +1,7 @@
+@import "style.css";
 #map {
-  height: 180px;
-  width: 300px;
+  height: 580px;
+  width: 100%;
 }
 
 /*# sourceMappingURL=map.css.map */

@@ -1,0 +1,40 @@
+@import "style.css";
+
+.workshop-picture {
+  width: 100%;
+  max-width: 300px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.picture-link {
+  transition: 0.3s;
+}
+
+.picture-link:hover {
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+  transition: 0.3s;
+}
+
+.icon {
+  width: 32px;
+  height: auto;
+  object-fit: cover;
+  transition: 0.3s;
+  margin: 5px 0;
+}
+
+.icon:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  width: 35px;
+  height: auto;
+  border-radius: 50px;
+}
+
+.td-edit {
+  width: 50px;
+}
+
+.td-delete {
+  width: 80px;
+}

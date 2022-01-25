@@ -6,6 +6,8 @@ entity user {
     id
     username
     password
+    first_name
+    last_name
     mail
     address | null
     phone | null
@@ -15,8 +17,13 @@ entity user {
 entity atelier {
     id
     title
-    description
     picture
+    street_number
+    street
+    postcode
+    city
+    description
+
     comment
     inscription
     numberOfPeople

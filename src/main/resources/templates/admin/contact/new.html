@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <head>
+        <title>Ajouter un contact</title>
+        <link href="/static/scss/contact.css" rel="stylesheet"/>
+    </head>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <h1 class="text-center my-4">Ajouter un contact</h1>
+            <div class="row justify-content-center">
+                <div class="col-11 col-md-5">
+                    <form class="my-3" th:action="@{/admin/contact/add}" method="post" th:object="${user}">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username :</label>
+                            <input class="form-control" id="username" name="username" th:field="*{username}" type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="lastName">Nom :</label>
+                            <input class="form-control" id="lastName" name="lastName" th:field="*{lastName}" type="text" placeholder="John">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="firstName">Prenom :</label>
+                            <input class="form-control" id="firstName" name="firstName" th:field="*{firstName}" type="text" placeholder="Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Mail :</label>
+                            <input class="form-control" id="email" name="email" th:field="*{email}" type="email" placeholder="john.doe@mail.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="phone">Telephone :</label>
+                            <input class="form-control" id="phone" name="phone" th:field="*{phone}" type="number" placeholder="0698754321">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Mot de passe :</label>
+                            <input class="form-control" id="password" name="password" th:field="*{password}" type="password">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="role">Role :</label>
+                            <select id="role" class="form-select" th:field="*{role}">
+                                <option value="ROLE_USER">Utilisateur</option>
+                                <option value="ROLE_ADMIN">Administrateur</option>
+                            </select>
+                        </div>
+                        <div class="text-center my-3">
+                            <button class="btn btn-primary" type="submit">Ajouter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

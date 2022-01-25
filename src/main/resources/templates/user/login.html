@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
 
-    <th:block layout:fragment="head">
+    <head>
         <title>Connexion</title>
-    </th:block>
+    </head>
 
     <div layout:fragment="body">
         <div class="container">
@@ -24,7 +24,7 @@
                                 <button class="btn btn-primary" type="submit">Se connecter</button>
                             </div>
                             <div class="m-1">
-                                <a class="btn btn-secondary" href="/user">Créer un compte</a>
+                                <a class="btn btn-secondary" th:href="@{/newUser}">Créer un compte</a>
                             </div>
                         </div>
                     </form>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <head>
+        <title>Gestion des contacts</title>
+        <link href="/static/scss/contact.css" rel="stylesheet"/>
+    </head>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <h1 class="text-center my-4">Gestion des Contacts</h1>
+            <div class="row justify-content-center">
+                <div class="col-11">
+                    <div class="text-end">
+                        <a class="btn btn-primary" th:href="@{/admin/contact/new}">Ajouter un contact</a>
+                    </div>
+                    <div class="table-responsive d-block d-md-none my-2">
+                        <table class="table table-bordered border-dark" th:each="user, userStat : ${users}">
+                            <thead>
+                                <tr>
+                                    <th scope="col" th:text="'Contact ' + ${userStat.index + 1}">Index</th>
+                                    <th scope="col" th:text="${user.username}">Surnom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Nom</th>
+                                <td th:text="${user.lastName}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Prénom</th>
+                                <td th:text="${user.firstName}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td th:text="${user.email}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Telephone</th>
+                                <td th:text="${user.phone}"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Role</th>
+                                <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" colspan="2">
+                                    <div class="d-flex justify-content-around">
+                                        <div><a href="#" class="link"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></div>
+                                        <div><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></div>
+                                    </div>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive d-none d-md-block my-2">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prenom</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Telephone</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col" colspan="2">Modifier</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user, userStat : ${users}">
+                                    <th scope="row" th:text="${userStat.index + 1}">Index</th>
+                                    <td th:text="${user.lastName}">Nom</td>
+                                    <td th:text="${user.firstName}">Prenom</td>
+                                    <td th:text="${user.email}">Email</td>
+                                    <td th:text="${user.phone}">Telephone</td>
+                                    <td th:text="${user.role == 'ROLE_USER'} ? 'Utilisateur' : 'Administrateur'">Role</td>
+                                    <td class="text-end td-edit"><a class="link" th:href="@{/admin/contact/update/{id} (id = ${user.id})}"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
+                                    <td class="td-delete"><a class="link" th:href="@{/admin/delete/{id} (id = ${user.id})}"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>
