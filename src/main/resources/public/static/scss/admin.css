@@ -6,4 +6,9 @@
   object-fit: cover;
 }
 
+body {
+  background-image: url("/static/img/home-background.jpg");
+  background-size: cover;
+}
+
 /*# sourceMappingURL=admin.css.map */
