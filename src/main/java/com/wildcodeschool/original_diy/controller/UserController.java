@@ -64,7 +64,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user")
+    @GetMapping("/newUser")
     public String getUser(Model model) {
         DiyUser user = new DiyUser();
         model.addAttribute("user", user);

@@ -1,10 +1,15 @@
 package com.wildcodeschool.original_diy.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @JsonIdentityInfo(
@@ -28,6 +33,8 @@ public class DiyWorkshop {
 
 
 
+    @ManyToMany(mappedBy = "workshops")
+    private List<DiyUser> users = new ArrayList<>();
 
     public DiyWorkshop() {
     }

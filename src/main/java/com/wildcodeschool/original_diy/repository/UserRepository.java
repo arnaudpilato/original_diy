@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<DiyUser, Long> {
 
     @Query("SELECT u FROM DiyUser AS u")
     public List<DiyUser> getAllUsers();
+
 }
