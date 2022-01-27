@@ -37,9 +37,8 @@ public class MapController {
             gouvApi = objectMapper.readValue(response, APIGouvAdress.class);
 
             System.out.println(rootResp);
-            System.out.println("----------------------------------------------");
             System.out.println(gouvApi);
-            System.out.println("--------------------- ");
+
 
 
         } catch (JsonProcessingException e) {

@@ -2,8 +2,10 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.entity.DiyWorkshopUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.repository.WorkshopUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ public class AdminWorshopController {
     public WorkshopRepository workshopRepository;
     @Autowired
     public UserRepository userRepository;
+    @Autowired
+    public WorkshopUserRepository workshopUserRepository;
 
     // PIL : Affichage des ateliers
     @GetMapping("/admin/workshop")
@@ -46,7 +50,10 @@ public class AdminWorshopController {
         }
 
         DiyUser currentUser = userRepository.getByUsername(principal.getName());
+        DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
+
         workshopRepository.save(workshop);
+        workshopUserRepository.save(userToWorkshop);
 
 
         return "redirect:/admin/workshop";

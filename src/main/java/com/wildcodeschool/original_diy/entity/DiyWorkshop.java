@@ -32,7 +32,6 @@ public class DiyWorkshop {
     private APIGouvAdress cartography;
 
 
-
     @ManyToMany(mappedBy = "workshops")
     private List<DiyUser> users = new ArrayList<>();
 
@@ -101,5 +100,21 @@ public class DiyWorkshop {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public APIGouvAdress getCartography() {
+        return cartography;
+    }
+
+    public void setCartography(APIGouvAdress cartography) {
+        this.cartography = cartography;
+    }
+
+    public List<DiyUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<DiyUser> users) {
+        this.users = users;
     }
 }
