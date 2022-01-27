@@ -39,7 +39,6 @@ public class AdminContactController {
         String encodedPassword = encoder.encode(rawPassword);
 
         user.setPassword(encodedPassword);
-
         userRepository.save(user);
 
         return "redirect:/admin/contact";
@@ -56,7 +55,11 @@ public class AdminContactController {
 
     // PIL : Modification d'un contact
     @PostMapping("/admin/contact/update/{id}")
-    public String postUser(@PathVariable("id") Long userId, @Valid DiyUser user, BindingResult result, @Param("password") String password) {
+    public String postUser(@PathVariable("id") Long userId,
+                           @Valid DiyUser user,
+                           BindingResult result,
+                           @Param("password") String password)
+    {
         if (result.hasErrors()) {
             user.setId(userId);
 
@@ -69,7 +72,6 @@ public class AdminContactController {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String rawPassword = user.getPassword();
             String encodedPassword = encoder.encode(rawPassword);
-
             user.setPassword(encodedPassword);
         }
 

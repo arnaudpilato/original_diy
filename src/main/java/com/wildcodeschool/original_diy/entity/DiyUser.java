@@ -1,10 +1,18 @@
 package com.wildcodeschool.original_diy.entity;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DiyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +26,10 @@ public class DiyUser {
     private Long phone;
     private String role;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<DiyWorkshop> workshops = new ArrayList<>();
+
 
     public DiyUser() {
     }
