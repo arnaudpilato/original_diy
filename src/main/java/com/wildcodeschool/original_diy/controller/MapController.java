@@ -18,34 +18,6 @@ public class MapController {
     @GetMapping("/map")
     public String index() {
         // String url = "https://api-adresse.data.gouv.fr/search/?q=178+allee+adrienne+bolland&postcode=45770";
-        WebClient webClient = WebClient.create(API_MAP_URL);
-        Mono<String> call = webClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("q", "178", "+", "allee adrienne bolland&")
-                        .queryParam("postcode", "45770")
-                        .build()
-                )
-                .retrieve()
-                .bodyToMono(String.class);
-
-        String response = call.block();
-
-        APIGouvAdress gouvApi = null ;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootResp = objectMapper.readTree(response);
-            gouvApi = objectMapper.readValue(response, APIGouvAdress.class);
-
-            System.out.println(rootResp);
-            System.out.println(gouvApi);
-
-
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-     //   System.out.println(response);
-
 
         return "map/map";
     }

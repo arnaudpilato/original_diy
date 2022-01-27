@@ -49,6 +49,7 @@ public class AdminWorshopController {
             workshop.setPicture("/static/img/static-picture.png");
         }
 
+
         DiyUser currentUser = userRepository.getByUsername(principal.getName());
         DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
 
