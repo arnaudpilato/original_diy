@@ -6,7 +6,9 @@ import com.wildcodeschool.original_diy.entity.DiyWorkshopUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopUserRepository;
+import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class AdminWorshopController {
     public UserRepository userRepository;
     @Autowired
     public WorkshopUserRepository workshopUserRepository;
+    @Autowired
+    public APIGouvService APIGouvService;
 
     // PIL : Affichage des ateliers
     @GetMapping("/admin/workshop")
@@ -36,7 +40,7 @@ public class AdminWorshopController {
     }
 
     // PIL : Ajout d'un nouvel atelier
-    @PostMapping("/admin/workshop/add")
+    @RequestMapping("/admin/workshop/add")
     public String addWorkshop(@ModelAttribute DiyWorkshop workshop,
                               @RequestParam(value = "picture_file") MultipartFile picture,
                               Principal principal) throws IOException {
@@ -49,15 +53,26 @@ public class AdminWorshopController {
             workshop.setPicture("/static/img/static-picture.png");
         }
 
+        // System.out.println(APIGouvService.getAdressAPI(workshop.getStreet(), workshop.getPostCode(), workshop.getStreetNumber()).getClass());
+       try {
+           workshop.setLatitude(APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                   workshop.getStreetNumber()).get("features").get(1).get("geometry").get("coordinates").get(0).asDouble());
+           workshop.setLongitude(APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                   workshop.getStreetNumber()).get("features").get(1).get("geometry").get("coordinates").get(1).asDouble());
 
-        DiyUser currentUser = userRepository.getByUsername(principal.getName());
-        DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
+           DiyUser currentUser = userRepository.getByUsername(principal.getName());
+           DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
 
-        workshopRepository.save(workshop);
-        workshopUserRepository.save(userToWorkshop);
+           workshopRepository.save(workshop);
+           workshopUserRepository.save(userToWorkshop);
 
+
+       }catch (Exception e){
+            e.getMessage();
+       }
 
         return "redirect:/admin/workshop";
+
     }
 
     @GetMapping("/admin/workshop/new")

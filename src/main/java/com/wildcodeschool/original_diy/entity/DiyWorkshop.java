@@ -28,8 +28,9 @@ public class DiyWorkshop {
     private Long postCode;
     private String city;
     private String description;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
-    private APIGouvAdress cartography;
+    private Double longitude;
+    private Double latitude;
+
 
 
     @ManyToMany(mappedBy = "workshops")
@@ -102,13 +103,6 @@ public class DiyWorkshop {
         this.description = description;
     }
 
-    public APIGouvAdress getCartography() {
-        return cartography;
-    }
-
-    public void setCartography(APIGouvAdress cartography) {
-        this.cartography = cartography;
-    }
 
     public List<DiyUser> getUsers() {
         return users;
@@ -116,5 +110,21 @@ public class DiyWorkshop {
 
     public void setUsers(List<DiyUser> users) {
         this.users = users;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }
