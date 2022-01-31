@@ -12,6 +12,7 @@
             <div class="row justify-content-center">
                 <div class="col-11 col-md-8 col-lg-5">
                     <form method="post" th:action="@{/admin/workshop/add}" enctype="multipart/form-data" th:object="${workshop}">
+                            <input name="id" th:field="${workshop.id}" type="hidden">
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label" for="title">Nom de l'atelier :</label>
