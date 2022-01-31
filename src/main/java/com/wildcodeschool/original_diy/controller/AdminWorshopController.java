@@ -45,9 +45,12 @@ public class AdminWorshopController {
             Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" +
                     picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             workshop.setPicture(filename);
+        } else if (workshop.getId() != null){
+            workshop.setPicture(workshopRepository.getById(workshop.getId()).getPicture());
         } else {
             workshop.setPicture("/static/img/static-picture.png");
         }
+
 
 
         DiyUser currentUser = userRepository.getByUsername(principal.getName());
@@ -61,8 +64,11 @@ public class AdminWorshopController {
     }
 
     @GetMapping("/admin/workshop/new")
-    public String newWorkshop(Model model) {
+    public String newWorkshop(Model model, @RequestParam(required = false, value = "id") Long id) {
         DiyWorkshop workshop = new DiyWorkshop();
+        if (id != null) {
+            workshop = workshopRepository.getById(id);
+        }
         model.addAttribute("workshop", workshop);
 
         return "/admin/workshop/new";
