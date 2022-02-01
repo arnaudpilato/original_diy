@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+
+    <th:block layout:fragment="head">
+        <title>Ateliers</title>
+        <link href="/static/scss/admin.css" rel="stylesheet"/>
+    </th:block>
+
+    <div layout:fragment="body">
+        <div class="container">
+            <h1 th:text="${workshop.title}" class="text-center my-3"></h1>
+            <h2 th:text="${workshop.streetNumber} +' '+ ${workshop.street} +' '+ ${workshop.city}"></h2>
+            <div class="row">
+                <div class="col-4">
+                    <div><a href="#"><img class="workshop-picture shadow img-fluid rounded mx-auto d-block" th:src="${workshop.picture}" alt="Image de l'atelier"></a></div>
+                    <div class="text-center text-wrap mt-2" th:text="${workshop.description}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</html>

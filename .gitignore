@@ -38,3 +38,4 @@ build/
 ### Database ###
 .env
 .env.local
+src/main/resources/public/static/data/*

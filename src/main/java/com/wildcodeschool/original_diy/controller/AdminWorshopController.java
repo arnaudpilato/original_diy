@@ -49,35 +49,52 @@ public class AdminWorshopController {
             Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" +
                     picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             workshop.setPicture(filename);
+        } else if (workshop.getId() != null) {
+            workshop.setPicture(workshopRepository.getById(workshop.getId()).getPicture());
         } else {
             workshop.setPicture("/static/img/static-picture.png");
         }
+        try {
 
-        // System.out.println(APIGouvService.getAdressAPI(workshop.getStreet(), workshop.getPostCode(), workshop.getStreetNumber()).getClass());
-       try {
-           workshop.setLatitude(APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                   workshop.getStreetNumber()).get("features").get(1).get("geometry").get("coordinates").get(0).asDouble());
-           workshop.setLongitude(APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                   workshop.getStreetNumber()).get("features").get(1).get("geometry").get("coordinates").get(1).asDouble());
+            double latitude = APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
 
-           DiyUser currentUser = userRepository.getByUsername(principal.getName());
-           DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
+            System.out.println(" latitude : " + latitude);
+            System.out.println(" longitude : " + longitude);
 
-           workshopRepository.save(workshop);
-           workshopUserRepository.save(userToWorkshop);
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
+
+            System.out.println("data set");
+            workshopRepository.save(workshop);
+            System.out.println("data save");
+            DiyUser user = userRepository.getByUsername(principal.getName());
+            DiyWorkshopUser diyWorkshopUser = new DiyWorkshopUser(user, workshop);
+            workshopUserRepository.save(diyWorkshopUser);
 
 
-       }catch (Exception e){
-            e.getMessage();
-       }
+
+
+            System.out.println("Dans le try");
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            System.out.println("dans le catch");
+        }
+
 
         return "redirect:/admin/workshop";
 
     }
 
     @GetMapping("/admin/workshop/new")
-    public String newWorkshop(Model model) {
+    public String newWorkshop(Model model, @RequestParam(required = false, value = "id") Long id) {
         DiyWorkshop workshop = new DiyWorkshop();
+        if (id != null) {
+            workshop = workshopRepository.getById(id);
+        }
         model.addAttribute("workshop", workshop);
 
         return "/admin/workshop/new";
