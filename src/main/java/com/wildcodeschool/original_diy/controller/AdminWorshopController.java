@@ -6,7 +6,9 @@ import com.wildcodeschool.original_diy.entity.DiyWorkshopUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopUserRepository;
+import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class AdminWorshopController {
     public UserRepository userRepository;
     @Autowired
     public WorkshopUserRepository workshopUserRepository;
+    @Autowired
+    public APIGouvService APIGouvService;
 
     // PIL : Affichage des ateliers
     @GetMapping("/admin/workshop")
@@ -36,31 +40,52 @@ public class AdminWorshopController {
     }
 
     // PIL : Ajout d'un nouvel atelier
-    @PostMapping("/admin/workshop/add")
+    @RequestMapping("/admin/workshop/add")
     public String addWorkshop(@ModelAttribute DiyWorkshop workshop,
                               @RequestParam(value = "picture_file") MultipartFile picture,
-                              Principal principal) throws IOException {
+                              Principal principal, Model model) throws IOException {
         if (!picture.isEmpty()) {
             String filename = "/static/data/" + picture.getOriginalFilename();
             Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" +
                     picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             workshop.setPicture(filename);
+
         } else if (workshop.getId() != null){
             workshop.setPicture(workshopRepository.getById(workshop.getId()).getPicture());
         } else {
             workshop.setPicture("/static/img/static-picture.png");
         }
+        try {
 
+            double latitude = APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
 
+            System.out.println(" latitude : " + latitude);
+            System.out.println(" longitude : " + longitude);
 
-        DiyUser currentUser = userRepository.getByUsername(principal.getName());
-        DiyWorkshopUser userToWorkshop = new DiyWorkshopUser(currentUser, workshop);
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
 
-        workshopRepository.save(workshop);
-        workshopUserRepository.save(userToWorkshop);
+            System.out.println("data set");
+            workshopRepository.save(workshop);
+            System.out.println("data save");
+            DiyUser user = userRepository.getByUsername(principal.getName());
+            DiyWorkshopUser diyWorkshopUser = new DiyWorkshopUser(user, workshop);
+            workshopUserRepository.save(diyWorkshopUser);
+
+            model.addAttribute("workshops", workshopRepository.getAllWorkshops());
+            System.out.println("Dans le try");
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            System.out.println("dans le catch");
+        }
 
 
         return "redirect:/admin/workshop";
+
     }
 
     @GetMapping("/admin/workshop/new")

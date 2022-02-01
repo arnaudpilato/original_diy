@@ -3,9 +3,11 @@ package com.wildcodeschool.original_diy.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+@Service
 public class APIGouvService {
     private static final String API_MAP_URL = "https://api-adresse.data.gouv.fr/search/";
     private WebClient webClient;
@@ -36,8 +38,6 @@ public class APIGouvService {
                 )
                 .retrieve()
                 .bodyToMono(String.class).block();
-
-
     }
 
 }
