@@ -43,7 +43,7 @@ public class AdminWorshopController {
     @RequestMapping("/admin/workshop/add")
     public String addWorkshop(@ModelAttribute DiyWorkshop workshop,
                               @RequestParam(value = "picture_file") MultipartFile picture,
-                              Principal principal) throws IOException {
+                              Principal principal, Model model) throws IOException {
         if (!picture.isEmpty()) {
             String filename = "/static/data/" + picture.getOriginalFilename();
             Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" +
@@ -75,6 +75,7 @@ public class AdminWorshopController {
             DiyWorkshopUser diyWorkshopUser = new DiyWorkshopUser(user, workshop);
             workshopUserRepository.save(diyWorkshopUser);
 
+            model.addAttribute("workshops", workshopRepository.getAllWorkshops());
             System.out.println("Dans le try");
         } catch (Exception e) {
 
