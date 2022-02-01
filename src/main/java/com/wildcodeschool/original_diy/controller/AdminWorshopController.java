@@ -49,7 +49,8 @@ public class AdminWorshopController {
             Files.copy(picture.getInputStream(), Paths.get("src/main/resources/public/static/data/" +
                     picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             workshop.setPicture(filename);
-        } else if (workshop.getId() != null) {
+
+        } else if (workshop.getId() != null){
             workshop.setPicture(workshopRepository.getById(workshop.getId()).getPicture());
         } else {
             workshop.setPicture("/static/img/static-picture.png");
@@ -73,9 +74,6 @@ public class AdminWorshopController {
             DiyUser user = userRepository.getByUsername(principal.getName());
             DiyWorkshopUser diyWorkshopUser = new DiyWorkshopUser(user, workshop);
             workshopUserRepository.save(diyWorkshopUser);
-
-
-
 
             System.out.println("Dans le try");
         } catch (Exception e) {
