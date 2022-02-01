@@ -1,7 +1,9 @@
 package com.wildcodeschool.original_diy.entity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class DiyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false, unique = true)
     private String username;
     private String firstName;
     private String lastName;
@@ -25,8 +27,11 @@ public class DiyUser {
     private String email;
     private Long phone;
     private String role;
-
-
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<DiyComment> diyComments = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL)
     private List<DiyWorkshop> workshops = new ArrayList<>();
 
@@ -96,5 +101,21 @@ public class DiyUser {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<DiyComment> getDiyComments() {
+        return diyComments;
+    }
+
+    public void setDiyComments(List<DiyComment> diyComments) {
+        this.diyComments = diyComments;
+    }
+
+    public List<DiyWorkshop> getWorkshops() {
+        return workshops;
+    }
+
+    public void setWorkshops(List<DiyWorkshop> workshops) {
+        this.workshops = workshops;
     }
 }

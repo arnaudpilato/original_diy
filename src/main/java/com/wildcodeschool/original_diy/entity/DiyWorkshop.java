@@ -30,8 +30,10 @@ public class DiyWorkshop {
     private String description;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
     private APIGouvAdress cartography;
-
-
+    @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @OrderBy("id DESC")
+    private final List<DiyComment> comments = new ArrayList<DiyComment>();
     @ManyToMany(mappedBy = "workshops")
     private List<DiyUser> users = new ArrayList<>();
 
@@ -117,4 +119,9 @@ public class DiyWorkshop {
     public void setUsers(List<DiyUser> users) {
         this.users = users;
     }
+
+    public List<DiyComment> getComments() {
+        return comments;
+    }
+
 }
