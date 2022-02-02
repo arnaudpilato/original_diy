@@ -6,15 +6,18 @@ entity user {
     id
     username
     password
-    first_name
-    last_name
     mail
-    address | null
-    phone | null
     role
 }
 
-entity atelier {
+entity profile {
+    first_name
+    last_name
+    address
+    phone
+}
+
+entity workshop {
     id
     title
     picture
@@ -23,16 +26,28 @@ entity atelier {
     postcode
     city
     description
-
-    comment
-    inscription
     numberOfPeople
+    boolean confirmation
 }
 
 entity comment {
     id
+    comment
+    created_at
+    boolean confirmation
 }
 
-atelier "1.1" -- "1.n" comment
+entity inscription {
+    id
+    workshop_id
+    user_id
+}
+
+user "1.1" -- "1.1" profile
+comment "m" -- "1" workshop
+comment "m" -- "1" user
+inscription "m" -- "m" user
+inscription "m" -- "m" workshop
+workshop "m" -- "1" user
 
 @enduml
