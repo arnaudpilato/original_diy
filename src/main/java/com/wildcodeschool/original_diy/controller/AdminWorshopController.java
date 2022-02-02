@@ -39,7 +39,7 @@ public class AdminWorshopController {
     }
 
     // PIL : Ajout d'un nouvel atelier
-    @RequestMapping("/admin/workshop/add")
+    @RequestMapping("/user/workshop/add")
     public String addWorkshop(@ModelAttribute DiyWorkshop workshop,
                               @RequestParam(value = "picture_file") MultipartFile picture,
                               Principal principal, Model model) throws IOException {
@@ -49,7 +49,7 @@ public class AdminWorshopController {
                     picture.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             workshop.setPicture(filename);
 
-        } else if (workshop.getId() != null){
+        } else if (workshop.getId() != null) {
             workshop.setPicture(workshopRepository.getById(workshop.getId()).getPicture());
         } else {
             workshop.setPicture("/static/img/static-picture.png");
@@ -77,13 +77,16 @@ public class AdminWorshopController {
 
     }
 
-    @GetMapping("/admin/workshop/new")
-    public String newWorkshop(Model model, @RequestParam(required = false, value = "id") Long id) {
+    @GetMapping("/user/workshop/new")
+    public String newWorkshop(Model model, @RequestParam(required = false, value = "id") Long id, Principal principal) {
         DiyWorkshop workshop = new DiyWorkshop();
         if (id != null) {
             workshop = workshopRepository.getById(id);
         }
+        DiyUser user = userRepository.getByUsername(principal.getName());
         model.addAttribute("workshop", workshop);
+        model.addAttribute("user", user);
+
 
         return "/admin/workshop/new";
     }

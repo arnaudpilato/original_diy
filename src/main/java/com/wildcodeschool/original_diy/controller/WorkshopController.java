@@ -24,7 +24,7 @@ public class WorkshopController {
 
     @GetMapping("/workshop")
     public String getWorkshops(Model model) {
-        model.addAttribute("workshops", workshopRepository.getAllWorkshops());
+        model.addAttribute("workshops", workshopRepository.getAllConfirmedWorkshops());
 
         return "/workshop/workshop";
     }
