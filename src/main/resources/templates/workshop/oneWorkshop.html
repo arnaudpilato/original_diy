@@ -9,10 +9,11 @@
 
 <div layout:fragment="body">
     <div class="container">
+        <div class="row justify-content-center">
         <div class="text-center my-3">
             <h1 th:text="${workshop.title}"></h1>
             <h2 th:text="${workshop.streetNumber} +' '+ ${workshop.street} +' '+ ${workshop.city}"></h2>
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-4">
                     <div><a href="#"><img class="workshop-picture shadow img-fluid rounded mx-auto d-block"
                                           th:src="${workshop.picture}" alt="Image de l'atelier"></a></div>
@@ -20,7 +21,8 @@
                 </div>
             </div>
         </div>
-        <div th:if="${user != null}">
+        </div>
+        <div th:if="${user != 'null'}">
             <form action="#" th:action="@{/saveComment}" th:object="${comment}" method="POST">
                 <div class="form-group">
                     <label for="comment">Ajouter un commentaire : </label>
@@ -43,7 +45,7 @@
                 </div>
                 <div class="justify-content-between d-flex align-items-center">
                     <p th:text="${comment.getComment()}" class="p-3">
-                    <div th:if="${user != null}">
+                    <div th:if="${user != 'null'}">
 
                         <p th:if="${user.role == 'ROLE_ADMIN'}"><a
                                 th:href="@{/admin/comment/delete/{id} (id = ${comment.id})}"><img class="icon"
