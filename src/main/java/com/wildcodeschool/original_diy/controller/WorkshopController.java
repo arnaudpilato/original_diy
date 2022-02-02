@@ -38,7 +38,7 @@ public class WorkshopController {
             DiyUser user = userRepository.getByUsername(principal.getName());
             model.addAttribute("user", user);
         } else {
-            model.addAttribute("user", null);
+            model.addAttribute("user", "null");
         }
 
         return "/workshop/oneWorkshop";
