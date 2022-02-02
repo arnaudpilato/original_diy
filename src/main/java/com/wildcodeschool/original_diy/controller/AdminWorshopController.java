@@ -1,7 +1,9 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.service.APIGouvService;
@@ -25,6 +27,8 @@ public class AdminWorshopController {
     public UserRepository userRepository;
     @Autowired
     public APIGouvService APIGouvService;
+    @Autowired
+    public CommentRepository commentRepository;
 
     // PIL : Affichage des ateliers
     @GetMapping("/admin/workshop")
@@ -88,6 +92,14 @@ public class AdminWorshopController {
     public String deleteWorkshop(@PathVariable("id") Long id) {
         DiyWorkshop workshop = workshopRepository.getById(id);
         workshopRepository.delete(workshop);
+
+        return "redirect:/admin/workshop";
+    }
+
+    @GetMapping("/admin/comment/delete/{id}")
+    public String deleteComment(@PathVariable("id") Long id) {
+        DiyComment comment = commentRepository.getById(id);
+        commentRepository.delete(comment);
 
         return "redirect:/admin/workshop";
     }
