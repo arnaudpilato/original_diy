@@ -20,7 +20,6 @@ public class DiyWorkshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String picture;
     private Long streetNumber;
@@ -28,12 +27,12 @@ public class DiyWorkshop {
     private Long postCode;
     private String city;
     private String description;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
-    private APIGouvAdress cartography;
     @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @OrderBy("id DESC")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
+    private Double longitude;
+    private Double latitude;
     @ManyToMany(mappedBy = "workshops")
     private List<DiyUser> users = new ArrayList<>();
 
@@ -104,13 +103,6 @@ public class DiyWorkshop {
         this.description = description;
     }
 
-    public APIGouvAdress getCartography() {
-        return cartography;
-    }
-
-    public void setCartography(APIGouvAdress cartography) {
-        this.cartography = cartography;
-    }
 
     public List<DiyUser> getUsers() {
         return users;
@@ -122,6 +114,22 @@ public class DiyWorkshop {
 
     public List<DiyComment> getComments() {
         return comments;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
 }
