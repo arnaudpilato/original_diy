@@ -2,13 +2,10 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
-import com.wildcodeschool.original_diy.entity.DiyWorkshopUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
-import com.wildcodeschool.original_diy.repository.WorkshopUserRepository;
 import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +23,6 @@ public class AdminWorshopController {
     public WorkshopRepository workshopRepository;
     @Autowired
     public UserRepository userRepository;
-    @Autowired
-    public WorkshopUserRepository workshopUserRepository;
     @Autowired
     public APIGouvService APIGouvService;
 
@@ -62,27 +57,17 @@ public class AdminWorshopController {
             double longitude = APIGouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
 
-            System.out.println(" latitude : " + latitude);
-            System.out.println(" longitude : " + longitude);
-
+            DiyUser user = userRepository.getByUsername(principal.getName());
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
+            workshop.setDiyUser(user);
 
-            System.out.println("data set");
             workshopRepository.save(workshop);
-            System.out.println("data save");
-            DiyUser user = userRepository.getByUsername(principal.getName());
-            DiyWorkshopUser diyWorkshopUser = new DiyWorkshopUser(user, workshop);
-            workshopUserRepository.save(diyWorkshopUser);
 
             model.addAttribute("workshops", workshopRepository.getAllWorkshops());
-            System.out.println("Dans le try");
         } catch (Exception e) {
-
             e.printStackTrace();
-            System.out.println("dans le catch");
         }
-
 
         return "redirect:/admin/workshop";
 

@@ -1,7 +1,9 @@
 package com.wildcodeschool.original_diy.entity;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class DiyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(nullable = false, unique = true)
     private String username;
     private String firstName;
     private String lastName;
@@ -25,13 +27,29 @@ public class DiyUser {
     private String email;
     private Long phone;
     private String role;
-
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<DiyWorkshop> workshops = new ArrayList<>();
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<DiyComment> diyComments = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "diyUser",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @OrderBy("id DESC")
+    private List<DiyWorkshop> workshop = new ArrayList<>();
 
 
     public DiyUser() {
+    }
+
+    public List<DiyWorkshop> getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(List<DiyWorkshop> workshop) {
+        this.workshop = workshop;
     }
 
     public Long getId() {
@@ -97,4 +115,13 @@ public class DiyUser {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public List<DiyComment> getDiyComments() {
+        return diyComments;
+    }
+
+    public void setDiyComments(List<DiyComment> diyComments) {
+        this.diyComments = diyComments;
+    }
+
 }
