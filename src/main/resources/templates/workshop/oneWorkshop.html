@@ -29,21 +29,30 @@
                 </div>
 
                 <input type="hidden" th:value="${workshop.id}" name="workshopid" class="form-control mb-4 col-4">
-                <button type="submit" class="btn btn-info col-2"> Save</button>
+                <button type="submit" class="btn btn-info col-2">Envoyer</button>
             </form>
         </div>
         <hr>
-
-
         <div class="">
             <h2>Commentaire : </h2>
             <div class="jusitfy-content-between" th:each="comment : ${workshop.getComments()}">
                 <hr>
-                <div class="justify-content-between d-flex align-items-center" >
+                <div class="justify-content-between d-flex align-items-center">
                     <p th:text="${comment.getDiyUser().getUsername()} +' :'"/>
                     <p th:text="${#dates.format(comment.getCreatedAt(),'dd/MM/yyyy HH:mm')}"/>
                 </div>
-                <p th:text="${comment.getComment()}" class="p-3">
+                <div class="justify-content-between d-flex align-items-center">
+                    <p th:text="${comment.getComment()}" class="p-3">
+                    <div th:if="${user != null}">
+
+                        <p th:if="${user.role == 'ROLE_ADMIN'}"><a
+                                th:href="@{/admin/comment/delete/{id} (id = ${comment.id})}"><img class="icon"
+                                                                                                  style="width: 20px; height: 20px"
+                                                                                                  src="/static/img/delete.png"
+                                                                                                  alt="Logo supprimer"/></a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 

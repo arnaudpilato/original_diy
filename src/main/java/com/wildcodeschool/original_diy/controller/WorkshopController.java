@@ -1,6 +1,7 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyComment;
+import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
@@ -34,7 +35,8 @@ public class WorkshopController {
         model.addAttribute("workshop", workshopRepository.getById(id));
         model.addAttribute("comment", diyComment);
         if (principal != null) {
-            model.addAttribute("user", userRepository.getByUsername(principal.getName()));
+            DiyUser user = userRepository.getByUsername(principal.getName());
+            model.addAttribute("user", user);
         } else {
             model.addAttribute("user", null);
         }

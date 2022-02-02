@@ -23,7 +23,7 @@ public class DiyComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false, unique = false)
+    @Column(length = 65535, columnDefinition = "TEXT")
     private String comment;
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
     private Date createdAt;
