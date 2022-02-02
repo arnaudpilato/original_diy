@@ -33,8 +33,8 @@ public class DiyWorkshop {
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
     private Double longitude;
     private Double latitude;
-    @ManyToMany(mappedBy = "workshops")
-    private List<DiyUser> users = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DiyUser diyUser;
 
     public DiyWorkshop() {
     }
@@ -103,13 +103,12 @@ public class DiyWorkshop {
         this.description = description;
     }
 
-
-    public List<DiyUser> getUsers() {
-        return users;
+    public DiyUser getDiyUser() {
+        return diyUser;
     }
 
-    public void setUsers(List<DiyUser> users) {
-        this.users = users;
+    public void setDiyUser(DiyUser diyUser) {
+        this.diyUser = diyUser;
     }
 
     public List<DiyComment> getComments() {

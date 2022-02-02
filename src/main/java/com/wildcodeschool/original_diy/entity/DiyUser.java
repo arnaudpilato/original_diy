@@ -32,11 +32,24 @@ public class DiyUser {
             orphanRemoval = true
     )
     private List<DiyComment> diyComments = new ArrayList<>();
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<DiyWorkshop> workshops = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "diyUser",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @OrderBy("id DESC")
+    private List<DiyWorkshop> workshop = new ArrayList<>();
 
 
     public DiyUser() {
+    }
+
+    public List<DiyWorkshop> getWorkshop() {
+        return workshop;
+    }
+
+    public void setWorkshop(List<DiyWorkshop> workshop) {
+        this.workshop = workshop;
     }
 
     public Long getId() {
@@ -111,11 +124,4 @@ public class DiyUser {
         this.diyComments = diyComments;
     }
 
-    public List<DiyWorkshop> getWorkshops() {
-        return workshops;
-    }
-
-    public void setWorkshops(List<DiyWorkshop> workshops) {
-        this.workshops = workshops;
-    }
 }
