@@ -59,6 +59,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">Surnom</th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Prenom</th>
                                     <th scope="col">Email</th>
@@ -70,6 +71,7 @@
                             <tbody>
                                 <tr th:each="user, userStat : ${users}">
                                     <th scope="row" th:text="${userStat.index + 1}">Index</th>
+                                    <td th:text="${user.username}">Surnom</td>
                                     <td th:text="${user.lastName}">Nom</td>
                                     <td th:text="${user.firstName}">Prenom</td>
                                     <td th:text="${user.email}">Email</td>

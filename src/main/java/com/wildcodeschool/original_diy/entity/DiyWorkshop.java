@@ -1,27 +1,42 @@
 package com.wildcodeschool.original_diy.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DiyWorkshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String picture;
     private Long streetNumber;
     private String street;
     private Long postCode;
     private String city;
+    @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
-
-    @ManyToMany(mappedBy = "workshops")
-    private List<DiyUser> users = new ArrayList<>();
+    @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @OrderBy("id DESC")
+    private final List<DiyComment> comments = new ArrayList<DiyComment>();
+    private Double longitude;
+    private Double latitude;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private DiyUser diyUser;
+    private boolean confirmation = false;
 
     public DiyWorkshop() {
     }
@@ -88,5 +103,41 @@ public class DiyWorkshop {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public DiyUser getDiyUser() {
+        return diyUser;
+    }
+
+    public void setDiyUser(DiyUser diyUser) {
+        this.diyUser = diyUser;
+    }
+
+    public List<DiyComment> getComments() {
+        return comments;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public boolean isConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(boolean confirmation) {
+        this.confirmation = confirmation;
     }
 }

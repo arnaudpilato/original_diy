@@ -1,64 +1,79 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/_layout}">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/_layout}">
 
-  <head>
+<head>
     <title>Gestion des ateliers</title>
     <link href="/static/scss/workshop.css" rel="stylesheet"/>
-  </head>
+</head>
 
-  <div layout:fragment="body">
+<div layout:fragment="body">
     <div class="container">
-      <h1 class="text-center my-4">Gestion des ateliers</h1>
-      <div class="text-end"><a class="btn btn-primary" th:href="@{/admin/workshop/new}">Ajout d'un atelier</a></div>
-      <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" th:each="worshop, workshopStat : ${worshops}">
-          <thead>
-            <tr>
-              <th th:text="'Atelier ' + ${workshopStat.index + 1}">Index</th>
-              <th class="wrap-responsive" scope="col" th:text="${worshop.title}">Titre</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Image</th>
-              <td class="text-center"><img class="workshop-picture" th:src="${worshop.picture}" alt="Image de l'atelier"></td>
-            </tr>
-            <tr>
-              <th scope="row">Description</th>
-              <td class="text-wrap" th:text="${worshop.description}">Description</td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="2">
-                <div class="d-flex justify-content-around">
-                  <div><a href="#" class="link"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></div>
-                  <div><a class="link" href="#"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></div>
-                </div>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-responsive-md d-none d-md-block my-2">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col" colspan="2">Image</th>
-              <th scope="col">Description</th>
-              <th scope="col" colspan="2">Modifier</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="worshop, workshopStat : ${worshops}">
-              <th scope="row" th:text="${workshopStat.index + 1}"></th>
-              <th colspan="2"><img class="workshop-picture rounded img-fluid" th:src="${worshop.picture}" alt="Image de l'atelier"></th>
-              <td class="text-wrap" th:text="${worshop.description}"></td>
-              <td class="text-end td-edit"><a href="#" class="link"><img class="icon" src="/static/img/edit.png" alt="Logo éditer"></a></td>
-              <td class="td-delete"><a class="link" th:href="@{/admin/workshop/delete/{id} (id = ${worshop.id})}"><img class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <h1 class="text-center my-4">Gestion des ateliers</h1>
+        <div class="text-end"><a class="btn btn-primary" th:href="@{/user/workshop/new}">Ajout d'un atelier</a></div>
+        <div class="table-responsive d-block d-md-none my-2">
+            <table class="table table-bordered border-dark" th:each="worshop, workshopStat : ${worshops}">
+                <thead>
+                <tr>
+                    <th th:text="'Atelier ' + ${workshopStat.index + 1}">Index</th>
+                    <th class="wrap-responsive" scope="col" th:text="${worshop.title}">Titre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Image</th>
+                    <td class="text-center"><img class="workshop-picture" th:src="${worshop.picture}"
+                                                 alt="Image de l'atelier"></td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td class="text-wrap" th:text="${worshop.description}">Description</td>
+                </tr>
+                <tr>
+                    <th scope="row" colspan="2">
+                        <div class="d-flex justify-content-around">
+
+                            <div><a th:href="@{/user/workshop/new(id = ${worshop.id})}" class="link"><img class="icon"
+                                                                                                          src="/static/img/edit.png"
+                                                                                                          alt="Logo éditer"></a>
+                            </div>
+                            <div><a th:href="@{/admin/workshop/delete/{id} (id = ${worshop.id})}" href="#"><img
+                                    class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></div>
+                        </div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive-md d-none d-md-block my-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" colspan="2">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Visible</th>
+                    <th scope="col" colspan="2">Modifier</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="worshop, workshopStat : ${worshops}">
+                    <th scope="row" th:text="${workshopStat.index + 1}"></th>
+                    <th colspan="2"><a th:href="@{/workshop/{id}(id = ${worshop.id})}"><img
+                            class="workshop-picture rounded img-fluid" th:src="${worshop.picture}"
+                            alt="Image de l'atelier"></a></th>
+                    <td class="text-wrap" th:text="${worshop.description}"></td>
+                    <td th:if="${worshop.confirmation}">oui</td>
+                    <td th:unless="${worshop.confirmation}">non</td>
+                    <td class="text-end td-edit"><a th:href="@{/user/workshop/new(id = ${worshop.id})}"
+                                                    class="link"><img class="icon" src="/static/img/edit.png"
+                                                                      alt="Logo éditer"></a></td>
+                    <td class="td-delete"><a class="link" th:href="@{/admin/workshop/delete/{id} (id = ${worshop.id})}"><img
+                            class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
+</div>
 </html>
