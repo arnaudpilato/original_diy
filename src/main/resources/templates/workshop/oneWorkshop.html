@@ -37,7 +37,7 @@
         <hr>
         <div class="">
             <h2>Commentaire : </h2>
-            <div class="jusitfy-content-between" th:each="comment : ${workshop.getComments()}">
+            <div class="jusitfy-content-between" th:each="comment : ${workshop.getComments()}" th:if="${comment.isConfirmed()}">
                 <hr>
                 <div class="justify-content-between d-flex align-items-center">
                     <p th:text="${comment.getDiyUser().getUsername()} +' :'"/>

@@ -99,11 +99,5 @@ public class AdminWorshopController {
         return "redirect:/admin/workshop";
     }
 
-    @GetMapping("/admin/comment/delete/{id}")
-    public String deleteComment(@PathVariable("id") Long id) {
-        DiyComment comment = commentRepository.getById(id);
-        commentRepository.delete(comment);
 
-        return "redirect:/admin/workshop";
-    }
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/_layout}">
+
+<head>
+    <title>Gestion des ateliers</title>
+    <link href="/static/scss/workshop.css" rel="stylesheet"/>
+</head>
+
+<div layout:fragment="body">
+    <div class="container">
+        <h1 class="text-center my-4">Gestion des commentaires</h1>
+        <div class="table-responsive d-block d-md-none my-2">
+            <table class="table table-bordered border-dark" th:each="worshop, workshopStat : ${workshops}">
+                <thead>
+                <tr>
+                    <th th:text="'Atelier ' + ${workshopStat.index + 1}">Index</th>
+                    <th class="wrap-responsive" scope="col" th:text="${worshop.title}">Titre</th>
+                </tr>
+                </thead>
+                <tbody th:each="comment : ${worshop.getComments()}">
+                <tr>
+                    <th th:text="${comment.getDiyUser().username}" scope="row"></th>
+                    <td class="text-wrap" th:text="${comment.getComment()}"></td>
+                </tr>
+                <tr>
+                    <th scope="row" colspan="2">
+                        <div class="d-flex justify-content-around">
+
+                            <div>
+                                <form th:action="@{comment/confirm/{id} (id = ${comment.id})}">
+                                    <input th:checked="${comment.confirmed}" type="checkbox" id="confirmation"
+                                           name="confirmation" onclick="this.form.submit()">
+                                </form>
+                            </div>
+
+
+                            <div><a th:href="@{/admin/comment/delete/{id} (id = ${comment.id})}" href="#"><img
+                                    class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></div>
+                        </div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="table-responsive-md d-none d-md-block my-2">
+            <table class="table table-bordered border-dark" th:each="worshop, workshopStat : ${workshops}">
+                <thead>
+                <tr>
+                    <th class="col-2" th:text="'Atelier ' + ${workshopStat.index + 1}">Index</th>
+                    <th class="wrap-responsive col-8" scope="col" th:text="${worshop.title}">Titre</th>
+                    <th class="col-1">Visible</th>
+                    <th class="col-1">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody th:each="comment : ${worshop.getComments()}">
+                <tr>
+                    <th scope="row" th:text="${comment.getDiyUser().username}"></th>
+                    <td class="text-wrap" th:text="${comment.getComment()}"></td>
+                    <td class="justify-content-center">
+                        <form th:action="@{comment/confirm/{id} (id = ${comment.id})}">
+                            <input th:checked="${comment.confirmed}" type="checkbox" id="confirm"
+                                   name="confirmation" onclick="this.form.submit()">
+                        </form>
+                    </td>
+                    <td>
+                        <div><a th:href="@{/admin/comment/delete/{id} (id = ${comment.id})}" href="#"><img
+                                class="icon" src="/static/img/delete.png" alt="Logo supprimer"></a></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>
+</html>
