@@ -7,11 +7,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity

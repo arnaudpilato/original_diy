@@ -11,10 +11,10 @@
                         <a class="nav-link active" aria-current="page" href="/">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/workshop}">Atelier</a>
+                        <a class="nav-link" th:href="@{/templates/workshop}">Atelier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/map}">Carte</a>
+                        <a class="nav-link" th:href="@{/templates/map}">Carte</a>
                     </li>
                     <li class="nav-item"  sec:authorize="hasRole('ROLE_ADMIN')">
                         <a class="nav-link" href="/admin">Administration</a>
