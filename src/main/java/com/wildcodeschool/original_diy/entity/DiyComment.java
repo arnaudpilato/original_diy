@@ -31,6 +31,7 @@ public class DiyComment {
     private DiyWorkshop diyWorkshop;
     @ManyToOne(fetch = FetchType.LAZY)
     private DiyUser diyUser;
+    private boolean confirmed = false;
 
     public DiyComment() {
     }
@@ -75,4 +76,11 @@ public class DiyComment {
         this.diyUser = diyUser;
     }
 
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
+    }
 }

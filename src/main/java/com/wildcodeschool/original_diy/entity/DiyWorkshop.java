@@ -26,6 +26,7 @@ public class DiyWorkshop {
     private String street;
     private Long postCode;
     private String city;
+    @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
     @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)

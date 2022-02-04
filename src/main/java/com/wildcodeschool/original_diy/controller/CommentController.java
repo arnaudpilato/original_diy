@@ -8,9 +8,8 @@ import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Date;
@@ -24,6 +23,15 @@ public class CommentController {
     private WorkshopRepository workshopRepository;
     @Autowired
     private CommentRepository commentRepository;
+
+
+    @GetMapping("/admin/commentaire")
+    public String getWorkshops(Model model) {
+        model.addAttribute("commentary", commentRepository.findAll());
+        model.addAttribute("workshops", workshopRepository.getAllWorkshops());
+
+        return "admin/workshop/commentary";
+    }
 
     @RequestMapping("/saveComment")
     public String saveComment(@RequestParam(value = "workshopid") Long workshopid, @ModelAttribute DiyComment diyComment, Principal principal) {
@@ -39,5 +47,26 @@ public class CommentController {
         commentRepository.save(diyComment);
 
         return "redirect:/workshop/" + workshopid;
+    }
+
+    @GetMapping("/admin/comment/delete/{id}")
+    public String deleteComment(@PathVariable("id") Long id) {
+        DiyComment comment = commentRepository.getById(id);
+        commentRepository.delete(comment);
+
+        return "redirect:/admin/commentaire";
+    }
+
+    @GetMapping("/admin/comment/confirm/{id}")
+    public String confirmComment(@PathVariable("id") Long id) {
+        DiyComment comment = commentRepository.getById(id);
+        if (comment.isConfirmed()){
+            comment.setConfirmed(false);
+        }else{
+            comment.setConfirmed(true);
+        }
+        commentRepository.save(comment);
+
+        return "redirect:/admin/commentaire";
     }
 }
