@@ -35,6 +35,7 @@ public class DiyWorkshop {
     private Double latitude;
     @ManyToOne(fetch = FetchType.LAZY)
     private DiyUser diyUser;
+    private boolean confirmation = false;
 
     public DiyWorkshop() {
     }
@@ -131,4 +132,11 @@ public class DiyWorkshop {
         this.latitude = latitude;
     }
 
+    public boolean isConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(boolean confirmation) {
+        this.confirmation = confirmation;
+    }
 }

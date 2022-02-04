@@ -12,4 +12,7 @@ import java.util.List;
 public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
     @Query("SELECT w FROM DiyWorkshop AS w")
     public List<DiyWorkshop> getAllWorkshops();
+
+    @Query("SELECT w FROM DiyWorkshop AS w WHERE w.confirmation = true")
+    public List<DiyWorkshop> getAllConfirmedWorkshops();
 }
