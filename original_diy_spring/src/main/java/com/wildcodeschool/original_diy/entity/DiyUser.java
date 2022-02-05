@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Pil : Added constraints to make the username and email table unique
+ * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
 @Entity

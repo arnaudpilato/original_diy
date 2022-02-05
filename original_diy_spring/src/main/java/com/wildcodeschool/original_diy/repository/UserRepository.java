@@ -7,7 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Pil : Added possibility to search by username <br>
+ * - Added boolean to check if username and email exist
+ */
 @Repository
 public interface UserRepository extends JpaRepository<DiyUser, Long> {
     @Query("SELECT u FROM DiyUser AS u WHERE u.username = :username")
@@ -16,4 +21,7 @@ public interface UserRepository extends JpaRepository<DiyUser, Long> {
     @Query("SELECT u FROM DiyUser AS u")
     public List<DiyUser> getAllUsers();
 
+    Optional<DiyUser> findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }
