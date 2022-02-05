@@ -6,12 +6,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class DiyRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // PIL : Conversion énum eRole en chaine de caractères
+    // PIL : Conversion eRole en string
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
