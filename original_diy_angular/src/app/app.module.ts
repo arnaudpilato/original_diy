@@ -4,10 +4,12 @@ import { RegisterComponent } from './register/register.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { authInterceptorProviders } from "./helper/auth.interceptor";
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule } from "@angular/forms";
 import { LoginComponent } from './login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
