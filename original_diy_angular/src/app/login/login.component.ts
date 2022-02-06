@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../service/auth.service";
+import {TokenStorageService} from "../service/token-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -17,9 +19,32 @@ export class LoginComponent implements OnInit {
   public roles: string[] = [];
   public userName: string = '';
 
-  constructor() { }
+  constructor(private authService: AuthService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorageService.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorageService.getUser().roles;
+      this.userName = this.tokenStorageService.getUser().username;
+    }
   }
 
+  onSubmit(): void {
+    const { username, password } = this.form;
+
+    this.authService.login(username, password).subscribe({
+      next: data => {
+        this.tokenStorageService.saveToken(data.accessToken);
+        this.tokenStorageService.saveUser(data.user);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorageService.getUser().roles;
+        this.reloadPage();
+      }
+    });
+  }
+
+  reloadPage(): void {
+    window.location.reload();
+  }
 }
