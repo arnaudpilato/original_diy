@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../service/auth.service";
+import { Title } from "@angular/platform-browser";
+import { AuthService } from "../service/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,9 @@ export class RegisterComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private title: Title, private authService: AuthService) {
+    this.title.setTitle("OriginalDIY - Inscription")
+  }
 
   ngOnInit(): void {
   }

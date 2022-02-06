@@ -9,6 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule } from "@angular/forms";
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -17,12 +19,14 @@ import { LoginComponent } from './login/login.component';
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

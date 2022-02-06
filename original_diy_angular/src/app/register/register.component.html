@@ -1,58 +1,44 @@
-<div class="container-fluid">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-11 col-lg-5 mt-5" *ngIf="isSuccessful">
-        <div class="alert alert-success">Your registration is successful!</div>
-      </div>
-      <div class="row justify-content-center mt-3">
-        <div class="col-11 col-lg-5 panel bg-primary my-3">
-          <form class="row justify-content-center" *ngIf="!isSuccessful" name="form" (ngSubmit)="registerForm.form.valid && onSubmit()" #registerForm="ngForm" novalidate>
-            <h1 class="text-center text-white my-4">Création d'un nouvel utilisateur</h1>
-            <div class="row col-11 col-lg-10 g-1 justify-content-between" *ngIf="registerForm.submitted && isSignUpFailed">
-              <div class="alert alert-warning">Inscription échouée !<br />{{ errorMessage }}</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-4 mt-5" *ngIf="isSuccessful">
+      <div class="alert alert-success">Votre inscription a bien été enregistrée!</div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-11 col-md-4 my-3">
+        <form class="row justify-content-center" *ngIf="!isSuccessful" name="form" (ngSubmit)="registerForm.form.valid && onSubmit()" #registerForm="ngForm" novalidate>
+          <h1 class="text-center my-4">Création d'un nouvel utilisateur</h1>
+          <div class="row col-11 col-lg-10 g-1 justify-content-between" *ngIf="registerForm.submitted && isSignUpFailed">
+            <div class="alert alert-warning">Inscription échouée !<br />{{ errorMessage }}</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="username">Utilisateur :</label>
+            <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel"/>
+            <div class="form-control alert-danger my-2" *ngIf="username.errors && registerForm.submitted">
+              <div *ngIf="username.errors['required']">Le nom est requis !</div>
+              <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>
+              <div *ngIf="username.errors['maxlength']">L'identifiant doit faire moins de 100 caractères !</div>
             </div>
-            <div class="row col-11 col-lg-10 g-1 justify-content-between">
-              <div class="col-auto">
-                <label class="col-form-label text-white" for="username">Identifiant</label>
-              </div>
-              <div class="col-lg-7">
-                <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" required minlength="1" maxlength="100" #username="ngModel"/>
-              </div>
-              <div class="form-control alert-danger my-2" *ngIf="username.errors && registerForm.submitted">
-                <div *ngIf="username.errors['required']">Le nom est requis !</div>
-                <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>
-                <div *ngIf="username.errors['maxlength']">L'identifiant doit faire moins de 100 caractères !</div>
-              </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="email">Adresse e-mail :</label>
+            <input class="form-control" id="email" name="email" [(ngModel)]="form.email" type="email" placeholder="Adresse email" required email #email="ngModel"/>
+            <div class="form-control alert-danger my-2" *ngIf="email.errors && registerForm.submitted">
+              <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
+              <div *ngIf="email.errors['email']">L'adresse email doit être une adresse valide !</div>
             </div>
-            <div class="row col-11 col-lg-10 g-1 justify-content-between">
-              <div class="col-auto">
-                <label class="col-form-label text-white" for="email">Adresse e-mail</label>
-              </div>
-              <div class="col-lg-7">
-                <input class="form-control" id="email" name="email" [(ngModel)]="form.email" type="email" required email #email="ngModel"/>
-              </div>
-              <div class="form-control alert-danger my-2" *ngIf="email.errors && registerForm.submitted">
-                <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
-                <div *ngIf="email.errors['email']">L'adresse email doit être une adresse valide !</div>
-              </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe :</label>
+            <input class="form-control" id="password" name="password" [(ngModel)]="form.password" type="password" placeholder="Mot de passe" required minlength="1" #password="ngModel"/>
+            <div class="form-control alert-danger my-2" *ngIf="password.errors && registerForm.submitted">
+              <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
+              <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
             </div>
-            <div class="row col-11 col-lg-10 g-1 justify-content-between">
-              <div class="col-auto">
-                <label class="col-form-label text-white" for="password">Mot de passe</label>
-              </div>
-              <div class="col-7">
-                <input class="form-control" id="password" name="password" [(ngModel)]="form.password" type="password" required minlength="1" #password="ngModel"/>
-              </div>
-              <div class="form-control alert-danger my-2" *ngIf="password.errors && registerForm.submitted">
-                <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
-                <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
-              </div>
-            </div>
-            <div class="text-center my-4">
-              <button class="btn btn-secondary">Créer le compte</button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="text-center my-4">
+            <button class="btn btn-primary">Valider</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
