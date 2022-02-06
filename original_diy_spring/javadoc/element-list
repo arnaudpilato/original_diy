@@ -4,4 +4,5 @@ com.wildcodeschool.original_diy.controller
 com.wildcodeschool.original_diy.entity
 com.wildcodeschool.original_diy.model
 com.wildcodeschool.original_diy.repository
+com.wildcodeschool.original_diy.security
 com.wildcodeschool.original_diy.service

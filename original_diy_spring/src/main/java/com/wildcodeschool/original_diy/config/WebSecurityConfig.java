@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.config;
 
+import com.wildcodeschool.original_diy.security.AuthEntryPointJwt;
 import com.wildcodeschool.original_diy.security.AuthTokenFilter;
 import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * Implementing AuthTokenFilter for intercept the all incoming request
      */
     @Autowired
-    private AuthEntryPointJwt unauthorizeHandler;
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -90,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and()
-                .csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizeHandler).and()
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
