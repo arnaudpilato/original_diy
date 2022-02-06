@@ -1,4 +1,4 @@
-package com.wildcodeschool.original_diy.controller;
+/*package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
@@ -100,3 +100,4 @@ public class AdminWorshopController {
 
 
 }
+*/

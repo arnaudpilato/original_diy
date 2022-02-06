@@ -1,4 +1,4 @@
-package com.wildcodeschool.original_diy.controller;
+/*package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
@@ -99,3 +99,4 @@ public class AdminContactController {
         return "redirect:/admin/contact";
     }
 }
+*/

@@ -1,4 +1,4 @@
-package com.wildcodeschool.original_diy.controller;
+/*package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyUser;
@@ -70,3 +70,4 @@ public class CommentController {
         return "redirect:/admin/commentaire";
     }
 }
+*/
