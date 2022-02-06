@@ -36,7 +36,9 @@ public class DiyUser {
     private String username;
 
     private String firstName;
+
     private String lastName;
+
     private Long phone;
 
     @NotBlank

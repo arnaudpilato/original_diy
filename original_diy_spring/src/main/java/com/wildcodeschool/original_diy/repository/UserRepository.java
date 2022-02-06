@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Pil : Added possibility to search by username <br>
+ * Pil : Added the possibility to search by username <br>
  * - Added boolean to check if username and email exist
  */
 @Repository

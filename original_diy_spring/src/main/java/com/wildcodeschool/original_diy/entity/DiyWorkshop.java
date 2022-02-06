@@ -20,22 +20,33 @@ public class DiyWorkshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
+
     private String picture;
+
     private Long streetNumber;
+
     private String street;
+
     private Long postCode;
+
     private String city;
+
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
-    @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("id DESC")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
+
     private Double longitude;
+
     private Double latitude;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private DiyUser diyUser;
+
     private boolean confirmation = false;
 
     public DiyWorkshop() {
