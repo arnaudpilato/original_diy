@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-11 col-lg-5 mt-5" *ngIf="isLoggedIn">
+        <div class="alert alert-success text-center">Connexion réussi, bienvenue {{ userName }}.</div>
+      </div>
+      <div class="row justify-content-center mt-5">
+        <div class="col-11 col-lg-5 panel bg-primary">
+          <form class="row justify-content-center" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <h1 class="text-center text-white my-4">Connexion</h1>
+            <div class="form-group">
+              <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">Login failed: {{ errorMessage }}</div>
+            </div>
+            <div class="row col-10 col-lg-7 g-1 justify-content-between">
+              <div class="col-auto">
+                <label class="col-form-label text-white" for="username">Identifiant</label>
+              </div>
+              <div class="col-7">
+                <input class="form-control" id="username" type="text"  name="username" [(ngModel)]="form.username" required #username="ngModel"/>
+              </div>
+              <div>
+                <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">L'identifiant est requis !</div>
+              </div>
+            </div>
+            <div class="row col-10 col-lg-7 g-1 justify-content-between">
+              <div class="col-auto">
+                <label class="col-form-label text-white" for="password">Mot de passe</label>
+              </div>
+              <div class="col-7">
+                <input id="password" type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="1" #password="ngModel"/>
+              </div>
+              <div class="form-control alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+                <div *ngIf="password.errors['required']">Le mot de passe est requis !</div>
+                <div *ngIf="password.errors['minlength']">Le mot de passe doit contenir au moins 1 caractère !</div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center my-4">
+              <div class="mx-2">
+                <button class="btn btn-secondary">Connexion</button>
+              </div>
+              <div class="mx-2">
+                <button class="btn btn-secondary" routerLink="/register">Inscription</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
