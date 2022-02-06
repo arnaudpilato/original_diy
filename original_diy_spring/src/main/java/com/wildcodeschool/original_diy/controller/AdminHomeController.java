@@ -1,4 +1,4 @@
-package com.wildcodeschool.original_diy.controller;
+/*package com.wildcodeschool.original_diy.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,3 +10,4 @@ public class AdminHomeController {
         return "admin/home/index";
     }
 }
+*/

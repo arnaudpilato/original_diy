@@ -20,14 +20,19 @@ public class DiyComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 65535, columnDefinition = "TEXT")
     private String comment;
+
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
     private Date createdAt;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private DiyWorkshop diyWorkshop;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private DiyUser diyUser;
+
     private boolean confirmed = false;
 
     public DiyComment() {

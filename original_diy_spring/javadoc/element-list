@@ -1,0 +1,10 @@
+com.wildcodeschool.original_diy
+com.wildcodeschool.original_diy.config
+com.wildcodeschool.original_diy.controller
+com.wildcodeschool.original_diy.entity
+com.wildcodeschool.original_diy.model
+com.wildcodeschool.original_diy.repository
+com.wildcodeschool.original_diy.request
+com.wildcodeschool.original_diy.response
+com.wildcodeschool.original_diy.security
+com.wildcodeschool.original_diy.service

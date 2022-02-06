@@ -1,4 +1,4 @@
-package com.wildcodeschool.original_diy.controller;
+/*package com.wildcodeschool.original_diy.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -35,3 +35,4 @@ public class RedirectionController implements ErrorController {
         return "redirection/error";
     }
 }
+*/
