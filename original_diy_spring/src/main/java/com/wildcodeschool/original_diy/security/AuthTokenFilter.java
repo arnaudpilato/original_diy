@@ -17,7 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Pil : Get full custom object using UserRepository, then we build a UserDetails object using static build method
+ * Pil : Get full custom object using UserRepository, then we build a UserDetails object using static build method <br>
+ * - This filter will have the following responsibilities : <br>
+ * - Intercept the all incoming requests <br>
+ * - Get JWT from the request <br>
+ * - Validate JWT <br>
+ * - Get the username from JWT and find the authenticated user <br>
+ * - Forward the request to the next filter
  */
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired

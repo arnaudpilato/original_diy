@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.config;
 
+import com.wildcodeschool.original_diy.security.AuthTokenFilter;
 import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DiyUserDetailsService userDetailsService;
 
+    /**
+     * Implementing AuthTokenFilter for intercept the all incoming request
+     */
     @Autowired
     private AuthEntryPointJwt unauthorizeHandler;
 
