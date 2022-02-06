@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Pil : Get a fully customized user using UserRepository and create a UserDetails object using the static build method
+ */
 @Service
 public class DiyUserDetailsService implements UserDetailsService {
     @Autowired
@@ -17,7 +20,7 @@ public class DiyUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public DiyUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        DiyUser user = userRepository.getByUsername(username)
+        DiyUser user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé avec l'identifiant : " + username));
 
         return DiyUserDetails.build(user);
