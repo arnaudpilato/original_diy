@@ -9,6 +9,7 @@ import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.response.JwtResponse;
 import com.wildcodeschool.original_diy.request.LoginRequest;
 import com.wildcodeschool.original_diy.request.SignupRequest;
+import com.wildcodeschool.original_diy.response.MessageResponse;
 import com.wildcodeschool.original_diy.security.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -126,7 +127,7 @@ public class AuthController {
             });
         }
 
-        user.setRole(roles);
+        user.setRoles(roles);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("Votre inscription à bien été enregistrée!"));

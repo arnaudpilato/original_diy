@@ -49,7 +49,13 @@ public class DiyUser {
     @Size(max = 100)
     private String password;
 
-    private String role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<DiyRole> roles = new HashSet<>();
+
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -63,12 +69,7 @@ public class DiyUser {
     @OrderBy("id DESC")
     private List<DiyWorkshop> workshop = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<DiyRole> roles = new HashSet<>();
-
+    private String role;
 
     public DiyUser() {
     }
