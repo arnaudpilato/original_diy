@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from "@angular/common/http";
 import { MapComponent } from './map/map.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MapComponent } from './map/map.component';
     FooterComponent,
     LoginComponent,
     HomeComponent,
-    MapComponent
+    MapComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,
