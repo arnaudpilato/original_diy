@@ -10,18 +10,10 @@ import { UserService } from "../service/user.service";
 export class HomeComponent implements OnInit {
   public content: string | undefined;
 
-  constructor(private title: Title, private userService: UserService) {
+  constructor(private title: Title) {
     this.title.setTitle("OriginalDIY - Accueil");
   }
 
   ngOnInit(): void {
-    this.userService.getPublicContent().subscribe({
-      next: data => {
-        this.content = data;
-      },
-      error: err => {
-        this.content = JSON.parse(err.error).message;
-      }
-    });
   }
 }

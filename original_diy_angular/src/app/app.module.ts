@@ -11,6 +11,9 @@ import { FormsModule } from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from "@angular/common/http";
+import { MapComponent } from './map/map.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { HttpClientModule } from "@angular/common/http";
     NavBarComponent,
     FooterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MapComponent,
+    AdminHomeComponent,
+    AdminContactComponent
   ],
   imports: [
     BrowserModule,
