@@ -1,9 +1,10 @@
 export class DiyUser {
-    id: number | undefined;
-    username: string | undefined;
-    firstName: string | undefined;
-    lastName: string | undefined;
-    phone: number | undefined;
-    email: string | undefined;
-    role: string | undefined;
+    id?: number;
+    username?: string;
+    firstName?: string;
+    lastName?: string;
+    phone?: number;
+    email?: string;
+    role?: string;
+    password?: string;
 }
