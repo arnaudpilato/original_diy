@@ -13,24 +13,23 @@ export class AdminContactComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
-  public users?: DiyUser[];
+  public users: DiyUser[] | undefined;
 
   constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
   ngOnInit(): void {
-    this.retrieveTutorials();
+    this.getAllUsers();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
-      console.log(this.users);
     }
   }
 
-  retrieveTutorials(): void {
+  getAllUsers(): void {
     this.userService.getAll()
       .subscribe({
         next: (data) => {
