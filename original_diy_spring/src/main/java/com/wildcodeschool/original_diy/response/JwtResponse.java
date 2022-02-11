@@ -1,26 +1,17 @@
 package com.wildcodeschool.original_diy.response;
 
-import java.util.List;
+import com.wildcodeschool.original_diy.entity.DiyUser;
 
 public class JwtResponse {
     private String token;
 
     private String type = "Bearer";
 
-    private Long id;
+    private DiyUser user;
 
-    private String username;
-
-    private String email;
-
-    private List<String> roles;
-
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String accessToken, DiyUser user) {
         this.token = accessToken;
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.roles = roles;
+        this.user = user;
     }
 
     public String getAccessToken() {
@@ -39,35 +30,7 @@ public class JwtResponse {
         this.type = tokenType;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public DiyUser getUser() { return user; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
+    public void setUser(DiyUser user) { this.user = user; }
 }
