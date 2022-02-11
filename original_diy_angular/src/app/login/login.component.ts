@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from "@angular/platform-browser";
-import { AuthService } from "../service/auth.service";
-import { TokenStorageService } from "../service/token-storage.service";
+import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
+import {AuthService} from "../service/auth.service";
+import {TokenStorageService} from "../service/token-storage.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private title: Title, private authService: AuthService, private tokenStorageService: TokenStorageService) {
     this.title.setTitle("OriginalDIY - Connexion")
-}
+  }
 
   ngOnInit(): void {
     if (this.tokenStorageService.getToken()) {
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, password } = this.form;
+    const {username, password} = this.form;
 
     this.authService.login(username, password).subscribe({
       next: data => {

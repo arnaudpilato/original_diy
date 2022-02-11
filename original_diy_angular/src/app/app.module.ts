@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from "@angular/common/http";
 import { MapComponent } from './map/map.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AdminContactComponent } from './admin-contact/admin-contact.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     LoginComponent,
     HomeComponent,
     MapComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    AdminContactComponent
   ],
   imports: [
     BrowserModule,
