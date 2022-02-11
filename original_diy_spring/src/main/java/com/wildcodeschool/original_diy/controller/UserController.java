@@ -1,75 +1,34 @@
-/*package com.wildcodeschool.original_diy.controller;
+package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/test/user")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/")
-    public String index() {
+    @GetMapping("/all")
+    public ResponseEntity<List<DiyUser>> getAllUsers() {
+        try {
+            List<DiyUser> users = new ArrayList<DiyUser>();
+            userRepository.findAll().forEach(users::add);
 
-        return "home/index";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-
-        return "user/login";
-    }
-
-    @RequestMapping("/addUser")
-    public String addUser(@ModelAttribute("user") DiyUser user, BindingResult result, @Param("username") String username, @Param("password") String password) {
-        // PIL : Message d'erreur si le champ nom est vide
-        if (username.isEmpty()) {
-            result.rejectValue("username", "isEmpty", "Le champ nom est vide !");
-            result.hasErrors();
-        }
-
-        // PIL : Message d'erreur si le champ password est vide
-        if (password.isEmpty()) {
-            result.hasErrors();
-            result.rejectValue("password", "isEmpty", "Le champ mot de passe est vide !");
-        }
-
-        if (result.hasErrors()) {
-            return "user/user";
-        } else {
-            // PIL : Encodage du mot de passe
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String rawPassword = user.getPassword();
-            String encodedPassword = encoder.encode(rawPassword);
-
-            user.setPassword(encodedPassword);
-
-            try {
-                user.setRole("ROLE_USER");
-                userRepository.save(user);
-            } catch (Exception e) {
-                return "user/user";
+            if (users.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return "redirect:/";
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/newUser")
-    public String getUser(Model model) {
-        DiyUser user = new DiyUser();
-        model.addAttribute("user", user);
-
-        return "user/user";
-    }
 }
-*/
