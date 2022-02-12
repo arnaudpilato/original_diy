@@ -14,11 +14,8 @@ export class AdminContactEditComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
-  public user: DiyUser = {
-    username: '',
-    firstName: '',
-    lastName: '',
-  }
+  public message: string = '';
+  public user: DiyUser = new DiyUser();
 
   public form: any = {
     username: null,
@@ -55,6 +52,15 @@ export class AdminContactEditComponent implements OnInit {
   }
 
   onSubmit() {
+    this.message = '';
 
+    this.userService.update(this.user.id, this.form)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
+        },
+        error: (e) => console.error(e)
+      });
   }
 }
