@@ -3,6 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
 import { UserService } from "../service/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact',
@@ -15,7 +16,7 @@ export class AdminContactComponent implements OnInit {
   public currentToken: any;
   public users: DiyUser[] | undefined;
 
-  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService) {
+  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
@@ -36,6 +37,17 @@ export class AdminContactComponent implements OnInit {
         next: (data) => {
           this.users = data;
           console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  deleteUser(id: any): void {
+    this.userService.delete(id)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          window.location.reload();
         },
         error: (e) => console.error(e)
       });
