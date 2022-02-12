@@ -18,12 +18,12 @@ export class AdminContactEditComponent implements OnInit {
   public user: DiyUser = new DiyUser();
 
   public form: any = {
-    username: null,
+    username: this.user.username,
     firstName: null,
     lastName: null,
     phone: null,
     email: null,
-    role: null,
+    roles: null,
   }
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService, private userService: UserService, private route: ActivatedRoute) {
@@ -32,6 +32,7 @@ export class AdminContactEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.user)
 
     if (this.isLoggedIn) {
       this.getUser(this.route.snapshot.params["id"]);

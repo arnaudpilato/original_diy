@@ -15,6 +15,7 @@ import { MapComponent } from './map/map.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminContactEditComponent } from './admin-contact-edit/admin-contact-edit.component';
+import { AdminContactNewComponent } from './admin-contact-new/admin-contact-new.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AdminContactEditComponent } from './admin-contact-edit/admin-contact-ed
     MapComponent,
     AdminHomeComponent,
     AdminContactComponent,
-    AdminContactEditComponent
+    AdminContactEditComponent,
+    AdminContactNewComponent
   ],
   imports: [
     BrowserModule,

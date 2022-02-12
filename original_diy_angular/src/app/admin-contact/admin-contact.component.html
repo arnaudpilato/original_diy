@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="col-11">
       <div class="text-end">
-        <a class="btn btn-primary" href="#">Ajouter un contact</a>
+        <a class="btn btn-primary" routerLink="../admin-contact-new">Ajouter un contact</a>
       </div>
       <div class="table-responsive d-block d-md-none my-2">
         <table class="table table-bordered border-dark" *ngFor="let user of users; let index = index">
@@ -33,7 +33,7 @@
           </tr>
           <tr>
             <th scope="row">Role</th>
-            <td>{{ user.role }}</td>
+            <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
           </tr>
           <tr>
             <th scope="row" colspan="2">
@@ -68,7 +68,7 @@
             <td>{{ user.firstName }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.phone }}</td>
-            <td>{{ user.role }}</td>
+            <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
             <td class="text-end td-edit"><a class="link" routerLink="../admin-contact-edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
             <td class="td-delete"><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
           </tr>
