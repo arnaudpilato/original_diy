@@ -7,4 +7,5 @@ export class DiyUser {
     email?: string;
     role?: string;
     password?: string;
+    roles?: any;
 }

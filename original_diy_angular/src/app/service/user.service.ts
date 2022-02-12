@@ -16,6 +16,14 @@ export class UserService {
   }
 
   getById(id: any): Observable<DiyUser> {
-    return this.http.get(`${API_URL}${id}`);
+    return this.http.get(API_URL + "get/" + id);
+  }
+
+  create(data: any): Observable<any> {
+    return this.http.post(API_URL + "new", data);
+  }
+
+  update(id: any, data: any): Observable<any> {
+    return this.http.put(API_URL + "edit/" + id, data);
   }
 }

@@ -22,6 +22,7 @@ export class AdminContactComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.users)
 
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorageService.getUser();

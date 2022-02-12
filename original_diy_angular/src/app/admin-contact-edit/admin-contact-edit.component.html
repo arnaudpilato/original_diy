@@ -2,7 +2,8 @@
   <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
-      <form class="my-3" name="form" (ngSubmit)="userEditForm.form.valid && onSubmit()" #userEditForm="ngForm" novalidate>
+      <form class="my-3" name="form" (ngSubmit)="onSubmit()" #userEditForm="ngForm" novalidate>
+        <div class="alert alert-success text-center" *ngIf="userEditForm.submitted">{{ message }}</div>
         <div class="mb-3">
           <label class="form-label" for="username">Username :</label>
           <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text"
@@ -27,10 +28,6 @@
           <label class="form-label" for="phone">Telephone :</label>
           <input class="form-control" id="phone" name="phone" [(ngModel)]="form.phone" type="number"
                  placeholder="0698754321" #phone="ngModel" value="{{ user.phone }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="password">Mot de passe :</label>
-          <input class="form-control" id="password" name="password" [(ngModel)]="form.password" type="password" #password="ngModel">
         </div>
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
