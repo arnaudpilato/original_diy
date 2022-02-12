@@ -70,7 +70,7 @@
             <td>{{ user.phone }}</td>
             <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
             <td class="text-end td-edit"><a class="link" routerLink="../admin-contact-edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
-            <td class="td-delete"><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
+            <td class="td-delete"><a class="link" (click)="deleteUser(user.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
           </tr>
           </tbody>
         </table>
