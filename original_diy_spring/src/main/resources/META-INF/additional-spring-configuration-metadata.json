@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "amazon.aws.s3.endpoint.url",
+      "type": "java.lang.String",
+      "description": "Description for amazon.aws.s3.endpoint.url."
+  }
+] }
