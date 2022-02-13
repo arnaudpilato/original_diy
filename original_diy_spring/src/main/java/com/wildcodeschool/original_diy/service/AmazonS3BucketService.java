@@ -19,16 +19,16 @@ import java.io.IOException;
 public class AmazonS3BucketService {
     private AmazonS3 amazonS3;
 
-    @Value("${endpointUrl}")
+    @Value("${amazon.aws.s3.endpoint.url}")
     private String endpointUrl;
 
-    @Value("${bucketName}")
+    @Value("${amazon.aws.s3.bucket.name}")
     private String bucketName;
 
-    @Value("${accessKey}")
+    @Value("${amazon.aws.s3.access.key}")
     private String accessKey;
 
-    @Value("${secretKey}")
+    @Value("${amazon.aws.s3.secret.key}")
     private String secretKey;
 
     @PostConstruct
