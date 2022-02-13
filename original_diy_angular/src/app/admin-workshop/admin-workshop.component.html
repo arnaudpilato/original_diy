@@ -1,0 +1,67 @@
+
+<div class="container">
+  <h1 class="text-center my-4">Gestion des ateliers</h1>
+  <div class="text-end"><a class="btn btn-primary" href="#">Ajout d'un atelier</a></div>
+  <div class="table-responsive d-block d-md-none my-2">
+    <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
+      <thead>
+        <tr>
+          <th>{{ "Atelier " + (index + 1) }}</th>
+          <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Image</th>
+          <td class="text-center"><img class="workshop-picture" src="{{ workshop.picture }}" alt="Image de l'atelier"></td>
+        </tr>
+        <tr>
+          <th scope="row">Description</th>
+          <td class="text-wrap">{{ workshop.description }}</td>
+        </tr>
+        <tr>
+          <th scope="row" colspan="2">
+            <div class="d-flex justify-content-around">
+              <div><a href="#" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+              </div>
+              <div>
+                <a href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive-md d-none d-md-block my-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" colspan="2">Image</th>
+          <th scope="col">Description</th>
+          <th scope="col">Visible</th>
+          <th scope="col" colspan="2">Modifier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let workshop of workshops; let index = index">
+          <th scope="row">{{ index + 1 }}</th>
+          <th colspan="2">
+            <a href="#">
+              <img class="workshop-picture rounded img-fluid" src="{{ workshop.picture }}" alt="Image de l'atelier">
+            </a>
+          </th>
+          <td class="text-wrap">{{ workshop.description }}</td>
+          <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
+          <td class="text-end td-edit">
+            <a href="#" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+          </td>
+          <td class="td-delete">
+            <a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

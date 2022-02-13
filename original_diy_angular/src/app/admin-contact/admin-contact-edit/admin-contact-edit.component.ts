@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {DiyUser} from "../model/user.model";
+import {DiyUser} from "../../model/user.model";
 import {Title} from "@angular/platform-browser";
-import {TokenStorageService} from "../service/token-storage.service";
-import {UserService} from "../service/user.service";
+import {TokenStorageService} from "../../service/token-storage.service";
+import {UserService} from "../../service/user.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
