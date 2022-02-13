@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {DiyUser} from "../../model/user.model";
-import {Title} from "@angular/platform-browser";
-import {TokenStorageService} from "../../service/token-storage.service";
-import {UserService} from "../../service/user.service";
-import {ActivatedRoute} from "@angular/router";
+import { DiyUser } from "../../model/user.model";
+import { Title } from "@angular/platform-browser";
+import { TokenStorageService } from "../../service/token-storage.service";
+import { UserService } from "../../service/user.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact-edit',
@@ -42,26 +42,26 @@ export class AdminContactEditComponent implements OnInit {
   }
 
   getUser(id: string): void {
-    this.userService.getById(id)
-      .subscribe({
-        next: (data) => {
-          this.user = data;
-          console.log(data);
+    this.userService.getById(id).subscribe({
+      next: (data) => {
+        this.user = data;
+        console.log(data);
         },
-        error: (e) => console.error(e)
-      });
+
+      error: (e) => console.error(e)
+    });
   }
 
   onSubmit() {
     this.message = '';
 
-    this.userService.update(this.user.id, this.form)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
-        },
-        error: (e) => console.error(e)
-      });
+    this.userService.update(this.user.id, this.form).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
+      },
+
+      error: (e) => console.error(e)
+    });
   }
 }

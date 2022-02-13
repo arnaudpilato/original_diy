@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Title} from "@angular/platform-browser";
-import {UserService} from "../../service/user.service";
-import {DiyUser} from "../../model/user.model";
-import {Router} from "@angular/router";
+import { Title } from "@angular/platform-browser";
+import { UserService } from "../../service/user.service";
+import { DiyUser } from "../../model/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact-new',
@@ -35,12 +35,13 @@ export class AdminContactNewComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.router.navigate(['/admin-contact']);
-        }, error: (e) => {
+      },
+
+      error: (e) => {
         console.error(e)
         this.isSignUpFailed = true;
         this.errorMessage = e.error.message;
       }
     });
   }
-
 }

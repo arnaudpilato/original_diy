@@ -24,7 +24,7 @@ export class AdminWorkshopComponent implements OnInit {
       next: (data) => {
         this.workshops = data;
         console.log(data);
-        },
+      },
 
       error: (err) => console.log(err)
     });

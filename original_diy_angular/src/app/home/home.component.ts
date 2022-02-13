@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
-import { UserService } from "../service/user.service";
 
 @Component({
   selector: 'app-home',
