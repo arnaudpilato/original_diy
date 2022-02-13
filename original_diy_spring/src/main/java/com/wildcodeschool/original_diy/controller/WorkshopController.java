@@ -2,11 +2,12 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,35 +34,23 @@ public class WorkshopController {
         }
     }
 
+    @PostMapping("new")
+    public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
+        try {
+            DiyWorkshop workshop = new DiyWorkshop();
 
+            workshop.setTitle(workshopRequest.getTitle());
 
-    /*
-    @Autowired
-    WorkshopRepository workshopRepository;
-    @Autowired
-    CommentRepository commentRepository;
-    @Autowired
-    UserRepository userRepository;
+            if (workshopRequest.getPicture() == null) {
+                workshop.setPicture("/assets/img/static-picture.png");
+            }
 
-    @GetMapping("/workshop")
-    public String getWorkshops(Model model) {
-        model.addAttribute("workshops", workshopRepository.getAllConfirmedWorkshops());
+            workshopRepository.save(workshop);
 
-        return "/workshop/workshop";
-    }
+            return new ResponseEntity<>(workshop, HttpStatus.CREATED);
+        } catch (Exception e) {
 
-    @GetMapping("/workshop/{id}")
-    public String getOneWorkshop(Model model, @PathVariable("id") Long id, Principal principal) {
-        DiyComment diyComment = new DiyComment();
-        model.addAttribute("workshop", workshopRepository.getById(id));
-        model.addAttribute("comment", diyComment);
-        if (principal != null) {
-            DiyUser user = userRepository.getByUsername(principal.getName());
-            model.addAttribute("user", user);
-        } else {
-            model.addAttribute("user", "null");
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-        return "/workshop/oneWorkshop";
-    }*/
+    }
 }

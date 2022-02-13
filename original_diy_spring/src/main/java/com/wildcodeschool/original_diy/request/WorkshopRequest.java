@@ -1,24 +1,6 @@
-package com.wildcodeschool.original_diy.entity;
+package com.wildcodeschool.original_diy.request;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "workshops")
-public class DiyWorkshop {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class WorkshopRequest {
     private String title;
 
     private String picture;
@@ -31,32 +13,13 @@ public class DiyWorkshop {
 
     private String city;
 
-    @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
-
-    @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @OrderBy("id DESC")
-    private final List<DiyComment> comments = new ArrayList<DiyComment>();
 
     private Double longitude;
 
     private Double latitude;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private DiyUser diyUser;
-
     private boolean confirmation = false;
-
-    public DiyWorkshop() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -112,18 +75,6 @@ public class DiyWorkshop {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public DiyUser getDiyUser() {
-        return diyUser;
-    }
-
-    public void setDiyUser(DiyUser diyUser) {
-        this.diyUser = diyUser;
-    }
-
-    public List<DiyComment> getComments() {
-        return comments;
     }
 
     public Double getLongitude() {
