@@ -3,7 +3,6 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
 import { UserService } from "../service/user.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact',
@@ -16,7 +15,7 @@ export class AdminContactComponent implements OnInit {
   public currentToken: any;
   public users: DiyUser[] | undefined;
 
-  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
+  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
