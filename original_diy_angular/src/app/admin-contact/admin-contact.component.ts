@@ -31,24 +31,24 @@ export class AdminContactComponent implements OnInit {
   }
 
   getAllUsers(): void {
-    this.userService.getAll()
-      .subscribe({
-        next: (data) => {
-          this.users = data;
-          console.log(data);
+    this.userService.getAll().subscribe({
+      next: (data) => {
+        this.users = data;
+        console.log(data);
         },
-        error: (e) => console.error(e)
-      });
+
+      error: (e) => console.error(e)
+    });
   }
 
   deleteUser(id: any): void {
-    this.userService.delete(id)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          window.location.reload();
-        },
-        error: (e) => console.error(e)
-      });
+    this.userService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+
+      error: (e) => console.error(e)
+    });
   }
 }

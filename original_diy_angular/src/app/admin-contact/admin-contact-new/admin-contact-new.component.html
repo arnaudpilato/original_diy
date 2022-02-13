@@ -1,9 +1,8 @@
-
 <div class="container">
   <h1 class="text-center my-4">Ajouter un contact</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
-      <form class="my-3" (ngSubmit)="userNewForm.form.valid && onSubmit()" #userNewForm="ngForm" name="form" novalidate>
+      <form method="post" class="my-3" (ngSubmit)="userNewForm.form.valid && onSubmit()" #userNewForm="ngForm" name="form" novalidate>
         <div class="justify-content-between"
              *ngIf="userNewForm.submitted && isSignUpFailed">
           <div class="alert alert-warning">Inscription échouée !<br/>{{ errorMessage }}</div>
@@ -54,7 +53,7 @@
         </div>
         <div class="text-center my-3">
           <button class="btn btn-primary m-1">Ajouter</button>
-          <button class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</button>
+          <a class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</a>
         </div>
       </form>
     </div>

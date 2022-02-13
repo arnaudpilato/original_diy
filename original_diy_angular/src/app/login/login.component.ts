@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Title} from "@angular/platform-browser";
-import {AuthService} from "../service/auth.service";
-import {TokenStorageService} from "../service/token-storage.service";
+import { Title } from "@angular/platform-browser";
+import { AuthService } from "../service/auth.service";
+import { TokenStorageService } from "../service/token-storage.service";
 
 @Component({
   selector: 'app-login',

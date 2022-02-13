@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Title} from "@angular/platform-browser";
-import {AuthService} from "../service/auth.service";
+import { Title } from "@angular/platform-browser";
+import { AuthService } from "../service/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
+
       error: err => {
         this.errorMessage = err.message;
         this.isSignUpFailed = true;

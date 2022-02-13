@@ -12,6 +12,7 @@ import { AdminContactEditComponent } from "./admin-contact/admin-contact-edit/ad
 import {HomeComponent} from "./home/home.component";
 import { MapComponent } from "./map/map.component";
 import {AdminWorkshopComponent} from "./admin-workshop/admin-workshop.component";
+import {AdminWorkshopNewComponent} from "./admin-workshop-new/admin-workshop-new.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'admin-contact-new', component: AdminContactNewComponent },
   { path: 'admin-contact-edit/:id', component: AdminContactEditComponent },
   { path: 'admin-workshop', component: AdminWorkshopComponent },
+  { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },
