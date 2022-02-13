@@ -3,22 +3,26 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { AdminHomeComponent } from "./admin-home/admin-home.component";
-import { MapComponent } from "./map/map.component";
-import { AdminContactComponent } from "./admin-contact/admin-contact.component";
-import { AdminContactEditComponent } from "./admin-contact-edit/admin-contact-edit.component";
-import {AdminContactNewComponent} from "./admin-contact-new/admin-contact-new.component";
 
+import { AdminHomeComponent } from "./admin-home/admin-home.component";
+import { AdminContactComponent } from "./admin-contact/admin-contact.component";
+import { AdminContactNewComponent } from "./admin-contact-new/admin-contact-new.component";
+import { AdminContactEditComponent } from "./admin-contact-edit/admin-contact-edit.component";
+
+import {HomeComponent} from "./home/home.component";
+import { MapComponent } from "./map/map.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
   { path: 'admin-home', component: AdminHomeComponent },
   { path: 'admin-contact', component: AdminContactComponent },
   { path: 'admin-contact-new', component: AdminContactNewComponent },
   { path: 'admin-contact-edit/:id', component: AdminContactEditComponent },
-  { path: 'map', component: MapComponent },
 
+  { path: 'home', component: HomeComponent },
+  { path: 'map', component: MapComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

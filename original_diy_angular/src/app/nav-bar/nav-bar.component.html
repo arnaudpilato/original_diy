@@ -7,29 +7,29 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
+                    <a class="nav-link" routerLink="home">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Atelier</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/map" routerLink="map">Carte</a>
+                    <a class="nav-link" routerLink="map">Carte</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/home" routerLink="admin-home">Administration</a>
+                    <a class="nav-link" routerLink="admin-home">Administration</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item" >
-                    <a class="nav-link" href="/admin/contact" routerLink="admin-contact">Contact</a>
+                    <a class="nav-link" routerLink="admin-contact">Contact</a>
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="!isLoggedIn">
                 <li class="nav-item">
-                    <a class="nav-link" href="/register" routerLink="register">Inscription</a>
+                    <a class="nav-link" routerLink="register">Inscription</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login" routerLink="login">Connexion</a>
+                    <a class="nav-link" routerLink="login">Connexion</a>
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="isLoggedIn">
