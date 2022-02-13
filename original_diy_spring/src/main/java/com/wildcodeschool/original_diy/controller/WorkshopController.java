@@ -1,20 +1,41 @@
-/*package com.wildcodeschool.original_diy.controller;
+package com.wildcodeschool.original_diy.controller;
 
-import com.wildcodeschool.original_diy.entity.DiyComment;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.repository.CommentRepository;
-import com.wildcodeschool.original_diy.repository.UserRepository;
+import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/test/workshop/")
 public class WorkshopController {
+    @Autowired
+    WorkshopRepository workshopRepository;
+
+    @GetMapping("all")
+    public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
+        try {
+            List<DiyWorkshop> workshops = new ArrayList<>();
+            workshopRepository.findAll().forEach(workshops::add);
+
+            if (workshops.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(workshops, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
+    /*
     @Autowired
     WorkshopRepository workshopRepository;
     @Autowired
@@ -42,6 +63,5 @@ public class WorkshopController {
         }
 
         return "/workshop/oneWorkshop";
-    }
+    }*/
 }
-*/
