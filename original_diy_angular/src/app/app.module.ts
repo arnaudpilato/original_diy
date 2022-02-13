@@ -14,8 +14,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { MapComponent } from './map/map.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminContactComponent } from './admin-contact/admin-contact.component';
-import { AdminContactEditComponent } from './admin-contact-edit/admin-contact-edit.component';
-import { AdminContactNewComponent } from './admin-contact-new/admin-contact-new.component';
+import { AdminContactEditComponent } from './admin-contact/admin-contact-edit/admin-contact-edit.component';
+import { AdminContactNewComponent } from './admin-contact/admin-contact-new/admin-contact-new.component';
+import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { AdminContactNewComponent } from './admin-contact-new/admin-contact-new.
     AdminHomeComponent,
     AdminContactComponent,
     AdminContactEditComponent,
-    AdminContactNewComponent
+    AdminContactNewComponent,
+    AdminWorkshopComponent
   ],
   imports: [
     BrowserModule,
