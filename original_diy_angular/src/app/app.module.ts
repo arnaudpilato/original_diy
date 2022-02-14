@@ -17,7 +17,7 @@ import { AdminContactComponent } from './admin-contact/admin-contact.component';
 import { AdminContactEditComponent } from './admin-contact/admin-contact-edit/admin-contact-edit.component';
 import { AdminContactNewComponent } from './admin-contact/admin-contact-new/admin-contact-new.component';
 import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
-import { AdminWorkshopNewComponent } from './admin-workshop-new/admin-workshop-new.component';
+import { AdminWorkshopNewComponent } from './admin-workshop/admin-workshop-new/admin-workshop-new.component';
 
 
 @NgModule({

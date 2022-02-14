@@ -1,7 +1,7 @@
 export class DiyWorkshop {
   id?: number;
   title?: string;
-  picture?: string;
+  picturePath?: string;
   streetNumber?: number;
   street?: string;
   postCode?: number;
