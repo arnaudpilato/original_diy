@@ -2,7 +2,7 @@
   <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
-      <form method="post" (ngSubmit)="workshopNewForm.valid && onSubmit()" #workshopNewForm="ngForm" name="form" enctype="multipart/form-data" novalidate>
+      <form method="post" (ngSubmit)="workshopNewForm.valid && onSubmit()" #workshopNewForm="ngForm" name="form" novalidate>
         <div class="row">
           <div class="mb-3">
             <label class="form-label" for="title">Nom de l'atelier :</label>
@@ -10,7 +10,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>
-            <input class="form-control" id="picture" name="picture_file" type="file">
+            <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label" for="streetNumber">N° de rue :</label>

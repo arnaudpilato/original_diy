@@ -12,7 +12,7 @@ import { AdminContactEditComponent } from "./admin-contact/admin-contact-edit/ad
 import {HomeComponent} from "./home/home.component";
 import { MapComponent } from "./map/map.component";
 import {AdminWorkshopComponent} from "./admin-workshop/admin-workshop.component";
-import {AdminWorkshopNewComponent} from "./admin-workshop-new/admin-workshop-new.component";
+import {AdminWorkshopNewComponent} from "./admin-workshop/admin-workshop-new/admin-workshop-new.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

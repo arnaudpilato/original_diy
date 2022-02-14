@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DiyWorkshop } from "../model/workshop.model";
+import { DiyWorkshop } from "../../model/workshop.model";
 import { Title } from "@angular/platform-browser";
-import { WorkshopService } from "../service/workshop.service";
+import { WorkshopService } from "../../service/workshop.service";
 import { Router } from "@angular/router";
+import {AmazonS3Service} from "../../service/amazon-s3.service";
 
 @Component({
   selector: 'app-admin-workshop-new',
@@ -12,20 +13,35 @@ import { Router } from "@angular/router";
 export class AdminWorkshopNewComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
+  public currentFileUpload: any;
+  public selectedFiles: any;
+  public nameFile: any = null;
   public model: DiyWorkshop = new DiyWorkshop();
+  public file: any;
+  changeImage = false;
+  progress: { percentage: number } = { percentage: 0 };
 
-  constructor(private title: Title, private workshopService: WorkshopService, private router: Router) {
+  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service, private router: Router) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 
   ngOnInit(): void {
   }
 
+  selectFile(event: any) {
+    this.selectedFiles = event.target.files;
+    this.nameFile = this.selectedFiles.item(0).name;
+    console.log(this.selectedFiles.item(0).name);
+  }
+  change(event: any) {
+    this.changeImage = true;
+  }
+
   onSubmit() {
     const data = {
       title: this.model.title,
-      /*picture: this.model.picture,
-      streetNumber: this.model.streetNumber,
+      picturePath: this.nameFile,
+      /*streetNumber: this.model.streetNumber,
       street: this.model.street,
       postCode: this.model.postCode,
       city: this.model.city,
@@ -35,6 +51,13 @@ export class AdminWorkshopNewComponent implements OnInit {
       latitude: this.model.latitude,
       confirmation: this.model.confirmation,*/
     };
+
+    if (this.selectedFiles != null) {
+      this.currentFileUpload = this.selectedFiles.item(0);
+      this.amazonS3Service.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+        this.selectedFiles = undefined;
+      });
+    }
 
     this.workshopService.create(data).subscribe({
       next: (res) => {
