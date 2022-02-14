@@ -1,0 +1,50 @@
+<div class="container" *ngIf="currentUser && isLoggedIn; else loggedOut">
+  <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-5">
+      <form class="my-3" name="form" (ngSubmit)="onSubmit()" #userEditForm="ngForm" novalidate>
+        <div class="alert alert-success text-center" *ngIf="userEditForm.submitted">{{ message }}</div>
+        <div class="mb-3">
+          <label class="form-label" for="username">Username :</label>
+          <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text"
+                 placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="lastName">Nom :</label>
+          <input class="form-control" id="lastName" name="lastName" [(ngModel)]="form.lastName" type="text"
+                 placeholder="Doe" #lastName="ngModel" value="{{ user.lastName }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="firstName">Prenom :</label>
+          <input class="form-control" id="firstName" name="firstName" [(ngModel)]="form.firstName" type="text"
+                 placeholder="John" #firstName="ngModel" value="{{  user.firstName }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Mail :</label>
+          <input class="form-control" id="email" name="email" [(ngModel)]="form.email" type="email"
+                 placeholder="john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="phone">Telephone :</label>
+          <input class="form-control" id="phone" name="phone" [(ngModel)]="form.phone" type="number"
+                 placeholder="0698754321" #phone="ngModel" value="{{ user.phone }}">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="role">Role :</label>
+          <select id="role" class="form-select" [(ngModel)]="form.role" name="role" #role="ngModel">
+            <option value="ROLE_USER">Utilisateur</option>
+            <option value="ROLE_ADMIN">Administrateur</option>
+          </select>
+        </div>
+        <div class="text-center my-3">
+          <button class="btn btn-primary m-1">Modifier</button>
+          <button class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  Veuillez vous connecter !
+</ng-template>

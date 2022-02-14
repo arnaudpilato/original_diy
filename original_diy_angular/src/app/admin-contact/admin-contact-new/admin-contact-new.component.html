@@ -1,0 +1,61 @@
+<div class="container">
+  <h1 class="text-center my-4">Ajouter un contact</h1>
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-5">
+      <form method="post" class="my-3" (ngSubmit)="userNewForm.form.valid && onSubmit()" #userNewForm="ngForm" name="form" novalidate>
+        <div class="justify-content-between"
+             *ngIf="userNewForm.submitted && isSignUpFailed">
+          <div class="alert alert-warning">Inscription échouée !<br/>{{ errorMessage }}</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="username">Utilisateur :</label>
+          <input class="form-control" id="username" name="username" [(ngModel)]="model.username" type="text" minlength="1" maxlength="100" required #username="ngModel">
+        </div>
+        <div class="form-control alert-danger my-2" *ngIf="username.errors && userNewForm.submitted">
+          <div *ngIf="username.errors['required']">Le nom est requis !</div>
+          <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>
+          <div *ngIf="username.errors['maxlength']">L'identifiant doit faire moins de 100 caractères !</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="lastName">Nom :</label>
+          <input class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" type="text" placeholder="John">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="firstName">Prenom :</label>
+          <input class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" type="text" placeholder="Doe">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="email">Mail :</label>
+          <input class="form-control" id="email" name="email" [(ngModel)]="model.email" type="text" email required placeholder="john.doe@mail.com" #email="ngModel">
+        </div>
+        <div class="form-control alert-danger my-2" *ngIf="email.errors && userNewForm.submitted">
+          <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
+          <div *ngIf="email.errors['email']">L'adresse email doit être une adresse valide !</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="phone">Telephone :</label>
+          <input class="form-control" id="phone" name="phone" [(ngModel)]="model.phone" type="number" placeholder="0698754321">
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">Mot de passe :</label>
+          <input class="form-control" id="password" name="password" [(ngModel)]="model.password" type="password" minlength="1" required #password="ngModel">
+        </div>
+        <div class="form-control alert-danger my-2" *ngIf="password.errors && userNewForm.submitted">
+          <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
+          <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="role">Role :</label>
+          <select id="role" class="form-select" name="role" [(ngModel)]="model.role" type="text">
+            <option value="ROLE_USER">Utilisateur</option>
+            <option value="ROLE_ADMIN">Administrateur</option>
+          </select>
+        </div>
+        <div class="text-center my-3">
+          <button class="btn btn-primary m-1">Ajouter</button>
+          <a class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

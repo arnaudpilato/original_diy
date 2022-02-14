@@ -71,10 +71,7 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles
+                userRepository.findById(userDetails.getId()).get()
         ));
     }
 
@@ -109,7 +106,7 @@ public class AuthController {
 
         if (strRoles == null) {
             DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Erreur: Rle non trouvé!"));
+                    .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {

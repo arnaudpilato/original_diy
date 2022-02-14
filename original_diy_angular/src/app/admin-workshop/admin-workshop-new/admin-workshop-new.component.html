@@ -1,0 +1,49 @@
+<div class="container">
+  <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-8 col-lg-5">
+      <form method="post" (ngSubmit)="workshopNewForm.valid && onSubmit()" #workshopNewForm="ngForm" name="form" novalidate>
+        <div class="row">
+          <div class="mb-3">
+            <label class="form-label" for="title">Nom de l'atelier :</label>
+            <input class="form-control" id="title" name="title" [ngModel]="model.title" type="text" placeholder="Atelier design">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="picture">Photo :</label>
+            <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label" for="streetNumber">N° de rue :</label>
+            <input class="form-control" id="streetNumber" name="streetNumber" [ngModel]="model.streetNumber" type="number" placeholder="1">
+          </div>
+          <div class="col-md-9 mb-3">
+            <label class="form-label" for="street">Rue/Avenue/Allée :</label>
+            <input class="form-control" id="street" name="street" [ngModel]="model.street" type="text" placeholder="Avenue du Champ de Mars">
+          </div>
+          <div class="col-md-3 mb-3">
+            <label class="form-label" for="postCode">Code Postal :</label>
+            <input class="form-control" id="postCode" name="postCode" [ngModel]="model.postCode" type="number" placeholder="45074">
+          </div>
+          <div class="col-md-9 mb-3">
+            <label class="form-label" for="city">Ville :</label>
+            <input class="form-control" id="city" name="city" [ngModel]="model.city" type="text" placeholder="Orléans">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="description">Description :</label>
+            <textarea class="form-control" id="description" name="description" [ngModel]="model.description" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
+              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" type="checkbox" >
+            </div>
+          </div>
+          <div class="text-center my-3">
+            <button class="btn btn-primary m-1">Ajouter</button>
+            <a class="btn btn-secondary m-1" routerLink="/admin-workshop">Retour</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

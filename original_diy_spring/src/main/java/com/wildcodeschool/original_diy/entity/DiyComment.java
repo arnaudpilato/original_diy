@@ -16,6 +16,7 @@ import java.util.Date;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "comments")
 public class DiyComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

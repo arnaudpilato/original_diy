@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { AuthService } from "../service/auth.service";
 
@@ -8,7 +8,7 @@ import { AuthService } from "../service/auth.service";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public form:any = {
+  public form: any = {
     username: null,
     email: null,
     password: null,
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { username, email, password } = this.form;
+    const {username, email, password} = this.form;
 
     this.authService.register(username, email, password).subscribe({
       next: data => {
@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
       },
+
       error: err => {
         this.errorMessage = err.message;
         this.isSignUpFailed = true;
