@@ -128,7 +128,7 @@ public class UserController {
 
             Set<DiyRole> roles = new HashSet<>();
 
-            if (userRequest.getRole().equals("ROLE_USER")) {
+            if (userRequest.getRoles().equals("ROLE_USER")) {
                 DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
                 roles.add(userRole);

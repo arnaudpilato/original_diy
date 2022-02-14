@@ -18,8 +18,7 @@ export class AdminWorkshopNewComponent implements OnInit {
   public nameFile: any = null;
   public model: DiyWorkshop = new DiyWorkshop();
   public file: any;
-  changeImage = false;
-  progress: { percentage: number } = { percentage: 0 };
+  public changeImage = false;
 
   constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service, private router: Router) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
@@ -33,6 +32,7 @@ export class AdminWorkshopNewComponent implements OnInit {
     this.nameFile = this.selectedFiles.item(0).name;
     console.log(this.selectedFiles.item(0).name);
   }
+
   change(event: any) {
     this.changeImage = true;
   }
@@ -41,16 +41,21 @@ export class AdminWorkshopNewComponent implements OnInit {
     const data = {
       title: this.model.title,
       picturePath: this.nameFile,
-      /*streetNumber: this.model.streetNumber,
+      streetNumber: this.model.streetNumber,
       street: this.model.street,
       postCode: this.model.postCode,
       city: this.model.city,
       description: this.model.description,
-      comments: this.model.comments,
-      longitude: this.model.longitude,
-      latitude: this.model.latitude,
-      confirmation: this.model.confirmation,*/
-    };
+      confirmation: this.model.confirmation,
+
+    /*
+     comments: this.model.comments,
+     longitude: this.model.longitude,
+     latitude: this.model.latitude,
+     */
+    }
+
+    console.log(data);
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -58,10 +63,10 @@ export class AdminWorkshopNewComponent implements OnInit {
         this.selectedFiles = undefined;
       });
     }
-
     this.workshopService.create(data).subscribe({
       next: (res) => {
         console.log(res);
+        //this.router.navigate(['/admin-workshop']);
       },
 
       error: (e) => {
