@@ -11,23 +11,22 @@ import {AmazonS3Service} from "../../service/amazon-s3.service";
   styleUrls: ['./admin-workshop-new.component.scss']
 })
 export class AdminWorkshopNewComponent implements OnInit {
-  public isSignUpFailed: boolean = false;
-  public errorMessage: string = '';
-  public currentFileUpload: any;
+ public isSignUpFailed: boolean = false;
+   public errorMessage: string = '';
+  /*public currentFileUpload: any;
   public selectedFiles: any;
-  public nameFile: any = null;
+  public nameFile: any = null;*/
   public model: DiyWorkshop = new DiyWorkshop();
-  public file: any;
-  changeImage = false;
-  progress: { percentage: number } = { percentage: 0 };
+  /*public file: any;
+  public changeImage = false;*/
 
-  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service, private router: Router) {
+  constructor(private title: Title, private workshopService: WorkshopService,/* private amazonS3Service: AmazonS3Service, private router: Router*/) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 
   ngOnInit(): void {
   }
-
+/*
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
@@ -35,33 +34,37 @@ export class AdminWorkshopNewComponent implements OnInit {
   }
   change(event: any) {
     this.changeImage = true;
-  }
+  }*/
 
   onSubmit() {
     const data = {
       title: this.model.title,
-      picturePath: this.nameFile,
-      /*streetNumber: this.model.streetNumber,
-      street: this.model.street,
-      postCode: this.model.postCode,
-      city: this.model.city,
-      description: this.model.description,
-      comments: this.model.comments,
-      longitude: this.model.longitude,
-      latitude: this.model.latitude,
-      confirmation: this.model.confirmation,*/
-    };
+    }
+      /*picturePath: this.nameFile,
+     treetNumber: this.model.streetNumber,
+     street: this.model.street,
+     postCode: this.model.postCode,
+     city: this.model.city,
+     description: this.model.description,
+     comments: this.model.comments,
+     longitude: this.model.longitude,
+     latitude: this.model.latitude,
+     confirmation: this.model.confirmation,*/
 
+    console.log(data);
+
+/*
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
       this.amazonS3Service.pushFileToStorage(this.currentFileUpload).subscribe(event => {
         this.selectedFiles = undefined;
       });
     }
-
+*/
     this.workshopService.create(data).subscribe({
       next: (res) => {
         console.log(res);
+        //this.router.navigate(['/admin-workshop']);
       },
 
       error: (e) => {
