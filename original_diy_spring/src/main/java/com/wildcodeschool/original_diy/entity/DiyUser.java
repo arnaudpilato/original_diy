@@ -69,8 +69,6 @@ public class DiyUser {
     @OrderBy("id DESC")
     private List<DiyWorkshop> workshop = new ArrayList<>();
 
-    private String role;
-
     public DiyUser() {
     }
 
@@ -140,14 +138,6 @@ public class DiyUser {
 
     public void setPhone(Long phone) {
         this.phone = phone;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public List<DiyComment> getDiyComments() {

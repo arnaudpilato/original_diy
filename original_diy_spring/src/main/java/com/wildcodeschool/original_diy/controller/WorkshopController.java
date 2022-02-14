@@ -13,12 +13,12 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/test/workshop/")
+@RequestMapping("/api/test/workshop")
 public class WorkshopController {
     @Autowired
     WorkshopRepository workshopRepository;
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
         try {
             List<DiyWorkshop> workshops = new ArrayList<>();
@@ -34,16 +34,26 @@ public class WorkshopController {
         }
     }
 
-    @PostMapping("new")
+    @PostMapping("/new")
     public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
 
             workshop.setTitle(workshopRequest.getTitle());
 
-            if (workshopRequest.getPicture() == null) {
-                workshop.setPicture("/assets/img/static-picture.png");
+            if (workshopRequest.getPicturePath() == null) {
+                workshop.setPicturePath("/assets/img/static-picture.png");
+            } else {
+                workshop.setPicturePath(workshopRequest.getPicturePath());
             }
+
+            workshop.setStreetNumber(workshopRequest.getStreetNumber());
+            workshop.setStreet(workshopRequest.getStreet());
+            workshop.setPostCode(workshopRequest.getPostCode());
+            workshop.setCity(workshopRequest.getCity());
+            workshop.setDescription(workshopRequest.getDescription());
+            workshop.setConfirmation(workshopRequest.isConfirmation());
+
 
             workshopRepository.save(workshop);
 
