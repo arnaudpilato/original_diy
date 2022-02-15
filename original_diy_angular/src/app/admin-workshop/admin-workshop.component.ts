@@ -9,6 +9,8 @@ import {WorkshopService} from "../service/workshop.service";
   styleUrls: ['./admin-workshop.component.scss']
 })
 export class AdminWorkshopComponent implements OnInit {
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public static: string = '/assets/img/static-picture.png';
   public workshops: DiyWorkshop[] | undefined;
 
   constructor(private title: Title, private workshopService: WorkshopService) {
