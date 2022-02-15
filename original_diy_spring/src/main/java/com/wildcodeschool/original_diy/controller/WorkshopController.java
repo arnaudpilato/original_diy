@@ -36,6 +36,17 @@ public class WorkshopController {
         }
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
+        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
+
+        if (workshop.isPresent()) {
+            return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping("/new")
     public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
         try {
