@@ -13,6 +13,7 @@ import {HomeComponent} from "./home/home.component";
 import { MapComponent } from "./map/map.component";
 import {AdminWorkshopComponent} from "./admin-workshop/admin-workshop.component";
 import {AdminWorkshopNewComponent} from "./admin-workshop/admin-workshop-new/admin-workshop-new.component";
+import {AdminWorkshopEditComponent} from "./admin-workshop/admin-workshop-edit/admin-workshop-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'admin-contact-edit/:id', component: AdminContactEditComponent },
   { path: 'admin-workshop', component: AdminWorkshopComponent },
   { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
+  { path: 'admin-workshop-edit/:id', component: AdminWorkshopEditComponent },
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },

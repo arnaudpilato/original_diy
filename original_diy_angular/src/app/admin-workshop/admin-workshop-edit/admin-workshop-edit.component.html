@@ -6,11 +6,11 @@
         <div class="row">
           <div class="justify-content-between"
                *ngIf="workshopEditForm.submitted && isSignUpFailed">
-            <div class="alert alert-warning">Inscription échouée !<br/>{{ errorMessage }}</div>
+            <div class="alert alert-warning">Modification échouée !<br/>{{ errorMessage }}</div>
           </div>
           <div class="mb-3">
             <label class="form-label" for="title">Nom de l'atelier :</label>
-            <input class="form-control" id="title" name="title" [(ngModel)]="form.title" type="text" placeholder="Nom de l'atelier">
+            <input class="form-control" id="title" name="title" [(ngModel)]="workshop.title" type="text" placeholder="Nom de l'atelier" value="{{ workshop.title }}">
           </div>
           <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>
@@ -18,28 +18,28 @@
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label" for="streetNumber">N° de rue :</label>
-            <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="form.streetNumber" type="number" placeholder="1">
+            <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="workshop.streetNumber" type="number" placeholder="1" value="{{ workshop.streetNumber }}">
           </div>
           <div class="col-md-9 mb-3">
             <label class="form-label" for="street">Rue/Avenue/Allée :</label>
-            <input class="form-control" id="street" name="street" [(ngModel)]="form.street" type="text" placeholder="Avenue du Champ de Mars">
+            <input class="form-control" id="street" name="street" [(ngModel)]="workshop.street" type="text" placeholder="Avenue du Champ de Mars" value="{{ workshop.street }}">
           </div>
           <div class="col-md-3 mb-3">
             <label class="form-label" for="postCode">Code Postal :</label>
-            <input class="form-control" id="postCode" name="postCode" [(ngModel)]="form.postCode" type="number" placeholder="45074">
+            <input class="form-control" id="postCode" name="postCode" [(ngModel)]="workshop.postCode" type="number" placeholder="45074" value="{{ workshop.postCode }}">
           </div>
           <div class="col-md-9 mb-3">
             <label class="form-label" for="city">Ville :</label>
-            <input class="form-control" id="city" name="city" [(ngModel)]="form.city" type="text" placeholder="Orléans">
+            <input class="form-control" id="city" name="city" [(ngModel)]="workshop.city" type="text" placeholder="Orléans" value="{{ workshop.city }}">
           </div>
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="form.description" rows="3"></textarea>
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="workshop.description" rows="3" [value]="workshop.description"></textarea>
           </div>
           <div class="mb-3">
             <div class="form-check form-switch">
               <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="form.confirmation" type="checkbox" value="false">
+              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="workshop.confirmation" type="checkbox" value="{{ workshop.confirmation }}">
             </div>
           </div>
           <div class="text-center my-3">
