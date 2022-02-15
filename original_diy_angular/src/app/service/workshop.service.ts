@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { DiyWorkshop } from "../model/workshop.model";
-import {DiyUser} from "../model/user.model";
 
 const API_URL = 'http://localhost:8080/api/test/workshop/';
 
