@@ -1,4 +1,5 @@
 export class DiyWorkshop {
+  id?: number;
   title?: string;
   picturePath?: string;
   streetNumber?: number;

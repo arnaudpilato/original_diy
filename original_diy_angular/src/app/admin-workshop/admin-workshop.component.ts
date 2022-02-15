@@ -31,4 +31,15 @@ export class AdminWorkshopComponent implements OnInit {
       error: (err) => console.log(err)
     });
   }
+
+  deleteWorkshop(id: any): void {
+    this.workshopService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+
+      error: (e) => console.error(e)
+    });
+  }
 }

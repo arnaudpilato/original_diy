@@ -18,6 +18,7 @@ import { AdminContactEditComponent } from './admin-contact/admin-contact-edit/ad
 import { AdminContactNewComponent } from './admin-contact/admin-contact-new/admin-contact-new.component';
 import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
 import { AdminWorkshopNewComponent } from './admin-workshop/admin-workshop-new/admin-workshop-new.component';
+import { AdminWorkshopEditComponent } from './admin-workshop/admin-workshop-edit/admin-workshop-edit.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AdminWorkshopNewComponent } from './admin-workshop/admin-workshop-new/a
     AdminContactEditComponent,
     AdminContactNewComponent,
     AdminWorkshopComponent,
-    AdminWorkshopNewComponent
+    AdminWorkshopNewComponent,
+    AdminWorkshopEditComponent
   ],
   imports: [
     BrowserModule,
