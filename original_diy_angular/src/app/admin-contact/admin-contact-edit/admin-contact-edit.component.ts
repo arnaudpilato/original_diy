@@ -16,15 +16,7 @@ export class AdminContactEditComponent implements OnInit {
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
-
-  public form: any = {
-    username: this.user.username,
-    firstName: null,
-    lastName: null,
-    phone: null,
-    email: null,
-    roles: null,
-  }
+  public essais = ['ROLE_USER', 'ROLE_ADMIN'];
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService, private userService: UserService, private route: ActivatedRoute) {
     this.title.setTitle("OriginalDIY - Admin - contact - edit")
@@ -55,7 +47,17 @@ export class AdminContactEditComponent implements OnInit {
   onSubmit() {
     this.message = '';
 
-    this.userService.update(this.user.id, this.form).subscribe({
+    const data = {
+      username: this.user.username,
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      phone: this.user.phone,
+      email: this.user.email,
+      roles: this.user.roles,
+      password: this.user.password,
+    }
+
+    this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
         console.log(res);
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
