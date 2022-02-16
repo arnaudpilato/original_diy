@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
+import {DiyWorkshop} from "../model/workshop.model";
+import {Title} from "@angular/platform-browser";
+import {WorkshopService} from "../service/workshop.service";
 
 @Component({
   selector: 'app-map',
@@ -9,10 +12,45 @@ import * as L from 'leaflet';
 export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
 
-  constructor() {
+  public workshops: any[] | undefined ;
+
+  public longitude: number[] | undefined ;
+
+  constructor(private title: Title, private workshopService: WorkshopService) {
+    this.title.setTitle("OriginalDIY - Admin - Workshops")
   }
 
   ngOnInit(): void {
+    this.getAllWorkshops();
+    console.log("test", this.workshops);
+  }
+
+  getAllWorkshops(): void   {
+    this.workshopService.getAll().subscribe({
+      next: (datas) => {
+        console.log(datas)
+        this.workshops = datas;
+
+        const greenIcon = L.icon({
+          iconUrl: 'assets/img/markericons.png',
+
+          iconSize:     [40, 60], // size of the icon
+          shadowSize:   [50, 64], // size of the shadow
+          iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        this.workshops.forEach((data) => {
+            const marker = L.marker([data.latitude , data.longitude], {icon : greenIcon}).addTo(this.map);
+
+
+        })
+
+
+      },
+      error: (err) => console.log(err)
+    });
   }
 
   private initMap(): void {
@@ -28,9 +66,11 @@ export class MapComponent implements OnInit, AfterViewInit {
         minZoom: 3,
         maxZoom: 20,
         attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
-      });
+      },
+        );
 
     const cities = L.layerGroup();
+
 
     const baseLayers = {
       "Street": tiles,
@@ -48,9 +88,12 @@ export class MapComponent implements OnInit, AfterViewInit {
     });
 
     L.control.layers(baseLayers, overlays).addTo(this.map);
+
+
   }
 
   ngAfterViewInit(): void {
     this.initMap();
+
   }
 }
