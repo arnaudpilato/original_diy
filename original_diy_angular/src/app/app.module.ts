@@ -19,6 +19,7 @@ import { AdminContactNewComponent } from './admin-contact/admin-contact-new/admi
 import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.component';
 import { AdminWorkshopNewComponent } from './admin-workshop/admin-workshop-new/admin-workshop-new.component';
 import { AdminWorkshopEditComponent } from './admin-workshop/admin-workshop-edit/admin-workshop-edit.component';
+import { Error404Component } from './redirection/error404/error404.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AdminWorkshopEditComponent } from './admin-workshop/admin-workshop-edit
     AdminContactNewComponent,
     AdminWorkshopComponent,
     AdminWorkshopNewComponent,
-    AdminWorkshopEditComponent
+    AdminWorkshopEditComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,

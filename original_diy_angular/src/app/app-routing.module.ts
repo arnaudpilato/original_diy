@@ -14,6 +14,7 @@ import { MapComponent } from "./map/map.component";
 import {AdminWorkshopComponent} from "./admin-workshop/admin-workshop.component";
 import {AdminWorkshopNewComponent} from "./admin-workshop/admin-workshop-new/admin-workshop-new.component";
 import {AdminWorkshopEditComponent} from "./admin-workshop/admin-workshop-edit/admin-workshop-edit.component";
+import {Error404Component} from "./redirection/error404/error404.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'admin-workshop', component: AdminWorkshopComponent },
   { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
   { path: 'admin-workshop-edit/:id', component: AdminWorkshopEditComponent },
+
+  { path: 'error-404', component: Error404Component },
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },
