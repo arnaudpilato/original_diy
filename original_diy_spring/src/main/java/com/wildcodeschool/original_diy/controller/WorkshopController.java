@@ -6,6 +6,7 @@ import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.model.ERole;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
+import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,9 @@ import java.util.*;
 public class WorkshopController {
     @Autowired
     WorkshopRepository workshopRepository;
+
+    @Autowired
+    APIGouvService gouvService;
 
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
@@ -67,10 +71,17 @@ public class WorkshopController {
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
 
+            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
 
-            workshopRepository.save(workshop);
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
 
-            return new ResponseEntity<>(workshop, HttpStatus.CREATED);
+                workshopRepository.save(workshop);
+                return new ResponseEntity<>(workshop, HttpStatus.CREATED);
+
         } catch (Exception e) {
 
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
