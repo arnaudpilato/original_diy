@@ -35,8 +35,10 @@ export class AuthInterceptor implements HttpInterceptor {
           errorMsg = `Error: ${error.error.message}`;
         }
         else {
-          if (error.status === 400) {
+          if (error.status === 404) {
             this.router.navigate(['/error-404']);
+          } else if (error.status === 500) {
+            this.router.navigate(['/error-500']);
           }
         }
         console.log(errorMsg);

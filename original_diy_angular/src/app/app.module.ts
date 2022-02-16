@@ -20,6 +20,7 @@ import { AdminWorkshopComponent } from './admin-workshop/admin-workshop.componen
 import { AdminWorkshopNewComponent } from './admin-workshop/admin-workshop-new/admin-workshop-new.component';
 import { AdminWorkshopEditComponent } from './admin-workshop/admin-workshop-edit/admin-workshop-edit.component';
 import { Error404Component } from './redirection/error404/error404.component';
+import { Error500Component } from './redirection/error500/error500.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { Error404Component } from './redirection/error404/error404.component';
     AdminWorkshopComponent,
     AdminWorkshopNewComponent,
     AdminWorkshopEditComponent,
-    Error404Component
+    Error404Component,
+    Error500Component
   ],
   imports: [
     BrowserModule,
