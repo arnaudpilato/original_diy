@@ -5,14 +5,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 @Service
 public class APIGouvService {
     private static final String API_MAP_URL = "https://api-adresse.data.gouv.fr/search/";
-    private WebClient webClient;
+    private   WebClient webClient;
 
-    private WebClient getWebClient() {
+    public  WebClient getWebClient() {
         if (webClient == null) {
             webClient = WebClient.create(API_MAP_URL);
         }
@@ -20,7 +19,7 @@ public class APIGouvService {
         return webClient;
     }
 
-    public JsonNode getAdressAsJson(String street, Long postcode, Long streetNumber) {
+    public    JsonNode getAdressAsJson(String street, Long postcode, Long streetNumber) {
         try {
             return new ObjectMapper().readTree(getAdressAPI(street, postcode, streetNumber));
         } catch (JsonProcessingException e) {
@@ -28,7 +27,7 @@ public class APIGouvService {
         }
     }
 
-    public String getAdressAPI(String street, Long postcode, Long streetNumber) {
+    public  String getAdressAPI(String street, Long postcode, Long streetNumber) {
         // String url = "https://api-adresse.data.gouv.fr/search/?q=178+allee+adrienne+bolland&postcode=45770";
        return getWebClient().get()
                 .uri(uriBuilder -> uriBuilder
