@@ -13,7 +13,7 @@ public class DiyRole {
 
     // PIL : Conversion eRole en string
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
+    @Column(name = "name", length = 20)
     private ERole name;
 
     public Integer getId() {
