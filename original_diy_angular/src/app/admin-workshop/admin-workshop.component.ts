@@ -9,6 +9,8 @@ import {WorkshopService} from "../service/workshop.service";
   styleUrls: ['./admin-workshop.component.scss']
 })
 export class AdminWorkshopComponent implements OnInit {
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public static: string = '/assets/img/static-picture.png';
   public workshops: DiyWorkshop[] | undefined;
 
   constructor(private title: Title, private workshopService: WorkshopService) {
@@ -27,6 +29,17 @@ export class AdminWorkshopComponent implements OnInit {
       },
 
       error: (err) => console.log(err)
+    });
+  }
+
+  deleteWorkshop(id: any): void {
+    this.workshopService.delete(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        window.location.reload();
+      },
+
+      error: (e) => console.error(e)
     });
   }
 }

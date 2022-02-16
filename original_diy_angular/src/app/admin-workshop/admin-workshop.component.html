@@ -12,7 +12,9 @@
       <tbody>
         <tr>
           <th scope="row">Image</th>
-          <td class="text-center"><img class="workshop-picture" src="{{ workshop.picturePath }}" alt="Image de l'atelier"></td>
+          <td class="text-center">
+            <img class="workshop-picture" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
+          </td>
         </tr>
         <tr>
           <th scope="row">Description</th>
@@ -21,10 +23,10 @@
         <tr>
           <th scope="row" colspan="2">
             <div class="d-flex justify-content-around">
-              <div><a href="#" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+              <div><a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
               </div>
               <div>
-                <a href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+                <a (click)="deleteWorkshop(workshop.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
               </div>
             </div>
           </th>
@@ -48,19 +50,24 @@
           <th scope="row">{{ index + 1 }}</th>
           <th colspan="2">
             <a href="#">
-              <img class="workshop-picture rounded img-fluid" src="{{ workshop.picturePath }}" alt="Image de l'atelier">
+              <img class="workshop-picture rounded img-fluid" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
             </a>
           </th>
           <td class="text-wrap">{{ workshop.description }}</td>
           <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
           <td class="text-end td-edit">
-            <a href="#" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+            <a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
           </td>
           <td class="td-delete">
-            <a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+            <a class="link" (click)="deleteWorkshop(workshop.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+  <div *ngFor="let workshop of workshops">
+    <div>{{workshop.latitude}}</div>
+
+  </div>
 </div>
+
