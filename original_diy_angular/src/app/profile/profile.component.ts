@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DiyUser } from "../../model/user.model";
-import { Title } from "@angular/platform-browser";
-import { TokenStorageService } from "../../service/token-storage.service";
-import { UserService } from "../../service/user.service";
+import {DiyUser} from "../model/user.model";
+import {Title} from "@angular/platform-browser";
+import {TokenStorageService} from "../service/token-storage.service";
+import {UserService} from "../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-admin-contact-edit',
-  templateUrl: './admin-contact-edit.component.html',
-  styleUrls: ['./admin-contact-edit.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class AdminContactEditComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
@@ -23,7 +23,7 @@ export class AdminContactEditComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.title.setTitle("OriginalDIY - Admin - contact - edit")
+    this.title.setTitle("OriginalDIY - profil")
   }
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class AdminContactEditComponent implements OnInit {
       next: (data) => {
         this.user = data;
         console.log(data);
-        },
+      },
 
       error: (e) => console.error(e)
     });
@@ -57,7 +57,6 @@ export class AdminContactEditComponent implements OnInit {
       lastName: this.user.lastName,
       phone: this.user.phone,
       email: this.user.email,
-      roles: this.user.roles,
       password: this.user.password,
     }
 
@@ -66,7 +65,7 @@ export class AdminContactEditComponent implements OnInit {
         console.log(res);
         console.log(this.user.roles)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
-        this.router.navigate(['/admin-contact'])
+        this.router.navigate(['/home'])
       },
 
       error: (e) => console.error(e)
