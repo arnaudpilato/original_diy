@@ -3,7 +3,7 @@ import { DiyUser } from "../../model/user.model";
 import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../../service/token-storage.service";
 import { UserService } from "../../service/user.service";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact-edit',
@@ -18,8 +18,13 @@ export class AdminContactEditComponent implements OnInit {
   public user: DiyUser = new DiyUser();
   public essais = ['ROLE_USER', 'ROLE_ADMIN'];
 
-  constructor(private title: Title, private tokenStorageService: TokenStorageService, private userService: UserService, private route: ActivatedRoute) {
-    this.title.setTitle("OriginalDIY - Admin - contact - edit")
+  constructor(
+    private title: Title,
+    private tokenStorageService: TokenStorageService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router) {
+      this.title.setTitle("OriginalDIY - Admin - contact - edit")
   }
 
   ngOnInit(): void {
@@ -60,7 +65,9 @@ export class AdminContactEditComponent implements OnInit {
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
         console.log(res);
+        console.log(this.user.roles)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
+        this.router.navigate(['/admin-contact'])
       },
 
       error: (e) => console.error(e)
