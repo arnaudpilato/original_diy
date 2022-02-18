@@ -33,9 +33,12 @@
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="isLoggedIn">
-                <li class="nav-item">
-                    <a class="nav-link" (click)="logout()">Déconnexion</a>
-                </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="profile/{{ currentUser.id }}">Profil</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" (click)="logout()">Déconnexion</a>
+              </li>
             </ul>
         </div>
     </div>

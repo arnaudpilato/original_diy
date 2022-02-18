@@ -17,6 +17,7 @@ import {AdminWorkshopEditComponent} from "./admin-workshop/admin-workshop-edit/a
 import {Error404Component} from "./error/error404/error404.component";
 import {Error500Component} from "./error/error500/error500.component";
 import {ErrorComponent} from "./error/error.component";
+import {ProfileComponent} from "./profile/profile.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },
+  { path: 'profile/:id', component: ProfileComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
