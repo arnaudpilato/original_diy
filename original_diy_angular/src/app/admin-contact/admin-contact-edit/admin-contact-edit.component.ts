@@ -4,6 +4,7 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../../service/token-storage.service";
 import { UserService } from "../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Role} from "../../model/roles.model";
 
 @Component({
   selector: 'app-admin-contact-edit',
@@ -16,6 +17,8 @@ export class AdminContactEditComponent implements OnInit {
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
+  public roles: string[] = Object.keys(Role);
+  public role: string | undefined;
 
   constructor(
     private title: Title,
@@ -48,6 +51,11 @@ export class AdminContactEditComponent implements OnInit {
     });
   }
 
+  getRole(role: string) {
+    this.role = role;
+    console.log("valeur du role :" + role)
+  }
+
   onSubmit() {
     this.message = '';
 
@@ -57,14 +65,14 @@ export class AdminContactEditComponent implements OnInit {
       lastName: this.user.lastName,
       phone: this.user.phone,
       email: this.user.email,
-      roles: this.user.roles,
+      role: this.role,
       password: this.user.password,
     }
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
         console.log(res);
-        console.log(this.user.roles)
+        console.log(this.role)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
         this.router.navigate(['/admin-contact'])
       },

@@ -39,12 +39,21 @@
                  placeholder="0698754321" value="{{ user.phone }}">
         </div>
         <div class="mb-3">
+
+
+
+
           <label class="form-label" for="role">Role :</label>
-          <select id="role" class="form-select" [(ngModel)]="user.roles" name="roles">
-            <option value="user">Utilisateur</option>
-            <option value="admin">Administrateur</option>
+          <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
+            <option *ngFor="let role of roles" value="{{ role == 'Utilisateur' ? 'ROLE_USER' : 'ROLE_ADMIN' }}">{{ role }}</option>
           </select>
         </div>
+
+
+
+
+
+
         <div class="mb-3">
           <label class="form-label" for="password">Mot de passe :</label>
           <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password" minlength="1" required #password="ngModel" value="{{ user.password }}">
