@@ -74,33 +74,30 @@ public class UserController {
             DiyUser user = new DiyUser(
                     userRequest.getUsername(),
                     userRequest.getEmail(),
-                    passwordEncoder.encode(userRequest.getPassword()));
+                    passwordEncoder.encode(userRequest.getPassword())
+            );
 
             user.setFirstName(userRequest.getFirstName());
             user.setLastName(userRequest.getLastName());
-            user.setPhone((long) userRequest.getPhone());
+            user.setPhone(userRequest.getPhone());
 
-            Set<String> strRoles = userRequest.getRole();
+            String role = userRequest.getRole();
             Set<DiyRole> roles = new HashSet<>();
 
-            if (strRoles == null) {
+            if (role == null) {
                 DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
                 roles.add(userRole);
             } else {
-                strRoles.forEach(role -> {
-                    switch (role) {
-                        case "admin":
-                            DiyRole adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                    .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
-                            roles.add(adminRole);
-                            break;
-                        default:
-                            DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                    .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé"));
-                            roles.add(userRole);
-                    }
-                });
+                if (role.equals("ROLE_ADMIN")) {
+                    DiyRole adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
+                    roles.add(adminRole);
+                } else {
+                    DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé"));
+                    roles.add(userRole);
+                }
             }
 
             user.setRoles(roles);
@@ -114,7 +111,7 @@ public class UserController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<DiyUser> updateUser(@PathVariable("id") long id, @RequestBody DiyUser userRequest) {
+    public ResponseEntity<DiyUser> updateUser(@PathVariable("id") long id, @RequestBody UserRequest userRequest) {
         Optional<DiyUser> userData = userRepository.findById(id);
 
         if (userData.isPresent()) {
@@ -131,25 +128,26 @@ public class UserController {
                 }
             }
 
-            Set<DiyRole> strRoles = userRequest.getRoles();
+            String role = userRequest.getRole();
             Set<DiyRole> roles = new HashSet<>();
 
-            if (strRoles == null) {
+            System.out.println(role);
+
+            if (role == null) {
                 DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
                 roles.add(userRole);
             } else {
-                strRoles.forEach(role -> {
-                    if ("admin".equals(role)) {
-                        DiyRole adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
-                        roles.add(adminRole);
-                    } else {
-                        DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé"));
-                        roles.add(userRole);
-                    }
-                });
+                if (role.equals("ROLE_ADMIN")) {
+                    DiyRole adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                            .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé!"));
+                    roles.add(adminRole);
+                } else {
+
+                    DiyRole userRole = roleRepository.findByName(ERole.ROLE_USER)
+                            .orElseThrow(() -> new RuntimeException("Erreur: Role non trouvé"));
+                    roles.add(userRole);
+                }
             }
 
             user.setRoles(roles);
