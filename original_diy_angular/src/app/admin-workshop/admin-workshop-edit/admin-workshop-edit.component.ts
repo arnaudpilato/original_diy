@@ -12,6 +12,7 @@ import {AmazonS3Service} from "../../service/amazon-s3.service";
   styleUrls: ['./admin-workshop-edit.component.scss']
 })
 export class AdminWorkshopEditComponent implements OnInit {
+  private roles: string[] = [];
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public currentFileUpload: any;
@@ -24,6 +25,7 @@ export class AdminWorkshopEditComponent implements OnInit {
   public workshop: DiyWorkshop = new DiyWorkshop();
   public file: any;
   public changeImage = false;
+  public showAdminBoard: boolean = false;
 
   constructor(
     private title: Title,
@@ -38,12 +40,17 @@ export class AdminWorkshopEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    const user = this.tokenStorageService.getUser();
     console.log(this.workshop)
 
     if (this.isLoggedIn) {
       this.getWorkshop(this.route.snapshot.params["id"]);
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
+      this.roles = user.roles;
+      console.log(this.roles.includes('ROLE_ADMIN'))
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
   }
 
