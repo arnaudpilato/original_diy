@@ -23,6 +23,7 @@ import { Error404Component } from './error/error404/error404.component';
 import { Error500Component } from './error/error500/error500.component';
 import { ErrorComponent } from './error/error.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { ProfileComponent } from './profile/profile.component';
     Error404Component,
     Error500Component,
     ErrorComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminFooterComponent
   ],
   imports: [
     BrowserModule,

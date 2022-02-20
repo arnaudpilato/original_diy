@@ -3,7 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { UserService } from "../../service/user.service";
 import { DiyUser } from "../../model/user.model";
 import { Router } from "@angular/router";
-import {Role} from "../../model/roles.model";
+import { DiyRole } from "../../model/role.model";
 
 @Component({
   selector: 'app-admin-contact-new',
@@ -14,7 +14,7 @@ export class AdminContactNewComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public model: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(Role);
+  public roles: string[] = Object.keys(DiyRole);
   public role: string | undefined;
 
   constructor(private title: Title, private userService: UserService, private router: Router) {

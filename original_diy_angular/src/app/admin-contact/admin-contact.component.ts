@@ -3,7 +3,6 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
 import { UserService } from "../service/user.service";
-import {Role} from "../model/roles.model";
 
 @Component({
   selector: 'app-admin-contact',
