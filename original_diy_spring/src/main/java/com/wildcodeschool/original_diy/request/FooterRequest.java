@@ -1,14 +1,6 @@
-package com.wildcodeschool.original_diy.entity;
+package com.wildcodeschool.original_diy.request;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "footer")
-public class DiyFooter {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
+public class FooterRequest {
     private String name;
 
     private String socialNetworkPath;
@@ -16,16 +8,6 @@ public class DiyFooter {
     private String picturePath;
 
     private boolean visible;
-
-    public DiyFooter() { }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
