@@ -4,7 +4,7 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../../service/token-storage.service";
 import { UserService } from "../../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Role} from "../../model/roles.model";
+import { DiyRole } from "../../model/role.model";
 
 @Component({
   selector: 'app-admin-contact-edit',
@@ -17,7 +17,7 @@ export class AdminContactEditComponent implements OnInit {
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(Role);
+  public roles: string[] = Object.keys(DiyRole);
   public role: string | undefined;
 
   constructor(
