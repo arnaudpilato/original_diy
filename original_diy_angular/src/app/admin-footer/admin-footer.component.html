@@ -2,14 +2,14 @@
   <h1 class="text-center my-4">Gestion du footer</h1>
   <div class="text-end"><a class="btn btn-primary" routerLink="/admin-workshop-new">Ajout d'un réseau social</a></div>
   <div class="table-responsive d-block d-md-none my-2">
-    <!-- <table class="table table-bordered border-dark" *ngFor="let network of networks; let index = index">
+     <table class="table table-bordered border-dark" *ngFor="let socialNetwork of socialNetworks; let index = index">
      <thead>
     <tr>
-        <th>{{ "Atelier " + (index + 1) }}</th>
-        <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
+        <th>{{ "Réseau social " + (index + 1) }}</th>
+        <th class="wrap-responsive" scope="col">{{ socialNetwork.name }}</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody><!--
       <tr>
         <th scope="row">Image</th>
         <td class="text-center">
@@ -31,7 +31,7 @@
           </div>
         </th>
       </tr>
-      </tbody>
+      </tbody>-->
     </table>
   </div>
   <div class="table-responsive-md d-none d-md-block my-2">
@@ -40,34 +40,30 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col" colspan="2">Image</th>
-        <th scope="col">Description</th>
+        <th scope="col">Nom</th>
         <th scope="col">Visible</th>
         <th scope="col" colspan="2">Modifier</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let workshop of workshops; let index = index">
+      <tr *ngFor="let socialNetwork of socialNetworks; let index = index">
         <th scope="row">{{ index + 1 }}</th>
         <th colspan="2">
           <a href="#">
-            <img class="workshop-picture rounded img-fluid" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
+            <img class=social-network-picture rounded src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image du réseau social">
           </a>
         </th>
-        <td class="text-wrap">{{ workshop.description }}</td>
-        <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
+        <td class="text-wrap">{{ socialNetwork.name }}</td>
+        <td>{{ socialNetwork.visible ? "oui" : "non" }}</td>
         <td class="text-end td-edit">
-          <a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+          <a routerLink="../admin-workshop-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
         </td>
         <td class="td-delete">
-          <a class="link" (click)="deleteWorkshop(workshop.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+          <a class="link" (click)="deleteSocialNetwork(socialNetwork.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
         </td>
       </tr>
       </tbody>
     </table>
-  </div>
-  <div *ngFor="let workshop of workshops">
-    <div>{{workshop.latitude}}</div>-->
-
   </div>
 </div>
 
