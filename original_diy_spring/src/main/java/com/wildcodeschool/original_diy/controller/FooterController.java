@@ -49,6 +49,13 @@ public class FooterController {
 
             footer.setName(footerRequest.getName());
             footer.setSocialNetworkPath(footerRequest.getSocialNetworkPath());
+
+            if (footerRequest.getPicturePath() == null) {
+                footer.setPicturePath("/assets/img/static-picture.png");
+            } else {
+                footer.setPicturePath(footerRequest.getPicturePath());
+            }
+
             footer.setPicturePath(footerRequest.getPicturePath());
             footer.setVisible(footerRequest.isVisible());
 
