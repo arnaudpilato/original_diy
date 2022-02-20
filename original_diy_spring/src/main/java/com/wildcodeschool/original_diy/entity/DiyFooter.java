@@ -15,6 +15,8 @@ public class DiyFooter {
 
     private String picturePath;
 
+    private boolean visible;
+
     public DiyFooter() { }
 
     public Integer getId() {
@@ -47,5 +49,13 @@ public class DiyFooter {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }
