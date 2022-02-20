@@ -14,14 +14,14 @@ public class UserRequest {
 
     private String lastName;
 
-    private int phone;
+    private Long phone;
 
     @NotBlank
     @Size(max = 100)
     @Email
     private String email;
 
-    private Set<String> role;
+    private String role;
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -51,11 +51,11 @@ public class UserRequest {
         this.lastName = lastName;
     }
 
-    public int getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -67,13 +67,9 @@ public class UserRequest {
         this.email = email;
     }
 
-    public Set<String> getRole() {
-        return role;
-    }
+    public String getRole() { return role; }
 
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
+    public void setRole(String role) { this.role = role; }
 
     public String getPassword() {
         return password;
@@ -82,7 +78,4 @@ public class UserRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
 }

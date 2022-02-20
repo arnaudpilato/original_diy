@@ -22,6 +22,7 @@ import { AdminWorkshopEditComponent } from './admin-workshop/admin-workshop-edit
 import { Error404Component } from './error/error404/error404.component';
 import { Error500Component } from './error/error500/error500.component';
 import { ErrorComponent } from './error/error.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ErrorComponent } from './error/error.component';
     AdminWorkshopEditComponent,
     Error404Component,
     Error500Component,
-    ErrorComponent
+    ErrorComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

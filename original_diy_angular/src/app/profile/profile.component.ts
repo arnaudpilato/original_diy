@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { DiyUser } from "../../model/user.model";
-import { Title } from "@angular/platform-browser";
-import { TokenStorageService } from "../../service/token-storage.service";
-import { UserService } from "../../service/user.service";
+import {DiyUser} from "../model/user.model";
+import {Title} from "@angular/platform-browser";
+import {TokenStorageService} from "../service/token-storage.service";
+import {UserService} from "../service/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Role} from "../../model/roles.model";
 
 @Component({
-  selector: 'app-admin-contact-edit',
-  templateUrl: './admin-contact-edit.component.html',
-  styleUrls: ['./admin-contact-edit.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class AdminContactEditComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(Role);
-  public role: string | undefined;
 
   constructor(
     private title: Title,
@@ -26,7 +23,7 @@ export class AdminContactEditComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) {
-      this.title.setTitle("OriginalDIY - Admin - contact - edit")
+    this.title.setTitle("OriginalDIY - profil")
   }
 
   ngOnInit(): void {
@@ -45,15 +42,10 @@ export class AdminContactEditComponent implements OnInit {
       next: (data) => {
         this.user = data;
         console.log(data);
-        },
+      },
 
       error: (e) => console.error(e)
     });
-  }
-
-  getRole(role: string) {
-    this.role = role;
-    console.log("valeur du role :" + role)
   }
 
   onSubmit() {
@@ -65,16 +57,15 @@ export class AdminContactEditComponent implements OnInit {
       lastName: this.user.lastName,
       phone: this.user.phone,
       email: this.user.email,
-      role: this.role,
       password: this.user.password,
     }
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
         console.log(res);
-        console.log(this.role)
+        console.log(this.user.roles)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
-        this.router.navigate(['/admin-contact'])
+        this.router.navigate(['/home'])
       },
 
       error: (e) => console.error(e)
