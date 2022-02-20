@@ -7,6 +7,7 @@ import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -87,7 +88,6 @@ public class WorkshopController {
     }
 
     @PutMapping("/edit/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<DiyWorkshop> updateWorkshop(@PathVariable("id") long id, @RequestBody WorkshopRequest workshopRequest) {
         Optional<DiyWorkshop> workshopData = workshopRepository.findById(id);
 
@@ -120,7 +120,6 @@ public class WorkshopController {
     }
 
     @DeleteMapping("delete/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         try {
             workshopRepository.deleteById(id);
