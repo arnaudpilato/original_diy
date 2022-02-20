@@ -2,6 +2,8 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyFooter;
 import com.wildcodeschool.original_diy.entity.DiyUser;
+import com.wildcodeschool.original_diy.repository.FooterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/test/footer")
 public class FooterController {
+    @Autowired
+    FooterRepository footerRepository;
+
     @GetMapping("/all")
     public ResponseEntity<List<DiyFooter>> getAllSocialNetworks() {
         try {

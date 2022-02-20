@@ -15,12 +15,6 @@ import java.util.Optional;
  */
 @Repository
 public interface UserRepository extends JpaRepository<DiyUser, Long> {
-    @Query("SELECT u FROM DiyUser AS u WHERE u.username = :username")
-    public DiyUser getByUsername(@Param("username") String username);
-
-    @Query("SELECT u FROM DiyUser AS u")
-    public List<DiyUser> getAllUsers();
-
     Optional<DiyUser> findByUsername(String username);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
