@@ -3,4 +3,5 @@ export class DiyFooter {
   name?: string;
   socialNetworkPath?: string;
   picturePath?: string;
+  visible?: boolean;
 }
