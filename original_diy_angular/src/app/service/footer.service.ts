@@ -18,4 +18,8 @@ export class FooterService {
   delete(id: any): Observable<any> {
     return this.http.delete(API_URL + "delete/" + id);
   }
+
+  create(data: any): Observable<any> {
+    return this.http.post(API_URL + "new", data);
+  }
 }

@@ -24,6 +24,8 @@ import { Error500Component } from './error/error500/error500.component';
 import { ErrorComponent } from './error/error.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';
+import { AdminFooterEditComponent } from './admin-footer/admin-footer-edit/admin-footer-edit.component';
+import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-footer-new.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';
     Error500Component,
     ErrorComponent,
     ProfileComponent,
-    AdminFooterComponent
+    AdminFooterComponent,
+    AdminFooterEditComponent,
+    AdminFooterNewComponent
   ],
   imports: [
     BrowserModule,

@@ -8,17 +8,20 @@ import { AdminHomeComponent } from "./admin-home/admin-home.component";
 import { AdminContactComponent } from "./admin-contact/admin-contact.component";
 import { AdminContactNewComponent } from "./admin-contact/admin-contact-new/admin-contact-new.component";
 import { AdminContactEditComponent } from "./admin-contact/admin-contact-edit/admin-contact-edit.component";
+import { AdminWorkshopComponent } from "./admin-workshop/admin-workshop.component";
+import { AdminWorkshopNewComponent } from "./admin-workshop/admin-workshop-new/admin-workshop-new.component";
+import { AdminWorkshopEditComponent } from "./admin-workshop/admin-workshop-edit/admin-workshop-edit.component";
+import { AdminFooterComponent } from "./admin-footer/admin-footer.component";
+import { AdminFooterNewComponent } from "./admin-footer/admin-footer-new/admin-footer-new.component";
+import { AdminFooterEditComponent } from "./admin-footer/admin-footer-edit/admin-footer-edit.component";
 
 import {HomeComponent} from "./home/home.component";
 import { MapComponent } from "./map/map.component";
-import {AdminWorkshopComponent} from "./admin-workshop/admin-workshop.component";
-import {AdminWorkshopNewComponent} from "./admin-workshop/admin-workshop-new/admin-workshop-new.component";
-import {AdminWorkshopEditComponent} from "./admin-workshop/admin-workshop-edit/admin-workshop-edit.component";
-import {Error404Component} from "./error/error404/error404.component";
-import {Error500Component} from "./error/error500/error500.component";
-import {ErrorComponent} from "./error/error.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {AdminFooterComponent} from "./admin-footer/admin-footer.component";
+
+import { Error404Component } from "./error/error404/error404.component";
+import { Error500Component } from "./error/error500/error500.component";
+import { ErrorComponent } from "./error/error.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,6 +35,8 @@ const routes: Routes = [
   { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
   { path: 'admin-workshop-edit/:id', component: AdminWorkshopEditComponent },
   { path: 'admin-footer', component: AdminFooterComponent},
+  { path: 'admin-footer-new', component: AdminFooterNewComponent},
+  { path: 'admin-footer-edit/:id', component: AdminFooterEditComponent},
 
   { path: 'error', component: ErrorComponent},
   { path: 'error-404', component: Error404Component },

@@ -76,8 +76,7 @@ export class AdminWorkshopEditComponent implements OnInit {
   }
 
   onSubmit() {
-
-  const data =  {
+    const data =  {
       title: this.workshop.title,
       picturePath: this.workshop.picturePath,
       streetNumber: this.workshop.streetNumber,
