@@ -1,4 +1,4 @@
-import { Role } from "./roles.model";
+import { DiyRole } from "./role.model";
 
 export class DiyUser {
     id?: number;
@@ -7,7 +7,7 @@ export class DiyUser {
     lastName?: string;
     phone?: number;
     email?: string;
-    role?: Role;
+    role?: DiyRole;
     password?: string;
     roles?: any;
 }

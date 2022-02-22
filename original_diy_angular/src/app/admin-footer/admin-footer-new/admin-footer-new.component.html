@@ -1,0 +1,37 @@
+<div class="container">
+  <h1 class="text-center my-4">Ajout d'un réseau social</h1>
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-8 col-lg-5">
+      <form method="post" class="my-3" (ngSubmit)="footerNewForm.form.valid && onSubmit()" #footerNewForm="ngForm" name="form" novalidate>
+        <div class="row">
+          <div class="justify-content-between"
+               *ngIf="footerNewForm.submitted && isSignUpFailed">
+            <div class="alert alert-warning">Inscription échouée !<br/>{{ errorMessage }}</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="name">Nom du réseau social :</label>
+            <input class="form-control" id="name" name="name" [(ngModel)]="footer.name" type="text" placeholder="Pinterest">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="picturePath">Image :</label>
+            <input class="form-control" id="picturePath" (change)="selectFile($event)" type="file">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="socialNetworkPath">Url :</label>
+            <input class="form-control" id="socialNetworkPath" name="socialNetworkPath" [(ngModel)]="footer.socialNetworkPath" type="string" placeholder="https://www.pinterest.fr/">
+          </div>
+          <div>
+            <div class="form-check form-switch">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
+              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="footer.visible" type="checkbox" value="false">
+            </div>
+          </div>
+          <div class="text-center my-3">
+            <button class="btn btn-primary m-1">Ajouter</button>
+            <a class="btn btn-secondary m-1" routerLink="/admin-workshop">Retour</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

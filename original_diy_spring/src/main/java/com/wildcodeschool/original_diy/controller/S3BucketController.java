@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("api/auth")
 @RestController
+@RequestMapping("api/auth")
 public class S3BucketController {
 
     private AmazonS3BucketService amazonS3BucketService;
