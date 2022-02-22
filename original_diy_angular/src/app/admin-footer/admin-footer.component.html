@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center my-4">Gestion du footer</h1>
-  <div class="text-end"><a class="btn btn-primary" routerLink="/admin-workshop-new">Ajout d'un réseau social</a></div>
+  <div class="text-end"><a class="btn btn-primary" routerLink="/admin-footer-new">Ajout d'un réseau social</a></div>
   <div class="table-responsive d-block d-md-none my-2">
      <table class="table table-bordered border-dark" *ngFor="let socialNetwork of socialNetworks; let index = index">
      <thead>
@@ -13,7 +13,7 @@
       <tr>
         <th scope="row">Image</th>
         <td class="text-center">
-          <img class="workshop-picture" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image de l'atelier">
+          <img class="workshop-picture" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image du réseau social">
         </td>
       </tr>
       <tr>
@@ -23,7 +23,7 @@
       <tr>
         <th scope="row" colspan="2">
           <div class="d-flex justify-content-around">
-            <div><a routerLink="../admin-workshop-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+            <div><a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
             </div>
             <div>
               <a (click)="deleteSocialNetwork(socialNetwork.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
@@ -50,13 +50,13 @@
         <th scope="row">{{ index + 1 }}</th>
         <th colspan="2">
           <a href="#">
-            <img class=social-network-picture rounded src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image du réseau social">
+            <img class=social-network-picture src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image du réseau social">
           </a>
         </th>
         <td class="text-wrap">{{ socialNetwork.name }}</td>
         <td>{{ socialNetwork.visible ? "oui" : "non" }}</td>
         <td class="text-end td-edit">
-          <a routerLink="../admin-workshop-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+          <a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
         </td>
         <td class="td-delete">
           <a class="link" (click)="deleteSocialNetwork(socialNetwork.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
