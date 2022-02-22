@@ -1,6 +1,6 @@
-projectKey=Original-DIY
+projectKey=OriginalDIY---Angular
 serverUrl=http://localhost:9000
 serverVersion=9.3.0.51899
-dashboardUrl=http://localhost:9000/dashboard?id=Original-DIY
-ceTaskId=AX8jbUMChWcOUmTebuea
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AX8jbUMChWcOUmTebuea
+dashboardUrl=http://localhost:9000/dashboard?id=OriginalDIY---Angular
+ceTaskId=AX8jk5A_hWcOUmTebue4
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX8jk5A_hWcOUmTebue4
