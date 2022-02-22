@@ -56,7 +56,6 @@ public class FooterController {
                 footer.setPicturePath(footerRequest.getPicturePath());
             }
 
-            footer.setPicturePath(footerRequest.getPicturePath());
             footer.setVisible(footerRequest.isVisible());
 
             footerRepository.save(footer);
