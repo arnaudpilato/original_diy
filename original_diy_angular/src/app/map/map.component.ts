@@ -43,7 +43,10 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         this.workshops.forEach((data) => {
             const marker = L.marker([data.latitude , data.longitude], {icon : greenIcon}).addTo(this.map);
-
+          var popup = L.popup()
+            .setLatLng([data.latitude, data.longitude])
+            .setContent(data.description)
+            .openOn(this.map);
 
         })
 
