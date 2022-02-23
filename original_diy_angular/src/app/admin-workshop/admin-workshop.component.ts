@@ -13,6 +13,9 @@ export class AdminWorkshopComponent implements OnInit {
   public static: string = '/assets/img/static-picture.png';
   public workshops: DiyWorkshop[] | undefined;
 
+  public authuser: any;
+
+
   constructor(private title: Title, private workshopService: WorkshopService) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
   }
