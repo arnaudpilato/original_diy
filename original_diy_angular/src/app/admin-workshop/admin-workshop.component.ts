@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
+import {AmazonS3Service} from "../service/amazon-s3.service";
 
 @Component({
   selector: 'app-admin-workshop',
@@ -13,10 +14,7 @@ export class AdminWorkshopComponent implements OnInit {
   public static: string = '/assets/img/static-picture.png';
   public workshops: DiyWorkshop[] | undefined;
 
-  public authuser: any;
-
-
-  constructor(private title: Title, private workshopService: WorkshopService) {
+  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
   }
 
@@ -35,7 +33,11 @@ export class AdminWorkshopComponent implements OnInit {
     });
   }
 
-  deleteWorkshop(id: any): void {
+  deleteWorkshop(id: any, path: any): void {
+    if (path != "/assets/img/static-picture.png") {
+      this.amazonS3Service.deleteFile(path);
+    }
+
     this.workshopService.delete(id).subscribe({
       next: (res) => {
         console.log(res);

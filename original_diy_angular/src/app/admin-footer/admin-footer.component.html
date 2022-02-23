@@ -26,7 +26,7 @@
             <div><a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
             </div>
             <div>
-              <a (click)="deleteSocialNetwork(socialNetwork.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+              <a (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
             </div>
           </div>
         </th>
@@ -59,7 +59,7 @@
           <a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
         </td>
         <td class="td-delete">
-          <a class="link" (click)="deleteSocialNetwork(socialNetwork.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+          <a class="link" (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
         </td>
       </tr>
       </tbody>
