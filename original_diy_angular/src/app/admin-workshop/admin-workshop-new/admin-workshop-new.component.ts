@@ -4,6 +4,7 @@ import { Title } from "@angular/platform-browser";
 import { WorkshopService } from "../../service/workshop.service";
 import { Router } from "@angular/router";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-admin-workshop-new',
@@ -19,12 +20,17 @@ export class AdminWorkshopNewComponent implements OnInit {
   public model: DiyWorkshop = new DiyWorkshop();
   public file: any;
   public changeImage = false;
+  public authuser: any;
 
-  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service, private router: Router) {
+  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service,
+              private router: Router, private token: TokenStorageService) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
+
   }
 
   ngOnInit(): void {
+    this.authuser = this.token.getUser();
+    console.log("console log de this.authuser: ", this.authuser)
   }
 
   selectFile(event: any) {
@@ -38,7 +44,7 @@ export class AdminWorkshopNewComponent implements OnInit {
   }
 
   onSubmit() {
-    const data = {
+    const data : any = {
       title: this.model.title,
       picturePath: this.nameFile,
       streetNumber: this.model.streetNumber,
@@ -47,6 +53,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       city: this.model.city,
       description: this.model.description,
       confirmation: this.model.confirmation,
+      diyUser: this.authuser,
 
     /*
      comments: this.model.comments,
@@ -55,7 +62,12 @@ export class AdminWorkshopNewComponent implements OnInit {
      */
     }
 
-    console.log(data);
+    if (this.selectedFiles != null) {
+      this.currentFileUpload = this.selectedFiles.item(0);
+      this.amazonS3Service.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+        this.selectedFiles = undefined;
+      });
+    }
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -63,14 +75,12 @@ export class AdminWorkshopNewComponent implements OnInit {
         this.selectedFiles = undefined;
       });
     }
+
     this.workshopService.create(data).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigate(['/admin-workshop']);
       },
-
       error: (e) => {
-        console.error(e)
         this.isSignUpFailed = true;
         this.errorMessage = e.error.message;
       }

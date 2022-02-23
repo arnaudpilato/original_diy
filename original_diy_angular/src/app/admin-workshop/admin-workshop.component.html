@@ -45,6 +45,7 @@
           <th scope="col" colspan="2">Modifier</th>
         </tr>
       </thead>
+
       <tbody>
         <tr *ngFor="let workshop of workshops; let index = index">
           <th scope="row">{{ index + 1 }}</th>
@@ -66,8 +67,6 @@
     </table>
   </div>
   <div *ngFor="let workshop of workshops">
-    <div>{{workshop.latitude}}</div>
-
   </div>
 </div>
 
