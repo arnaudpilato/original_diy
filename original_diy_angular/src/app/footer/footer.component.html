@@ -1,7 +1,14 @@
 <div class="container-fluid footer mt-auto py-3 footer-color">
   <div class="container">
-    <div class="text-center">
-      2022 | Wild Code School
+    <div class="row justify-content-center mb-3">
+      <div class="col-1" *ngFor="let socialNetwork of socialNetworks">
+        <a href="{{ socialNetwork.socialNetworkPath }}"><img class="social-network-icon" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image de {{ socialNetwork.name }}"></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="text-center">
+        2022 | Wild Code School
+      </div>
     </div>
   </div>
 </div>
