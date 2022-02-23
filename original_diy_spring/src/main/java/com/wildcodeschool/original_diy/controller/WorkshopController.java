@@ -1,6 +1,8 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import com.wildcodeschool.original_diy.service.APIGouvService;
@@ -9,18 +11,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test/workshop")
 public class WorkshopController {
+
     @Autowired
     WorkshopRepository workshopRepository;
 
     @Autowired
     APIGouvService gouvService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
@@ -53,7 +61,6 @@ public class WorkshopController {
     public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
-
             workshop.setTitle(workshopRequest.getTitle());
 
             if (workshopRequest.getPicturePath() == null) {
@@ -76,11 +83,11 @@ public class WorkshopController {
 
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
+            workshop.setDiyUser(workshopRequest.getDiyUser());
+            workshopRepository.save(workshop);
+            return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
-                workshopRepository.save(workshop);
-                return new ResponseEntity<>(workshop, HttpStatus.CREATED);
-
-        } catch (Exception e) {
+        } catch (Exception e){
 
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

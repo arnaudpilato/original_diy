@@ -17,6 +17,8 @@ import java.util.Set;
  * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
+
+
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -61,13 +63,14 @@ public class DiyUser {
             orphanRemoval = true
     )
     private List<DiyComment> diyComments = new ArrayList<>();
+
     @OneToMany(
             mappedBy = "diyUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @OrderBy("id DESC")
-    private List<DiyWorkshop> workshop = new ArrayList<>();
+    private List<DiyWorkshop> workshops;
 
     public DiyUser() {
     }
@@ -79,11 +82,11 @@ public class DiyUser {
     }
 
     public List<DiyWorkshop> getWorkshop() {
-        return workshop;
+        return workshops;
     }
 
     public void setWorkshop(List<DiyWorkshop> workshop) {
-        this.workshop = workshop;
+        this.workshops = workshop;
     }
 
     public Long getId() {
