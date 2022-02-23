@@ -1,23 +1,15 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyFooter;
-import com.wildcodeschool.original_diy.entity.DiyRole;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.model.ERole;
 import com.wildcodeschool.original_diy.repository.FooterRepository;
 import com.wildcodeschool.original_diy.request.FooterRequest;
-import com.wildcodeschool.original_diy.request.UserRequest;
-import com.wildcodeschool.original_diy.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -66,7 +58,7 @@ public class FooterController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteSocialNetwork(@PathVariable("id") Long id) {
         try {
             footerRepository.deleteById(id);
