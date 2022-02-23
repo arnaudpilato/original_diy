@@ -62,7 +62,8 @@ export class AdminFooterNewComponent implements OnInit {
     this.footerService.create(data).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin-footer']);
+        window.location.href="/admin-footer"
+        //this.router.navigate(['/admin-footer']);
       },
 
       error: (err) => console.error(err)

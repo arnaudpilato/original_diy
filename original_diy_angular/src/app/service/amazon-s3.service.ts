@@ -20,4 +20,12 @@ export class AmazonS3Service {
 
     return this.https.request(newRequest);
   }
+
+  deleteFile(file: any) {
+    this.https.post<string>('http://localhost:8080/api/auth/deleteFile',file).subscribe(
+      res => {
+        file = res;
+      }
+    );
+  }
 }
