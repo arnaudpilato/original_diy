@@ -4,8 +4,11 @@ package com.wildcodeschool.original_diy.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -31,6 +34,12 @@ public class DiyWorkshop {
 
     private String city;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
+    private Date date;
+
+    @DateTimeFormat(pattern = "h:mm")
+    private Date hours;
+
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 
@@ -46,6 +55,7 @@ public class DiyWorkshop {
     private DiyUser diyUser;
 
     private boolean confirmation = false;
+
 
     public DiyWorkshop() {
     }
@@ -144,5 +154,21 @@ public class DiyWorkshop {
 
     public void setConfirmation(boolean confirmation) {
         this.confirmation = confirmation;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getHours() {
+        return hours;
+    }
+
+    public void setHours(Date hours) {
+        this.hours = hours;
     }
 }
