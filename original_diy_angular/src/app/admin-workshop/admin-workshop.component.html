@@ -26,7 +26,7 @@
               <div><a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
               </div>
               <div>
-                <a (click)="deleteWorkshop(workshop.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+                <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
               </div>
             </div>
           </th>
@@ -59,7 +59,7 @@
             <a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
           </td>
           <td class="td-delete">
-            <a class="link" (click)="deleteWorkshop(workshop.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+            <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
           </td>
         </tr>
       </tbody>

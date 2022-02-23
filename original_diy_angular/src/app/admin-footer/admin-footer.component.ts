@@ -44,16 +44,9 @@ export class AdminFooterComponent implements OnInit {
     });
   }
 
-  deleteFile(file: any) {
-    this.http.post<string>('http://localhost:8080/api/auth/deleteFile/',file).subscribe(
-      res => {
-        this.file = res;
-      }
-    );
-  }
   deleteSocialNetwork(id: any, path: any): void {
     if (path != "/assets/img/static-picture.png") {
-      this.deleteFile(path);
+      this.amazonS3Service.deleteFile(path);
     }
 
     this.footerService.delete(id).subscribe({
