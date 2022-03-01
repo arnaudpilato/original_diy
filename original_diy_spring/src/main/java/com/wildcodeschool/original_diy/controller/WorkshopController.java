@@ -33,7 +33,7 @@ public class WorkshopController {
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
         try {
             List<DiyWorkshop> workshops = new ArrayList<>();
-            workshopRepository.findAll().forEach(workshops::add);
+            workshops.addAll(workshopRepository.findAll());
 
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
