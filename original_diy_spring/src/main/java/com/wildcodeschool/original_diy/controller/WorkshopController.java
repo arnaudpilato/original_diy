@@ -124,8 +124,8 @@ public class WorkshopController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteWorkshop(@PathVariable("id") Long id) {
         try {
             workshopRepository.deleteById(id);
 
