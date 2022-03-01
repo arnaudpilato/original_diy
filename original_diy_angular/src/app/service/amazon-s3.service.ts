@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AmazonS3Service {
+  baseUrl = environment.baseUrl + '/auth/';
+
   constructor(private https: HttpClient) { }
 
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
@@ -13,7 +16,7 @@ export class AmazonS3Service {
 
     data.append('file', file);
 
-    const newRequest = new HttpRequest('POST', 'http://localhost:8080/api/auth/uploadFile', data, {
+    const newRequest = new HttpRequest('POST', this.baseUrl + 'uploadFile', data, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -22,7 +25,7 @@ export class AmazonS3Service {
   }
 
   deleteFile(file: any) {
-    this.https.post<string>('http://localhost:8080/api/auth/deleteFile',file).subscribe(
+    this.https.post<string>(this.baseUrl + 'deleteFile', file).subscribe(
       res => {
         file = res;
       }
