@@ -3,7 +3,7 @@ package com.wildcodeschool.original_diy.request;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+
 import java.util.Date;
 
 
@@ -30,7 +30,7 @@ public class WorkshopRequest {
 
     private DiyUser diyUser;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ", iso = DateTimeFormat.ISO.DATE)
     private Date date;
 
     @DateTimeFormat(pattern = "hh:mm")

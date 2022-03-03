@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.text.DateFormat;
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -67,7 +68,7 @@ public class WorkshopController {
             } else {
                 workshop.setPicturePath(workshopRequest.getPicturePath());
             }
-
+            Locale locale = new Locale("fr", "FR");
             workshop.setStreetNumber(workshopRequest.getStreetNumber());
             workshop.setStreet(workshopRequest.getStreet());
             workshop.setPostCode(workshopRequest.getPostCode());
@@ -83,6 +84,9 @@ public class WorkshopController {
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
             workshop.setDiyUser(workshopRequest.getDiyUser());
+            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+
+
             workshop.setDate(workshopRequest.getDate());
             workshopRepository.save(workshop);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
