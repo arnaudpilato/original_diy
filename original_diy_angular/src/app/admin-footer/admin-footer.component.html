@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center my-4">Gestion du footer</h1>
-  <div class="text-end"><a class="btn btn-primary" routerLink="/admin-footer-new">Ajout d'un réseau social</a></div>
+  <div class="text-end"><a class="btn btn-primary" routerLink="/admin/footer/new">Ajout d'un réseau social</a></div>
   <div class="table-responsive d-block d-md-none my-2">
      <table class="table table-bordered border-dark" *ngFor="let socialNetwork of socialNetworks; let index = index">
      <thead>
@@ -23,7 +23,7 @@
       <tr>
         <th scope="row" colspan="2">
           <div class="d-flex justify-content-around">
-            <div><a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+            <div><a routerLink="/admin/footer/edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
             </div>
             <div>
               <a (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
@@ -56,7 +56,7 @@
         <td class="text-wrap">{{ socialNetwork.name }}</td>
         <td>{{ socialNetwork.visible ? "oui" : "non" }}</td>
         <td class="text-end td-edit">
-          <a routerLink="../admin-footer-edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+          <a routerLink="/admin/footer/edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
         </td>
         <td class="td-delete">
           <a class="link" (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>

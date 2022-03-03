@@ -58,7 +58,7 @@ export class AdminFooterEditComponent implements OnInit {
     this.footerService.update(this.socialNetwork.id, data).subscribe({
       next: (data) => {
         console.log("data");
-        this.router.navigate(['/admin-footer']);
+        this.router.navigate(['/admin/footer']);
       },
 
       error: (err) => {
