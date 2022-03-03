@@ -1,6 +1,11 @@
 package com.wildcodeschool.original_diy.request;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 
 public class WorkshopRequest {
     private String title;
@@ -24,6 +29,28 @@ public class WorkshopRequest {
     private boolean confirmation = false;
 
     private DiyUser diyUser;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
+    private Date date;
+
+    @DateTimeFormat(pattern = "hh:mm")
+    private Date hours;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getHours() {
+        return hours;
+    }
+
+    public void setHours(Date hours) {
+        this.hours = hours;
+    }
 
     public WorkshopRequest() {
     }
