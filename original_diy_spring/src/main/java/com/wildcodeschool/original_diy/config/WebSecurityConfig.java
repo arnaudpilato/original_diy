@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Pil : We need UserDetailsService for implement the user details to perform authetication and authorization
+     * Pil : We need UserDetailsService for implement the user details to perform authentication and authorization
      * @param authenticationManagerBuilder
      * @throws Exception
      */
