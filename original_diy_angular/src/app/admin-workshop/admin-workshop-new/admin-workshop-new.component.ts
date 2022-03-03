@@ -53,7 +53,9 @@ export class AdminWorkshopNewComponent implements OnInit {
       city: this.model.city,
       description: this.model.description,
       confirmation: this.model.confirmation,
+      date: this.model.date,
       diyUser: this.authuser,
+
 
     /*
      comments: this.model.comments,

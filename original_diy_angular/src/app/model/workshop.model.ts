@@ -12,4 +12,6 @@ export class DiyWorkshop {
   latitude?: number;
   confirmation?: boolean;
   diyUser?: any;
+  date?: any;
+
 }

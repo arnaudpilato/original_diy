@@ -34,6 +34,12 @@
             <input class="form-control" id="city" name="city" [(ngModel)]="model.city" type="text" placeholder="Orléans">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="date">Date:</label>
+            <input class="form-control" type="datetime-local"
+                      name="date" id="date" [(ngModel)]="model.date" rows="3"/>
+          </div>
+
+          <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
             <textarea class="form-control" id="description" name="description" [(ngModel)]="model.description" rows="3"></textarea>
           </div>
