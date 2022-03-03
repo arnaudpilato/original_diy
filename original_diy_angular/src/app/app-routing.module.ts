@@ -34,9 +34,9 @@ const routes: Routes = [
   { path: 'admin-workshop', component: AdminWorkshopComponent },
   { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
   { path: 'admin-workshop-edit/:id', component: AdminWorkshopEditComponent },
-  { path: 'admin-footer', component: AdminFooterComponent},
-  { path: 'admin-footer-new', component: AdminFooterNewComponent},
-  { path: 'admin-footer-edit/:id', component: AdminFooterEditComponent},
+  { path: 'admin/footer', component: AdminFooterComponent},
+  { path: 'admin/footer/new', component: AdminFooterNewComponent},
+  { path: 'admin/footer/edit/:id', component: AdminFooterEditComponent},
 
   { path: 'error', component: ErrorComponent},
   { path: 'error-404', component: Error404Component },
