@@ -30,7 +30,7 @@ public class WorkshopRequest {
 
     private DiyUser diyUser;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ", iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
     private Date date;
 
     @DateTimeFormat(pattern = "hh:mm")

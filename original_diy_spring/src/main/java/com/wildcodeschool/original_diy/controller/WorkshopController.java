@@ -68,7 +68,7 @@ public class WorkshopController {
             } else {
                 workshop.setPicturePath(workshopRequest.getPicturePath());
             }
-            Locale locale = new Locale("fr", "FR");
+
             workshop.setStreetNumber(workshopRequest.getStreetNumber());
             workshop.setStreet(workshopRequest.getStreet());
             workshop.setPostCode(workshopRequest.getPostCode());
@@ -84,7 +84,6 @@ public class WorkshopController {
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
             workshop.setDiyUser(workshopRequest.getDiyUser());
-            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
 
 
             workshop.setDate(workshopRequest.getDate());
