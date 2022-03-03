@@ -28,9 +28,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'admin-home', component: AdminHomeComponent },
-  { path: 'admin-contact', component: AdminContactComponent },
-  { path: 'admin-contact-new', component: AdminContactNewComponent },
-  { path: 'admin-contact-edit/:id', component: AdminContactEditComponent },
+  { path: 'admin/contact', component: AdminContactComponent },
+  { path: 'admin/contact/new', component: AdminContactNewComponent },
+  { path: 'admin/contact/edit/:id', component: AdminContactEditComponent },
   { path: 'admin-workshop', component: AdminWorkshopComponent },
   { path: 'admin-workshop-new', component: AdminWorkshopNewComponent},
   { path: 'admin-workshop-edit/:id', component: AdminWorkshopEditComponent },
