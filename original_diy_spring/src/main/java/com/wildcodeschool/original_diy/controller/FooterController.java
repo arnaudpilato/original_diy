@@ -1,8 +1,11 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyFooter;
+import com.wildcodeschool.original_diy.entity.DiyUser;
+import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.FooterRepository;
 import com.wildcodeschool.original_diy.request.FooterRequest;
+import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -55,6 +59,44 @@ public class FooterController {
             return new ResponseEntity<>(footer, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<DiyFooter> getSocialNetworkById(@PathVariable("id") long id) {
+        Optional<DiyFooter> socialNetwork = footerRepository.findById(id);
+
+        if (socialNetwork.isPresent()) {
+            return new ResponseEntity<>(socialNetwork.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<DiyFooter> updateSocialNetwork(@PathVariable("id") long id, @RequestBody FooterRequest footerRequest) {
+        Optional<DiyFooter> footerData = footerRepository.findById(id);
+
+        if (footerData.isPresent()) {
+            DiyFooter footer = footerData.get();
+
+            footer.setName(footerRequest.getName());
+
+            if (footerRequest.getPicturePath() == null) {
+                footer.setPicturePath("/assets/img/static-picture.png");
+            } else {
+                footer.setPicturePath(footerRequest.getPicturePath());
+            }
+
+            footer.setPicturePath(footerRequest.getPicturePath());
+            footer.setVisible(footerRequest.isVisible());
+
+            footerRepository.save(footer);
+
+            return new ResponseEntity<>(footerRepository.save(footer), HttpStatus.OK);
+        } else {
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
