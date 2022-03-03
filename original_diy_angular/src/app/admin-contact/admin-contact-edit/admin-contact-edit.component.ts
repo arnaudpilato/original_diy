@@ -74,7 +74,7 @@ export class AdminContactEditComponent implements OnInit {
         console.log(res);
         console.log(this.role)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
-        this.router.navigate(['/admin-contact'])
+        this.router.navigate(['/admin/contact'])
       },
 
       error: (e) => console.error(e)
