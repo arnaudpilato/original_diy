@@ -53,7 +53,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       city: this.model.city,
       description: this.model.description,
       confirmation: this.model.confirmation,
-      date: this.model.date,
+      date: new Date((new Date(this.model.date)).getTime() + (60 * 60 * 24 * 1000)),
       diyUser: this.authuser,
 
 
