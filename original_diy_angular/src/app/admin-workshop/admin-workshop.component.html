@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="text-center my-4">Gestion des ateliers</h1>
-  <div class="text-end"><a class="btn btn-primary" routerLink="/admin-workshop-new">Ajout d'un atelier</a></div>
+  <div class="text-end"><a class="btn btn-primary" routerLink="/admin/workshop/new">Ajout d'un atelier</a></div>
   <div class="table-responsive d-block d-md-none my-2">
     <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
       <thead>
@@ -23,7 +23,7 @@
         <tr>
           <th scope="row" colspan="2">
             <div class="d-flex justify-content-around">
-              <div><a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+              <div><a routerLink="/admin/workshop/edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
               </div>
               <div>
                 <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
@@ -57,7 +57,7 @@
           <td class="text-wrap">{{ workshop.description }}</td>
           <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
           <td class="text-end td-edit">
-            <a routerLink="../admin-workshop-edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+            <a routerLink="/admin/workshop/edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
           </td>
           <td class="td-delete">
             <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>

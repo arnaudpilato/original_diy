@@ -50,7 +50,7 @@ import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-f
     ProfileComponent,
     AdminFooterComponent,
     AdminFooterEditComponent,
-    AdminFooterNewComponent
+    AdminFooterNewComponent,
   ],
   imports: [
     BrowserModule,

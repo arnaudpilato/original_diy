@@ -12,7 +12,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Atelier</a>
             </li>
-            <li class="nav-item" *ngIf="showAdminBoard">
+            <li class="nav-item">
                 <a class="nav-link" routerLink="map">Carte</a>
             </li>
           </ul>
@@ -24,12 +24,12 @@
                 <a class="nav-link" routerLink="login">Connexion</a>
             </li>
           </ul>
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" *ngIf="showAdminBoard">
             <li class="nav-item" >
               <a class="nav-link" routerLink="admin/contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="admin-home">Administration</a>
+              <a class="nav-link" routerLink="admin/home">Administration</a>
             </li>
           </ul>
           <ul class="navbar-nav" *ngIf="isLoggedIn">
