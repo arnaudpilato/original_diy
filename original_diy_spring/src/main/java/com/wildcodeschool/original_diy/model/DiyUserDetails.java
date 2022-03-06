@@ -25,7 +25,7 @@ public class DiyUserDetails implements UserDetails {
     @JsonIgnore
     private final String password;
 
-    private final Collection<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
 
     public DiyUserDetails(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -93,17 +93,12 @@ public class DiyUserDetails implements UserDetails {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
+    public boolean equals(Object o) {
+        if (this == o)
             return true;
-        }
-
-        if (object == null || getClass() != object.getClass()) {
+        if (o == null || getClass() != o.getClass())
             return false;
-        }
-
-        DiyUserDetails user = (DiyUserDetails) object;
-
+        DiyUserDetails user = (DiyUserDetails) o;
         return Objects.equals(id, user.id);
     }
 }

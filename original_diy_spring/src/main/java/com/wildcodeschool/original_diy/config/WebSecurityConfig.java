@@ -36,7 +36,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private DiyUserDetailsService userDetailsService;
+    DiyUserDetailsService userDetailsService;
 
     /**
      * Implementing AuthTokenFilter for intercept the all incoming request
