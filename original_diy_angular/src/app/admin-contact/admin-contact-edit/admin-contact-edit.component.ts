@@ -12,13 +12,14 @@ import { DiyRole } from "../../model/role.model";
   styleUrls: ['./admin-contact-edit.component.scss']
 })
 export class AdminContactEditComponent implements OnInit {
+  public roles: string[] = [];
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(DiyRole);
-  public role: string | undefined;
+  public eRoles = DiyRole;
+  public role: string[] = [];
 
   constructor(
     private title: Title,
@@ -34,6 +35,8 @@ export class AdminContactEditComponent implements OnInit {
     console.log(this.user)
 
     if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
       this.getUser(this.route.snapshot.params["id"]);
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
@@ -51,11 +54,6 @@ export class AdminContactEditComponent implements OnInit {
     });
   }
 
-  getRole(role: string) {
-    this.role = role;
-    console.log("valeur du role :" + role)
-  }
-
   onSubmit() {
     this.message = '';
 
@@ -65,7 +63,7 @@ export class AdminContactEditComponent implements OnInit {
       lastName: this.user.lastName,
       phone: this.user.phone,
       email: this.user.email,
-      role: this.role,
+      roles: this.role,
       password: this.user.password,
     }
 
@@ -79,5 +77,10 @@ export class AdminContactEditComponent implements OnInit {
 
       error: (e) => console.error(e)
     });
+  }
+
+  getRole(role: string) {
+    this.role[0] = role;
+    console.log("valeur du role :" + role)
   }
 }

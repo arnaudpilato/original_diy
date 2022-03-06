@@ -17,7 +17,7 @@ export class FooterService {
     return this.http.get<DiyFooter[]>(this.baseUrl + "all");
   }
 
-  getById(id: any): Observable<DiyWorkshop> {
+  getById(id: any): Observable<DiyFooter> {
     return this.http.get(this.baseUrl + "get/" + id);
   }
 
