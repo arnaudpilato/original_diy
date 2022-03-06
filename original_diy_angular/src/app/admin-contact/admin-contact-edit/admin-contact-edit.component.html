@@ -41,8 +41,8 @@
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option value="user" [selected]="user?.roles[0]?.name == 'ROLE_USER'">Utilisateur</option>
-            <option value="admin" [selected]="user?.roles[0]?.name == 'ROLE_ADMIN'">Administrateur</option>
+            <option value="user" [selected]="user.roles ? user.roles[0]?.name == 'ROLE_USER' : undefined">Utilisateur</option>
+            <option value="admin" [selected]="user.roles ? user.roles[0]?.name == 'ROLE_ADMIN' : undefined">Administrateur</option>
           </select>
         </div>
         <div class="mb-3">
