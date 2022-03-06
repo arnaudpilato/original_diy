@@ -16,8 +16,7 @@ public class DiyRole {
     @Column(length = 20)
     private ERole name;
 
-    public DiyRole() {
-    }
+    public DiyRole() { }
 
     public DiyRole(ERole name) {
         this.name = name;

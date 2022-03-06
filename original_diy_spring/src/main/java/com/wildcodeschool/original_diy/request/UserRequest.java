@@ -1,8 +1,11 @@
 package com.wildcodeschool.original_diy.request;
 
+import com.wildcodeschool.original_diy.entity.DiyRole;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserRequest {
@@ -21,7 +24,7 @@ public class UserRequest {
     @Email
     private String email;
 
-    private String role;
+    private Set<String> roles;
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -67,9 +70,13 @@ public class UserRequest {
         this.email = email;
     }
 
-    public String getRole() { return role; }
+    public Set<String> getRoles() {
+        return roles;
+    }
 
-    public void setRole(String role) { this.role = role; }
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
 
     public String getPassword() {
         return password;

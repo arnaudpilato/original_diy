@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (token != null) {
       authenticationRequest = req.clone({
-        headers: req.headers.set(TOKEN_HEADER_KEY, token)
+        headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token)
       });
     }
 
@@ -36,9 +36,9 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         else {
           if (error.status === 404) {
-            this.router.navigate(['/error-404']);
+            this.router.navigate(['/error/404']);
           } else if (error.status === 500) {
-            this.router.navigate(['/error-500']);
+            this.router.navigate(['/error/500']);
           } else {
             this.router.navigate(['/error']);
           }

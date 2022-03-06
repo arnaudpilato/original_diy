@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
+  <h1 class="text-center my-4">Modifier de {{ workshop.title }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
       <form method="post" class="my-3" (ngSubmit)="workshopEditForm.form.valid && onSubmit()" #workshopEditForm="ngForm" name="form" novalidate>
@@ -44,7 +44,7 @@
           </div>
           <div class="text-center my-3">
             <button class="btn btn-primary m-1">Modifier</button>
-            <a class="btn btn-secondary m-1" routerLink="/admin-workshop">Retour</a>
+            <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
           </div>
         </div>
       </form>

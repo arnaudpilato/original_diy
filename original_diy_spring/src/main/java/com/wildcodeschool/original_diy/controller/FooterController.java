@@ -1,14 +1,12 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyFooter;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.FooterRepository;
 import com.wildcodeschool.original_diy.request.FooterRequest;
-import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -38,6 +36,7 @@ public class FooterController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createsocialNetwork(@Valid @RequestBody FooterRequest footerRequest) {
         try {
@@ -62,6 +61,7 @@ public class FooterController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyFooter> getSocialNetworkById(@PathVariable("id") long id) {
         Optional<DiyFooter> socialNetwork = footerRepository.findById(id);
@@ -73,6 +73,7 @@ public class FooterController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyFooter> updateSocialNetwork(@PathVariable("id") long id, @RequestBody FooterRequest footerRequest) {
         Optional<DiyFooter> footerData = footerRepository.findById(id);
@@ -100,6 +101,7 @@ public class FooterController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteSocialNetwork(@PathVariable("id") Long id) {
         try {

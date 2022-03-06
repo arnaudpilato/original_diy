@@ -47,7 +47,8 @@
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option *ngFor="let role of roles" value="{{ role == 'Utilisateur' ? 'ROLE_USER' : 'ROLE_ADMIN' }}">{{ role }}</option>
+            <option value="user" [selected]="model.roles[0]?.name == 'ROLE_USER'">Utilisateur</option>
+            <option value="admin" [selected]="model.roles[0]?.name == 'ROLE_ADMIN'">Administrateur</option>
           </select>
         </div>
         <div class="text-center my-3">
