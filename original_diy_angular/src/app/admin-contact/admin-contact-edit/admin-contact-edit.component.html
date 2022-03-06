@@ -1,4 +1,4 @@
-<div class="container" *ngIf="currentUser && isLoggedIn; else loggedOut">
+<div class="container" *ngIf="currentUser && isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">

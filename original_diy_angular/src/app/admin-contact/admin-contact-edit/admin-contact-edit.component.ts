@@ -15,6 +15,7 @@ export class AdminContactEditComponent implements OnInit {
   public roles: string[] = [];
   public isLoggedIn: boolean = false;
   public currentUser: any;
+  public showAdminBoard: boolean = false;
   public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
@@ -40,6 +41,7 @@ export class AdminContactEditComponent implements OnInit {
       this.getUser(this.route.snapshot.params["id"]);
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
   }
 
