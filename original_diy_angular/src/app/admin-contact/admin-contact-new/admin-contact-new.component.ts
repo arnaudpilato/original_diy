@@ -40,8 +40,8 @@ export class AdminContactNewComponent implements OnInit {
     };
 
     this.userService.create(data).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: (data) => {
+        console.log(data);
         this.router.navigate(['/admin/contact']);
       },
 

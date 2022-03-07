@@ -102,7 +102,7 @@ export class AdminWorkshopEditComponent implements OnInit {
     this.workshopService.update(this.workshop.id, data).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin-workshop']);
+        this.router.navigate(['/admin/workshop']);
       },
 
       error: (err) => console.error(err)
