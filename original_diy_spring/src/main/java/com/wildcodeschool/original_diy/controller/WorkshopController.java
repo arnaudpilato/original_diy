@@ -80,7 +80,6 @@ public class WorkshopController {
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
             double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
-            System.out.println(workshopRequest.getDate());
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
             workshop.setDiyUser(workshopRequest.getDiyUser());
