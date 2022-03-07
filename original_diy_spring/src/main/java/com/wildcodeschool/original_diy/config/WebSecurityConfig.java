@@ -36,7 +36,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private DiyUserDetailsService userDetailsService;
+    DiyUserDetailsService userDetailsService;
 
     /**
      * Implementing AuthTokenFilter for intercept the all incoming request
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Pil : We need UserDetailsService for implement the user details to perform authetication and authorization
+     * Pil : We need UserDetailsService for implement the user details to perform authentication and authorization
      * @param authenticationManagerBuilder
      * @throws Exception
      */

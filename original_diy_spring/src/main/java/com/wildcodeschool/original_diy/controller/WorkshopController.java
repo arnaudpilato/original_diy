@@ -1,6 +1,5 @@
 package com.wildcodeschool.original_diy.controller;
 
-import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
@@ -9,11 +8,11 @@ import com.wildcodeschool.original_diy.service.APIGouvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
-import java.text.DateFormat;
+
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,6 +45,7 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
@@ -57,6 +57,7 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
         try {
@@ -95,6 +96,7 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyWorkshop> updateWorkshop(@PathVariable("id") long id, @RequestBody WorkshopRequest workshopRequest) {
         Optional<DiyWorkshop> workshopData = workshopRepository.findById(id);
@@ -127,8 +129,9 @@ public class WorkshopController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteWorkshop(@PathVariable("id") Long id) {
         try {
             workshopRepository.deleteById(id);
 

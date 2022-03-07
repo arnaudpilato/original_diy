@@ -3,7 +3,6 @@ import { Title } from "@angular/platform-browser";
 import { UserService } from "../../service/user.service";
 import { DiyUser } from "../../model/user.model";
 import { Router } from "@angular/router";
-import { DiyRole } from "../../model/role.model";
 
 @Component({
   selector: 'app-admin-contact-new',
@@ -11,11 +10,11 @@ import { DiyRole } from "../../model/role.model";
   styleUrls: ['./admin-contact-new.component.scss']
 })
 export class AdminContactNewComponent implements OnInit {
+  public roles: string[] = [];
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public model: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(DiyRole);
-  public role: string | undefined;
+  public role: string[] = [];
 
   constructor(private title: Title, private userService: UserService, private router: Router) {
     this.title.setTitle("OriginalDIY - Admin - contact - new")
@@ -25,7 +24,7 @@ export class AdminContactNewComponent implements OnInit {
   }
 
   getRole(role: string) {
-    this.role = role;
+    this.role[0] = role;
     console.log("valeur du role :" + role)
   }
 
@@ -37,13 +36,13 @@ export class AdminContactNewComponent implements OnInit {
       firstName: this.model.firstName,
       lastName: this.model.lastName,
       phone: this.model.phone,
-      role: this.role,
+      roles: this.role,
     };
 
     this.userService.create(data).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/admin-contact']);
+        this.router.navigate(['/admin/contact']);
       },
 
       error: (e) => {
