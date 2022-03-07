@@ -43,12 +43,6 @@
             <label class="form-label" for="description">Description :</label>
             <textarea class="form-control" id="description" name="description" [(ngModel)]="model.description" rows="3"></textarea>
           </div>
-          <div class="mb-3">
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" min="{{minDatetimeLocal | date:'yyyy-MM-dd hh:mm '}}" [(ngModel)]="model.confirmation" type="checkbox" value="false">
-            </div>
-          </div>
           <div class="text-center my-3">
             <button class="btn btn-primary m-1">Ajouter</button>
             <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
