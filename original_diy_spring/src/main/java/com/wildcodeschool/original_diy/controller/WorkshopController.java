@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
@@ -83,6 +84,8 @@ public class WorkshopController {
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
+            // Optional<DiyUser> user = userRepository.findById(workshopRequest.getDiyUser().getId());
+            // workshop.setDiyUser(workshopRequest.getDiyUser());
             workshop.setDiyUser(workshopRequest.getDiyUser());
 
 
