@@ -34,13 +34,19 @@
             <input class="form-control" id="city" name="city" [(ngModel)]="model.city" type="text" placeholder="Orléans">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="date">Date et heure de l'atelier :</label>
+            <input class="form-control" type="datetime-local"
+                      name="date" id="date" [(ngModel)]="model.date" rows="3"/>
+          </div>
+
+          <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
             <textarea class="form-control" id="description" name="description" [(ngModel)]="model.description" rows="3"></textarea>
           </div>
           <div class="mb-3">
             <div class="form-check form-switch">
               <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="model.confirmation" type="checkbox" value="false">
+              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" min="{{minDatetimeLocal | date:'yyyy-MM-dd hh:mm '}}" [(ngModel)]="model.confirmation" type="checkbox" value="false">
             </div>
           </div>
           <div class="text-center my-3">
