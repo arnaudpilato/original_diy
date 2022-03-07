@@ -34,11 +34,10 @@ export class AdminWorkshopNewComponent implements OnInit {
     this.isLoggedIn = !!this.token.getToken();
 
     if (this.isLoggedIn) {
-      this.authuser = this.token.getUser();
-      console.log("console log de this.authuser: ", this.authuser)
+      this.authuser = this.token.getUser().user;
+      this.minDatetimeLocal = new Date();
+      console.log("console log de this.authuser: ", this.authuser);
     }
-    this.authuser = this.token.getUser();
-    this.minDatetimeLocal = new Date();
   }
 
   selectFile(event: any) {
@@ -61,15 +60,8 @@ export class AdminWorkshopNewComponent implements OnInit {
       city: this.model.city,
       description: this.model.description,
       confirmation: this.model.confirmation,
-      //diyUser: this.authuser,
       date: new Date((new Date(this.model.date)).getTime() + (60 * 60  * 1000)),
       diyUser: this.authuser,
-
-      /*
-       comments: this.model.comments,
-       longitude: this.model.longitude,
-       latitude: this.model.latitude,
-       */
     }
 
     if (this.selectedFiles != null) {
