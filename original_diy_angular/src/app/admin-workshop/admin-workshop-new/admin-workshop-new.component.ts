@@ -12,6 +12,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
   styleUrls: ['./admin-workshop-new.component.scss']
 })
 export class AdminWorkshopNewComponent implements OnInit {
+  public isLoggedIn: boolean = false;
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public currentFileUpload: any;
@@ -29,8 +30,12 @@ export class AdminWorkshopNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authuser = this.token.getUser();
-    console.log("console log de this.authuser: ", this.authuser)
+    this.isLoggedIn = !!this.token.getToken();
+
+    if (this.isLoggedIn) {
+      this.authuser = this.token.getUser();
+      console.log("console log de this.authuser: ", this.authuser)
+    }
   }
 
   selectFile(event: any) {
@@ -53,7 +58,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       city: this.model.city,
       description: this.model.description,
       confirmation: this.model.confirmation,
-      diyUser: this.authuser,
+      //diyUser: this.authuser,
 
     /*
      comments: this.model.comments,
@@ -69,16 +74,10 @@ export class AdminWorkshopNewComponent implements OnInit {
       });
     }
 
-    if (this.selectedFiles != null) {
-      this.currentFileUpload = this.selectedFiles.item(0);
-      this.amazonS3Service.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-        this.selectedFiles = undefined;
-      });
-    }
-
     this.workshopService.create(data).subscribe({
-      next: (res) => {
-        this.router.navigate(['/admin-workshop']);
+      next: (data) => {
+        console.log(data)
+        this.router.navigate(['/admin/workshop']);
       },
       error: (e) => {
         this.isSignUpFailed = true;
