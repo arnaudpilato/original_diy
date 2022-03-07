@@ -5,6 +5,7 @@ import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import com.wildcodeschool.original_diy.service.APIGouvService;
+import com.wildcodeschool.original_diy.service.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ public class WorkshopController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    WorkshopService workshopService;
+
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
         try {
@@ -40,6 +44,27 @@ public class WorkshopController {
             }
 
             return new ResponseEntity<>(workshops, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/allConfirmed")
+    public ResponseEntity<List<DiyWorkshop>> getAllWorkshopsConfirmed() {
+        try {
+            List<DiyWorkshop> workshops = new ArrayList<>();
+
+            workshops.addAll(workshopRepository.getAllConfirmedWorkshops());
+            workshopService.workshopControl(workshops);
+
+            List<DiyWorkshop> workshopsNew = new ArrayList<>();
+            workshopsNew.addAll(workshopRepository.getAllConfirmedWorkshops());
+
+            if (workshops.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -90,7 +115,7 @@ public class WorkshopController {
             workshopRepository.save(workshop);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
-        } catch (Exception e){
+        } catch (Exception e) {
 
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
