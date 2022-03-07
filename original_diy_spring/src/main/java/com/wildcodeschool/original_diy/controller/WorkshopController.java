@@ -100,7 +100,7 @@ public class WorkshopController {
             workshop.setPostCode(workshopRequest.getPostCode());
             workshop.setCity(workshopRequest.getCity());
             workshop.setDescription(workshopRequest.getDescription());
-            workshop.setConfirmation(workshopRequest.isConfirmation());
+            workshop.setConfirmation(true);
 
             double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
