@@ -72,6 +72,32 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/last-workshops")
+    public ResponseEntity<List<DiyWorkshop>> getLastWorkshops() {
+        try {
+            List<DiyWorkshop> workshops = new ArrayList<>();
+
+            workshops.addAll(workshopRepository.getThreeLastWorkshops());
+            workshopService.workshopControl(workshops);
+
+            List<DiyWorkshop> workshopsNew = new ArrayList<>();
+            workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
+
+            for (DiyWorkshop workshop : workshopsNew){
+                System.out.println(workshop);
+            }
+
+            if (workshops.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {

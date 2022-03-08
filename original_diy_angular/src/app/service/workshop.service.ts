@@ -20,6 +20,10 @@ export class WorkshopService {
     return this.http.get<DiyWorkshop[]>(this.baseUrl + "allConfirmed");
   }
 
+  getLastWorkshop(): Observable<DiyWorkshop[]> {
+    return this.http.get<DiyWorkshop[]>(this.baseUrl + "last-workshops");
+  }
+
   getById(id: any): Observable<DiyWorkshop> {
     return this.http.get(this.baseUrl + "get/" + id);
   }
