@@ -44,7 +44,7 @@ export class AdminWorkshopEditComponent implements OnInit {
     console.log(this.workshop)
 
     if (this.isLoggedIn) {
-      this.getWorkshop(this.route.snapshot.params["id"]);
+      this.getWorkshop(this.tokenStorageService.getUser().id);
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
       this.roles = user.roles;
