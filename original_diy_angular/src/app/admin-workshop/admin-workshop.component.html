@@ -23,7 +23,7 @@
         <tr>
           <th scope="row" colspan="2">
             <div class="d-flex justify-content-around">
-              <div><a routerLink="/admin/workshop/edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+              <div><a routerLink="/admin/workshop/edit" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
               </div>
               <div>
                 <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
@@ -57,7 +57,7 @@
           <td class="text-wrap">{{ workshop.description }}</td>
           <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
           <td class="text-end td-edit">
-            <a routerLink="/admin/workshop/edit/{{ workshop.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+            <a routerLink="/admin/workshop/edit" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
           </td>
           <td class="td-delete">
             <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
