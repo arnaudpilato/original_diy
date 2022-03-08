@@ -50,7 +50,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/allConfirmed")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshopsConfirmed() {
         try {
