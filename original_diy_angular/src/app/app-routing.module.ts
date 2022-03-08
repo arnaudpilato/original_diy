@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'admin/contact/edit/:id', component: AdminContactEditComponent },
   { path: 'admin/workshop', component: AdminWorkshopComponent },
   { path: 'admin/workshop/new', component: AdminWorkshopNewComponent},
-  { path: 'admin/workshop/edit/:id', component: AdminWorkshopEditComponent },
+  { path: 'admin/workshop/edit', component: AdminWorkshopEditComponent },
   { path: 'admin/footer', component: AdminFooterComponent},
   { path: 'admin/footer/new', component: AdminFooterNewComponent},
   { path: 'admin/footer/edit/:id', component: AdminFooterEditComponent},
