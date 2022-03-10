@@ -98,7 +98,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
