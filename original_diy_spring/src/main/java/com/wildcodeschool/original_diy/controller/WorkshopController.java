@@ -1,7 +1,9 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
@@ -33,6 +35,9 @@ public class WorkshopController {
 
     @Autowired
     WorkshopService workshopService;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
@@ -162,6 +167,12 @@ public class WorkshopController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteWorkshop(@PathVariable("id") Long id) {
         try {
+            List<DiyComment> commentList = workshopRepository.getById(id).getComments();
+            System.out.println(commentList);
+            for (DiyComment comment : commentList
+            ) {
+                commentRepository.deleteById(comment.getId());
+            }
             workshopRepository.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

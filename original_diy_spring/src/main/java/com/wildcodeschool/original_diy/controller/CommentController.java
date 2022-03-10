@@ -1,21 +1,21 @@
-/*package com.wildcodeschool.original_diy.controller;
+package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyComment;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.request.CommentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.Date;
+import javax.validation.Valid;
 
-
-@Controller
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/test/comment")
 public class CommentController {
     @Autowired
     private UserRepository userRepository;
@@ -25,31 +25,25 @@ public class CommentController {
     private CommentRepository commentRepository;
 
 
-    @GetMapping("/admin/commentaire")
-    public String getWorkshops(Model model) {
-        model.addAttribute("commentary", commentRepository.findAll());
-        model.addAttribute("workshops", workshopRepository.getAllWorkshops());
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @RequestMapping("/new")
+    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest) {
 
-        return "admin/workshop/commentary";
-    }
-
-    @RequestMapping("/saveComment")
-    public String saveComment(@RequestParam(value = "workshopid") Long workshopid, @ModelAttribute DiyComment diyComment, Principal principal) {
-
-        if (diyComment.getComment().equals("")) {
-            return "redirect:/workshop/" + workshopid;
+        try {
+            DiyComment comment = new DiyComment();
+            comment.setComment(commentRequest.getComment());
+            comment.setDiyUser(commentRequest.getDiyUser());
+            comment.setDiyWorkshop(commentRequest.getDiyWorkshop());
+            comment.setConfirmed(false);
+            commentRepository.save(comment);
+            return new ResponseEntity<>(comment, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        DiyUser user = userRepository.getByUsername(principal.getName());
-        DiyWorkshop diyWorkshop = workshopRepository.getById(workshopid);
-        diyComment.setDiyWorkshop(diyWorkshop);
-        diyComment.setDiyUser(user);
-        diyComment.setCreatedAt(new Date());
-        commentRepository.save(diyComment);
-
-        return "redirect:/workshop/" + workshopid;
     }
 
-    @GetMapping("/admin/comment/delete/{id}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/delete/{id}")
     public String deleteComment(@PathVariable("id") Long id) {
         DiyComment comment = commentRepository.getById(id);
         commentRepository.delete(comment);
@@ -57,12 +51,13 @@ public class CommentController {
         return "redirect:/admin/commentaire";
     }
 
-    @GetMapping("/admin/comment/confirm/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/confirm/{id}")
     public String confirmComment(@PathVariable("id") Long id) {
         DiyComment comment = commentRepository.getById(id);
-        if (comment.isConfirmed()){
+        if (comment.isConfirmed()) {
             comment.setConfirmed(false);
-        }else{
+        } else {
             comment.setConfirmed(true);
         }
         commentRepository.save(comment);
@@ -70,4 +65,3 @@ public class CommentController {
         return "redirect:/admin/commentaire";
     }
 }
-*/
