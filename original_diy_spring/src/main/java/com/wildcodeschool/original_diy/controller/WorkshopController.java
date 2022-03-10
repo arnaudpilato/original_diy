@@ -1,7 +1,6 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyComment;
-import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
@@ -16,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,13 +24,10 @@ public class WorkshopController {
 
     @Autowired
     WorkshopRepository workshopRepository;
-
     @Autowired
     APIGouvService gouvService;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     WorkshopService workshopService;
 
@@ -66,6 +61,32 @@ public class WorkshopController {
 
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getAllConfirmedWorkshops());
+
+            if (workshops.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping("/last-workshops")
+    public ResponseEntity<List<DiyWorkshop>> getLastWorkshops() {
+        try {
+            List<DiyWorkshop> workshops = new ArrayList<>();
+
+            workshops.addAll(workshopRepository.getThreeLastWorkshops());
+            workshopService.workshopControl(workshops);
+
+            List<DiyWorkshop> workshopsNew = new ArrayList<>();
+            workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
+
+            for (DiyWorkshop workshop : workshopsNew){
+                System.out.println(workshop);
+            }
 
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -168,7 +189,6 @@ public class WorkshopController {
     public ResponseEntity<HttpStatus> deleteWorkshop(@PathVariable("id") Long id) {
         try {
             List<DiyComment> commentList = workshopRepository.getById(id).getComments();
-            System.out.println(commentList);
             for (DiyComment comment : commentList
             ) {
                 commentRepository.deleteById(comment.getId());
