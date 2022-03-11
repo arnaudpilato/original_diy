@@ -6,6 +6,7 @@ import com.wildcodeschool.original_diy.request.BadgeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ public class BadgeController {
     @Autowired
     BadgeRepository badgeRepository;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<DiyBadge>> gettAllBadges() {
         try {
@@ -36,6 +38,7 @@ public class BadgeController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createBadge(@Valid @RequestBody BadgeRequest badgeRequest) {
         try {
@@ -53,6 +56,7 @@ public class BadgeController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<DiyBadge> deleteBadge(@PathVariable("id") Long id) {
         try {
