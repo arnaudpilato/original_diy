@@ -44,7 +44,9 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },
-  { path: 'profile/:id', component: ProfileComponent},
+
+  { path: 'profile', component: ProfileComponent},
+
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
