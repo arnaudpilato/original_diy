@@ -13,7 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -82,14 +81,10 @@ public class WorkshopController {
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
             double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
-            // Optional<DiyUser> user = userRepository.findById(workshopRequest.getDiyUser().getId());
-            // workshop.setDiyUser(workshopRequest.getDiyUser());
             workshop.setDiyUser(workshopRequest.getDiyUser());
-
-
-            workshop.setDate(workshopRequest.getDate());
             workshopRepository.save(workshop);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
