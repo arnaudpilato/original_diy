@@ -20,11 +20,11 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getAllWorkshops();
+    this.getAllWorkshopsConfirmed();
   }
 
-  getAllWorkshops(): void {
-    this.workshopService.getAll().subscribe({
+  getAllWorkshopsConfirmed(): void {
+    this.workshopService.getAllConfirmed().subscribe({
       next: (datas) => {
         this.workshops = datas;
 

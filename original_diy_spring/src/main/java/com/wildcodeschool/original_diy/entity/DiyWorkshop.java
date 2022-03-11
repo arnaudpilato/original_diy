@@ -37,9 +37,6 @@ public class DiyWorkshop {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
     private Date date;
 
-    @DateTimeFormat(pattern = "hh:mm")
-    private Date hours;
-
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 
@@ -164,12 +161,5 @@ public class DiyWorkshop {
         this.date = date;
     }
 
-    public Date getHours() {
-        return hours;
-    }
-
-    public void setHours(Date hours) {
-        this.hours = hours;
-    }
 
 }

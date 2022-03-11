@@ -13,5 +13,4 @@ export class DiyWorkshop {
   confirmation?: boolean;
   diyUser?: any;
   date?: any;
-
 }
