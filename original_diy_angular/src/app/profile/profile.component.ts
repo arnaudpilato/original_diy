@@ -31,9 +31,9 @@ export class ProfileComponent implements OnInit {
     console.log(this.user)
 
     if (this.isLoggedIn) {
-      this.getUser(this.route.snapshot.params["id"]);
       this.currentUser = this.tokenStorageService.getUser();
       this.currentToken = this.tokenStorageService.getToken();
+      this.getUser(this.currentUser.id);
     }
   }
 

@@ -26,6 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { AdminFooterEditComponent } from './admin-footer/admin-footer-edit/admin-footer-edit.component';
 import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-footer-new.component';
+import { WorkshopComponent } from './workshop/workshop.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-f
     AdminFooterComponent,
     AdminFooterEditComponent,
     AdminFooterNewComponent,
+    WorkshopComponent,
   ],
   imports: [
     BrowserModule,

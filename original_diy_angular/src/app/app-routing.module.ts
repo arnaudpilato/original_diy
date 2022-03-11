@@ -22,6 +22,7 @@ import { Error404Component } from "./error/error404/error404.component";
 import { Error500Component } from "./error/error500/error500.component";
 import { ErrorComponent } from "./error/error.component";
 import { ProfileComponent } from "./profile/profile.component";
+import {WorkshopComponent} from "./workshop/workshop.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'admin/contact/edit/:id', component: AdminContactEditComponent },
   { path: 'admin/workshop/:id', component: AdminWorkshopComponent },
   { path: 'admin/workshop/new', component: AdminWorkshopNewComponent},
-  { path: 'admin/workshop/edit', component: AdminWorkshopEditComponent },
+  { path: 'admin/workshop/edit/:id', component: AdminWorkshopEditComponent },
+  { path: 'workshop/:id', component: WorkshopComponent },
   { path: 'admin/footer', component: AdminFooterComponent},
   { path: 'admin/footer/new', component: AdminFooterNewComponent},
   { path: 'admin/footer/edit/:id', component: AdminFooterEditComponent},
@@ -44,7 +46,9 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
   { path: 'map', component: MapComponent },
-  { path: 'profile/:id', component: ProfileComponent},
+
+  { path: 'profile', component: ProfileComponent},
+
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
