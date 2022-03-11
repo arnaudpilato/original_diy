@@ -1,1 +1,9 @@
-<p>admin-badge works!</p>
+<div class="container" *ngIf="isLoggedIn && showAdminBoard">
+  <h1 class="text-center my-4">Administration des badges</h1>
+  <div class="text-end"><a class="btn btn-primary" routerLink="/admin/badge/new">Ajouter un badge</a></div>
+  <div class="row">
+    <div class="col-8">
+
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
 import { UserService } from "../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact',
@@ -15,9 +16,9 @@ export class AdminContactComponent implements OnInit {
   public currentToken: any;
   public users: DiyUser[] | undefined;
   private roles: string[] = [];
-  showAdminBoard: boolean = false;
+  public showAdminBoard: boolean = false;
 
-  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService) {
+  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
@@ -32,6 +33,10 @@ export class AdminContactComponent implements OnInit {
       this.currentToken = this.tokenStorageService.getToken();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+    }
+
+    if (!this.showAdminBoard) {
+      this.router.navigate(['/error/401']).then(r => console.log(r));
     }
   }
 

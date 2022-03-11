@@ -24,7 +24,7 @@ export class AdminBadgeNewComponent implements OnInit {
     }
 
     if (!this.showAdminBoard) {
-      this.router.navigate(['/error/401']);
+      this.router.navigate(['/error/401']).then(r => console.log(r));
     }
   }
 }
