@@ -1,23 +1,19 @@
 package com.wildcodeschool.original_diy.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "footers")
-public class DiyFooter {
+public class DiyBadge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String socialNetworkPath;
-
     private String picturePath;
-
-    private boolean visible;
-
-    public DiyFooter() { }
 
     public Long getId() {
         return id;
@@ -35,25 +31,11 @@ public class DiyFooter {
         this.name = name;
     }
 
-    public String getSocialNetworkPath() {
-        return socialNetworkPath;
-    }
-
-    public void setSocialNetworkPath(String socialNetworkPath) {
-        this.socialNetworkPath = socialNetworkPath;
-    }
-
     public String getPicturePath() {
         return picturePath;
     }
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
-    }
-
-    public boolean isVisible() { return visible; }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
     }
 }
