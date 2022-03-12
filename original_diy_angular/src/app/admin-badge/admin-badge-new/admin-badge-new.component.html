@@ -1,7 +1,11 @@
-<div class="container" *ngIf="isLoggedIn && showAdminBoard">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <div class="row">
     <div class="col-4">
 
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>
