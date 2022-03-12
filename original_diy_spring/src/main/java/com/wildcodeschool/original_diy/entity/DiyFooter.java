@@ -3,7 +3,7 @@ package com.wildcodeschool.original_diy.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "footer")
+@Table(name = "footers")
 public class DiyFooter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

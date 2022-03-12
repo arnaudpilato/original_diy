@@ -72,6 +72,13 @@ public class DiyUser {
     @OrderBy("id DESC")
     private List<DiyWorkshop> workshops;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_badges",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "badge_id")
+    )
+    private Set<DiyBadge> badges = new HashSet<>();
+
     public DiyUser() {
     }
 
@@ -157,5 +164,13 @@ public class DiyUser {
 
     public void setRoles(Set<DiyRole> roles) {
         this.roles = roles;
+    }
+
+    public Set<DiyBadge> getBadges() {
+        return badges;
+    }
+
+    public void setBadges(Set<DiyBadge> badges) {
+        this.badges = badges;
     }
 }

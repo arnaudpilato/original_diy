@@ -3,6 +3,7 @@ import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
 import { UserService } from "../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-contact',
@@ -10,28 +11,24 @@ import { UserService } from "../service/user.service";
   styleUrls: ['./admin-contact.component.scss']
 })
 export class AdminContactComponent implements OnInit {
-  public isLoggedIn: boolean = false;
-  public currentUser: any;
-  public currentToken: any;
-  public users: DiyUser[] | undefined;
   private roles: string[] = [];
-  showAdminBoard: boolean = false;
+  public isLoggedIn: boolean = false;
+  public showAdminBoard: boolean = false;
+  public users: DiyUser[] | undefined;
 
-  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService) {
+  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
   ngOnInit(): void {
-    this.getAllUsers();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.users)
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getAllUsers();
+      console.log(this.users)
     }
   }
 

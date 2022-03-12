@@ -27,6 +27,9 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { AdminFooterEditComponent } from './admin-footer/admin-footer-edit/admin-footer-edit.component';
 import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-footer-new.component';
 import { WorkshopComponent } from './workshop/workshop.component';
+import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badge-new.component';
+import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
+import { Error401Component } from './error/error401/error401.component';
 
 
 @NgModule({
@@ -53,6 +56,9 @@ import { WorkshopComponent } from './workshop/workshop.component';
     AdminFooterEditComponent,
     AdminFooterNewComponent,
     WorkshopComponent,
+    AdminBadgeNewComponent,
+    AdminBadgeComponent,
+    Error401Component
   ],
   imports: [
     BrowserModule,
