@@ -12,24 +12,31 @@ import {TokenStorageService} from "../service/token-storage.service";
   styleUrls: ['./admin-footer.component.scss']
 })
 export class AdminFooterComponent implements OnInit {
+  private roles: string[] = [];
+  public isLoggedIn: boolean = false;
+  public showAdminBoard: boolean = false;
   public socialNetworks: DiyFooter[] | undefined;
   public static: string = '/assets/img/static-picture.png';
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
-  file: any;
-  public currentUser: any;
-  public isLoggedIn: boolean = false;
-  public currentToken: any;
-  constructor(private title:Title, private footerService: FooterService, private amazonS3Service: AmazonS3Service, private http: HttpClient, private tokenStorageService:TokenStorageService) {
-    this.title.setTitle("OriginalDIY - Admin - footer")
+  public file: any;
+
+  constructor(
+    private title:Title,
+    private footerService: FooterService,
+    private amazonS3Service: AmazonS3Service,
+    private http: HttpClient,
+    private tokenStorageService:TokenStorageService) {
+      this.title.setTitle("OriginalDIY - Admin - footer")
   }
 
   ngOnInit(): void {
-    this.getAllSocialNetworks();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getAllSocialNetworks();
     }
   }
 

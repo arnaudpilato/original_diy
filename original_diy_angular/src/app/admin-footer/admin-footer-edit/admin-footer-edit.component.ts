@@ -10,7 +10,7 @@ import {FooterService} from "../../service/footer.service";
   styleUrls: ['./admin-footer-edit.component.scss']
 })
 export class AdminFooterEditComponent implements OnInit {
-  public roles: string[] = [];
+  private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public socialNetwork: DiyFooter = new DiyFooter();
