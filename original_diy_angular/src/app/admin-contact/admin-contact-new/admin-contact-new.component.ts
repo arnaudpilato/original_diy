@@ -29,10 +29,6 @@ export class AdminContactNewComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
-
-    if (!this.showAdminBoard) {
-      this.router.navigate(['/error/401']).then(r => console.log(r));
-    }
   }
 
   getRole(role: string) {

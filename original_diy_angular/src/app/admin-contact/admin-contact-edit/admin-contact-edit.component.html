@@ -1,4 +1,4 @@
-<div class="container" *ngIf="currentUser && isLoggedIn && showAdminBoard">
+<div class="container" *ngIf="currentUser && isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
@@ -61,3 +61,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

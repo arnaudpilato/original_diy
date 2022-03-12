@@ -43,10 +43,6 @@ export class AdminContactEditComponent implements OnInit {
       this.currentToken = this.tokenStorageService.getToken();
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
-
-    if (!this.showAdminBoard) {
-      this.router.navigate(['/error/401']).then(r => console.log(r));
-    }
   }
 
   getUser(id: string): void {
