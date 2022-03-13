@@ -56,7 +56,7 @@ export class AdminWorkshopNewComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log(this.selectedFiles.item(0).name);
+    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {

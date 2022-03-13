@@ -46,6 +46,7 @@ export class AdminContactEditComponent implements OnInit {
       next: (data) => {
         this.user = data;
         console.log(data);
+        console.log("ssgfgsdfgfgsfgsfgsfdggsfdgsfdg " + this.user.roles[0].name)
         },
 
       error: (e) => console.error(e)
