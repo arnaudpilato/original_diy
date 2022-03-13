@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Gestion des ateliers</h1>
   <div class="text-end"><a class="btn btn-primary" routerLink="/admin/workshop/new">Ajout d'un atelier</a></div>
   <div class="table-responsive d-block d-md-none my-2">
@@ -81,3 +81,6 @@
   </div>
 </div>
 
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

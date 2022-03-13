@@ -14,20 +14,19 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class AdminWorkshopEditComponent implements OnInit {
   private roles: string[] = [];
+  public isLoggedIn: boolean = false;
+  public showAdminBoard: boolean = false;
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public currentFileUpload: any;
   public selectedFiles: any;
   public nameFile: any = null;
-  public isLoggedIn: boolean = false;
-  public currentUser: any;
-  public currentToken: any;
   public message: string = '';
   public workshop: DiyWorkshop = new DiyWorkshop();
   public file: any;
   public changeImage = false;
-  public showAdminBoard: boolean = false;
   public Editor = ClassicEditor;
+
 
   constructor(
     private title: Title,
@@ -42,17 +41,13 @@ export class AdminWorkshopEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    const user = this.tokenStorageService.getUser();
     console.log(this.workshop)
 
     if (this.isLoggedIn) {
-      this.getWorkshop(this.route.snapshot.params["id"]);
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
+      const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-      console.log(this.roles.includes('ROLE_ADMIN'))
-
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getWorkshop(this.route.snapshot.params["id"]);
     }
   }
 

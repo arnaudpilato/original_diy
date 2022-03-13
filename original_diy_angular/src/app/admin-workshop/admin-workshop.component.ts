@@ -3,6 +3,7 @@ import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
+import {TokenStorageService} from "../service/token-storage.service";
 
 @Component({
   selector: 'app-admin-workshop',
@@ -10,17 +11,31 @@ import {AmazonS3Service} from "../service/amazon-s3.service";
   styleUrls: ['./admin-workshop.component.scss']
 })
 export class AdminWorkshopComponent implements OnInit {
+  private roles: string[] = [];
+  public isLoggedIn: boolean = false;
+  public showAdminBoard: boolean = false;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
   public workshops:any[] | undefined ;
 
 
-  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service) {
+  constructor(
+    private tokenStorageService: TokenStorageService,
+    private title: Title,
+    private workshopService: WorkshopService,
+    private amazonS3Service: AmazonS3Service) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
   }
 
   ngOnInit(): void {
-    this.getAllWorkshops();
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getAllWorkshops();
+    }
   }
 
   getAllWorkshops(): void {

@@ -29,6 +29,10 @@ import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-f
 import { WorkshopComponent } from './workshop/workshop.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { nl2brPipe } from './nl2br.pipe';
+import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badge-new.component';
+import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
+import { Error401Component } from './error/error401/error401.component';
+
 
 
 @NgModule({
@@ -55,7 +59,10 @@ import { nl2brPipe } from './nl2br.pipe';
     AdminFooterEditComponent,
     AdminFooterNewComponent,
     WorkshopComponent,
-    nl2brPipe
+    nl2brPipe,
+    AdminBadgeNewComponent,
+    AdminBadgeComponent,
+    Error401Component
   ],
   imports: [
     BrowserModule,
