@@ -5,6 +5,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {WorkshopService} from "../../service/workshop.service";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-admin-workshop-edit',
@@ -24,6 +25,8 @@ export class AdminWorkshopEditComponent implements OnInit {
   public workshop: DiyWorkshop = new DiyWorkshop();
   public file: any;
   public changeImage = false;
+  public Editor = ClassicEditor;
+
 
   constructor(
     private title: Title,

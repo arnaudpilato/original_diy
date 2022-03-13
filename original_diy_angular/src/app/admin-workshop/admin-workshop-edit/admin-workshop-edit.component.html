@@ -34,7 +34,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="workshop.description" rows="3" [value]="workshop.description"></textarea>
+            <ckeditor [editor]="Editor" name="description" id="description" [(ngModel)]="workshop.description"></ckeditor>
           </div>
           <div class="mb-3">
             <div class="form-check form-switch">

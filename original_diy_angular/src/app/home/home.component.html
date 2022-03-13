@@ -11,9 +11,9 @@
       <img src="{{workshop.picturePath}}" class="card-img-top" alt="image de l'atelier">
       <div class="card-body">
         <h5 class="card-title">{{workshop.title}}</h5>
-        <p class="text-break card-text d-inline-block text-truncate my-3" style="max-width: 200px;">
-          {{workshop.description}}
-        </p>
+        <p class="text-break card-text d-inline-block text-truncate my-3" style="max-width: 200px;"
+           [innerHTML]="workshop.description | nl2br"></p>
+
         <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
            class="btn btn-primary text-center d-flex align-items-flex-end">
           Voir les détails

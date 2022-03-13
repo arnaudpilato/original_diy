@@ -18,6 +18,8 @@
     "@angular/platform-browser": "~13.1.0",
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
+    "@ckeditor/ckeditor5-angular": "^3.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^33.0.0",
     "@popperjs/core": "^2.11.2",
     "@types/leaflet": "^1.7.9",
     "bootstrap": "^5.1.3",
