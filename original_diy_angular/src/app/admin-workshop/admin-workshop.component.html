@@ -4,68 +4,79 @@
   <div class="table-responsive d-block d-md-none my-2">
     <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
       <thead>
-        <tr>
-          <th>{{ "Atelier " + (index + 1) }}</th>
-          <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
-        </tr>
+      <tr>
+        <th>{{ "Atelier " + (index + 1) }}</th>
+        <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">Image</th>
-          <td class="text-center">
-            <img class="workshop-picture" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Description</th>
-          <td class="text-wrap">{{ workshop.description }}</td>
-        </tr>
-        <tr>
-          <th scope="row" colspan="2">
-            <div class="d-flex justify-content-around">
-              <div><a routerLink="/admin/workshop/edit" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
-              </div>
-              <div>
-                <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
-              </div>
+      <tr>
+        <th scope="row">Image</th>
+        <td class="text-center">
+          <img class="workshop-picture"
+               src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+               alt="Image de l'atelier">
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td class="text-wrap">{{ workshop.description }}</td>
+      </tr>
+      <tr>
+        <th scope="row" colspan="2">
+          <div class="d-flex justify-content-around">
+            <div><a routerLink="/admin/workshop/edit" class="link"><img class="icon" src="/assets/img/edit.png"
+                                                                        alt="Logo éditer"></a>
             </div>
-          </th>
-        </tr>
+            <div>
+              <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon"
+                                                                                  src="/assets/img/delete.png"
+                                                                                  alt="Logo supprimer"></a>
+            </div>
+          </div>
+        </th>
+      </tr>
       </tbody>
     </table>
   </div>
   <div class="table-responsive-md d-none d-md-block my-2">
     <table class="table">
       <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col" colspan="2">Image</th>
-          <th scope="col">Description</th>
-          <th scope="col">Visible</th>
-          <th scope="col" colspan="2">Modifier</th>
-        </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col" colspan="2">Image</th>
+        <th scope="col">Description</th>
+        <th scope="col">Visible</th>
+        <th scope="col" colspan="2">Modifier</th>
+      </tr>
       </thead>
 
       <tbody>
-        <tr *ngFor="let workshop of workshops; let index = index">
-          <th scope="row">{{ index + 1 }}</th>
-          <th colspan="2">
-            <a href="#">
-              <img class="workshop-picture rounded img-fluid" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
-            </a>
-          </th>
-          <td class="text-wrap">{{ workshop.description }}</td>
-          <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
-          <td class="text-end td-edit">
-            <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
-          </td>
-          <td class="td-delete">
-            <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
-          </td>
-        </tr>
+      <tr *ngFor="let workshop of workshops; let index = index">
+        <th scope="row">{{ index + 1 }}</th>
+        <th colspan="2">
+          <a href="#">
+            <img class="workshop-picture rounded img-fluid"
+                 src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+                 alt="Image de l'atelier">
+          </a>
+        </th>
+        <td class="text-wrap" [innerHTML]="workshop.description | nl2br"></td>
+        <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
+        <td class="text-end td-edit">
+          <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link"><img class="icon" src="/assets/img/edit.png"
+                                                                                 alt="Logo éditer"></a>
+        </td>
+        <td class="td-delete">
+          <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon"
+                                                                                           src="/assets/img/delete.png"
+                                                                                           alt="Logo supprimer"></a>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
+
   <div *ngFor="let workshop of workshops">
   </div>
 </div>

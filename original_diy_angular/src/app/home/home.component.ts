@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
   }
 
   showWorkshop(id: any):void {
-    console.log("ma bite est grosse");
     this.workshopService.getById(id).subscribe({
       next: (datas) => {
         this.workshop = datas;
