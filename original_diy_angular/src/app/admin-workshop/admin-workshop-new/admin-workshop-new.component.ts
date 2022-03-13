@@ -5,11 +5,13 @@ import {WorkshopService} from "../../service/workshop.service";
 import {Router} from "@angular/router";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import {TokenStorageService} from "../../service/token-storage.service";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-admin-workshop-new',
   templateUrl: './admin-workshop-new.component.html',
-  styleUrls: ['./admin-workshop-new.component.scss']
+  styleUrls: ['./admin-workshop-new.component.scss'],
+
 })
 export class AdminWorkshopNewComponent implements OnInit {
   public isLoggedIn: boolean = false;
@@ -23,6 +25,9 @@ export class AdminWorkshopNewComponent implements OnInit {
   public changeImage = false;
   public authuser: any;
   minDatetimeLocal: any;
+
+  public Editor = ClassicEditor;
+
 
   constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service,
               private router: Router, private token: TokenStorageService) {

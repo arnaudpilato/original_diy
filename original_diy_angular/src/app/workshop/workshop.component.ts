@@ -16,7 +16,7 @@ export class WorkshopComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public currentUser: any;
   public currentToken: any;
-  public workshop: DiyWorkshop = new DiyWorkshop();
+  public workshop: any = new DiyWorkshop();
   public showAdminBoard: boolean = false;
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService,

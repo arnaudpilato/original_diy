@@ -12,7 +12,8 @@ import {AmazonS3Service} from "../service/amazon-s3.service";
 export class AdminWorkshopComponent implements OnInit {
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
-  public workshops: DiyWorkshop[] | undefined;
+  public workshops:any[] | undefined ;
+
 
   constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
@@ -26,6 +27,7 @@ export class AdminWorkshopComponent implements OnInit {
     this.workshopService.getAll().subscribe({
       next: (data) => {
         this.workshops = data;
+
         console.log(data);
       },
 

@@ -27,6 +27,8 @@ import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { AdminFooterEditComponent } from './admin-footer/admin-footer-edit/admin-footer-edit.component';
 import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-footer-new.component';
 import { WorkshopComponent } from './workshop/workshop.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { nl2brPipe } from './nl2br.pipe';
 
 
 @NgModule({
@@ -53,12 +55,14 @@ import { WorkshopComponent } from './workshop/workshop.component';
     AdminFooterEditComponent,
     AdminFooterNewComponent,
     WorkshopComponent,
+    nl2brPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
