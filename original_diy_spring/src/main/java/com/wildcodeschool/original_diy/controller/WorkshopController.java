@@ -138,6 +138,7 @@ public class WorkshopController {
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
             workshop.setDiyUser(workshopRequest.getDiyUser());
+            workshop.setDate(workshopRequest.getDate());
             workshopRepository.save(workshop);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
