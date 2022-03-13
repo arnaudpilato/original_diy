@@ -17,7 +17,7 @@ export class AdminContactNewComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public model: DiyUser = new DiyUser();
-  public role: string[] = [];
+  public role: string[] = ['ROLE_USER'];
 
   constructor(private tokenStorageService: TokenStorageService, private title: Title, private userService: UserService, private router: Router) {
     this.title.setTitle("OriginalDIY - Admin - contact - new")
