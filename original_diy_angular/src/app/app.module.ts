@@ -30,6 +30,7 @@ import { WorkshopComponent } from './workshop/workshop.component';
 import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badge-new.component';
 import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
 import { Error401Component } from './error/error401/error401.component';
+import { AdminBackgroundComponent } from './admin-background/admin-background.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { Error401Component } from './error/error401/error401.component';
     WorkshopComponent,
     AdminBadgeNewComponent,
     AdminBadgeComponent,
-    Error401Component
+    Error401Component,
+    AdminBackgroundComponent
   ],
   imports: [
     BrowserModule,

@@ -8,8 +8,8 @@ export class DiyWorkshop {
   city?: string;
   description?: string;
   comments?: string;
-  longitude?: number;
-  latitude?: number;
+  longitude?: any;
+  latitude?: any;
   confirmation?: boolean;
   diyUser?: any;
   date?: any;
