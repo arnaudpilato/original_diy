@@ -1,6 +1,9 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Gestion du footer</h1>
-  <div class="text-end"><a class="btn btn-primary" routerLink="/admin/footer/new">Ajout d'un réseau social</a></div>
+    <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-primary m-1" routerLink="/admin/footer/new">Ajout d'un réseau social</a></div>
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+    </div>
   <div class="table-responsive d-block d-md-none my-2">
      <table class="table table-bordered border-dark" *ngFor="let socialNetwork of socialNetworks; let index = index">
      <thead>
