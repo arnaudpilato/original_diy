@@ -16,6 +16,7 @@ import { AdminFooterNewComponent } from "./admin-footer/admin-footer-new/admin-f
 import { AdminFooterEditComponent } from "./admin-footer/admin-footer-edit/admin-footer-edit.component";
 import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
 import { AdminBadgeNewComponent } from "./admin-badge/admin-badge-new/admin-badge-new.component";
+import { AdminBackgroundComponent } from "./admin-background/admin-background.component";
 
 import { HomeComponent } from "./home/home.component";
 import { MapComponent } from "./map/map.component";
@@ -26,9 +27,6 @@ import { Error401Component } from "./error/error401/error401.component";
 import { Error404Component } from "./error/error404/error404.component";
 import { Error500Component } from "./error/error500/error500.component";
 import { ErrorComponent } from "./error/error.component";
-import {AdminBackgroundComponent} from "./admin-background/admin-background.component";
-
-
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

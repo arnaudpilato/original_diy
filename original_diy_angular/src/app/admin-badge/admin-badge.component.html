@@ -1,6 +1,11 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Administration des badges</h1>
-  <div class="text-end"><a class="btn btn-primary" routerLink="/admin/badge/new">Ajouter un badge</a></div>
+
+  <div class="text-end d-flex justify-content-end">
+      <div><a class="btn btn-primary m-1" routerLink="/admin/badge/new">Ajouter un badge</a></div>
+      <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+  </div>
+
   <div class="row">
     <div class="col-8">
 
