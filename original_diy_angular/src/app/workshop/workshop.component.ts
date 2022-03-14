@@ -18,6 +18,9 @@ export class WorkshopComponent implements OnInit {
   public currentToken: any;
   public workshop: any = new DiyWorkshop();
   public showAdminBoard: boolean = false;
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public static: string = '/assets/img/static-picture.png';
+
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService,
               private workshopService: WorkshopService, private route: ActivatedRoute) {
@@ -38,8 +41,8 @@ export class WorkshopComponent implements OnInit {
     }
   }
 
-  getWorkshop(id: string): void {
-    this.workshopService.getById(id).subscribe({
+  getWorkshop(id: number): void {
+    this.workshopService.getByIdHome(id).subscribe({
       next: (data) => {
         this.workshop = data;
 

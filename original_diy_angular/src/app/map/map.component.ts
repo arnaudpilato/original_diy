@@ -12,7 +12,7 @@ import {WorkshopService} from "../service/workshop.service";
 export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
 
-  public workshops: DiyWorkshop[] | undefined;
+  public workshops: any[] | undefined;
 
 
   constructor(private title: Title, private workshopService: WorkshopService) {

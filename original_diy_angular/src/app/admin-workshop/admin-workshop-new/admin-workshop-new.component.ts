@@ -22,7 +22,7 @@ export class AdminWorkshopNewComponent implements OnInit {
   public currentFileUpload: any;
   public selectedFiles: any;
   public nameFile: any = null;
-  public model: DiyWorkshop = new DiyWorkshop();
+  public model: any = new DiyWorkshop();
   public file: any;
   public changeImage = false;
   public authuser: any;

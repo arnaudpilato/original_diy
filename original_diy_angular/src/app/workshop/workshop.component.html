@@ -8,8 +8,9 @@
 
         <div class="row justify-content-center">
           <div class="row">
-            <div><a href="#"><img class="workshop-picture col-4 shadow img-fluid rounded mx-auto d-block"
-                                  src="{{workshop.picturePath}}" alt="Image de l'atelier"></a></div>
+            <div><a href="#"> <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
+             workshop.picturePath }}" alt="Image de l'atelier">
+            </a></div>
             <div class="text-center text-wrap mt-2">
             </div>
 
