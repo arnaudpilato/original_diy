@@ -1,6 +1,8 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
@@ -23,17 +25,17 @@ public class WorkshopController {
 
     @Autowired
     WorkshopRepository workshopRepository;
-
     @Autowired
     APIGouvService gouvService;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     WorkshopService workshopService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @Autowired
+    CommentRepository commentRepository;
+
+    @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
         try {
@@ -200,6 +202,11 @@ public class WorkshopController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteWorkshop(@PathVariable("id") Long id) {
         try {
+            List<DiyComment> commentList = workshopRepository.getById(id).getComments();
+            for (DiyComment comment : commentList
+            ) {
+                commentRepository.deleteById(comment.getId());
+            }
             workshopRepository.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
