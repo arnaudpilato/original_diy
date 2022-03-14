@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Ajouter un contact</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
@@ -47,8 +47,8 @@
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option value="user" [selected]="model.roles ? model.roles[0]?.name == 'ROLE_USER' : undefined">Utilisateur</option>
-            <option value="admin" [selected]="model.role ? model.roles[0]?.name == 'ROLE_ADMIN' : undefined">Administrateur</option>
+            <option value="user" selected>Utilisateur</option>
+            <option value="admin">Administrateur</option>
           </select>
         </div>
         <div class="text-center my-3">
@@ -59,3 +59,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

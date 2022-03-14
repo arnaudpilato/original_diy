@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -34,6 +35,7 @@ public class WorkshopController {
     @Autowired
     CommentRepository commentRepository;
 
+    @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
         try {
@@ -98,9 +100,24 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
-    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
+    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
+        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
+
+        System.out.println("authorities : "+authentication.getAuthorities());
+        System.out.println("principal : "+authentication.getPrincipal());
+
+        if (workshop.isPresent()) {
+            return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("permitAll()")
+    @GetMapping("/get-atelier/{id}")
+    public ResponseEntity<DiyWorkshop> getWorkshopByIdHome(@PathVariable("id") long id) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
         if (workshop.isPresent()) {
@@ -134,13 +151,10 @@ public class WorkshopController {
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
             double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                     workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
             workshop.setLatitude(latitude);
             workshop.setLongitude(longitude);
-            // Optional<DiyUser> user = userRepository.findById(workshopRequest.getDiyUser().getId());
-            // workshop.setDiyUser(workshopRequest.getDiyUser());
             workshop.setDiyUser(workshopRequest.getDiyUser());
-
-
             workshop.setDate(workshopRequest.getDate());
             workshopRepository.save(workshop);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);

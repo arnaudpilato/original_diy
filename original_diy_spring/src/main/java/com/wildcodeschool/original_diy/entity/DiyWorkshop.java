@@ -1,12 +1,10 @@
 package com.wildcodeschool.original_diy.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +32,8 @@ public class DiyWorkshop {
 
     private String city;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
 
     @Column(length = 65535, columnDefinition = "TEXT")

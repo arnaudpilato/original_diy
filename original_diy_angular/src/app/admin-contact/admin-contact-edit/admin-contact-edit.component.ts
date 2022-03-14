@@ -12,11 +12,9 @@ import { DiyRole } from "../../model/role.model";
   styleUrls: ['./admin-contact-edit.component.scss']
 })
 export class AdminContactEditComponent implements OnInit {
-  public roles: string[] = [];
+  private roles: string[] = [];
   public isLoggedIn: boolean = false;
-  public currentUser: any;
   public showAdminBoard: boolean = false;
-  public currentToken: any;
   public message: string = '';
   public user: DiyUser = new DiyUser();
   public eRoles = DiyRole;
@@ -39,8 +37,6 @@ export class AdminContactEditComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.getUser(this.route.snapshot.params["id"]);
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
   }
@@ -50,6 +46,7 @@ export class AdminContactEditComponent implements OnInit {
       next: (data) => {
         this.user = data;
         console.log(data);
+        console.log("ssgfgsdfgfgsfgsfgsfdggsfdgsfdg " + this.user.roles[0].name)
         },
 
       error: (e) => console.error(e)

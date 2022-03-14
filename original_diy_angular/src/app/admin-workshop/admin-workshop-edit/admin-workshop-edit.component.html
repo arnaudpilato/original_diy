@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Modifier de {{ workshop.title }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
@@ -34,7 +34,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="workshop.description" rows="3" [value]="workshop.description"></textarea>
+            <ckeditor [editor]="Editor" name="description" id="description" [(ngModel)]="workshop.description"></ckeditor>
           </div>
           <div class="mb-3">
             <div class="form-check form-switch">
@@ -51,3 +51,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

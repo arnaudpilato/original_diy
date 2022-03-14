@@ -5,36 +5,49 @@ import {WorkshopService} from "../../service/workshop.service";
 import {Router} from "@angular/router";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import {TokenStorageService} from "../../service/token-storage.service";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-admin-workshop-new',
   templateUrl: './admin-workshop-new.component.html',
-  styleUrls: ['./admin-workshop-new.component.scss']
+  styleUrls: ['./admin-workshop-new.component.scss'],
+
 })
 export class AdminWorkshopNewComponent implements OnInit {
+  private roles: string[] = [];
   public isLoggedIn: boolean = false;
+  public showAdminBoard: boolean = false;
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public currentFileUpload: any;
   public selectedFiles: any;
   public nameFile: any = null;
-  public model: DiyWorkshop = new DiyWorkshop();
+  public model: any = new DiyWorkshop();
   public file: any;
   public changeImage = false;
   public authuser: any;
-  minDatetimeLocal: any;
+  public minDatetimeLocal: any;
 
-  constructor(private title: Title, private workshopService: WorkshopService, private amazonS3Service: AmazonS3Service,
-              private router: Router, private token: TokenStorageService) {
-    this.title.setTitle("OriginalDIY - Admin - Workshop - New");
+  public Editor = ClassicEditor;
 
+
+  constructor(
+    private title: Title,
+    private workshopService: WorkshopService,
+    private amazonS3Service: AmazonS3Service,
+    private router: Router,
+    private token: TokenStorageService) {
+      this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.token.getToken();
 
     if (this.isLoggedIn) {
+      const user = this.token.getUser();
       this.authuser = this.token.getUser().user;
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.minDatetimeLocal = new Date();
       console.log("console log de this.authuser: ", this.authuser);
     }
@@ -43,7 +56,7 @@ export class AdminWorkshopNewComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log(this.selectedFiles.item(0).name);
+    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {

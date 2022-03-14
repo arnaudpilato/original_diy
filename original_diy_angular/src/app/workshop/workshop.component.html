@@ -2,27 +2,40 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="text-center my-3">
-        <h1>{{workshop.title}}</h1>
-        <h3> {{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</h3>
+        <div class="row">
+          <h1 class="my-4">Atelier : {{workshop.title}}</h1>
+        </div>
+
         <div class="row justify-content-center">
-          <div class="col-4">
-            <div><a href="#"><img class="workshop-picture shadow img-fluid rounded mx-auto d-block"
-                                  src="{{workshop.picturePath}}" alt="Image de l'atelier"></a></div>
-            <div class="text-center text-wrap mt-2" ><p>
-              {{workshop.description}}
-            </p>
-            <p>date de l'atelier : {{workshop.date | date : 'dd-MM-yyyy' }}</p>
-            <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
+          <div class="row">
+            <div><a href="#"> <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
+             workshop.picturePath }}" alt="Image de l'atelier">
+            </a></div>
+            <div class="text-center text-wrap mt-2">
+            </div>
+
+
+            <div class="row my-4">
+              <h3> adresse :  {{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</h3>
+            </div>
+
+            <div class="row">
+              <p [innerHTML]="workshop.description | nl2br"></p>
+            </div>
+            <div class="row my-4">
+              <p>date de l'atelier : {{workshop.date | date : 'dd-MM-yyyy' }}</p>
+              <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
+            </div>
+            <div class="row justify-content-center my-4">
+              <button class=" col-3 btn btn-primary">Participer</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
-  <hr>
-
 </div>
+
+
 
 

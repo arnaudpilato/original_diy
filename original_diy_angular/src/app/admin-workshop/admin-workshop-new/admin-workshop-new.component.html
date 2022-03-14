@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
@@ -36,12 +36,12 @@
           <div class="mb-3">
             <label class="form-label" for="date">Date et heure de l'atelier :</label>
             <input class="form-control" type="datetime-local"
-                      name="date" id="date" [(ngModel)]="model.date" rows="3"/>
+                      name="date" id="date" [(ngModel)]="model.date" required/>
           </div>
 
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="model.description" rows="3"></textarea>
+            <ckeditor [editor]="Editor" name="description" id="description" [(ngModel)]="model.description"></ckeditor>
           </div>
           <div class="text-center my-3">
             <button class="btn btn-primary m-1">Ajouter</button>
@@ -52,3 +52,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>
