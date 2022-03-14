@@ -109,6 +109,18 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/get-atelier/{id}")
+    public ResponseEntity<DiyWorkshop> getWorkshopByIdHome(@PathVariable("id") long id) {
+        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
+
+        if (workshop.isPresent()) {
+            return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping("/new")
     public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {

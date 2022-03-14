@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public content: string | undefined;
-  public workshops: DiyWorkshop[] | undefined;
-  public workshop: DiyWorkshop | undefined;
+  public workshops: any[] | undefined;
+  public workshop: any | undefined;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
 
