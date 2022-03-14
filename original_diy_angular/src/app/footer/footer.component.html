@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center mb-3">
       <div class="col-1 text-center" *ngFor="let socialNetwork of socialNetworks">
-        <a href="{{ socialNetwork.socialNetworkPath }}"><img class="social-network-icon" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image de {{ socialNetwork.name }}"></a>
+        <a href="{{ socialNetwork.socialNetworkPath }}" *ngIf="socialNetwork.visible" target="_blank"><img class="social-network-icon" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image de {{ socialNetwork.name }}"></a>
       </div>
     </div>
     <div class="row">

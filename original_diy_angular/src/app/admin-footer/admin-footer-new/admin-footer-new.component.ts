@@ -3,7 +3,6 @@ import { DiyFooter } from "../../model/footer.model";
 import { AmazonS3Service } from "../../service/amazon-s3.service";
 import { Title } from "@angular/platform-browser";
 import { FooterService } from "../../service/footer.service";
-import { Router } from "@angular/router";
 import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
@@ -29,8 +28,7 @@ export class AdminFooterNewComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private title: Title,
     private footerService: FooterService,
-    private amazonS3Service: AmazonS3Service,
-    private router: Router) {
+    private amazonS3Service: AmazonS3Service) {
       this.title.setTitle("OriginalDIY - admin - footer - new");
   }
 
