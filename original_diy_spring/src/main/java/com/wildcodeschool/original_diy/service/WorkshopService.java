@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class WorkshopService {
 
-    private Date date = new Date();
+    private final Date date = new Date();
 
     @Autowired
     WorkshopRepository workshopRepository;

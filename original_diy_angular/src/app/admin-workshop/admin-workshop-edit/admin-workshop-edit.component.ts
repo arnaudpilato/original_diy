@@ -84,7 +84,7 @@ export class AdminWorkshopEditComponent implements OnInit {
       comments: this.workshop.comments,
       longitude: this.workshop.longitude,
       latitude: this.workshop.latitude,
-      confirmation: this.workshop.confirmation
+      confirmation: this.workshop.confirmation,
     }
 
     if (this.selectedFiles != null) {
