@@ -33,23 +33,12 @@ public class WorkshopRequest {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
     private Date date;
 
-    @DateTimeFormat(pattern = "hh:mm")
-    private Date hours;
-
     public Date getDate() {
         return date;
     }
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Date getHours() {
-        return hours;
-    }
-
-    public void setHours(Date hours) {
-        this.hours = hours;
     }
 
     public WorkshopRequest() {
