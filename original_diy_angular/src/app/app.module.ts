@@ -32,6 +32,7 @@ import { nl2brPipe } from './nl2br.pipe';
 import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badge-new.component';
 import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
 import { Error401Component } from './error/error401/error401.component';
+import { AdminBackgroundComponent } from './admin-background/admin-background.component';
 
 
 
@@ -62,7 +63,8 @@ import { Error401Component } from './error/error401/error401.component';
     nl2brPipe,
     AdminBadgeNewComponent,
     AdminBadgeComponent,
-    Error401Component
+    Error401Component,
+    AdminBackgroundComponent
   ],
   imports: [
     BrowserModule,
