@@ -37,12 +37,31 @@ export class AdminWorkshopNewComponent implements OnInit {
     private amazonS3Service: AmazonS3Service,
     private router: Router,
     private token: TokenStorageService) {
-      this.title.setTitle("OriginalDIY - Admin - Workshop - New");
+    this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.token.getToken();
+    this.Editor.defaultConfig = {
+      toolbar: {
+        items: [
+          'heading', '|', 'bold', 'italic', 'link',
+          'bulletedList', 'numberedList', '|', 'indent', 'outdent', '|',
 
+          'blockQuote',
+          'insertTable',
+          'undo', 'redo'
+        ]
+      },
+      language: 'fr',
+      image: {
+        toolbar: [
+          'imageTextAlternative',
+          'imageStyle:full',
+          'imageStyle:side'
+        ]
+      }
+    }
     if (this.isLoggedIn) {
       const user = this.token.getUser();
       this.authuser = this.token.getUser().user;
