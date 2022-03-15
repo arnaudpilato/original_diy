@@ -37,6 +37,9 @@
               <a class="nav-link" routerLink="profile" *ngIf="!showAdminBoard">Profil</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" routerLink="mes-ateliers" *ngIf="!showAdminBoard">Mes Ateliers</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" (click)="logout()">Déconnexion</a>
             </li>
           </ul>

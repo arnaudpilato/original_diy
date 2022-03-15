@@ -33,6 +33,7 @@ import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badg
 import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
 import { Error401Component } from './error/error401/error401.component';
 import { AdminBackgroundComponent } from './admin-background/admin-background.component';
+import { WorskhopProfilComponent } from './worskhop-profil/worskhop-profil.component';
 
 
 
@@ -64,7 +65,8 @@ import { AdminBackgroundComponent } from './admin-background/admin-background.co
     AdminBadgeNewComponent,
     AdminBadgeComponent,
     Error401Component,
-    AdminBackgroundComponent
+    AdminBackgroundComponent,
+    WorskhopProfilComponent
   ],
   imports: [
     BrowserModule,
