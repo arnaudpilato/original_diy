@@ -17,6 +17,8 @@ export class WorskhopProfilComponent implements OnInit {
   public errorMessage: string = '';
   public authuser: any;
   public workshops: any[] | undefined;
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public static: string = '/assets/img/static-picture.png';
 
   constructor(private title: Title, private workshopService: WorkshopService,
               private token: TokenStorageService) {
