@@ -127,11 +127,8 @@ public class WorkshopController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
-    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
+    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
-
-        System.out.println("authorities : "+authentication.getAuthorities());
-        System.out.println("principal : "+authentication.getPrincipal());
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
