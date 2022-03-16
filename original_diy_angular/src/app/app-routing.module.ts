@@ -29,6 +29,7 @@ import { Error500Component } from "./error/error500/error500.component";
 import { ErrorComponent } from "./error/error.component";
 import {WorskhopProfilComponent} from "./worskhop-profil/worskhop-profil.component";
 import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
+import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -57,8 +58,9 @@ const routes: Routes = [
   { path: 'workshop/:id', component: WorkshopComponent },
   { path: 'map', component: MapComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'mes-ateliers', component: WorskhopProfilComponent },
+  { path: 'atelier-utilisateur', component: WorskhopProfilComponent },
   { path: 'mes-ateliers/creation-atelier', component: AddWorkshopComponent },
+  { path: 'mes-ateliers', component: UserWorkshopIndexComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
