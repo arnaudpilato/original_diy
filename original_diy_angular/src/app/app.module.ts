@@ -35,8 +35,8 @@ import { Error401Component } from './error/error401/error401.component';
 import { AdminBackgroundComponent } from './admin-background/admin-background.component';
 import { WorskhopProfilComponent } from './worskhop-profil/worskhop-profil.component';
 import { AddWorkshopComponent } from './add-workshop/add-workshop.component';
+import { CommentaryComponent } from './commentary/commentary.component';
 import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-index.component';
-
 
 
 @NgModule({
@@ -70,6 +70,7 @@ import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-
     AdminBackgroundComponent,
     WorskhopProfilComponent,
     AddWorkshopComponent,
+    CommentaryComponent,
     UserWorkshopIndexComponent
   ],
   imports: [

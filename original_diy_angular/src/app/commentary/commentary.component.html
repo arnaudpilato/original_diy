@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 text-center">
+      Commentaires :
+    </div>
+    <div class="col-2">
+      Utilisateur :
+    </div>
+    <div class="col-2">
+      Date du commentaire :
+    </div>
+  </div>
+  <div class="row" *ngFor="let comment of comments">
+    <div class="col-8">
+      {{ comment.comment }}
+    </div>
+    <div class="col-2">
+      <div *ngIf="comment.diyUser.username != null">
+        <div class="">{{ comment.diyUser.username }}</div>
+      </div>
+    </div>
+    <div class="col-2">
+      {{comment.createdAt | date : 'dd-MM-yy HH:mm'}}
+    </div>
+  </div>
+</div>
