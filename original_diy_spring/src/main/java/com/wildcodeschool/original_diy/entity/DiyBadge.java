@@ -1,11 +1,9 @@
 package com.wildcodeschool.original_diy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "badges")
 public class DiyBadge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

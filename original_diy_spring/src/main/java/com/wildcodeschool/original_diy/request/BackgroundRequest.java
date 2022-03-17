@@ -1,6 +1,6 @@
 package com.wildcodeschool.original_diy.request;
 
-public class BackgroudRequest {
+public class BackgroundRequest {
     private String name;
 
     private String picturePath;
