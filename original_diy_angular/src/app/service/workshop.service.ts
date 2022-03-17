@@ -45,6 +45,10 @@ export class WorkshopService {
     return this.http.put(this.baseUrl + "edit/" + id, data);
   }
 
+  reservation(id: any, data: any): Observable<any> {
+    return this.http.patch(this.baseUrl + "worskhop/reservation/" + id, data);
+  }
+
   delete(id: any): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }

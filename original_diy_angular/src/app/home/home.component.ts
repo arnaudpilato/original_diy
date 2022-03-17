@@ -35,8 +35,7 @@ export class HomeComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // console.log('home role ' + this.roles[0]);
-      //  console.log("this user" , user);
+
     }
 
   }
@@ -45,7 +44,6 @@ export class HomeComponent implements OnInit {
     this.workshopService.getLastWorkshop().subscribe({
         next: (datas) => {
           this.workshops = datas;
-         // console.log("this.workshops = ", this.workshops)
         },
 
         error: (e) => console.log(e)
@@ -54,10 +52,9 @@ export class HomeComponent implements OnInit {
   }
 
   showWorkshop(id: any):void {
-    this.workshopService.getById(id).subscribe({
+    this.workshopService.getByIdHome(id).subscribe({
       next: (datas) => {
         this.workshop = datas;
-        console.log("this.workshop = ", this.workshop)
       },
 
       error: (err) => console.error(err)

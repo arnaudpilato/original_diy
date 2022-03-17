@@ -8,7 +8,7 @@
 
         <div class="row justify-content-center">
           <div class="row">
-            <div><a href="#"> <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
+            <div><a href="#"> <img  class="col-4" src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
              workshop.picturePath }}" alt="Image de l'atelier">
             </a></div>
             <div class="text-center text-wrap mt-2">
@@ -27,7 +27,7 @@
               <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
             </div>
             <div class="row justify-content-center my-4">
-              <button class=" col-3 btn btn-primary">Participer</button>
+              <button class=" col-3 btn btn-primary" (click)="reservation(workshop.id)">Participer</button>
             </div>
             <div class="commentary">
                 <app-commentary></app-commentary>

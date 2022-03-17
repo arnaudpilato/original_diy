@@ -24,7 +24,6 @@ export class CommentaryComponent implements OnInit {
     this.commentaryService.getCommentaryByWorkshop(id).subscribe({
       next: (data) => {
         this.comments = data;
-        console.log("comment : ", data);
       },
       error: (err) => console.error(err)
     })

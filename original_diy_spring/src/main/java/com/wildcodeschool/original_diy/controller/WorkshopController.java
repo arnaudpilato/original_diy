@@ -88,8 +88,8 @@ public class WorkshopController {
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
-            for (DiyWorkshop workshop : workshopsNew){
-                System.out.println(workshop);
+            for (DiyWorkshop workshop : workshopsNew) {
+
             }
 
             if (workshops.isEmpty()) {
@@ -101,9 +101,10 @@ public class WorkshopController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PreAuthorize("permitAll()")
+
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/worskhop-by-user")
-    public ResponseEntity<List<DiyWorkshop>> getWorkshopByUserId(Authentication authentication ) {
+    public ResponseEntity<List<DiyWorkshop>> getWorkshopByUserId(Authentication authentication) {
         DiyUser user = userRepository.getUserByUsername(authentication.getName());
         try {
             user.getUsername().equals(authentication.getName());
@@ -111,7 +112,7 @@ public class WorkshopController {
             List<DiyWorkshop> workshops = new ArrayList<>();
 
             workshops.addAll(workshopRepository.getDiyWorkshopByDiyUserId(user));
-            System.out.println(workshops);
+
 
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -124,11 +125,11 @@ public class WorkshopController {
     }
 
 
-
     @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
-    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id) {
+    public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
+
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
@@ -187,7 +188,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyWorkshop> updateWorkshop(@PathVariable("id") long id, @RequestBody WorkshopRequest workshopRequest) {
         Optional<DiyWorkshop> workshopData = workshopRepository.findById(id);
@@ -232,6 +233,22 @@ public class WorkshopController {
             workshopRepository.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("permitAll()")
+    @PatchMapping("worskhop/reservation/{id}")
+    public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
+        try {
+
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+            DiyWorkshop workshop = workshopRepository.getById(id);
+            workshopService.workshopReservation(workshop, user);
+
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
