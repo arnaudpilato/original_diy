@@ -27,7 +27,7 @@
               <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
             </div>
             <div class="row justify-content-center my-4">
-              <button class=" col-3 btn btn-primary">Participer</button>
+              <button class=" col-3 btn btn-primary" (click)="reservation(workshop.id)">Participer</button>
             </div>
           </div>
         </div>

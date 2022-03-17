@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
   }
 
   showWorkshop(id: any):void {
-    this.workshopService.getById(id).subscribe({
+    this.workshopService.getByIdHome(id).subscribe({
       next: (datas) => {
         this.workshop = datas;
         console.log("this.workshop = ", this.workshop)
