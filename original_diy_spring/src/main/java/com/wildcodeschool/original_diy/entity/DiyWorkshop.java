@@ -51,7 +51,12 @@ public class DiyWorkshop {
     private DiyUser diyUser;
 
     private boolean confirmation = false;
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "workshop_reservation",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<DiyUser> reservation = new ArrayList<>();
 
     public DiyWorkshop() {
     }
@@ -160,5 +165,11 @@ public class DiyWorkshop {
         this.date = date;
     }
 
+    public List<DiyUser> getReservation() {
+        return reservation;
+    }
 
+    public void setReservation(List<DiyUser> reservation) {
+        this.reservation = reservation;
+    }
 }

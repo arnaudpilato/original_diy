@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.service;
 
+import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,11 @@ public class WorkshopService {
             workshop.setConfirmation(false);
             workshopRepository.save(workshop);
         }
+    }
+
+    public void workshopReservation(DiyWorkshop workshop, DiyUser user){
+
+        workshop.setReservation((List<DiyUser>) user);
+        workshopRepository.save(workshop);
     }
 }

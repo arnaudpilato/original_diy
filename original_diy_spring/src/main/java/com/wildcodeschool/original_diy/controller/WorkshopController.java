@@ -88,7 +88,7 @@ public class WorkshopController {
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
-            for (DiyWorkshop workshop : workshopsNew){
+            for (DiyWorkshop workshop : workshopsNew) {
                 System.out.println(workshop);
             }
 
@@ -101,9 +101,10 @@ public class WorkshopController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/worskhop-by-user")
-    public ResponseEntity<List<DiyWorkshop>> getWorkshopByUserId(Authentication authentication ) {
+    public ResponseEntity<List<DiyWorkshop>> getWorkshopByUserId(Authentication authentication) {
         DiyUser user = userRepository.getUserByUsername(authentication.getName());
         try {
             user.getUsername().equals(authentication.getName());
@@ -124,14 +125,13 @@ public class WorkshopController {
     }
 
 
-
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
-        System.out.println("authorities : "+authentication.getAuthorities());
-        System.out.println("principal : "+authentication.getPrincipal());
+        System.out.println("authorities : " + authentication.getAuthorities());
+        System.out.println("principal : " + authentication.getPrincipal());
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
@@ -235,6 +235,23 @@ public class WorkshopController {
             workshopRepository.deleteById(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasRole('USER' or 'ADMIN')")
+    @PatchMapping("worskhop/reservation/{id}")
+    public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
+        try {
+            System.out.println("ta mere");
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+            DiyWorkshop workshop = workshopRepository.getById(id);
+
+            workshopService.workshopReservation(workshop, user);
+
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
