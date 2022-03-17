@@ -33,7 +33,6 @@ export class WorskhopProfilComponent implements OnInit {
       this.authuser = this.token.getUser().user;
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      console.log("console log de this.authuser: ", this.authuser);
 
 
     }
@@ -43,7 +42,6 @@ export class WorskhopProfilComponent implements OnInit {
     this.workshopService.getWorkshopByUserId().subscribe({
       next: (datas) => {
         this.workshops = datas;
-       // console.log("this.workshop = ", this.workshops)
       },
 
       error: (err) => console.error(err)

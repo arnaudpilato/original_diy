@@ -67,14 +67,12 @@ export class AddWorkshopComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.minDatetimeLocal = new Date();
-      console.log("console log de this.authuser: ", this.authuser);
     }
   }
 
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -104,7 +102,6 @@ export class AddWorkshopComponent implements OnInit {
 
     this.workshopService.create(data).subscribe({
       next: (data) => {
-        console.log(data)
         this.router.navigate(['/mes-ateliers']);
       },
       error: (e) => {

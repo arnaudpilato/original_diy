@@ -44,7 +44,6 @@ export class AdminFooterComponent implements OnInit {
     this.footerService.getAll().subscribe({
       next: (data) => {
         this.socialNetworks = data;
-        console.log(data);
       },
 
       error: (err) => console.error(err)
@@ -58,7 +57,6 @@ export class AdminFooterComponent implements OnInit {
 
     this.footerService.delete(id).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
 

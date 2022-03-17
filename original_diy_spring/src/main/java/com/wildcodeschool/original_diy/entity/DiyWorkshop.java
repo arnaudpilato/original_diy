@@ -54,7 +54,7 @@ public class DiyWorkshop {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "workshop_reservation",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "workshop_id")
     )
     private List<DiyUser> reservation = new ArrayList<>();
 

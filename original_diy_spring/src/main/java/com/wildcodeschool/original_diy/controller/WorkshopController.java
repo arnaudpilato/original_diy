@@ -89,7 +89,7 @@ public class WorkshopController {
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
             for (DiyWorkshop workshop : workshopsNew) {
-                System.out.println(workshop);
+
             }
 
             if (workshops.isEmpty()) {
@@ -112,7 +112,7 @@ public class WorkshopController {
             List<DiyWorkshop> workshops = new ArrayList<>();
 
             workshops.addAll(workshopRepository.getDiyWorkshopByDiyUserId(user));
-            System.out.println(workshops);
+
 
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -125,13 +125,11 @@ public class WorkshopController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
         Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
-        System.out.println("authorities : " + authentication.getAuthorities());
-        System.out.println("principal : " + authentication.getPrincipal());
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
@@ -190,7 +188,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyWorkshop> updateWorkshop(@PathVariable("id") long id, @RequestBody WorkshopRequest workshopRequest) {
         Optional<DiyWorkshop> workshopData = workshopRepository.findById(id);
@@ -241,14 +239,13 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('USER' or 'ADMIN')")
+    @PreAuthorize("permitAll()")
     @PatchMapping("worskhop/reservation/{id}")
     public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
         try {
-            System.out.println("ta mere");
+
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
-
             workshopService.workshopReservation(workshop, user);
 
             return new ResponseEntity<>(HttpStatus.OK);

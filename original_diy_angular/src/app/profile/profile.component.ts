@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.user)
 
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorageService.getUser();
@@ -41,7 +40,6 @@ export class ProfileComponent implements OnInit {
     this.userService.getById(id).subscribe({
       next: (data) => {
         this.user = data;
-        console.log(data);
       },
 
       error: (e) => console.error(e)
@@ -62,8 +60,6 @@ export class ProfileComponent implements OnInit {
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
-        console.log(res);
-        console.log(this.user.roles)
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
         this.router.navigate(['/home'])
       },

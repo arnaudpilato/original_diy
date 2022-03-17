@@ -6,6 +6,7 @@ import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,9 +30,11 @@ public class WorkshopService {
         }
     }
 
-    public void workshopReservation(DiyWorkshop workshop, DiyUser user){
-
-        workshop.setReservation((List<DiyUser>) user);
+    public void workshopReservation(DiyWorkshop workshop, DiyUser user) {
+        List<DiyUser> users = new ArrayList<>();
+        users.add(user);
+        workshop.setReservation(users);
         workshopRepository.save(workshop);
+
     }
 }
