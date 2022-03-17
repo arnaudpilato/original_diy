@@ -31,7 +31,6 @@ export class AdminContactEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.user)
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -45,8 +44,6 @@ export class AdminContactEditComponent implements OnInit {
     this.userService.getById(id).subscribe({
       next: (data) => {
         this.user = data;
-        console.log(data);
-        console.log("ssgfgsdfgfgsfgsfgsfdggsfdgsfdg " + this.user.roles[0].name)
         },
 
       error: (e) => console.error(e)
@@ -68,8 +65,7 @@ export class AdminContactEditComponent implements OnInit {
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
-        console.log(res);
-        console.log(this.role)
+
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
         this.router.navigate(['/admin/contact'])
       },
@@ -80,6 +76,5 @@ export class AdminContactEditComponent implements OnInit {
 
   getRole(role: string) {
     this.role[0] = role;
-    console.log("valeur du role :" + role)
   }
 }

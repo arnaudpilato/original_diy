@@ -1,10 +1,12 @@
 package com.wildcodeschool.original_diy.service;
 
+import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,5 +28,13 @@ public class WorkshopService {
             workshop.setConfirmation(false);
             workshopRepository.save(workshop);
         }
+    }
+
+    public void workshopReservation(DiyWorkshop workshop, DiyUser user) {
+        List<DiyUser> users = new ArrayList<>();
+        users.add(user);
+        workshop.setReservation(users);
+        workshopRepository.save(workshop);
+
     }
 }

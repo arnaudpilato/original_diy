@@ -40,7 +40,6 @@ export class AdminFooterEditComponent implements OnInit {
     this.footerService.getById(id).subscribe({
       next: (data) => {
         this.socialNetwork = data;
-        console.log(data);
       },
 
       error: (err) => console.error(err)
@@ -57,7 +56,6 @@ export class AdminFooterEditComponent implements OnInit {
 
     this.footerService.update(this.socialNetwork.id, data).subscribe({
       next: (data) => {
-        console.log("data");
         window.location.href="/admin/footer"
       },
 
@@ -72,7 +70,6 @@ export class AdminFooterEditComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log(this.selectedFiles.item(0).name);
   }
 
   change(event: any) {

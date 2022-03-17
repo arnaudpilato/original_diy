@@ -21,7 +21,6 @@ export class FooterComponent implements OnInit {
     this.footerService.getAll().subscribe({
       next: (data) => {
         this.socialNetworks = data;
-        console.log(data);
       },
 
       error: (err) => console.error(err)

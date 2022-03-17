@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<DiyUser, Long> {
     Optional<DiyUser> findByUsername(String username);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
+
+    @Query("SELECT u FROM DiyUser u WHERE u.username = :username")
+    public DiyUser getUserByUsername(@Param("username") String username);
 }
