@@ -20,6 +20,10 @@ export class WorkshopService {
     return this.http.get<DiyWorkshop[]>(this.baseUrl + "allConfirmed");
   }
 
+  getWorkshopByUserId(): Observable<DiyWorkshop[]> {
+    return this.http.get<DiyWorkshop[]>(this.baseUrl + "worskhop-by-user");
+  }
+
   getLastWorkshop(): Observable<DiyWorkshop[]> {
     return this.http.get<DiyWorkshop[]>(this.baseUrl + "last-workshops");
   }
@@ -39,6 +43,10 @@ export class WorkshopService {
 
   update(id: any, data: any): Observable<any> {
     return this.http.put(this.baseUrl + "edit/" + id, data);
+  }
+
+  reservation(id: any, data: any): Observable<any> {
+    return this.http.patch(this.baseUrl + "worskhop/reservation/" + id, data);
   }
 
   delete(id: any): Observable<any> {

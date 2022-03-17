@@ -28,7 +28,6 @@ export class AdminContactComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.getAllUsers();
-      console.log(this.users)
     }
   }
 
@@ -36,7 +35,6 @@ export class AdminContactComponent implements OnInit {
     this.userService.getAll().subscribe({
       next: (data) => {
         this.users = data;
-        console.log(data);
         },
 
       error: (e) => console.error(e)
@@ -46,7 +44,6 @@ export class AdminContactComponent implements OnInit {
   deleteUser(id: any): void {
     this.userService.delete(id).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
 

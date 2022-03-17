@@ -43,7 +43,6 @@ export class AdminWorkshopComponent implements OnInit {
       next: (data) => {
         this.workshops = data;
 
-        console.log(data);
       },
 
       error: (err) => console.log(err)
@@ -57,7 +56,6 @@ export class AdminWorkshopComponent implements OnInit {
 
     this.workshopService.delete(id).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
 

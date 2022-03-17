@@ -4,6 +4,7 @@ import {TokenStorageService} from "../service/token-storage.service";
 import {WorkshopService} from "../service/workshop.service";
 import {DiyWorkshop} from "../model/workshop.model";
 import {ActivatedRoute} from "@angular/router";
+import {DiyUser} from "../model/user.model";
 
 @Component({
   selector: 'app-workshop',
@@ -11,15 +12,10 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./workshop.component.scss']
 })
 export class WorkshopComponent implements OnInit {
-  private roles: string[] = [];
-  public isSignUpFailed: boolean = false;
-  public isLoggedIn: boolean = false;
-  public currentUser: any;
-  public currentToken: any;
   public workshop: any = new DiyWorkshop();
-  public showAdminBoard: boolean = false;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
+  public model: DiyWorkshop = new DiyWorkshop();
 
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService,
@@ -28,17 +24,7 @@ export class WorkshopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
-    const user = this.tokenStorageService.getUser();
-
-    if (this.isLoggedIn) {
       this.getWorkshop(this.route.snapshot.params["id"]);
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
-      this.roles = user.roles;
-      console.log(this.roles.includes('ROLE_ADMIN'));
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-    }
   }
 
   getWorkshop(id: number): void {
@@ -47,6 +33,17 @@ export class WorkshopComponent implements OnInit {
         this.workshop = data;
 
         console.log(data);
+      },
+
+      error: (err) => console.error(err)
+    });
+  }
+
+  reservation(id: number): void {
+    this.workshopService.reservation(id, this.model).subscribe({
+      next: (data) => {
+        this.model = data;
+
       },
 
       error: (err) => console.error(err)

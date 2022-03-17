@@ -35,7 +35,6 @@ export class AdminContactNewComponent implements OnInit {
 
   getRole(role: string) {
     this.role[0] = role;
-    console.log("valeur du role :" + role)
   }
 
   onSubmit() {
@@ -51,7 +50,6 @@ export class AdminContactNewComponent implements OnInit {
 
     this.userService.create(data).subscribe({
       next: (data) => {
-        console.log(data);
         this.router.navigate(['/admin/contact']);
       },
 

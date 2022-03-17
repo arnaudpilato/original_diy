@@ -45,7 +45,6 @@ export class AdminFooterNewComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log(this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -71,7 +70,6 @@ export class AdminFooterNewComponent implements OnInit {
 
     this.footerService.create(data).subscribe({
       next: (data) => {
-        console.log(data);
         window.location.href="/admin/footer"
         //this.router.navigate(['/admin-footer']);
       },
