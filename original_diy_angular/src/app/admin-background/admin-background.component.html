@@ -1,1 +1,22 @@
-<p>admin-background works!</p>
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
+    <h1 class="text-center my-4">Gestion des fonds d'écran</h1>
+    <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-primary m-1" routerLink="/admin/background/new" *ngIf="visibility < 3">Ajouter un fond d'écran</a></div>
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-3 my-4" *ngFor="let background of backgrounds">
+            <div>
+                <a routerLink="/admin/background/edit/{{ background.id }}">
+                    <img class="background-picture rounded" src="{{ background.picturePath }}" alt="Image du fond d'écran">
+                </a>
+            </div>
+            <div class="text-center my-2">{{ background.name }}</div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <app-error401></app-error401>
+</ng-template>
+

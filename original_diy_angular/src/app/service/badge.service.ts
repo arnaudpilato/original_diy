@@ -13,7 +13,7 @@ export class BadgeService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<DiyBadge[]> {
-    return this.http.get(this.baseUrl + "/all");
+    return this.http.get<DiyBadge[]>(this.baseUrl + "/all");
   }
 
   create(data: any): Observable<any> {

@@ -4,6 +4,8 @@ import {TokenStorageService} from "../service/token-storage.service";
 import {WorkshopService} from "../service/workshop.service";
 import {DiyWorkshop} from "../model/workshop.model";
 import {ActivatedRoute} from "@angular/router";
+import {BackgroundService} from "../service/background.service";
+import {DiyBackground} from "../model/background.model";
 
 @Component({
   selector: 'app-workshop',
@@ -20,11 +22,16 @@ export class WorkshopComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
+  public background: any = new  DiyBackground();
 
 
-  constructor(private title: Title, private tokenStorageService: TokenStorageService,
-              private workshopService: WorkshopService, private route: ActivatedRoute) {
-    this.title.setTitle("OriginalDIY - Atelier");
+  constructor(
+      private title: Title,
+      private tokenStorageService: TokenStorageService,
+      private workshopService: WorkshopService,
+      private route: ActivatedRoute,
+      private backgroundService: BackgroundService) {
+        this.title.setTitle("OriginalDIY - Atelier");
   }
 
   ngOnInit(): void {
@@ -38,6 +45,7 @@ export class WorkshopComponent implements OnInit {
       this.roles = user.roles;
       console.log(this.roles.includes('ROLE_ADMIN'));
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getAllBackground();
     }
   }
 
@@ -51,6 +59,18 @@ export class WorkshopComponent implements OnInit {
 
       error: (err) => console.error(err)
     });
+  }
+
+  getAllBackground() {
+    this.backgroundService.getAll().subscribe({
+      next: (data) => {
+        this.background = data[1].picturePath
+        console.log("nom de l'image " + data[1].picturePath);
+
+      },
+
+      error: (err) => console.error(err)
+    })
   }
 
 }

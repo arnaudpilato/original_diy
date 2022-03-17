@@ -1,0 +1,32 @@
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
+    <h1 class="text-center my-4">Modifier un fond d'écran</h1>
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-8 col-lg-5">
+            <form method="post" class="my-3" (ngSubmit)="backgroundEditForm.form.valid && onSubmit()" #backgroundEditForm="ngForm" name="form" novalidate>
+                <div class="row">
+                    <div class="justify-content-between"
+                         *ngIf="backgroundEditForm.submitted && isSignUpFailed">
+                        <div class="alert alert-warning">Inscription échouée !<br/>{{ errorMessage }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="name">Page :</label>
+                        <select id="name" class="form-select" name="name" #name>
+                            <option value="home">Accueil</option>
+                            <option value="workshop">Atelier</option>
+                        </select>
+                    </div>
+                    <div class="btn btn-primary" (click)="deleteBackground()">
+                    </div>
+                    <div class="text-center my-3">
+                        <button class="btn btn-primary m-1">Ajouter</button>
+                        <a class="btn btn-secondary m-1" routerLink="/admin/background">Retour</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    <app-error401></app-error401>
+</ng-template>

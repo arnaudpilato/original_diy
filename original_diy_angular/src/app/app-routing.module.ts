@@ -27,6 +27,8 @@ import { Error401Component } from "./error/error401/error401.component";
 import { Error404Component } from "./error/error404/error404.component";
 import { Error500Component } from "./error/error500/error500.component";
 import { ErrorComponent } from "./error/error.component";
+import {AdminBackgroundNewComponent} from "./admin-background/admin-background-new/admin-background-new.component";
+import {AdminBackgroundEditComponent} from "./admin-background/admin-background-edit/admin-background-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -45,6 +47,8 @@ const routes: Routes = [
   { path: 'admin/badge', component: AdminBadgeComponent },
   { path: 'admin/badge/new', component: AdminBadgeNewComponent },
   { path: 'admin/background', component: AdminBackgroundComponent },
+  { path: 'admin/background/new', component: AdminBackgroundNewComponent },
+  { path: 'admin/background/edit/:id', component: AdminBackgroundEditComponent },
 
   { path: 'error', component: ErrorComponent },
   { path: 'error/401', component: Error401Component },
