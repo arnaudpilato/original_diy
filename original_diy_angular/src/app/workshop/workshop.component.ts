@@ -22,7 +22,7 @@ export class WorkshopComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
-  public background: any = new  DiyBackground();
+  public background: any;
 
 
   constructor(
@@ -37,6 +37,7 @@ export class WorkshopComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     const user = this.tokenStorageService.getUser();
+    this.getAllBackground();
 
     if (this.isLoggedIn) {
       this.getWorkshop(this.route.snapshot.params["id"]);
@@ -45,7 +46,6 @@ export class WorkshopComponent implements OnInit {
       this.roles = user.roles;
       console.log(this.roles.includes('ROLE_ADMIN'));
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.getAllBackground();
     }
   }
 
@@ -66,11 +66,9 @@ export class WorkshopComponent implements OnInit {
       next: (data) => {
         this.background = data[1].picturePath
         console.log("nom de l'image " + data[1].picturePath);
-
       },
 
       error: (err) => console.error(err)
     })
   }
-
 }

@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
+import {BackgroundService} from "../service/background.service";
 
 @Component({
   selector: 'app-map',
@@ -11,16 +12,21 @@ import {WorkshopService} from "../service/workshop.service";
 })
 export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
+  public background: any;
 
   public workshops: any[] | undefined;
 
 
-  constructor(private title: Title, private workshopService: WorkshopService) {
+  constructor(
+      private title: Title,
+      private workshopService: WorkshopService,
+      private backgroundService: BackgroundService) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
   }
 
   ngOnInit(): void {
     this.getAllWorkshopsConfirmed();
+    this.getAllBackground();
   }
 
   getAllWorkshopsConfirmed(): void {
@@ -79,7 +85,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     const cities = L.layerGroup();
 
-
     const baseLayers = {
       "Street": tiles,
       "Satelitte": USGS_USImageryTopo
@@ -98,9 +103,18 @@ export class MapComponent implements OnInit, AfterViewInit {
     L.control.layers(baseLayers, overlays).addTo(this.map);
   }
 
-
   ngAfterViewInit(): void {
     this.initMap();
 
+  }
+
+  getAllBackground() {
+    this.backgroundService.getAll().subscribe({
+      next: (data) => {
+        this.background = data[2].picturePath
+      },
+
+      error: (err) => console.error(err)
+    })
   }
 }

@@ -10,15 +10,19 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="name">Page :</label>
-                        <select id="name" class="form-select" name="name" #name>
-                            <option value="home">Accueil</option>
-                            <option value="workshop">Atelier</option>
+                        <select id="name" class="form-select" name="name">
+                            <option *ngIf="background.id == 1">Accueil</option>
+                            <option *ngIf="background.id == 2">Atelier</option>
+                            <option *ngIf="background.id == 3">Carte</option>
                         </select>
                     </div>
-                    <div class="btn btn-primary" (click)="deleteBackground()">
+                    <div class="mb-3">
+                        <label class="form-label" for="picturePath">Image :</label>
+                        <input class="form-control" id="picturePath" (change)="selectFile($event)" type="file">
                     </div>
                     <div class="text-center my-3">
-                        <button class="btn btn-primary m-1">Ajouter</button>
+                        <button class="btn btn-primary m-1">Modifier</button>
+                        <button class="btn btn-danger" (click)="deleteBackground()">Supprimer</button>
                         <a class="btn btn-secondary m-1" routerLink="/admin/background">Retour</a>
                     </div>
                 </div>
