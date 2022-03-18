@@ -1,41 +1,39 @@
 <div class="min-vh-100 background-home" [style.backgroundImage]="'url(' + background +')'">
-    <div class="container">
-      <div class="container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="text-center my-3">
+        <div class="row">
+          <h1 class="my-4">Atelier : {{workshop.title}}</h1>
+        </div>
+
         <div class="row justify-content-center">
-          <div class="text-center my-3">
-            <div class="row">
-              <h1 class="my-4">Atelier : {{workshop.title}}</h1>
+          <div class="row">
+            <div><a href="#"> <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
+             workshop.picturePath }}" alt="Image de l'atelier">
+            </a></div>
+            <div class="text-center text-wrap mt-2">
             </div>
 
-            <div class="row justify-content-center">
-              <div class="row">
-                <div><a href="#"> <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 +
-                 workshop.picturePath }}" alt="Image de l'atelier">
-                </a></div>
-                <div class="text-center text-wrap mt-2">
-                </div>
 
+            <div class="row my-4">
+              <h3> adresse :  {{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</h3>
+            </div>
 
-                <div class="row my-4">
-                  <h3> adresse :  {{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</h3>
-                </div>
-
-                <div class="row">
-                  <p [innerHTML]="workshop.description | nl2br"></p>
-                </div>
-                <div class="row my-4">
-                  <p>date de l'atelier : {{workshop.date | date : 'dd-MM-yyyy' }}</p>
-                  <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
-                </div>
-                <div class="row justify-content-center my-4">
-                  <button class=" col-3 btn btn-primary">Participer</button>
-                </div>
-              </div>
+            <div class="row">
+              <p [innerHTML]="workshop.description | nl2br"></p>
+            </div>
+            <div class="row my-4">
+              <p>date de l'atelier : {{workshop.date | date : 'dd-MM-yyyy' }}</p>
+              <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
+            </div>
+            <div class="row justify-content-center my-4">
+              <button class=" col-3 btn btn-primary">Participer</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
 
 
