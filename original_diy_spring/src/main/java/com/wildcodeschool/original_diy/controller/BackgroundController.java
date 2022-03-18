@@ -21,7 +21,6 @@ public class BackgroundController {
     @Autowired
     BackgroundRepository backgroundRepository;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<DiyBackground>> gettAllBackgrounds() {
         try {
@@ -90,6 +89,7 @@ public class BackgroundController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyBackground> updateBackground(@PathVariable("id") long id, @RequestBody BackgroundRequest backgroundRequest) {
         Optional<DiyBackground> backgroundData = backgroundRepository.findById(id);
+        String s3 = "https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/";
 
         if (backgroundData.isPresent()) {
             DiyBackground background = backgroundData.get();
@@ -97,7 +97,7 @@ public class BackgroundController {
             if (backgroundRequest.getPicturePath() == null) {
                 background.setPicturePath(null);
             } else {
-                background.setPicturePath(backgroundRequest.getPicturePath());
+                background.setPicturePath(s3 + backgroundRequest.getPicturePath());
             }
 
             return new ResponseEntity<>(backgroundRepository.save(background), HttpStatus.OK);
