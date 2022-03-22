@@ -59,7 +59,7 @@ const routes: Routes = [
   { path: 'map', component: MapComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'atelier-utilisateur', component: WorskhopProfilComponent },
-  { path: 'mes-ateliers/creation-atelier', component: AddWorkshopComponent },
+  { path: 'creation-atelier', component: AddWorkshopComponent },
   { path: 'mes-ateliers', component: UserWorkshopIndexComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
