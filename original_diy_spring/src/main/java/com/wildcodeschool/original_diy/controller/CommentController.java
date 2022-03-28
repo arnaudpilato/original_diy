@@ -32,13 +32,15 @@ public class CommentController {
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping("/new")
-    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest) {
+    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest,Authentication authentication) {
 
         try {
             DiyComment comment = new DiyComment();
             comment.setComment(commentRequest.getComment());
-            comment.setDiyUser(commentRequest.getDiyUser());
-            comment.setDiyWorkshop(commentRequest.getDiyWorkshop());
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+            comment.setDiyUser(user);
+            DiyWorkshop workshop = workshopRepository.getById(commentRequest.getDiyWorkshopId());
+            comment.setDiyWorkshop(workshop);
             comment.setConfirmed(false);
             commentRepository.save(comment);
             return new ResponseEntity<>(comment, HttpStatus.CREATED);
