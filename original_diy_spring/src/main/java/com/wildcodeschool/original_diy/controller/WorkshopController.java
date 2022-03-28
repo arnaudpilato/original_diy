@@ -246,6 +246,8 @@ public class WorkshopController {
 
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
+
+
             workshopService.workshopReservation(workshop, user);
 
             return new ResponseEntity<>(HttpStatus.OK);

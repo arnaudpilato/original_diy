@@ -32,6 +32,10 @@ public class DiyWorkshop {
 
     private String city;
 
+    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "reservation_id")
+    private DiyReservation reservation;
+
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
@@ -51,12 +55,9 @@ public class DiyWorkshop {
     private DiyUser diyUser;
 
     private boolean confirmation = false;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "workshop_reservation",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "workshop_id")
-    )
-    private List<DiyUser> reservation = new ArrayList<>();
+
+    private int limitedPlaces;
+
 
     public DiyWorkshop() {
     }
@@ -165,11 +166,19 @@ public class DiyWorkshop {
         this.date = date;
     }
 
-    public List<DiyUser> getReservation() {
+    public DiyReservation getReservation() {
         return reservation;
     }
 
-    public void setReservation(List<DiyUser> reservation) {
+    public void setReservation(DiyReservation reservation) {
         this.reservation = reservation;
+    }
+
+    public int getLimitedPlaces() {
+        return limitedPlaces;
+    }
+
+    public void setLimitedPlaces(int limitedPlaces) {
+        this.limitedPlaces = limitedPlaces;
     }
 }
