@@ -49,7 +49,6 @@ public class WorkshopService {
             }
 
         } catch (Exception e) {
-
         }
 
 
