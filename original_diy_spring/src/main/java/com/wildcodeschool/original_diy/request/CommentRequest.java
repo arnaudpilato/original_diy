@@ -13,7 +13,7 @@ public class CommentRequest {
     @DateTimeFormat(pattern = "dd/MM/yyyy h:mm ")
     private Date createdAt;
 
-    private DiyWorkshop diyWorkshop;
+    private Long diyWorkshopId;
 
     private DiyUser diyUser;
 
@@ -36,12 +36,12 @@ public class CommentRequest {
         this.createdAt = createdAt;
     }
 
-    public DiyWorkshop getDiyWorkshop() {
-        return diyWorkshop;
+    public Long getDiyWorkshopId() {
+        return diyWorkshopId;
     }
 
-    public void setDiyWorkshop(DiyWorkshop diyWorkshop) {
-        this.diyWorkshop = diyWorkshop;
+    public void setDiyWorkshopId(Long diyWorkshopId) {
+        this.diyWorkshopId = diyWorkshopId;
     }
 
     public DiyUser getDiyUser() {
@@ -51,5 +51,4 @@ public class CommentRequest {
     public void setDiyUser(DiyUser diyUser) {
         this.diyUser = diyUser;
     }
-
 }
