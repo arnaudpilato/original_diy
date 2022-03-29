@@ -177,6 +177,13 @@ public class DiyUser {
         this.badges = badges;
     }
 
+    public DiyReservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(DiyReservation reservation) {
+        this.reservation = reservation;
+    }
 
     public List<DiyWorkshop> getWorkshops() {
         return workshops;

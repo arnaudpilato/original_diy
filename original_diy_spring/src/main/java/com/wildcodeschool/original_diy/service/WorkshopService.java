@@ -39,8 +39,10 @@ public class WorkshopService {
 
         try {
 
-            if ((!workshop.getDiyUser().equals(user)) && (workshop.getReservation().getUser() == null)) {
+        // Controle qui vérifie que celui qui a crée un l'atelier ne peut pas s'inscrire à celui-ci
+        // Controle qui vérifie si un user est inscrit a un atelier il ne peut alors ce réeinscrire
 
+            if ((!workshop.getDiyUser().equals(user)) && (!workshop.getReservation().getUser().equals(user))) {
                 DiyReservation reservation = new DiyReservation();
                 reservation.setWorkshop(workshop);
                 reservation.setUser(user);
@@ -49,8 +51,10 @@ public class WorkshopService {
             }
 
         } catch (Exception e) {
-        }
 
+            System.err.println(e);
+
+        }
 
     }
 }
