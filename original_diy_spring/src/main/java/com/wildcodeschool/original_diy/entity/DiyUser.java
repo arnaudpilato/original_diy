@@ -22,7 +22,7 @@ import java.util.Set;
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "username")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),

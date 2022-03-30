@@ -1,3 +1,21 @@
+<h1 class="text-center my-4 ">Ajout d'un commentaire</h1>
+  <div class="row justify-content-center">
+    <div class="col-11 col-md-8 col-lg-5">
+      <form method="post" class="my-3" (ngSubmit)="commentaryNewForm.form.valid && onSubmit()" #commentaryNewForm="ngForm" name="form" novalidate>
+        <div class="row">
+          <div class="mb-3">
+            <label class="form-label" for="title">Commentaire :</label>
+            <input class="form-control" id="title" name="title" [(ngModel)]="model.comment" type="text" placeholder="commentaire ...">
+          </div>
+          <div class="text-center my-3">
+            <button class="btn btn-primary m-1">Ajouter</button>
+            <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
 <div class="container">
   <div class="row">
     <div class="col-8 text-center">
@@ -15,9 +33,10 @@
       {{ comment.comment }}
     </div>
     <div class="col-2">
-      <div *ngIf="comment.diyUser.username != null">
-        <div class="">{{ comment.diyUser.username }}</div>
+      <div *ngIf="comment.diyUser.username != null; else userObject">
+        {{ comment.diyUser.username }}
       </div>
+      <ng-template #userObject>{{comment.diyUser}}</ng-template>
     </div>
     <div class="col-2">
       {{comment.createdAt | date : 'dd-MM-yy HH:mm'}}
