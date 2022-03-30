@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -42,6 +43,7 @@ public class CommentController {
             DiyWorkshop workshop = workshopRepository.getById(commentRequest.getDiyWorkshopId());
             comment.setDiyWorkshop(workshop);
             comment.setConfirmed(false);
+            comment.setCreatedAt(new Date());
             commentRepository.save(comment);
             return new ResponseEntity<>(comment, HttpStatus.CREATED);
         } catch (Exception e) {
