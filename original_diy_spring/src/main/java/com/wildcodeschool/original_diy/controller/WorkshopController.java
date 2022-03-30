@@ -239,7 +239,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PatchMapping("worskhop/reservation/{id}")
     public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
         try {
@@ -260,6 +260,25 @@ public class WorkshopController {
             }
 
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @DeleteMapping("worskhop/reservation/delete/{id}")
+    public ResponseEntity<HttpStatus> workshopReservationDelete(@PathVariable("id") Long id, Authentication authentication) {
+        try {
+
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+            DiyWorkshop workshop = workshopRepository.getById(id);
+
+
+
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
