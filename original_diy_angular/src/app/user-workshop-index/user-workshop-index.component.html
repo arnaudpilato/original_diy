@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="text-center my-4">Espace Atelier</h1>
+  <div class="row justify-content-between">
+    <div class=" col-md-4 my-3">
+      <div class="picture-link rounded">
+        <a routerLink="/atelier-utilisateur"><img class="picture rounded" src="/assets/img/workshop.jpg" alt="Image atelier"></a>
+      </div>
+      <h3 class="text-center my-2">Mes ateliers</h3>
+    </div>
+    <div class=" col-md-4 my-3">
+      <div class="picture-link rounded">
+        <a routerLink="/admin/contact"><img class="picture rounded " src="/assets/img/contact.jpeg" alt="Image utilisateur"></a>
+      </div>
+      <h3 class="text-center my-2">Mes inscriptions</h3>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

@@ -1,20 +1,18 @@
 package com.wildcodeschool.original_diy.entity;
 
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
 import java.util.Date;
 
-
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "comments")
 public class DiyComment {
@@ -29,6 +27,8 @@ public class DiyComment {
     private Date createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private DiyWorkshop diyWorkshop;
 
     @ManyToOne(fetch = FetchType.LAZY)

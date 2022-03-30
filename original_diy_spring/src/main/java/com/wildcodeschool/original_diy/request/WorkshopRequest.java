@@ -1,5 +1,12 @@
 package com.wildcodeschool.original_diy.request;
 
+import com.wildcodeschool.original_diy.entity.DiyUser;
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+import java.util.Date;
+
+
 public class WorkshopRequest {
     private String title;
 
@@ -21,6 +28,22 @@ public class WorkshopRequest {
 
     private boolean confirmation = false;
 
+    private DiyUser diyUser;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
+    private Date date;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public WorkshopRequest() {
+    }
+
     public String getTitle() {
         return title;
     }
@@ -29,9 +52,13 @@ public class WorkshopRequest {
         this.title = title;
     }
 
-    public String getPicturePath() { return picturePath; }
+    public String getPicturePath() {
+        return picturePath;
+    }
 
-    public void setPicturePath(String picturePath) { this.picturePath = picturePath; }
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 
     public Long getStreetNumber() {
         return streetNumber;
@@ -95,5 +122,13 @@ public class WorkshopRequest {
 
     public void setConfirmation(boolean confirmation) {
         this.confirmation = confirmation;
+    }
+
+    public DiyUser getDiyUser() {
+        return diyUser;
+    }
+
+    public void setDiyUser(DiyUser diyUser) {
+        this.diyUser = diyUser;
     }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Ajouter un contact</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
@@ -47,14 +47,19 @@
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option *ngFor="let role of roles" value="{{ role == 'Utilisateur' ? 'ROLE_USER' : 'ROLE_ADMIN' }}">{{ role }}</option>
+            <option value="user" selected>Utilisateur</option>
+            <option value="admin">Administrateur</option>
           </select>
         </div>
         <div class="text-center my-3">
           <button class="btn btn-primary m-1">Ajouter</button>
-          <a class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</a>
+          <a class="btn btn-secondary m-1" routerLink="/admin/contact">Retour</a>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

@@ -17,10 +17,12 @@ import java.util.Set;
  * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
+
+
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "username")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "users",uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
@@ -49,6 +51,8 @@ public class DiyUser {
     @Size(max = 100)
     private String password;
 
+
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -61,13 +65,21 @@ public class DiyUser {
             orphanRemoval = true
     )
     private List<DiyComment> diyComments = new ArrayList<>();
+
     @OneToMany(
             mappedBy = "diyUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @OrderBy("id DESC")
-    private List<DiyWorkshop> workshop = new ArrayList<>();
+    private List<DiyWorkshop> workshops;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_badges",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "badge_id")
+    )
+    private Set<DiyBadge> badges = new HashSet<>();
 
     public DiyUser() {
     }
@@ -79,11 +91,11 @@ public class DiyUser {
     }
 
     public List<DiyWorkshop> getWorkshop() {
-        return workshop;
+        return workshops;
     }
 
     public void setWorkshop(List<DiyWorkshop> workshop) {
-        this.workshop = workshop;
+        this.workshops = workshop;
     }
 
     public Long getId() {
@@ -154,5 +166,23 @@ public class DiyUser {
 
     public void setRoles(Set<DiyRole> roles) {
         this.roles = roles;
+    }
+
+    public Set<DiyBadge> getBadges() {
+        return badges;
+    }
+
+    public void setBadges(Set<DiyBadge> badges) {
+        this.badges = badges;
+    }
+
+
+
+    public List<DiyWorkshop> getWorkshops() {
+        return workshops;
+    }
+
+    public void setWorkshops(List<DiyWorkshop> workshops) {
+        this.workshops = workshops;
     }
 }

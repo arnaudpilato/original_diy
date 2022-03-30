@@ -10,7 +10,7 @@
                 <a class="nav-link" routerLink="home">Accueil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Atelier</a>
+                <a class="nav-link" href="#">Nos atelier</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" routerLink="map">Carte</a>
@@ -26,15 +26,18 @@
           </ul>
           <ul class="navbar-nav" *ngIf="showAdminBoard">
             <li class="nav-item" >
-              <a class="nav-link" routerLink="admin-contact">Contact</a>
+              <a class="nav-link" routerLink="admin/contact">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="admin-home">Administration</a>
+              <a class="nav-link" routerLink="admin/home">Administration</a>
             </li>
           </ul>
           <ul class="navbar-nav" *ngIf="isLoggedIn">
             <li class="nav-item">
-              <a class="nav-link" routerLink="profile/{{ currentUser.id }}">Profil</a>
+              <a class="nav-link" routerLink="profile" *ngIf="!showAdminBoard">Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="mes-ateliers" *ngIf="!showAdminBoard">Mes Ateliers</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" (click)="logout()">Déconnexion</a>

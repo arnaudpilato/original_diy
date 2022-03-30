@@ -12,13 +12,13 @@ import { DiyRole } from "../../model/role.model";
   styleUrls: ['./admin-contact-edit.component.scss']
 })
 export class AdminContactEditComponent implements OnInit {
+  private roles: string[] = [];
   public isLoggedIn: boolean = false;
-  public currentUser: any;
-  public currentToken: any;
+  public showAdminBoard: boolean = false;
   public message: string = '';
   public user: DiyUser = new DiyUser();
-  public roles: string[] = Object.keys(DiyRole);
-  public role: string | undefined;
+  public eRoles = DiyRole;
+  public role: string[] = [];
 
   constructor(
     private title: Title,
@@ -31,12 +31,12 @@ export class AdminContactEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.user)
 
     if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
       this.getUser(this.route.snapshot.params["id"]);
-      this.currentUser = this.tokenStorageService.getUser();
-      this.currentToken = this.tokenStorageService.getToken();
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
     }
   }
 
@@ -44,16 +44,10 @@ export class AdminContactEditComponent implements OnInit {
     this.userService.getById(id).subscribe({
       next: (data) => {
         this.user = data;
-        console.log(data);
         },
 
       error: (e) => console.error(e)
     });
-  }
-
-  getRole(role: string) {
-    this.role = role;
-    console.log("valeur du role :" + role)
   }
 
   onSubmit() {
@@ -65,19 +59,22 @@ export class AdminContactEditComponent implements OnInit {
       lastName: this.user.lastName,
       phone: this.user.phone,
       email: this.user.email,
-      role: this.role,
+      roles: this.role,
       password: this.user.password,
     }
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
-        console.log(res);
-        console.log(this.role)
+
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
-        this.router.navigate(['/admin-contact'])
+        this.router.navigate(['/admin/contact'])
       },
 
       error: (e) => console.error(e)
     });
+  }
+
+  getRole(role: string) {
+    this.role[0] = role;
   }
 }

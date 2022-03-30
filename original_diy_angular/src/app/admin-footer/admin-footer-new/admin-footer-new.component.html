@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">Ajout d'un réseau social</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
@@ -23,15 +23,19 @@
           <div>
             <div class="form-check form-switch">
               <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="footer.visible" type="checkbox" value="false">
+              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation" [(ngModel)]="footer.visible" type="checkbox" value="true">
             </div>
           </div>
           <div class="text-center my-3">
             <button class="btn btn-primary m-1">Ajouter</button>
-            <a class="btn btn-secondary m-1" routerLink="/admin-workshop">Retour</a>
+            <a class="btn btn-secondary m-1" routerLink="/admin/footer">Retour</a>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

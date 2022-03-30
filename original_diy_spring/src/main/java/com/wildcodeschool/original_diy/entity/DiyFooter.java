@@ -3,11 +3,11 @@ package com.wildcodeschool.original_diy.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "footer")
+@Table(name = "footers")
 public class DiyFooter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String name;
 
@@ -19,11 +19,11 @@ public class DiyFooter {
 
     public DiyFooter() { }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,9 +51,7 @@ public class DiyFooter {
         this.picturePath = picturePath;
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
+    public boolean isVisible() { return visible; }
 
     public void setVisible(boolean visible) {
         this.visible = visible;

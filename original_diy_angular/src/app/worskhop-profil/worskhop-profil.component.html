@@ -1,0 +1,83 @@
+<div class="container">
+  <h1 class="text-center my-4">Gestion des ateliers</h1>
+  <div class="text-end d-flex justify-content-end">
+    <div><a class="btn btn-primary my-4" routerLink="/creation-atelier">Ajout d'un atelier</a></div>
+  </div>
+  <div class="table-responsive d-block d-md-none my-2">
+    <table class="table table-bordered border-dark" *ngFor="let workshop of workshops ">
+      <thead>
+      <tr>
+        <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">Image</th>
+        <td class="text-center">
+          <img class="workshop-picture"
+               src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+               alt="Image de l'atelier">
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td class="text-wrap">{{ workshop.description }}</td>
+      </tr>
+      <tr>
+        <th scope="row" colspan="2">
+          <div class="d-flex justify-content-around">
+
+          </div>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive-md d-none d-md-block my-2">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col" class="text-center" colspan="2">Image</th>
+        <th scope="col" class="text-center ">Description</th>
+        <th scope="col" class="text-center">status</th>
+        <th scope="col" class="text-center">Date et heure</th>
+        <th scope="col" class="text-center">Adresse</th>
+        <th scope="col" class="text-center">Date de création</th>
+        <th scope="col" class="text-center">Nombres de participants</th>
+        <th scope="col" class="text-center">Détails</th>
+
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let workshop of workshops; let index = index">
+        <th colspan="2" class="col-2">
+          <a href="#">
+            <img class="workshop-picture  img-fluid"
+                 src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+                 alt="Image de l'atelier">
+          </a>
+        </th>
+        <td class=" text-center align-middle  text-truncate  col-4 " style="max-width: 200px;" [innerHTML]="workshop.description | nl2br"></td>
+        <td class="text-center align-middle col-2">{{ workshop.confirmation ? "en cours" : "terminer" }}</td>
+        <td class="text-center align-middle"><p> {{workshop.date | date : 'dd-MM-yyyy' }}</p>
+          <p>à {{workshop.date | date : 'HH' }} h {{workshop.date | date : 'mm' }}</p>
+           </td>
+        <td class="text-center align-middle col-2"> <p>{{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</p>
+          <p> {{workshop.postCode}} {{workshop.city}} </p>
+       </td><td class="text-center align-middle col-2"> En attente</td>
+        <td class="text-center align-middle"> En attente </td>
+        <td class="text-center align-middle"> <i class="bi bi-search"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngFor="let workshop of workshops">
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

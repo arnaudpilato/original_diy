@@ -1,5 +1,25 @@
-<div class="background-home">
-    <div class="container">
+<div class="min-vh-100 background-home">
+  <div class="container">
+    <div class="row">
       <h1 class="text-center my-4">Bienvenue !</h1>
     </div>
+
+    <div class="row my-4">
+      <h2 class="text-center">Les nouveaux ateliers</h2>
+    </div>
+    <div class="row justify-content-around my-3 ">
+      <div *ngFor="let workshop of workshops" class="card" style="width: 18rem;">
+        <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
+        <div class="card-body">
+          <h5 class="card-title">{{workshop.title}}</h5>
+          <p class="text-break card-text d-inline-block text-truncate my-3" style="max-width: 200px;"
+           [innerHTML]="workshop.description | nl2br"></p>
+          <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
+             class="btn btn-primary text-center d-flex align-items-flex-end">
+            Voir les détails
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

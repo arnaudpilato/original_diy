@@ -1,5 +1,5 @@
-<div class="container">
-  <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
+  <h1 class="text-center my-4">Modifier de {{ workshop.title }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-8 col-lg-5">
       <form method="post" class="my-3" (ngSubmit)="workshopEditForm.form.valid && onSubmit()" #workshopEditForm="ngForm" name="form" novalidate>
@@ -34,7 +34,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>
-            <textarea class="form-control" id="description" name="description" [(ngModel)]="workshop.description" rows="3" [value]="workshop.description"></textarea>
+            <ckeditor [editor]="Editor" name="description" id="description" [(ngModel)]="workshop.description"></ckeditor>
           </div>
           <div class="mb-3">
             <div class="form-check form-switch">
@@ -44,10 +44,14 @@
           </div>
           <div class="text-center my-3">
             <button class="btn btn-primary m-1">Modifier</button>
-            <a class="btn btn-secondary m-1" routerLink="/admin-workshop">Retour</a>
+            <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
           </div>
         </div>
       </form>
     </div>
   </div>
 </div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

@@ -1,8 +1,8 @@
-<div class="container" *ngIf="currentUser && isLoggedIn; else loggedOut">
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
   <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
   <div class="row justify-content-center">
     <div class="col-11 col-md-5">
-      <form class="my-3" name="form" (ngSubmit)="onSubmit()" #userEditForm="ngForm" novalidate>
+      <form method="post" class="my-3" name="form" (ngSubmit)="userEditForm.form.valid && onSubmit()" #userEditForm="ngForm" novalidate>
         <div class="alert alert-success text-center" *ngIf="userEditForm.submitted">{{ message }}</div>
         <div class="mb-3">
           <label class="form-label" for="username">Username :</label>
@@ -41,7 +41,8 @@
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option *ngFor="let role of roles" value="{{ role == 'Utilisateur' ? 'ROLE_USER' : 'ROLE_ADMIN' }}">{{ role }}</option>
+            <option value="user" [selected]="user.roles ? user.roles[0].name == 'ROLE_USER' : undefined">Utilisateur</option>
+            <option value="admin" [selected]="user.roles ? user.roles[0].name == 'ROLE_ADMIN' : undefined">Administrateur</option>
           </select>
         </div>
         <div class="mb-3">
@@ -54,7 +55,7 @@
         </div>
         <div class="text-center my-3">
           <button class="btn btn-primary m-1">Modifier</button>
-          <button class="btn btn-secondary m-1" routerLink="/admin-contact">Retour</button>
+          <button class="btn btn-secondary m-1" routerLink="/admin/contact">Retour</button>
         </div>
       </form>
     </div>
@@ -62,5 +63,5 @@
 </div>
 
 <ng-template #loggedOut>
-  Veuillez vous connecter !
+  <app-error401></app-error401>
 </ng-template>

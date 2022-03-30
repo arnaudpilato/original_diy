@@ -26,6 +26,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminFooterComponent } from './admin-footer/admin-footer.component';
 import { AdminFooterEditComponent } from './admin-footer/admin-footer-edit/admin-footer-edit.component';
 import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-footer-new.component';
+import { WorkshopComponent } from './workshop/workshop.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { nl2brPipe } from './nl2br.pipe';
+import { AdminBadgeNewComponent } from './admin-badge/admin-badge-new/admin-badge-new.component';
+import { AdminBadgeComponent } from "./admin-badge/admin-badge.component";
+import { Error401Component } from './error/error401/error401.component';
+import { AdminBackgroundComponent } from './admin-background/admin-background.component';
+import { WorskhopProfilComponent } from './worskhop-profil/worskhop-profil.component';
+import { AddWorkshopComponent } from './add-workshop/add-workshop.component';
+import { CommentaryComponent } from './commentary/commentary.component';
+import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-index.component';
 
 
 @NgModule({
@@ -50,13 +61,24 @@ import { AdminFooterNewComponent } from './admin-footer/admin-footer-new/admin-f
     ProfileComponent,
     AdminFooterComponent,
     AdminFooterEditComponent,
-    AdminFooterNewComponent
+    AdminFooterNewComponent,
+    WorkshopComponent,
+    nl2brPipe,
+    AdminBadgeNewComponent,
+    AdminBadgeComponent,
+    Error401Component,
+    AdminBackgroundComponent,
+    WorskhopProfilComponent,
+    AddWorkshopComponent,
+    CommentaryComponent,
+    UserWorkshopIndexComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

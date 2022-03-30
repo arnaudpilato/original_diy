@@ -1,17 +1,18 @@
 package com.wildcodeschool.original_diy.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@JsonIdentityInfo(
+/*@JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "id")*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "workshops")
 public class DiyWorkshop {
@@ -31,6 +32,14 @@ public class DiyWorkshop {
 
     private String city;
 
+    @ManyToMany
+    private List<DiyUser> reservationUser;
+
+
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
+    private Date date;
+
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 
@@ -46,6 +55,9 @@ public class DiyWorkshop {
     private DiyUser diyUser;
 
     private boolean confirmation = false;
+
+    private int limitedPlaces;
+
 
     public DiyWorkshop() {
     }
@@ -144,5 +156,29 @@ public class DiyWorkshop {
 
     public void setConfirmation(boolean confirmation) {
         this.confirmation = confirmation;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public List<DiyUser> getReservationUser() {
+        return reservationUser;
+    }
+
+    public void setReservationUser(List<DiyUser> reservationUser) {
+        this.reservationUser = reservationUser;
+    }
+
+    public int getLimitedPlaces() {
+        return limitedPlaces;
+    }
+
+    public void setLimitedPlaces(int limitedPlaces) {
+        this.limitedPlaces = limitedPlaces;
     }
 }

@@ -7,7 +7,7 @@ import {TokenStorageService} from "../service/token-storage.service";
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  private role: string = 'ROLE_USER';
+  private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public currentUser: any;
@@ -19,18 +19,17 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.currentUser = this.tokenStorageService.getUser();
-      this.role = this.tokenStorageService.getUser().roles[0].name;
-
-      if (this.role == 'ROLE_ADMIN') {
-        this.showAdminBoard = true;
-      }
-      console.log(this.role);
+      console.log('Est ce que l\'utilisateur à le role admin ' + this.showAdminBoard);
+      console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
     }
   }
 
   public logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
+    window.location.href="/home"
   }
 }
