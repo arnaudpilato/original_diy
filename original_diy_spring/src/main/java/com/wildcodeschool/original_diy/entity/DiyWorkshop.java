@@ -32,9 +32,9 @@ public class DiyWorkshop {
 
     private String city;
 
-    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "reservation_id")
-    private DiyReservation reservation;
+    @ManyToMany
+    private List<DiyUser> reservationUser;
+
 
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
@@ -166,12 +166,12 @@ public class DiyWorkshop {
         this.date = date;
     }
 
-    public DiyReservation getReservation() {
-        return reservation;
+    public List<DiyUser> getReservationUser() {
+        return reservationUser;
     }
 
-    public void setReservation(DiyReservation reservation) {
-        this.reservation = reservation;
+    public void setReservationUser(List<DiyUser> reservationUser) {
+        this.reservationUser = reservationUser;
     }
 
     public int getLimitedPlaces() {

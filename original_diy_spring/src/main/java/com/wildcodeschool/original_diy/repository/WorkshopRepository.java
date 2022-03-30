@@ -1,6 +1,5 @@
 package com.wildcodeschool.original_diy.repository;
 
-import com.wildcodeschool.original_diy.entity.DiyReservation;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import org.springframework.data.jpa.repository.JpaRepository;
