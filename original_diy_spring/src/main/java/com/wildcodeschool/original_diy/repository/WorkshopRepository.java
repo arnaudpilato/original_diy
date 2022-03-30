@@ -1,6 +1,5 @@
 package com.wildcodeschool.original_diy.repository;
 
-import com.wildcodeschool.original_diy.entity.DiyReservation;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +22,8 @@ public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
 
     @Query( value = "SELECT w FROM DiyWorkshop  w WHERE w.diyUser = :diyUser")
     public List<DiyWorkshop> getDiyWorkshopByDiyUserId(@Param("diyUser") DiyUser diyUser);
+
+
 
 
 
