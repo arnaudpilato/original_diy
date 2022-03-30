@@ -268,13 +268,17 @@ public class WorkshopController {
 
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    @DeleteMapping("worskhop/reservation/delete/{id}")
-    public ResponseEntity<HttpStatus> workshopReservationDelete(@PathVariable("id") Long id, Authentication authentication) {
+    @DeleteMapping("reservation/delete/{id}")
+    public ResponseEntity<HttpStatus> workshopReservationDelete(@PathVariable("id") Long id,
+                                                                Authentication authentication) {
         try {
 
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
 
+
+             workshop.getReservationUser().remove(user);
+             workshopRepository.save(workshop);
 
 
 
