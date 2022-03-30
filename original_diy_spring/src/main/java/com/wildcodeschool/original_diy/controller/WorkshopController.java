@@ -244,11 +244,20 @@ public class WorkshopController {
     public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
         try {
 
+            List<DiyUser> users = new ArrayList<>();
+
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
 
 
-            workshopService.workshopReservation(workshop, user);
+            users.addAll(workshop.getReservationUser());
+            users.add(user);
+
+            if ((!workshop.getReservationUser().contains(user))) {
+
+                workshop.setReservationUser(users);
+                workshopRepository.save(workshop);
+            }
 
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
