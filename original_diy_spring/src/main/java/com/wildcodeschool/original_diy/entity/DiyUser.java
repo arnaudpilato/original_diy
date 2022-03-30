@@ -51,6 +51,9 @@ public class DiyUser {
     @Size(max = 100)
     private String password;
 
+    @ManyToOne( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private DiyReservation reservation;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -172,5 +175,21 @@ public class DiyUser {
 
     public void setBadges(Set<DiyBadge> badges) {
         this.badges = badges;
+    }
+
+    public DiyReservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(DiyReservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public List<DiyWorkshop> getWorkshops() {
+        return workshops;
+    }
+
+    public void setWorkshops(List<DiyWorkshop> workshops) {
+        this.workshops = workshops;
     }
 }
