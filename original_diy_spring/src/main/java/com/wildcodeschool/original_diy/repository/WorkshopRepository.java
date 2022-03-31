@@ -24,7 +24,4 @@ public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
     public List<DiyWorkshop> getDiyWorkshopByDiyUserId(@Param("diyUser") DiyUser diyUser);
 
 
-
-
-
 }
