@@ -17,7 +17,7 @@ export class AdminCommentaryComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public workshops: DiyWorkshop[] | undefined;
 
-  constructor(private title: Title, private tokenStorageService: TokenStorageService, private workshopService: WorkshopService, private commentaryService: CommentaryService,private router: Router) {
+  constructor(private title: Title, private tokenStorageService: TokenStorageService, private workshopService: WorkshopService, private commentaryService: CommentaryService, private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 
@@ -36,22 +36,22 @@ export class AdminCommentaryComponent implements OnInit {
     this.workshopService.getAll().subscribe({
       next: (data) => {
         this.workshops = data;
-        console.log(data)
-        },
+      },
 
       error: (e) => console.error(e)
     });
   }
 
   confirm(id: number) {
-    this.commentaryService.confirmed(id).subscribe({
+    this.commentaryService.confirmed(id).subscribe({});
+  }
 
-      next: (res) => {
-        console.log(id);
+  deleteCommentary(id: number) {
+    console.log(id);
+    this.commentaryService.delete(id).subscribe({
+      next: () => {
         window.location.reload();
-      },
-
-      error: (e) => console.error(e)
+      }
     });
   }
 }
