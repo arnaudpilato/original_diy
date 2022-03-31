@@ -1,0 +1,77 @@
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
+  <h1 class="text-center my-4">Gestion des Commentaires</h1>
+  <div class="row justify-content-center">
+    <div class="col-11">
+      <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+      </div>
+      <div class="table-responsive d-block d-md-none my-2">
+        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
+          <thead>
+          <tr>
+            <th scope="col">{{ "Contact " + (index + 1) }}</th>
+            <th scope="col">{{ workshop.title }}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">Nom</th>
+            <td>{{ workshop.title }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Prénom</th>
+            <td>{{ workshop.title }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td>{{ workshop.title }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Telephone</th>
+            <td>{{ workshop.title }}</td>
+          </tr>
+          <tr>
+            <th scope="row" colspan="2">
+              <div class="d-flex justify-content-around">
+                <div><a class="link" routerLink="/admin/contact/edit/{{ workshop.id }}"><img class="icon"
+                                                                                             src="/assets/img/edit.png"
+                                                                                             alt="Logo éditer"></a>
+                </div>
+                <div><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+                </div>
+              </div>
+            </th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-responsive d-none d-md-block my-2">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Atelier</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Utilisateur</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let workshop of workshops">
+          <tr *ngFor="let comment of workshop.comments">
+            <th scope="row">{{ workshop.title }}</th>
+            <th>{{ comment.comment }}</th>
+            <th>{{ comment.diyUser }}</th>
+            <td class="text-end td-edit">
+              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
+              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked" name="confirmation"
+                     [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

@@ -30,6 +30,7 @@ import { ErrorComponent } from "./error/error.component";
 import {WorskhopProfilComponent} from "./worskhop-profil/worskhop-profil.component";
 import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
 import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
+import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'admin/badge', component: AdminBadgeComponent },
   { path: 'admin/badge/new', component: AdminBadgeNewComponent },
   { path: 'admin/background', component: AdminBackgroundComponent },
+  { path: 'admin/commentary', component: AdminCommentaryComponent },
 
   { path: 'error', component: ErrorComponent },
   { path: 'error/401', component: Error401Component },

@@ -31,9 +31,24 @@ public class CommentController {
     private CommentRepository commentRepository;
 
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/confirm/{id}")
+        public void changeConfirmation(@PathVariable("id") Long id) {
+        DiyComment comment = commentRepository.getById(id);
+        System.out.println(comment.getId());
+        boolean status = comment.isConfirmed();
+        if (status) {
+            comment.setConfirmed(false);
+        }else {
+            comment.setConfirmed(true);
+        }
+        commentRepository.save(comment);
+    }
+
+
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping("/new")
-    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest,Authentication authentication) {
+    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
 
         try {
             DiyComment comment = new DiyComment();
