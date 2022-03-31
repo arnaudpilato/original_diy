@@ -52,4 +52,8 @@ export class WorkshopService {
   delete(id: any): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }
+
+  deleteReservation(id: any): Observable<any> {
+    return this.http.delete(this.baseUrl + "reservation/delete/" + id);
+  }
 }

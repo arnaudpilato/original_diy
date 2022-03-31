@@ -65,4 +65,14 @@ export class WorkshopComponent implements OnInit {
     });
   }
 
+  deleteReservationUser(id: number): void {
+    this.workshopService.deleteReservation(id).subscribe({
+      next: (res) => {
+        window.location.reload();
+      },
+
+      error: (e) => console.error(e)
+    });
+  }
+
 }
