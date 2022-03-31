@@ -33,15 +33,20 @@ public class CommentController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/confirm/{id}")
-        public void changeConfirmation(@PathVariable("id") Long id) {
-        DiyComment comment = commentRepository.getById(id);
-        boolean status = comment.isConfirmed();
-        if (status) {
-            comment.setConfirmed(false);
-        }else {
-            comment.setConfirmed(true);
+    public ResponseEntity<Object> changeConfirmation(@PathVariable("id") Long id) {
+        try {
+            DiyComment comment = commentRepository.getById(id);
+            boolean status = comment.isConfirmed();
+            if (status) {
+                comment.setConfirmed(false);
+            } else {
+                comment.setConfirmed(true);
+            }
+            commentRepository.save(comment);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        commentRepository.save(comment);
     }
 
 
@@ -85,26 +90,16 @@ public class CommentController {
         }
     }
 
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    @GetMapping("/delete/{id}")
-    public String deleteComment(@PathVariable("id") Long id) {
-        DiyComment comment = commentRepository.getById(id);
-        commentRepository.delete(comment);
-
-        return "redirect:/admin/commentaire";
-    }
-
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin/confirm/{id}")
-    public String confirmComment(@PathVariable("id") Long id) {
-        DiyComment comment = commentRepository.getById(id);
-        if (comment.isConfirmed()) {
-            comment.setConfirmed(false);
-        } else {
-            comment.setConfirmed(true);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
+        System.out.println("id:::::"+ id);
+        try {
+            DiyComment comment = commentRepository.getById(id);
+            commentRepository.delete(comment);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        commentRepository.save(comment);
-
-        return "redirect:/admin/commentaire";
     }
 }

@@ -9,39 +9,30 @@
         <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
           <thead>
           <tr>
-            <th scope="col">{{ "Contact " + (index + 1) }}</th>
-            <th scope="col">{{ workshop.title }}</th>
+            <th class="text-danger" scope="col">{{ workshop.title }}</th>
+            <th scope="col">information</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody *ngFor="let comment of workshop.comments">
           <tr>
-            <th scope="row">Nom</th>
-            <td>{{ workshop.title }}</td>
+            <th scope="row">Utilisateur</th>
+            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
           </tr>
           <tr>
-            <th scope="row">Prénom</th>
-            <td>{{ workshop.title }}</td>
+            <th scope="row">Commentaire {{ index+1 }}</th>
+            <td>{{ comment.comment }}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Date</th>
+            <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
           </tr>
           <tr>
-            <th scope="row">Email</th>
-            <td>{{ workshop.title }}</td>
+            <th scope="row">Visible</th>
+            <td><input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
+                     [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}"></td>
           </tr>
-          <tr>
-            <th scope="row">Telephone</th>
-            <td>{{ workshop.title }}</td>
-          </tr>
-          <tr>
-            <th scope="row" colspan="2">
-              <div class="d-flex justify-content-around">
-                <div><a class="link" routerLink="/admin/contact/edit/{{ workshop.id }}"><img class="icon"
-                                                                                             src="/assets/img/edit.png"
-                                                                                             alt="Logo éditer"></a>
-                </div>
-                <div><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
-                </div>
-              </div>
-            </th>
-          </tr>
+
           </tbody>
         </table>
       </div>
@@ -51,21 +42,22 @@
           <tr>
             <th scope="col-3">Atelier</th>
             <th scope="col-5">Commentaire</th>
-            <th scope="col-3">Utilisateur</th>
+            <th scope="col-2">Utilisateur</th>
             <th scope="col-1">Date/Heure</th>
+            <th scope="col-1">Visible</th>
           </tr>
           </thead>
           <tbody *ngFor="let workshop of workshops">
           <tr *ngFor="let comment of workshop.comments">
-            <th scope="row">{{ workshop.title }}</th>
-            <th>{{ comment.comment }}</th>
-            <th>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</th>
-            <th>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</th>
+            <td>{{ workshop.title }}</td>
+            <td>{{ comment.comment }}</td>
+            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
+            <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
             <td class="text-end td-edit">
-              <label (click)="confirm(comment.id)" class="form-check-label" for="flexSwitchCheckChecked{{comment.id}}">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
+              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
             </td>
+              <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
           </tr>
           </tbody>
         </table>
