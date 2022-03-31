@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     private title: Title,
     private tokenStorageService: TokenStorageService,
     private workshopService: WorkshopService) {
-      this.title.setTitle("OriginalDIY - Accueil");
+    this.title.setTitle("OriginalDIY - Accueil");
   }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  showWorkshop(id: any):void {
+  showWorkshop(id: any): void {
     this.workshopService.getByIdHome(id).subscribe({
       next: (datas) => {
         this.workshop = datas;
