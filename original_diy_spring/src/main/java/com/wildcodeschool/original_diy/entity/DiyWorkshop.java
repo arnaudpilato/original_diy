@@ -36,7 +36,6 @@ public class DiyWorkshop {
     @ManyToMany
     private List<DiyUser> reservationUser;
 
-
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
