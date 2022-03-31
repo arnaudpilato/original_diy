@@ -1,6 +1,7 @@
 package com.wildcodeschool.original_diy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -35,7 +36,6 @@ public class DiyWorkshop {
     @ManyToMany
     private List<DiyUser> reservationUser;
 
-
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
@@ -45,6 +45,7 @@ public class DiyWorkshop {
 
     @OneToMany(mappedBy = "diyWorkshop", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("id DESC")
+    @JsonManagedReference("workshopComment")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
 
     private Double longitude;

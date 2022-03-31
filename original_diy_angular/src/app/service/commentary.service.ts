@@ -32,4 +32,8 @@ export class CommentaryService {
   delete(id: any): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }
+
+  confirmed(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + "confirm/" + id);
+  }
 }
