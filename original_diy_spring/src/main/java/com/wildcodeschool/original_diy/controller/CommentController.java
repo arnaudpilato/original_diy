@@ -35,7 +35,6 @@ public class CommentController {
     @RequestMapping("/confirm/{id}")
         public void changeConfirmation(@PathVariable("id") Long id) {
         DiyComment comment = commentRepository.getById(id);
-        System.out.println(comment.getId());
         boolean status = comment.isConfirmed();
         if (status) {
             comment.setConfirmed(false);

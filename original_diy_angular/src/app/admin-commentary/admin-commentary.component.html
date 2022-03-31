@@ -49,9 +49,10 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th scope="col">Atelier</th>
-            <th scope="col">Commentaire</th>
-            <th scope="col">Utilisateur</th>
+            <th scope="col-3">Atelier</th>
+            <th scope="col-5">Commentaire</th>
+            <th scope="col-3">Utilisateur</th>
+            <th scope="col-1">Date/Heure</th>
           </tr>
           </thead>
           <tbody *ngFor="let workshop of workshops">
@@ -59,9 +60,10 @@
             <th scope="row">{{ workshop.title }}</th>
             <th>{{ comment.comment }}</th>
             <th>{{ comment.diyUser }}</th>
+            <th>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</th>
             <td class="text-end td-edit">
-              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked" name="confirmation"
+              <label (click)="confirm(comment.id)" class="form-check-label" for="flexSwitchCheckChecked{{comment.id}}">Visible</label>
+              <input class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
             </td>
           </tr>
