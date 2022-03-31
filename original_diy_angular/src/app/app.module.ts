@@ -37,6 +37,7 @@ import { WorskhopProfilComponent } from './worskhop-profil/worskhop-profil.compo
 import { AddWorkshopComponent } from './add-workshop/add-workshop.component';
 import { CommentaryComponent } from './commentary/commentary.component';
 import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-index.component';
+import { AdminCommentaryComponent } from './admin-commentary/admin-commentary.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-
     WorskhopProfilComponent,
     AddWorkshopComponent,
     CommentaryComponent,
-    UserWorkshopIndexComponent
+    UserWorkshopIndexComponent,
+    AdminCommentaryComponent
   ],
   imports: [
     BrowserModule,
