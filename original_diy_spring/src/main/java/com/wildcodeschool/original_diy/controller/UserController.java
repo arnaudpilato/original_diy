@@ -31,7 +31,7 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyUser>> getAllUsers() {
         try {
