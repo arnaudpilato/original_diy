@@ -59,7 +59,7 @@
           <tr *ngFor="let comment of workshop.comments">
             <th scope="row">{{ workshop.title }}</th>
             <th>{{ comment.comment }}</th>
-            <th>{{ comment.diyUser }}</th>
+            <th>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</th>
             <th>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</th>
             <td class="text-end td-edit">
               <label (click)="confirm(comment.id)" class="form-check-label" for="flexSwitchCheckChecked{{comment.id}}">Visible</label>
