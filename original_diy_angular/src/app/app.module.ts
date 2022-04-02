@@ -38,6 +38,7 @@ import { AddWorkshopComponent } from './add-workshop/add-workshop.component';
 import { CommentaryComponent } from './commentary/commentary.component';
 import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-index.component';
 import { AdminCommentaryComponent } from './admin-commentary/admin-commentary.component';
+import { WorkshopReservationComponent } from './workshop-reservation/workshop-reservation.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { AdminCommentaryComponent } from './admin-commentary/admin-commentary.co
     AddWorkshopComponent,
     CommentaryComponent,
     UserWorkshopIndexComponent,
-    AdminCommentaryComponent
+    AdminCommentaryComponent,
+    WorkshopReservationComponent
   ],
   imports: [
     BrowserModule,

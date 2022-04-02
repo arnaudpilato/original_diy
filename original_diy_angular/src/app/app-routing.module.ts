@@ -31,6 +31,7 @@ import {WorskhopProfilComponent} from "./worskhop-profil/worskhop-profil.compone
 import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
 import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
 import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
+import {WorkshopReservationComponent} from "./workshop-reservation/workshop-reservation.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'atelier-utilisateur', component: WorskhopProfilComponent },
   { path: 'creation-atelier', component: AddWorkshopComponent },
   { path: 'mes-ateliers', component: UserWorkshopIndexComponent },
+  { path: 'mes-inscriptions', component: WorkshopReservationComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

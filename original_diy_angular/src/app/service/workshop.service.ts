@@ -28,6 +28,9 @@ export class WorkshopService {
     return this.http.get<DiyWorkshop[]>(this.baseUrl + "last-workshops");
   }
 
+  getReservationByCurrentUser(): Observable<any> {
+    return this.http.get(this.baseUrl + "reservation-by-current-user");
+  }
 
   getById(id: any): Observable<DiyWorkshop> {
     return this.http.get(this.baseUrl + "get/" + id);
@@ -56,4 +59,6 @@ export class WorkshopService {
   deleteReservation(id: any): Observable<any> {
     return this.http.delete(this.baseUrl + "reservation/delete/" + id);
   }
+
+
 }
