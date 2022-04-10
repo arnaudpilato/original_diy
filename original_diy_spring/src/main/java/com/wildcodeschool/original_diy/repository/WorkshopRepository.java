@@ -23,7 +23,7 @@ public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
     @Query(value = "SELECT w FROM DiyWorkshop  w WHERE w.diyUser = :diyUser")
     public List<DiyWorkshop> getDiyWorkshopByDiyUserId(@Param("diyUser") DiyUser diyUser);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM original.workshops AS w JOIN workshops_reservation_user AS wru ON wru.diy_workshop_id = w.id WHERE wru.reservation_user_id = :diyUserId ")
+    @Query(nativeQuery = true, value = "SELECT * FROM workshops AS w JOIN workshops_reservation_user AS wru ON wru.diy_workshop_id = w.id WHERE wru.reservation_user_id = :diyUserId ")
     public List<DiyWorkshop> getDiyWorkshopByReservationUser(@Param("diyUserId") Long diyUserId);
 
 }
