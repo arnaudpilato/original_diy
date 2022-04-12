@@ -5,16 +5,15 @@
 entity user {
     id
     username
-    password
-    mail
-    role
-}
-
-entity profile {
-    first_name
-    last_name
-    address
+    firstName
+    lastName
     phone
+    email
+    password
+    role
+    diyComments
+    workshops
+    badges
 }
 
 entity workshop {
@@ -25,29 +24,64 @@ entity workshop {
     street
     postcode
     city
+    reservationUser
+    date
     description
+    comments
+    longitude
+    latitude
+    diyUser
     numberOfPeople
-    boolean confirmation
+    confirmation
 }
 
 entity comment {
     id
     comment
     created_at
+    diyWorkshop
+    diyUser
     boolean confirmation
 }
 
-entity inscription {
+
+entity Badge {
     id
-    workshop_id
-    user_id
+    name
+    picturePath
 }
 
-user "1.1" -- "1.1" profile
+entity footer {
+    id
+    name
+    socialNetworkPath
+    picturePath
+    visible
+}
+
+entity role {
+    id
+    name
+
+}
+
+entity WorkshopReservationUser {
+userID
+workshopID
+
+}
+
+
+
+
+
+
+user "m" -- "1" workshop
+user "m" -- "1" Badge
 comment "m" -- "1" workshop
 comment "m" -- "1" user
-inscription "m" -- "m" user
-inscription "m" -- "m" workshop
+workshop "m" -- "m" WorkshopReservationUser
+WorkshopReservationUser "1" -- "1" user
 workshop "m" -- "1" user
 
 @enduml
