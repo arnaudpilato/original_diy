@@ -1,11 +1,98 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!pragma layout smetana
+!theme aws-orange
 
-autonumber
+entity background {
+   id
+   name
+   picturePath
+   visible
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+entity badge {
+   id
+   name
+   picturePath
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+entity comment {
+   id
+   comment
+   confirmed
+   created_at
+
+   user_id
+   workshop_id
+}
+
+entity footer {
+   id
+   name
+   picturePath
+   socialNetworkPath
+   visible
+}
+
+entity role {
+   id
+   name
+}
+
+entity user {
+   id
+   username
+   firstName
+   lastName
+   password
+   phone
+   email
+}
+
+entity workshop {
+   id
+   city
+   confirmation
+   date
+   description
+   latitude
+   longitude
+   picturePath
+   postCode
+   street
+   streetNumber
+   title
+
+   user_id
+}
+
+user "1.n" -- "1.n" badge
+user "1.n" -- "1.n" comment
+user "1.n" -- "1.n" role
+user "1.n" -- "1.1" workshop
+user "1.n" -- "1.1" workshop_reservation_user
+workshop "1.n" -- "1.1" workshop_reservation_user
+
+(user, badge) .. user_badge
+(user, comment) .. user_comment
+(user, role) .. user_role
+
+class user_role {
+   user_id
+   role_id
+}
+
+class user_comment {
+   user_id
+   comment_id
+}
+
+class user_badge {
+   user_id
+   badge_id
+}
+
+class workshop_reservation_user {
+   workshop_id
+   reservation_user_id
+}
 @enduml

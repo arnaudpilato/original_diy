@@ -7,8 +7,38 @@
   </div>
 
   <div class="row">
-    <div class="col-8">
-
+    <div class="col">
+        <div class="table-responsive d-none d-md-block my-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Badge</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" colspan="2">Modifier</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let badge of badges; let index = index">
+                        <td>{{ index + 1 }}</td>
+                        <td><img class="badge-picture" src="{{ s3 + badge.picturePath }}" alt="Badge"></td>
+                        <td>{{ badge.name }}</td>
+                        <td>{{ badge.description }}</td>
+                        <td class="text-end td-edit">
+                            <a routerLink="/admin/badge/edit/{{badge.id}}" class="link">
+                                <img class="icon" src="/assets/img/edit.png" alt="Logo éditer">
+                            </a>
+                        </td>
+                        <td class="td-delete">
+                            <a class="link" (click)="deleteBadge(badge.id, badge.picturePath)">
+                                <img class="icon" src="/assets/img/delete.png" alt="Logo supprimer">
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
   </div>
 </div>
