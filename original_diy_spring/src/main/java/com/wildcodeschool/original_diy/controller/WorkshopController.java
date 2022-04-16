@@ -102,7 +102,7 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/worskhop-by-user")
     public ResponseEntity<List<DiyWorkshop>> getWorkshopByUserId(Authentication authentication) {
         DiyUser user = userRepository.getUserByUsername(authentication.getName());
@@ -211,7 +211,6 @@ public class WorkshopController {
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
 
-
             workshopRepository.save(workshop);
 
             return new ResponseEntity<>(workshopRepository.save(workshop), HttpStatus.OK);
@@ -239,27 +238,54 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PatchMapping("worskhop/reservation/{id}")
     public ResponseEntity<HttpStatus> workshopReservation(@PathVariable("id") Long id, Authentication authentication) {
         try {
 
-            List<DiyUser> users = new ArrayList<>();
-
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
 
-
-            users.addAll(workshop.getReservationUser());
-            users.add(user);
-
-            if ((!workshop.getReservationUser().contains(user))) {
-
-                workshop.setReservationUser(users);
-                workshopRepository.save(workshop);
-            }
+            workshopService.reservationWorkshop(user, workshop);
 
             return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @DeleteMapping("reservation/delete/{id}")
+    public ResponseEntity<HttpStatus> workshopReservationDelete(@PathVariable("id") Long id,
+                                                                Authentication authentication) {
+        try {
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+            DiyWorkshop workshop = workshopRepository.getById(id);
+
+            workshopService.reservationDelete(user, workshop);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/reservation-by-current-user")
+    public ResponseEntity<List<DiyWorkshop>> workshopReservationByCurrentUser(Authentication authentication) {
+        try {
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+
+            List<DiyWorkshop> workshops = workshopRepository.getDiyWorkshopByReservationUser(user.getId());
+
+            if (workshops.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(workshops, HttpStatus.OK);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

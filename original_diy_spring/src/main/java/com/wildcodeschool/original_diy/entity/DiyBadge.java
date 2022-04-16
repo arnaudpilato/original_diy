@@ -15,6 +15,8 @@ public class DiyBadge {
 
     private String picturePath;
 
+    private String description;
+
     public Long getId() {
         return id;
     }
@@ -37,5 +39,13 @@ public class DiyBadge {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

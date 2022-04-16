@@ -1,6 +1,7 @@
 package com.wildcodeschool.original_diy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -51,8 +52,6 @@ public class DiyUser {
     @Size(max = 100)
     private String password;
 
-
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -60,11 +59,13 @@ public class DiyUser {
     )
     private Set<DiyRole> roles = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<DiyComment> diyComments = new ArrayList<>();
+
 
     @OneToMany(
             mappedBy = "diyUser",
@@ -72,6 +73,7 @@ public class DiyUser {
             orphanRemoval = true
     )
     @OrderBy("id DESC")
+    @JsonIgnore
     private List<DiyWorkshop> workshops;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -90,14 +92,6 @@ public class DiyUser {
         this.password = password;
     }
 
-    public List<DiyWorkshop> getWorkshop() {
-        return workshops;
-    }
-
-    public void setWorkshop(List<DiyWorkshop> workshop) {
-        this.workshops = workshop;
-    }
-
     public Long getId() {
         return id;
     }
@@ -106,7 +100,9 @@ public class DiyUser {
         this.id = id;
     }
 
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -128,22 +124,6 @@ public class DiyUser {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String mail) {
-        this.email = mail;
-    }
-
     public Long getPhone() {
         return phone;
     }
@@ -152,12 +132,20 @@ public class DiyUser {
         this.phone = phone;
     }
 
-    public List<DiyComment> getDiyComments() {
-        return diyComments;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDiyComments(List<DiyComment> diyComments) {
-        this.diyComments = diyComments;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<DiyRole> getRoles() {
@@ -168,15 +156,13 @@ public class DiyUser {
         this.roles = roles;
     }
 
-    public Set<DiyBadge> getBadges() {
-        return badges;
+    public List<DiyComment> getDiyComments() {
+        return diyComments;
     }
 
-    public void setBadges(Set<DiyBadge> badges) {
-        this.badges = badges;
+    public void setDiyComments(List<DiyComment> diyComments) {
+        this.diyComments = diyComments;
     }
-
-
 
     public List<DiyWorkshop> getWorkshops() {
         return workshops;
@@ -184,5 +170,13 @@ public class DiyUser {
 
     public void setWorkshops(List<DiyWorkshop> workshops) {
         this.workshops = workshops;
+    }
+
+    public Set<DiyBadge> getBadges() {
+        return badges;
+    }
+
+    public void setBadges(Set<DiyBadge> badges) {
+        this.badges = badges;
     }
 }

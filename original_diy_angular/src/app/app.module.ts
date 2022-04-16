@@ -37,6 +37,9 @@ import { WorskhopProfilComponent } from './worskhop-profil/worskhop-profil.compo
 import { AddWorkshopComponent } from './add-workshop/add-workshop.component';
 import { CommentaryComponent } from './commentary/commentary.component';
 import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-index.component';
+import { AdminCommentaryComponent } from './admin-commentary/admin-commentary.component';
+import { WorkshopReservationComponent } from './workshop-reservation/workshop-reservation.component';
+import { AdminBadgeEditComponent } from './admin-badge/admin-badge-edit/admin-badge-edit.component';
 
 
 @NgModule({
@@ -71,7 +74,10 @@ import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-
     WorskhopProfilComponent,
     AddWorkshopComponent,
     CommentaryComponent,
-    UserWorkshopIndexComponent
+    UserWorkshopIndexComponent,
+    AdminCommentaryComponent,
+    WorkshopReservationComponent,
+    AdminBadgeEditComponent
   ],
   imports: [
     BrowserModule,

@@ -30,6 +30,9 @@ import { ErrorComponent } from "./error/error.component";
 import {WorskhopProfilComponent} from "./worskhop-profil/worskhop-profil.component";
 import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
 import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
+import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
+import {WorkshopReservationComponent} from "./workshop-reservation/workshop-reservation.component";
+import {AdminBadgeEditComponent} from "./admin-badge/admin-badge-edit/admin-badge-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,7 +50,9 @@ const routes: Routes = [
   { path: 'admin/footer/edit/:id', component: AdminFooterEditComponent },
   { path: 'admin/badge', component: AdminBadgeComponent },
   { path: 'admin/badge/new', component: AdminBadgeNewComponent },
+  { path: 'admin/badge/edit/:id', component: AdminBadgeEditComponent },
   { path: 'admin/background', component: AdminBackgroundComponent },
+  { path: 'admin/commentary', component: AdminCommentaryComponent },
 
   { path: 'error', component: ErrorComponent },
   { path: 'error/401', component: Error401Component },
@@ -61,6 +66,7 @@ const routes: Routes = [
   { path: 'atelier-utilisateur', component: WorskhopProfilComponent },
   { path: 'creation-atelier', component: AddWorkshopComponent },
   { path: 'mes-ateliers', component: UserWorkshopIndexComponent },
+  { path: 'mes-inscriptions', component: WorkshopReservationComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

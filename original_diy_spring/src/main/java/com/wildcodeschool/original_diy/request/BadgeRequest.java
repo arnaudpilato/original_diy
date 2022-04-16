@@ -5,6 +5,8 @@ public class BadgeRequest {
 
     private String picturePath;
 
+    private String description;
+
     public String getName() {
         return name;
     }
@@ -19,5 +21,13 @@ public class BadgeRequest {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

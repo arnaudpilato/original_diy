@@ -1,18 +1,18 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-    <h1 class="text-center my-4">Ajouter un badge</h1>
+    <h1 class="text-center my-4">Modifier un badge</h1>
     <div class="text-end d-flex justify-content-end">
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
     <div class="row justify-content-center">
         <div class="col-11 col-md-5">
-            <form method="post" class="my-3" (ngSubmit)="badgeNewForm.form.valid && onSubmit()" #badgeNewForm="ngForm" name="form" novalidate>
+            <form method="post" class="my-3" (ngSubmit)="badgeEditForm.form.valid && onSubmit()" #badgeEditForm="ngForm" name="form" novalidate>
                 <div class="justify-content-between"
-                     *ngIf="badgeNewForm.submitted && isSignUpFailed">
+                     *ngIf="badgeEditForm.submitted && isSignUpFailed">
                     <div class="alert alert-warning">La création du badge à échouée !<br/>{{ errorMessage }}</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="name">Nom du badge :</label>
-                    <input class="form-control" id="name" name="name" [(ngModel)]="model.name"  type="text" required>
+                    <input class="form-control" id="name" name="name" [(ngModel)]="badge.name"  type="text" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="picture">Image du badge :</label>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Description :</label>
-                    <textarea class="form-control" id="description" name="name" rows="4" [(ngModel)]="model.description"  type="text"></textarea>
+                    <textarea class="form-control" id="description" name="name" rows="4" [(ngModel)]="badge.description"  type="text"></textarea>
                 </div>
                 <div class="text-center my-3">
                     <button class="btn btn-primary m-1">Ajouter</button>
@@ -32,5 +32,5 @@
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

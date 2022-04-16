@@ -1,53 +1,98 @@
 @startuml
 !pragma layout smetana
-!theme reddress-darkorange
+!theme aws-orange
 
-entity user {
-    id
-    username
-    password
-    mail
-    role
+entity background {
+   id
+   name
+   picturePath
+   visible
 }
 
-entity profile {
-    first_name
-    last_name
-    address
-    phone
-}
-
-entity workshop {
-    id
-    title
-    picture
-    street_number
-    street
-    postcode
-    city
-    description
-    numberOfPeople
-    boolean confirmation
+entity badge {
+   id
+   name
+   picturePath
 }
 
 entity comment {
-    id
-    comment
-    created_at
-    boolean confirmation
+   id
+   comment
+   confirmed
+   created_at
+
+   user_id
+   workshop_id
 }
 
-entity inscription {
-    id
-    workshop_id
-    user_id
+entity footer {
+   id
+   name
+   picturePath
+   socialNetworkPath
+   visible
 }
 
-user "1.1" -- "1.1" profile
-comment "m" -- "1" workshop
-comment "m" -- "1" user
-inscription "m" -- "m" user
-inscription "m" -- "m" workshop
-workshop "m" -- "1" user
+entity role {
+   id
+   name
+}
 
+entity user {
+   id
+   username
+   firstName
+   lastName
+   password
+   phone
+   email
+}
+
+entity workshop {
+   id
+   city
+   confirmation
+   date
+   description
+   latitude
+   longitude
+   picturePath
+   postCode
+   street
+   streetNumber
+   title
+
+   user_id
+}
+
+user "1.n" -- "1.n" badge
+user "1.n" -- "1.n" comment
+user "1.n" -- "1.n" role
+user "1.n" -- "1.1" workshop
+user "1.n" -- "1.1" workshop_reservation_user
+workshop "1.n" -- "1.1" workshop_reservation_user
+
+(user, badge) .. user_badge
+(user, comment) .. user_comment
+(user, role) .. user_role
+
+class user_role {
+   user_id
+   role_id
+}
+
+class user_comment {
+   user_id
+   comment_id
+}
+
+class user_badge {
+   user_id
+   badge_id
+}
+
+class workshop_reservation_user {
+   workshop_id
+   reservation_user_id
+}
 @enduml
