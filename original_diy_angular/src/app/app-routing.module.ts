@@ -32,6 +32,7 @@ import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
 import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
 import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
 import {WorkshopReservationComponent} from "./workshop-reservation/workshop-reservation.component";
+import {AdminBadgeEditComponent} from "./admin-badge/admin-badge-edit/admin-badge-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
   { path: 'admin/footer/edit/:id', component: AdminFooterEditComponent },
   { path: 'admin/badge', component: AdminBadgeComponent },
   { path: 'admin/badge/new', component: AdminBadgeNewComponent },
+  { path: 'admin/badge/edit/:id', component: AdminBadgeEditComponent },
   { path: 'admin/background', component: AdminBackgroundComponent },
   { path: 'admin/commentary', component: AdminCommentaryComponent },
 

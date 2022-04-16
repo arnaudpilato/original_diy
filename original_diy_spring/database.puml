@@ -1,87 +1,98 @@
 @startuml
 !pragma layout smetana
-!theme reddress-darkorange
+!theme aws-orange
 
-entity user {
-    id
-    username
-    firstName
-    lastName
-    phone
-    email
-    password
-    role
-    diyComments
-    workshops
-    badges
+entity background {
+   id
+   name
+   picturePath
+   visible
 }
 
-entity workshop {
-    id
-    title
-    picture
-    street_number
-    street
-    postcode
-    city
-    reservationUser
-    date
-    description
-    comments
-    longitude
-    latitude
-    diyUser
-    numberOfPeople
-    confirmation
+entity badge {
+   id
+   name
+   picturePath
 }
 
 entity comment {
-    id
-    comment
-    created_at
-    diyWorkshop
-    diyUser
-    boolean confirmation
-}
+   id
+   comment
+   confirmed
+   created_at
 
-
-entity Badge {
-    id
-    name
-    picturePath
+   user_id
+   workshop_id
 }
 
 entity footer {
-    id
-    name
-    socialNetworkPath
-    picturePath
-    visible
+   id
+   name
+   picturePath
+   socialNetworkPath
+   visible
 }
 
 entity role {
-    id
-    name
-
+   id
+   name
 }
 
-entity WorkshopReservationUser {
-userID
-workshopID
-
+entity user {
+   id
+   username
+   firstName
+   lastName
+   password
+   phone
+   email
 }
 
+entity workshop {
+   id
+   city
+   confirmation
+   date
+   description
+   latitude
+   longitude
+   picturePath
+   postCode
+   street
+   streetNumber
+   title
 
+   user_id
+}
 
+user "1.n" -- "1.n" badge
+user "1.n" -- "1.n" comment
+user "1.n" -- "1.n" role
+user "1.n" -- "1.1" workshop
+user "1.n" -- "1.1" workshop_reservation_user
+workshop "1.n" -- "1.1" workshop_reservation_user
 
+(user, badge) .. user_badge
+(user, comment) .. user_comment
+(user, role) .. user_role
 
+class user_role {
+   user_id
+   role_id
+}
 
-user "m" -- "1" workshop
-user "m" -- "1" Badge
-comment "m" -- "1" workshop
-comment "m" -- "1" user
-workshop "m" -- "m" WorkshopReservationUser
-WorkshopReservationUser "1" -- "1" user
-workshop "m" -- "1" user
+class user_comment {
+   user_id
+   comment_id
+}
 
+class user_badge {
+   user_id
+   badge_id
+}
+
+class workshop_reservation_user {
+   workshop_id
+   reservation_user_id
+}
 @enduml

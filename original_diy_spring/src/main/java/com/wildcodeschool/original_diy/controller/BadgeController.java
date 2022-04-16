@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -46,6 +47,7 @@ public class BadgeController {
 
             badge.setName(badgeRequest.getName());
             badge.setPicturePath(badgeRequest.getPicturePath());
+            badge.setDescription(badgeRequest.getDescription());
 
             badgeRepository.save(badge);
 
@@ -53,6 +55,37 @@ public class BadgeController {
         } catch (Exception e) {
 
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/get/{id}")
+    public ResponseEntity<DiyBadge> getBadgeById(@PathVariable("id") long id) {
+        Optional<DiyBadge> badge = badgeRepository.findById(id);
+
+        if (badge.isPresent()) {
+            return new ResponseEntity<>(badge.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<DiyBadge> updateBadge(@PathVariable("id") long id, @RequestBody BadgeRequest badgeRequest) {
+        Optional<DiyBadge> badgeData = badgeRepository.findById(id);
+
+        if (badgeData.isPresent()) {
+            DiyBadge badge = badgeData.get();
+
+            badge.setName(badgeRequest.getName());
+            badge.setPicturePath(badgeRequest.getPicturePath());
+            badge.setDescription(badgeRequest.getDescription());
+
+            return new ResponseEntity<>(badgeRepository.save(badge), HttpStatus.OK);
+        } else {
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

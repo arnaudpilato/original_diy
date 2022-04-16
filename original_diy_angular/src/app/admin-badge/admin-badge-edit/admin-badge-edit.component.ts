@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from "../../service/token-storage.service";
-import { Router } from "@angular/router";
-import { DiyBadge } from "../../model/badge.model";
-import { BadgeService } from "../../service/badge.service";
-import { AmazonS3Service } from "../../service/amazon-s3.service";
+import {DiyBadge} from "../../model/badge.model";
+import {TokenStorageService} from "../../service/token-storage.service";
+import {ActivatedRoute, Route, Router} from "@angular/router";
+import {BadgeService} from "../../service/badge.service";
+import {AmazonS3Service} from "../../service/amazon-s3.service";
 
 @Component({
-  selector: 'app-admin-badge-new',
-  templateUrl: './admin-badge-new.component.html',
-  styleUrls: ['./admin-badge-new.component.scss']
+  selector: 'app-admin-badge-edit',
+  templateUrl: './admin-badge-edit.component.html',
+  styleUrls: ['./admin-badge-edit.component.scss']
 })
-export class AdminBadgeNewComponent implements OnInit {
+export class AdminBadgeEditComponent implements OnInit {
   private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
-  public model: DiyBadge = new DiyBadge();
+  public badge: DiyBadge = new DiyBadge();
   public currentFileUpload: any;
   public selectedFiles: any;
   public nameFile: any = null;
@@ -26,7 +26,8 @@ export class AdminBadgeNewComponent implements OnInit {
       private tokenStorageService: TokenStorageService,
       private router: Router,
       private badgeService: BadgeService,
-      private amazonS3Service: AmazonS3Service,) { }
+      private amazonS3Service: AmazonS3Service,
+      private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -35,6 +36,7 @@ export class AdminBadgeNewComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.getBadge(this.route.snapshot.params["id"]);
     }
   }
 
@@ -48,11 +50,22 @@ export class AdminBadgeNewComponent implements OnInit {
     this.changeImage = true;
   }
 
+  getBadge(id: string): void {
+    this.badgeService.getById(id).subscribe({
+      next: (data) => {
+        this.badge = data;
+        console.log(data);
+      },
+
+      error: (err) => console.error(err)
+    });
+  }
+
   onSubmit() {
     const data = {
-      name: this.model.name,
+      name: this.badge.name,
       picturePath: this.nameFile,
-      description: this.model.description
+      description: this.badge.description
     };
 
     if (this.selectedFiles != null) {
@@ -62,17 +75,13 @@ export class AdminBadgeNewComponent implements OnInit {
       });
     }
 
-    this.badgeService.create(data).subscribe({
+    this.badgeService.update(this.badge.id, data).subscribe({
       next: (data) => {
-        console.log(data)
+        console.log(data);
         this.router.navigate(['/admin/badge']);
       },
 
-      error: (e) => {
-        console.error(e)
-        this.isSignUpFailed = true;
-        this.errorMessage = e.error.message;
-      }
+      error: (err) => console.error(err)
     });
   }
 }
