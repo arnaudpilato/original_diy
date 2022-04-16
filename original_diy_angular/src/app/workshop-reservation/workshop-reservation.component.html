@@ -8,26 +8,26 @@
   <div class="row justify-content-around d-flex my-5">
 
     <div class="card col-md-3 my-2 p-0 " *ngFor="let workshop of workshops; let index = index">
-      <a href="#">
-        <img class="workshop-picture rounded img-fluid"
+      <a href="#" class="">
+        <img class="workshop-picture  w-100 img-fluid"
              src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
              alt="Image de l'atelier">
       </a>
       <div class="card-body">
         <h5 class="card-title">{{ workshop.title }}</h5>
-        <p class="card-text" [innerHTML]="workshop.description | nl2br"></p>
+        <p class="card-text mt-3 " [innerHTML]="workshop.description | nl2br"></p>
         <p>date de l'atelier : {{workshop.date | date : 'dd/MM/yyyy' }}</p>
         <p>heure de l'atelier : {{workshop.date | date : 'HH:mm' }}</p>
         <div class="row justify-content-around d-flex">
           <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
              class="btn btn-primary col-lg-5 ">Détails</a>
           <button type="button" class="btn btn-danger  col-lg-5" data-bs-toggle="modal"
-                  [attr.data-bs-target]="'#exampleModal' + index">
+                  [attr.data-bs-target]="'#modal' + index">
             Annuler
           </button>
         </div>
       </div>
-      <div class="modal fade" [attr.id]="'exampleModal' + index" tabindex="-1" aria-labelledby="modalLabel"
+      <div class="modal fade" [attr.id]="'modal' + index" tabindex="-1" aria-labelledby="modalLabel"
            aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
