@@ -6,20 +6,20 @@
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
       </div>
       <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
+        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops">
           <thead>
           <tr>
             <th class="text-danger" scope="col">{{ workshop.title }}</th>
             <th scope="col">information</th>
           </tr>
           </thead>
-          <tbody *ngFor="let comment of workshop.comments">
+          <tbody *ngFor="let comment of workshop.comments; let index = index">
           <tr>
             <th scope="row">Utilisateur</th>
             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
           </tr>
           <tr>
-            <th scope="row">Commentaire {{ index+1 }}</th>
+            <th scope="row">Comments {{ index+1 }}</th>
             <td>{{ comment.comment }}</td>
           </tr>
 
@@ -40,11 +40,11 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th scope="col-3">Atelier</th>
-            <th scope="col-5">Commentaire</th>
-            <th scope="col-2">Utilisateur</th>
-            <th scope="col-1">Date/Heure</th>
-            <th scope="col-1">Visible</th>
+            <th scope="col">Atelier</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Utilisateur</th>
+            <th scope="col">Date/Heure</th>
+            <th scope="col">Visible</th>
           </tr>
           </thead>
           <tbody *ngFor="let workshop of workshops">
