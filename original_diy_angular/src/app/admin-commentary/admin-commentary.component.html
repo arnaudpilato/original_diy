@@ -57,7 +57,6 @@
               <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
             </td>
-              <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/edit.png" alt="Logo edit"></a></td>
             <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
           </tr>
           </tbody>
