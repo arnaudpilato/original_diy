@@ -20,7 +20,7 @@
           </tr>
           <tr>
             <th scope="row">Comments {{ index+1 }}</th>
-            <td>{{ comment.comment }}</td>
+            <td [innerHTML]="comment.comment | nl2br"></td>
           </tr>
 
           <tr>
@@ -50,14 +50,15 @@
           <tbody *ngFor="let workshop of workshops">
           <tr *ngFor="let comment of workshop.comments">
             <td>{{ workshop.title }}</td>
-            <td>{{ comment.comment }}</td>
+            <td [innerHTML]="comment.comment | nl2br"></td>
             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
             <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
             <td class="text-end td-edit">
               <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
             </td>
-              <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
+              <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/edit.png" alt="Logo edit"></a></td>
+            <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
           </tr>
           </tbody>
         </table>

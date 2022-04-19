@@ -53,13 +53,17 @@ export class CommentaryComponent implements OnInit {
   }
 
   onSubmit() {
+
     const data: any = {
       comment: this.model.comment,
       diyWorkshopId: this.diyWorkshopId,
     }
     this.commentaryService.create(data).subscribe({
       next: (data) => {
+        console.log("DATAAAAAAAAAAAAAAAAAAAA"+ data.id)
+/*
         window.location.reload();
+*/
       },
       error: (e) => {
       }
