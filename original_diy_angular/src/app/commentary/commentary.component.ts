@@ -60,10 +60,7 @@ export class CommentaryComponent implements OnInit {
     }
     this.commentaryService.create(data).subscribe({
       next: (data) => {
-        console.log("DATAAAAAAAAAAAAAAAAAAAA"+ data.id)
-/*
         window.location.reload();
-*/
       },
       error: (e) => {
       }
