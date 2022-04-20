@@ -9,15 +9,24 @@
     </div>
     <div class="row justify-content-around my-3 ">
       <div *ngFor="let workshop of workshops" class="card p-0 my-2 rounded" style="width: 18rem;">
-        <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
+        <img src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}"
+             alt="Image de l'atelier">
         <div class="card-body">
           <h5 class="card-title">{{workshop.title}}</h5>
-          <p class="text-break card-text d-inline-block text-truncate my-3" style="max-width: 200px;"
-           [innerHTML]="workshop.description | nl2br"></p>
-          <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
-             class="btn btn-info text-center d-flex ">
-            Voir les détails
-          </a>
+
+          <p class="card-text col text-truncate my-3"
+             [innerHTML]="workshop.description | nl2br | truncate:[30, '...'] "></p>
+          <div class="text-muted my-2">
+          date : {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}
+        </div>
+          <div class="justify-content-center text-center">
+
+            <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
+               class="btn btn-primary">
+              Voir les détails
+            </a>
+          </div>
+
         </div>
       </div>
     </div>
