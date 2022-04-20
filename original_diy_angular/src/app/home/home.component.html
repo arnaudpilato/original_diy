@@ -15,7 +15,7 @@
           <h5 class="card-title">{{workshop.title}}</h5>
 
           <p class="card-text col text-truncate my-3"
-             [innerHTML]="workshop.description | nl2br | truncate:[30, '...'] "></p>
+             [innerHTML]="workshop.description | nl2br | truncate:[33, '...'] "></p>
           <div class="text-muted my-2">
           date : {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}
         </div>
