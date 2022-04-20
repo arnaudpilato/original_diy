@@ -186,7 +186,6 @@ public class UserController {
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         try {
         DiyUser user = userRepository.getById(id);
-        System.out.println(user.getUsername());
         List<DiyComment> commentList = user.getComments();
         List<DiyWorkshop> workshopList = user.getWorkshops();
 
@@ -200,7 +199,6 @@ public class UserController {
         }
 
             userRepository.deleteById(id);
-
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {

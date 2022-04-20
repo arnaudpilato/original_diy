@@ -1,24 +1,25 @@
-<h1 class="text-center my-4 ">Ajout d'un commentaire</h1>
-<div class="row justify-content-center">
+<h1 class="text-center my-4 ">Vos questions :</h1>
+<div class="row justify-content-center" *ngIf="isLoggedIn">
   <div class="col-11 col-md-8 col-lg-5">
     <form method="post" class="my-3" (ngSubmit)="commentaryNewForm.form.valid && onSubmit()" #commentaryNewForm="ngForm"
           name="form" novalidate>
       <div class="row">
         <div class="mb-3">
-          <label class="form-label" for="title">Commentaire :</label>
+          <label class="form-label" for="title">Question :</label>
           <ckeditor [editor]="Editor" class="form-control" id="title" name="title" [(ngModel)]="model.comment"
                     type="text" placeholder="commentaire ...">
           </ckeditor>
         </div>
         <div class="text-center my-3">
-          <button class="btn btn-primary m-1">Ajouter</button>
-          <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
+          <button class="btn btn-primary m-1" *ngIf="isLoggedIn">Ajouter</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-
+<button class="btn  btn-danger my-5" *ngIf="!isLoggedIn">
+  <a href="/login" class="text-white"> Connectez-vous pour poser une question</a>
+</button>
 <div class="container" *ngIf="comments.length >= 1">
   <div class="row">
     <b class="col-8 text-center">

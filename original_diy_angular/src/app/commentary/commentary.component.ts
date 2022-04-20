@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DiyComment} from "../model/commentary.model";
 import {ActivatedRoute} from "@angular/router";
 import {CommentaryService} from "../service/commentary.service";
@@ -15,6 +15,7 @@ export class CommentaryComponent implements OnInit {
   public model: any = new DiyComment();
   public diyWorkshopId: number | undefined;
   public Editor = ClassicEditor;
+  @Input() isLoggedIn: any;
 
   constructor(private commentaryService: CommentaryService, private route: ActivatedRoute, private router: Router,
 ) {

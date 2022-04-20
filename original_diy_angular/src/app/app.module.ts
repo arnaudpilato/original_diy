@@ -40,6 +40,7 @@ import { UserWorkshopIndexComponent } from './user-workshop-index/user-workshop-
 import { AdminCommentaryComponent } from './admin-commentary/admin-commentary.component';
 import { WorkshopReservationComponent } from './workshop-reservation/workshop-reservation.component';
 import { AdminBadgeEditComponent } from './admin-badge/admin-badge-edit/admin-badge-edit.component';
+import {TruncatePipe} from "./TruncatePipe";
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { AdminBadgeEditComponent } from './admin-badge/admin-badge-edit/admin-ba
     UserWorkshopIndexComponent,
     AdminCommentaryComponent,
     WorkshopReservationComponent,
-    AdminBadgeEditComponent
+    AdminBadgeEditComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

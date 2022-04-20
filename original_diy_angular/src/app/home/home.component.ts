@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {TokenStorageService} from "../service/token-storage.service";
-import * as L from "leaflet";
 import {WorkshopService} from "../service/workshop.service";
-import {DiyWorkshop} from "../model/workshop.model";
 
 @Component({
   selector: 'app-home',
