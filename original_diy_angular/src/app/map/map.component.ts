@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import * as L from 'leaflet';
-import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
 
@@ -13,6 +12,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
 
   public workshops: any[] | undefined;
+
+  public workshop: any;
 
 
   constructor(private title: Title, private workshopService: WorkshopService) {
@@ -39,7 +40,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         });
 
         this.workshops.forEach((data) => {
-
+          const id = data.id;
           const date = new Date(data.date);
           const month = date.getUTCMonth() >= 10 ? `${date.getUTCMonth()}` : `0${date.getUTCMonth()}`;
           const day = date.getUTCDate() >= 10 ? `${date.getUTCDate()}` : `0${date.getUTCDate()}`;
@@ -51,7 +52,7 @@ export class MapComponent implements OnInit, AfterViewInit {
               + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
               `<p> à : ${hours} H ${minutes}</p>`
               + "<br/>" +
-              "<button class='btn btn-primary'>Détail</button>")
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
             .openPopup;
         });
       },
@@ -102,5 +103,15 @@ export class MapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
 
+  }
+
+  showWorkshop(id: any): void {
+    this.workshopService.getById(id).subscribe({
+      next: (datas) => {
+        this.workshop = datas;
+      },
+
+      error: (err) => console.error(err)
+    });
   }
 }

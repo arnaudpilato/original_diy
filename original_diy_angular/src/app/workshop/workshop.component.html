@@ -20,7 +20,7 @@
             </div>
 
             <div class="row">
-              <p [innerHTML]="workshop.description | nl2br"></p>
+              <p [innerHTML]="(workshop.description) | nl2br"></p>
             </div>
             <div class="row my-4">
               <p>date de l'atelier : {{workshop.date | date : 'dd-MM-yyyy' }}</p>
