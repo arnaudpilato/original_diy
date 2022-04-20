@@ -25,7 +25,7 @@ import java.util.Set;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "username")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "users",uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
 public class DiyUser {
@@ -61,10 +61,11 @@ public class DiyUser {
 
     @JsonIgnore
     @OneToMany(
+            mappedBy = "diyUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<DiyComment> diyComments = new ArrayList<>();
+    private List<DiyComment> comments;
 
 
     @OneToMany(
@@ -156,12 +157,12 @@ public class DiyUser {
         this.roles = roles;
     }
 
-    public List<DiyComment> getDiyComments() {
-        return diyComments;
+    public List<DiyComment> getComments() {
+        return comments;
     }
 
-    public void setDiyComments(List<DiyComment> diyComments) {
-        this.diyComments = diyComments;
+    public void setComments(List<DiyComment> comments) {
+        this.comments = comments;
     }
 
     public List<DiyWorkshop> getWorkshops() {
