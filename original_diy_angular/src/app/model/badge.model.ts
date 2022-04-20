@@ -3,4 +3,7 @@ export class DiyBadge {
   name?: string;
   picturePath?: string;
   description?: string;
+  condition?: string;
+  step?: number;
+  peoples?: number[];
 }

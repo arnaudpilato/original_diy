@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +20,6 @@ import java.util.Set;
  * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
-
 
 @Entity
 @JsonIdentityInfo(
@@ -81,7 +82,7 @@ public class DiyUser {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "badge_id")
     )
-    private Set<DiyBadge> badges = new HashSet<>();
+    private List<DiyBadge> badges = new ArrayList<>();
 
     public DiyUser() {
     }
@@ -172,11 +173,11 @@ public class DiyUser {
         this.workshops = workshops;
     }
 
-    public Set<DiyBadge> getBadges() {
+    public List<DiyBadge> getBadges() {
         return badges;
     }
 
-    public void setBadges(Set<DiyBadge> badges) {
+    public void setBadges(List<DiyBadge> badges) {
         this.badges = badges;
     }
 }

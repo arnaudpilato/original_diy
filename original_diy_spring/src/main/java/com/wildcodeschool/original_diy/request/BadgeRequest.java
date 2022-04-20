@@ -7,6 +7,12 @@ public class BadgeRequest {
 
     private String description;
 
+    private int step;
+
+    private String condition;
+
+    private Long[] peoples;
+
     public String getName() {
         return name;
     }
@@ -30,4 +36,20 @@ public class BadgeRequest {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public String getCondition() { return condition; }
+
+    public void setCondition(String condition) { this.condition = condition; }
+
+    public Long[] getPeoples() { return peoples; }
+
+    public void setPeoples(Long[] peoples) { this.peoples = peoples; }
 }

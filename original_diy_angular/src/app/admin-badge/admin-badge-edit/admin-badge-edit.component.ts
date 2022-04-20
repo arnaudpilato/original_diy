@@ -78,10 +78,11 @@ export class AdminBadgeEditComponent implements OnInit {
     this.badgeService.update(this.badge.id, data).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin/badge']);
+        window.location.href="/admin/badge";
       },
 
       error: (err) => console.error(err)
     });
   }
+
 }

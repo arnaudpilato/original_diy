@@ -1,11 +1,14 @@
 package com.wildcodeschool.original_diy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "badges")
 public class DiyBadge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +19,19 @@ public class DiyBadge {
     private String picturePath;
 
     private String description;
+
+    private int step;
+
+    @ManyToMany(mappedBy = "badges")
+    private List<DiyUser> users;
+
+    /**
+     * Pil : Delete users associated with the badge
+     */
+    @PreRemove
+    public void onDeleteBadge() {
+        this.users = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -47,5 +63,21 @@ public class DiyBadge {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public List<DiyUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<DiyUser> users) {
+        this.users = users;
     }
 }

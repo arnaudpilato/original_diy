@@ -16,6 +16,7 @@ export class AdminBadgeComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public badges: DiyBadge[] | undefined;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public searchBadge: string = "";
 
   constructor(private tokenStorageService: TokenStorageService, private router: Router, private badgeService: BadgeService, public amazonS3Service: AmazonS3Service) { }
 
@@ -31,7 +32,9 @@ export class AdminBadgeComponent implements OnInit {
   }
 
   getAllBadges(): void {
-    this.badgeService.getAll().subscribe({
+    let param: any = {};
+    param['searchBadge'] = this.searchBadge;
+    this.badgeService.getAll(param).subscribe({
       next: (data) => {
         this.badges = data;
       },

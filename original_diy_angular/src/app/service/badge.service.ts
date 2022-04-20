@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import { DiyBadge } from "../model/badge.model";
 import { Observable } from "rxjs";
 
@@ -12,8 +12,8 @@ export class BadgeService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<DiyBadge[]> {
-    return this.http.get<DiyBadge[]>(this.baseUrl + "/all");
+  getAll(searchBadge: any): Observable<DiyBadge[]> {
+    return this.http.get<DiyBadge[]>(this.baseUrl + "/all", {searchBadge});
   }
   getById(id: any): Observable<DiyBadge> {
     return this.http.get(this.baseUrl + "/get/" + id);
