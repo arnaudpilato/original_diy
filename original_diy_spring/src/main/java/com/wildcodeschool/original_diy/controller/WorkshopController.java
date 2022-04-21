@@ -150,26 +150,14 @@ public class WorkshopController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/new/admin")
-    public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
-        try {
-            DiyWorkshop workshop = new DiyWorkshop();
-           workshopService.createWorkshopAdmin(workshopRequest, workshop);
-            return new ResponseEntity<>(workshop, HttpStatus.CREATED);
-
-        } catch (Exception e) {
-
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> createWorkshopUserAndAdmin(@Valid @RequestBody WorkshopRequest workshopRequest) {
+    public ResponseEntity<?> createWorkshopUserAndAdmin(@Valid @RequestBody WorkshopRequest workshopRequest,
+                                                        Authentication authentication) {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
-           workshopService.createWorkshopAdminAndUser(workshopRequest, workshop);
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+           workshopService.createWorkshop(workshopRequest, workshop , user);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
         } catch (Exception e) {

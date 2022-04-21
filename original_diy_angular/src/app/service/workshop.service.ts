@@ -40,11 +40,7 @@ export class WorkshopService {
     return this.http.get(this.baseUrl + "get-atelier/" + id);
   }
 
-  createAdmin(data: any): Observable<any> {
-    return this.http.post(this.baseUrl + "new/admin", data);
-  }
-
-  createAdminAndUser(data: any): Observable<any> {
+  create(data: any): Observable<any> {
     return this.http.post(this.baseUrl + "new", data);
   }
 

@@ -100,7 +100,7 @@ export class AddWorkshopComponent implements OnInit {
       });
     }
 
-    this.workshopService.createAdminAndUser(data).subscribe({
+    this.workshopService.create(data).subscribe({
       next: (data) => {
         this.router.navigate(['/mes-ateliers']);
       },
