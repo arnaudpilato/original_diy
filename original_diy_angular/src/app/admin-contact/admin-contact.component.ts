@@ -15,6 +15,7 @@ export class AdminContactComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public users: DiyUser[] | undefined;
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
 
   constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');

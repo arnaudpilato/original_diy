@@ -74,9 +74,9 @@
             </tr>
           <tr>
               <th>Badges :</th>
-              <td>
-                  <ul>
-                      <li *ngFor="let badge of user.badges">{{ badge.name }}</li>
+              <td colspan="8">
+                  <ul class="d-flex">
+                      <li class="badge-list" *ngFor="let badge of user.badges"><img class="badge-picture" src="{{ s3 + badge.picturePath }}" alt="badge"></li>
                   </ul>
               </td>
           </tr>

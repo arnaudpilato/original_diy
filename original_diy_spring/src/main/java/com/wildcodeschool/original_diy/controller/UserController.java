@@ -175,6 +175,14 @@ public class UserController {
                     badges.add(badge);
                 }
 
+                /*for (Long badgeId : userRequest.getBadgesSelected()) {
+                    DiyBadge badge = badgeRepository.getById(badgeId);
+                    System.out.println(badge.getName());
+                    badge.getUsers().add(userRepository.getById(id));
+                    System.out.println(badge);
+                    badgeRepository.save(badge);
+                }*/
+
                 user.getBadges().addAll(badges);
             }
 
