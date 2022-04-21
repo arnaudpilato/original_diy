@@ -24,7 +24,6 @@ export class AdminBadgeNewComponent implements OnInit {
   public selectedFiles: any;
   public nameFile: any = null;
   public changeImage = false;
-  public all_selected_values: string[] = [];
 
   constructor(
       private tokenStorageService: TokenStorageService,
@@ -40,28 +39,8 @@ export class AdminBadgeNewComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.model.condition = 'now';
-      this.getAllUsers();
+      this.model.condition = 'manual';
     }
-  }
-
-  onChange(value: any): void {
-    if (this.all_selected_values.includes(value)) {
-      this.all_selected_values = this.all_selected_values.filter((item) => item !== value);
-    } else {
-      this.all_selected_values.push(value);
-    }
-    console.log(this.all_selected_values);
-  }
-
-  getAllUsers(): void {
-    this.userService.getAll().subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-
-      error: (e) => console.error(e)
-    });
   }
 
   selectFile(event: any) {
@@ -81,7 +60,6 @@ export class AdminBadgeNewComponent implements OnInit {
       description: this.model.description,
       condition: this.model.condition,
       step: this.model.step,
-      peoples: this.all_selected_values,
     };
 
     if (this.selectedFiles != null) {
@@ -94,7 +72,7 @@ export class AdminBadgeNewComponent implements OnInit {
     this.badgeService.create(data).subscribe({
       next: (data) => {
         console.log(data)
-        this.router.navigate(['/admin/badge']);
+        window.location.href="/admin/badge"
       },
 
       error: (e) => {

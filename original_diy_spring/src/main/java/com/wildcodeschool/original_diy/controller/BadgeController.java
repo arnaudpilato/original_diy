@@ -27,15 +27,15 @@ public class BadgeController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<DiyBadge>> getAllBadges(@RequestParam(name = "searchBadge") String searchBadge) {
+        System.out.println(searchBadge);
         try {
             List<DiyBadge> badges = new ArrayList<>();
 
-            if (searchBadge != null) {
+            if (!Objects.equals(searchBadge, "")) {
                 badgeRepository.getBadgesByFilter(searchBadge).forEach(badges::add);
             } else {
                 badgeRepository.findAll().forEach(badges::add);
             }
-
 
             if (badges.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -58,7 +58,7 @@ public class BadgeController {
             badge.setPicturePath(badgeRequest.getPicturePath());
             badge.setDescription(badgeRequest.getDescription());
 
-            if (badgeRequest.getCondition().equals("now")) {
+            if (badgeRequest.getCondition().equals("manual")) {
                 badge.setStep(0);
             } else {
                 badge.setStep(badgeRequest.getStep());
@@ -66,28 +66,15 @@ public class BadgeController {
 
             badgeRepository.save(badge);
 
-
-
-
-            if (badgeRequest.getPeoples().length > 0) {
+            /*if (badgeRequest.getPeoples().length > 0) {
                 System.out.println("Elle est bonne la condition");
                 for (Long userId : badgeRequest.getPeoples()) {
-                    System.out.println("condition for");
                     DiyUser user = userRepository.getById(userId);
-                    System.out.println(userId);
+                    user.getBadges().add(badge);
 
-                    List<DiyBadge> badgeUser = new ArrayList<>();
-                    badgeUser.addAll(user.getBadges());
-                    System.out.println(badgeUser);
-                    badgeUser.add(badge);
-                    System.out.println(badgeUser);
-                    System.out.println(user);
-
-                    user.setBadges(badgeUser);
                     userRepository.save(user);
-                    System.out.println(badgeUser);
                 }
-            }
+            }*/
 
             return new ResponseEntity<>(badge, HttpStatus.CREATED);
         } catch (Exception e) {

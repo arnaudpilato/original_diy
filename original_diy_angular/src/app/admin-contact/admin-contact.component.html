@@ -33,7 +33,7 @@
             </tr>
             <tr>
               <th scope="row">Role</th>
-              <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
+              <td *ngIf="user.roles?.length > 0">{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
             </tr>
             <tr>
               <th scope="row" colspan="2">
@@ -60,18 +60,26 @@
               <th scope="col" colspan="2">Modifier</th>
             </tr>
           </thead>
-          <tbody>
-            <tr *ngFor="let user of users">
-              <th scope="row">Index</th>
+          <tbody *ngFor="let user of users; let index = index">
+            <tr >
+              <th scope="row">{{ index + 1 }}</th>
               <td>{{ user.username }}</td>
               <td>{{ user.lastName }}</td>
               <td>{{ user.firstName }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.phone }}</td>
-              <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
+              <td *ngIf="user.roles?.length > 0">{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
               <td class="text-end td-edit"><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
               <td class="td-delete"><a class="link" (click)="deleteUser(user.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
             </tr>
+          <tr>
+              <th>Badges :</th>
+              <td>
+                  <ul>
+                      <li *ngFor="let badge of user.badges">{{ badge.name }}</li>
+                  </ul>
+              </td>
+          </tr>
           </tbody>
         </table>
       </div>

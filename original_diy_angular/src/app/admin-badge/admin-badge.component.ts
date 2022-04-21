@@ -32,11 +32,10 @@ export class AdminBadgeComponent implements OnInit {
   }
 
   getAllBadges(): void {
-    let param: any = {};
-    param['searchBadge'] = this.searchBadge;
-    this.badgeService.getAll(param).subscribe({
+    this.badgeService.getAll(this.searchBadge).subscribe({
       next: (data) => {
         this.badges = data;
+        console.log(this.searchBadge);
       },
 
       error: (e) => console.error(e)

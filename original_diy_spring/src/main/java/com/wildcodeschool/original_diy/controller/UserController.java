@@ -1,8 +1,10 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.entity.DiyRole;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.model.ERole;
+import com.wildcodeschool.original_diy.repository.BadgeRepository;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.request.UserRequest;
@@ -30,6 +32,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BadgeRepository badgeRepository;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
@@ -162,6 +167,19 @@ public class UserController {
                     }
                 });
             }
+
+            /*if (userRequest.getBadgesSelected().length > 0) {
+                System.out.println("Elle est bonne la condition");
+                for (Long badgeId : userRequest.getBadgesSelected()) {
+                    System.out.println(badgeId);
+                    DiyBadge badge = badgeRepository.getById(badgeId);
+                    badge.getUsers().add(user);
+                    //user.getBadges().add(badge);
+
+                    System.out.println(user.getBadges());
+                    badgeRepository.save(badge);
+                }
+            }*/
 
             user.setRoles(roles);
 

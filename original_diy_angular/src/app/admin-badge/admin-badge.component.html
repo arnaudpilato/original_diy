@@ -29,6 +29,7 @@
                         <th scope="col">Badge</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Attribution</th>
                         <th scope="col" colspan="2">Modifier</th>
                     </tr>
                     </thead>
@@ -38,6 +39,9 @@
                         <td><img class="badge-picture" src="{{ s3 + badge.picturePath }}" alt="Badge"></td>
                         <td>{{ badge.name }}</td>
                         <td>{{ badge.description }}</td>
+                        <td>
+                        {{ badge.name}}
+                        </td>
                         <td class="text-end td-edit">
                             <a routerLink="/admin/badge/edit/{{badge.id}}" class="link">
                                 <img class="icon" src="/assets/img/edit.png" alt="Logo éditer">

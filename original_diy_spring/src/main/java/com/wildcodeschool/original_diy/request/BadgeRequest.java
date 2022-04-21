@@ -11,8 +11,6 @@ public class BadgeRequest {
 
     private String condition;
 
-    private Long[] peoples;
-
     public String getName() {
         return name;
     }
@@ -48,8 +46,4 @@ public class BadgeRequest {
     public String getCondition() { return condition; }
 
     public void setCondition(String condition) { this.condition = condition; }
-
-    public Long[] getPeoples() { return peoples; }
-
-    public void setPeoples(Long[] peoples) { this.peoples = peoples; }
 }

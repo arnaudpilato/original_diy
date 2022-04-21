@@ -1,3 +1,5 @@
+import {DiyUser} from "./user.model";
+
 export class DiyBadge {
   id?: number;
   name?: string;
@@ -6,4 +8,5 @@ export class DiyBadge {
   condition?: string;
   step?: number;
   peoples?: number[];
+  users?: DiyUser[];
 }

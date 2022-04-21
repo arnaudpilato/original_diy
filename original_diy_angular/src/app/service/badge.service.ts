@@ -12,8 +12,10 @@ export class BadgeService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(searchBadge: any): Observable<DiyBadge[]> {
-    return this.http.get<DiyBadge[]>(this.baseUrl + "/all", {searchBadge});
+  getAll(searchBadge: string): Observable<DiyBadge[]> {
+    let params = new HttpParams()
+        .set('searchBadge', searchBadge)
+    return this.http.get<DiyBadge[]>(this.baseUrl + "/all", {params});
   }
   getById(id: any): Observable<DiyBadge> {
     return this.http.get(this.baseUrl + "/get/" + id);

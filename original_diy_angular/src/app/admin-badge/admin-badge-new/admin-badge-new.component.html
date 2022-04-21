@@ -22,24 +22,16 @@
                     <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
                 </div>
                 <div class="mb-3 row">
-                    <div class="{{model.condition == 'now' ? 'col-md-12' : 'col-md-10'}}">
+                    <div class="{{model.condition == 'manual' ? 'col-md-12' : 'col-md-10'}}">
                         <label class="form-label" for="condition">Condition :</label>
                         <select class="form-control" id="condition" name="condition" [(ngModel)]="model.condition" #condition>
-                            <option value="now" [selected]="true">Immédiat</option>
+                            <option value="manual" [selected]="true">Manuellement</option>
                             <option value="after">Nombre d'ateliers participés</option>
                         </select>
                     </div>
-                    <div class="col-md-2" *ngIf="model.condition != 'now'">
+                    <div class="col-md-2" *ngIf="model.condition != 'manual'">
                         <label class="form-label" for="step">Nb :</label>
-                        <input class="form-control" id="step" name="step" [(ngModel)]="model.step"  type="number" [readOnly]="model.condition == 'now'">
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="checkbox">Personnes concernées :</label>
-                    <div class="form-check" id="checkbox">
-                        <div *ngFor="let user of users">
-                            <input class="form-check-input" (change)="onChange(user.id)" type="checkbox" value="{{ user.id }}" />{{user.username}}
-                        </div>
+                        <input class="form-control" id="step" name="step" [(ngModel)]="model.step"  type="number" [readOnly]="model.condition == 'manual'">
                     </div>
                 </div>
                 <div class="mb-3">

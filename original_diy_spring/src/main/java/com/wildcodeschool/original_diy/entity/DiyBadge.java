@@ -1,10 +1,13 @@
 package com.wildcodeschool.original_diy.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -23,15 +26,7 @@ public class DiyBadge {
     private int step;
 
     @ManyToMany(mappedBy = "badges")
-    private List<DiyUser> users;
-
-    /**
-     * Pil : Delete users associated with the badge
-     */
-    @PreRemove
-    public void onDeleteBadge() {
-        this.users = new ArrayList<>();
-    }
+    Set<DiyUser> users = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -73,11 +68,11 @@ public class DiyBadge {
         this.step = step;
     }
 
-    public List<DiyUser> getUsers() {
+    public Set<DiyUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<DiyUser> users) {
+    public void setUsers(Set<DiyUser> users) {
         this.users = users;
     }
 }

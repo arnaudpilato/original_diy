@@ -35,6 +35,7 @@ export class AdminContactComponent implements OnInit {
     this.userService.getAll().subscribe({
       next: (data) => {
         this.users = data;
+        console.log(data);
         },
 
       error: (e) => console.error(e)

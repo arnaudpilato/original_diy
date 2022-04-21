@@ -30,6 +30,8 @@ public class UserRequest {
     @Size(min = 1, max = 100)
     private String password;
 
+    private Long[] badgesSelected;
+
     public String getUsername() {
         return username;
     }
@@ -85,4 +87,8 @@ public class UserRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Long[] getBadgesSelected() { return badgesSelected; }
+
+    public void setBadgesSelected(Long[] badgesSelected) { this.badgesSelected = badgesSelected; }
 }
