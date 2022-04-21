@@ -168,18 +168,15 @@ public class UserController {
                 });
             }
 
-            /*if (userRequest.getBadgesSelected().length > 0) {
-                System.out.println("Elle est bonne la condition");
+            if (userRequest.getBadgesSelected().length > 0) {
+                Set<DiyBadge> badges = new HashSet<>();
                 for (Long badgeId : userRequest.getBadgesSelected()) {
-                    System.out.println(badgeId);
                     DiyBadge badge = badgeRepository.getById(badgeId);
-                    badge.getUsers().add(user);
-                    //user.getBadges().add(badge);
-
-                    System.out.println(user.getBadges());
-                    badgeRepository.save(badge);
+                    badges.add(badge);
                 }
-            }*/
+
+                user.getBadges().addAll(badges);
+            }
 
             user.setRoles(roles);
 

@@ -73,10 +73,11 @@ public class DiyUser {
     @JsonIgnore
     private List<DiyWorkshop> workshops;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_badges",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "badge_id")
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_badges",
+            joinColumns = { @JoinColumn(name = "badge_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") }
     )
     @JsonManagedReference("badges")
     private Set<DiyBadge> badges;

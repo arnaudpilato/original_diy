@@ -2,6 +2,7 @@ package com.wildcodeschool.original_diy.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,7 +27,8 @@ public class DiyBadge {
     private int step;
 
     @ManyToMany(mappedBy = "badges")
-    Set<DiyUser> users = new HashSet<>();
+    @JsonManagedReference("users")
+    private Set<DiyUser> users = new HashSet<>();
 
     public Long getId() {
         return id;
