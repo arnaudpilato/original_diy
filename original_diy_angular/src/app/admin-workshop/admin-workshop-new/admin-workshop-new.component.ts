@@ -103,7 +103,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       });
     }
 
-    this.workshopService.create(data).subscribe({
+    this.workshopService.createAdmin(data).subscribe({
       next: (data) => {
         console.log(data)
         this.router.navigate(['/admin/workshop']);

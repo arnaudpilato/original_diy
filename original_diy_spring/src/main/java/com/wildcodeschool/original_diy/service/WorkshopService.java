@@ -3,12 +3,15 @@ package com.wildcodeschool.original_diy.service;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +24,9 @@ public class WorkshopService {
 
     @Autowired
     WorkshopRepository workshopRepository;
+
+    @Autowired
+    APIGouvService gouvService;
 
 
     public void workshopControl(List<DiyWorkshop> workshops) {
@@ -67,5 +73,65 @@ public class WorkshopService {
         }
     }
 
+
+    public void createWorkshopAdmin (@Valid @RequestBody WorkshopRequest workshopRequest, DiyWorkshop workshop)
+    {
+
+            workshop.setTitle(workshopRequest.getTitle());
+
+            if (workshopRequest.getPicturePath() == null) {
+                workshop.setPicturePath("/assets/img/static-picture.png");
+            } else {
+                workshop.setPicturePath(workshopRequest.getPicturePath());
+            }
+
+            workshop.setStreetNumber(workshopRequest.getStreetNumber());
+            workshop.setStreet(workshopRequest.getStreet());
+            workshop.setPostCode(workshopRequest.getPostCode());
+            workshop.setCity(workshopRequest.getCity());
+            workshop.setDescription(workshopRequest.getDescription());
+            workshop.setConfirmation(true);
+
+            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
+            workshop.setDiyUser(workshopRequest.getDiyUser());
+            workshop.setDate(workshopRequest.getDate());
+            workshopRepository.save(workshop);
+    }
+
+    public void createWorkshopAdminAndUser (@Valid @RequestBody WorkshopRequest workshopRequest, DiyWorkshop workshop)
+    {
+
+        workshop.setTitle(workshopRequest.getTitle());
+
+        if (workshopRequest.getPicturePath() == null) {
+            workshop.setPicturePath("/assets/img/static-picture.png");
+        } else {
+            workshop.setPicturePath(workshopRequest.getPicturePath());
+        }
+
+        workshop.setStreetNumber(workshopRequest.getStreetNumber());
+        workshop.setStreet(workshopRequest.getStreet());
+        workshop.setPostCode(workshopRequest.getPostCode());
+        workshop.setCity(workshopRequest.getCity());
+        workshop.setDescription(workshopRequest.getDescription());
+        workshop.setConfirmation(false);
+
+        double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+        double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
+        workshop.setLatitude(latitude);
+        workshop.setLongitude(longitude);
+        workshop.setDiyUser(workshopRequest.getDiyUser());
+        workshop.setDate(workshopRequest.getDate());
+        workshopRepository.save(workshop);
+    }
 }
 
