@@ -8,4 +8,5 @@ export class DiyUser {
     role?: any;
     password?: string;
     roles?: any;
+    birthday?: Date;
 }
