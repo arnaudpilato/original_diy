@@ -173,7 +173,7 @@ public class WorkshopController {
             workshop.setTitle(workshopRequest.getTitle());
 
             if (workshopRequest.getPicturePath() == null) {
-                workshop.setPicturePath("/assets/img/static-picture.png");
+                workshop.setPicturePath(workshop.getPicturePath());
             } else {
                 workshop.setPicturePath(workshopRequest.getPicturePath());
             }
