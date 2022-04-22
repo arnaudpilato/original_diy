@@ -88,10 +88,6 @@ public class WorkshopController {
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
-            for (DiyWorkshop workshop : workshopsNew) {
-
-            }
-
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -188,6 +184,7 @@ public class WorkshopController {
             workshop.setCity(workshopRequest.getCity());
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
+            workshop.setDate(workshopRequest.getDate());
 
             workshopRepository.save(workshop);
 
