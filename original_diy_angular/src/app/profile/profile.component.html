@@ -7,7 +7,8 @@
         <div class="mb-3">
           <label class="form-label" for="username">Username :</label>
           <input class="form-control" id="username" name="username" [(ngModel)]="user.username" type="text"
-                 placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
+                 placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel"
+                 value="{{ user.username }}">
         </div>
         <div class="form-control alert-danger my-2" *ngIf="username.errors && userProfileForm.submitted">
           <div *ngIf="username.errors['required']">Le nom est requis !</div>
@@ -39,8 +40,15 @@
                  placeholder="0698754321" value="{{ user.phone }}">
         </div>
         <div class="mb-3">
+          <label class="form-label" for="birthday">Anniversaire :</label>
+          {{ user.birthday  | date:'dd-MM-yyyy'}}
+          <input class="form-control" id="birthday" name="birthday" [(ngModel)]="user.birthday"
+                 type="date" value="{{ user.birthday}}">
+        </div>
+        <div class="mb-3">
           <label class="form-label" for="password">Mot de passe :</label>
-          <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password" minlength="1" required #password="ngModel" value="{{ user.password }}">
+          <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password"
+                 minlength="1" required #password="ngModel" value="{{ user.password }}">
         </div>
         <div class="form-control alert-danger my-2" *ngIf="password.errors && userProfileForm.submitted">
           <div *ngIf="password.errors['required']">Le mot de passe est requis</div>

@@ -141,6 +141,7 @@ public class UserController {
             user.setLastName(userRequest.getLastName());
             user.setEmail(userRequest.getEmail());
             user.setPhone(userRequest.getPhone());
+            user.setBirthday(userRequest.getBirthday());
 
             if (!userRequest.getPassword().equals(user.getPassword()) && (!Objects.equals(userRequest.getPassword(), ""))) {
                 if (!passwordEncoder.encode(userRequest.getPassword()).equals(user.getPassword())) {

@@ -38,6 +38,7 @@
           <input class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" type="number"
                  placeholder="0698754321" value="{{ user.phone }}">
         </div>
+
         <div class="mb-3">
           <label class="form-label" for="role">Role :</label>
           <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>

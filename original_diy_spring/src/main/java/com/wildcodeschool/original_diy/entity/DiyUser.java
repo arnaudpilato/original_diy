@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Pil : Added constraints to make the username and email table unique <br>
@@ -48,6 +46,8 @@ public class DiyUser {
     @Size(max = 100)
     private String email;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date birthday;
     @NotBlank
     @Size(max = 100)
     private String password;
@@ -179,5 +179,13 @@ public class DiyUser {
 
     public void setBadges(Set<DiyBadge> badges) {
         this.badges = badges;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }
