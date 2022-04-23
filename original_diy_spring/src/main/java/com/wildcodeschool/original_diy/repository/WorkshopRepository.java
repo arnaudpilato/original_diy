@@ -17,7 +17,7 @@ public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
     @Query("SELECT w FROM DiyWorkshop w WHERE w.confirmation = true")
     public List<DiyWorkshop> getAllConfirmedWorkshops();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM workshops AS w WHERE w.confirmation = true ORDER BY w.date DESC LIMIT 3")
+    @Query(nativeQuery = true, value = "SELECT * FROM workshops AS w WHERE w.confirmation = true ORDER BY w.date ASC LIMIT 3")
     public List<DiyWorkshop> getThreeLastWorkshops();
 
     @Query(value = "SELECT w FROM DiyWorkshop  w WHERE w.diyUser = :diyUser")

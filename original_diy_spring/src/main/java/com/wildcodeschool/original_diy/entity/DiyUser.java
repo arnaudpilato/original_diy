@@ -1,17 +1,16 @@
 package com.wildcodeschool.original_diy.entity;
 
-import com.fasterxml.jackson.annotation.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Pil : Added constraints to make the username and email table unique <br>
@@ -22,7 +21,7 @@ import java.util.Set;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "username")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "users",uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
 public class DiyUser {
@@ -45,6 +44,8 @@ public class DiyUser {
     @Size(max = 100)
     private String email;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date birthday;
     @NotBlank
     @Size(max = 100)
     private String password;
@@ -58,10 +59,11 @@ public class DiyUser {
 
     @JsonIgnore
     @OneToMany(
+            mappedBy = "diyUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<DiyComment> diyComments = new ArrayList<>();
+    private List<DiyComment> comments;
 
 
     @OneToMany(
@@ -155,12 +157,12 @@ public class DiyUser {
         this.roles = roles;
     }
 
-    public List<DiyComment> getDiyComments() {
-        return diyComments;
+    public List<DiyComment> getComments() {
+        return comments;
     }
 
-    public void setDiyComments(List<DiyComment> diyComments) {
-        this.diyComments = diyComments;
+    public void setComments(List<DiyComment> comments) {
+        this.comments = comments;
     }
 
     public List<DiyWorkshop> getWorkshops() {
@@ -174,4 +176,12 @@ public class DiyUser {
     public Set<DiyBadge> getBadges() { return badges; }
 
     public void setBadges(Set<DiyBadge> badges) { this.badges = badges; }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }

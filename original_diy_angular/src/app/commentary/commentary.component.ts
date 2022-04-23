@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DiyComment} from "../model/commentary.model";
 import {ActivatedRoute} from "@angular/router";
 import {CommentaryService} from "../service/commentary.service";
 import {Router} from "@angular/router";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-commentary',
@@ -13,6 +14,8 @@ export class CommentaryComponent implements OnInit {
   public comments: any = new DiyComment();
   public model: any = new DiyComment();
   public diyWorkshopId: number | undefined;
+  public Editor = ClassicEditor;
+  @Input() isLoggedIn: any;
 
   constructor(private commentaryService: CommentaryService, private route: ActivatedRoute, private router: Router,
 ) {
@@ -22,6 +25,23 @@ export class CommentaryComponent implements OnInit {
   ngOnInit(): void {
     this.diyWorkshopId = this.route.snapshot.params["id"];
     this.getCommentaryByWorkshop(this.diyWorkshopId);
+    this.Editor.defaultConfig = {
+      toolbar: {
+        items: [
+          'heading', '|', 'bold', 'italic', 'link',
+          'bulletedList', 'numberedList', '|',
+          'undo', 'redo'
+        ]
+      },
+      language: 'fr',
+      image: {
+        toolbar: [
+          'imageTextAlternative',
+          'imageStyle:full',
+          'imageStyle:side'
+        ]
+      }
+    }
   }
 
   private getCommentaryByWorkshop(id: any): void {
@@ -34,14 +54,13 @@ export class CommentaryComponent implements OnInit {
   }
 
   onSubmit() {
+
     const data: any = {
       comment: this.model.comment,
       diyWorkshopId: this.diyWorkshopId,
     }
-        console.log("data : ",data)
     this.commentaryService.create(data).subscribe({
       next: (data) => {
-        console.log(data)
         window.location.reload();
       },
       error: (e) => {

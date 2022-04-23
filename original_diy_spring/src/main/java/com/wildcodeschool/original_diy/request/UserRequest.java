@@ -5,6 +5,7 @@ import com.wildcodeschool.original_diy.entity.DiyRole;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ public class UserRequest {
 
     private Set<String> roles;
 
+    private Date birthday;
     @NotBlank
     @Size(min = 1, max = 100)
     private String password;
@@ -91,4 +93,12 @@ public class UserRequest {
     public Long[] getBadgesSelected() { return badgesSelected; }
 
     public void setBadgesSelected(Long[] badgesSelected) { this.badgesSelected = badgesSelected; }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 }

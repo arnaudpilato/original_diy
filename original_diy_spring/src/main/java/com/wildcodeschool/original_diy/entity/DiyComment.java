@@ -25,7 +25,6 @@ public class DiyComment {
     private Date createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference("workshopComment")
     private DiyWorkshop diyWorkshop;
 

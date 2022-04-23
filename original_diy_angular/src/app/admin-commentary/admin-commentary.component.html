@@ -6,21 +6,21 @@
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
       </div>
       <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
-          <thead>
+        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops">
+          <thead *ngIf="workshop.comments.length >= 1 ">
           <tr>
             <th class="text-danger" scope="col">{{ workshop.title }}</th>
             <th scope="col">information</th>
           </tr>
           </thead>
-          <tbody *ngFor="let comment of workshop.comments">
+          <tbody *ngFor="let comment of workshop.comments; let index = index">
           <tr>
             <th scope="row">Utilisateur</th>
             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
           </tr>
           <tr>
-            <th scope="row">Commentaire {{ index+1 }}</th>
-            <td>{{ comment.comment }}</td>
+            <th scope="row">Comments {{ index + 1 }}</th>
+            <td [innerHTML]="comment.comment | nl2br"></td>
           </tr>
 
           <tr>
@@ -29,10 +29,17 @@
           </tr>
           <tr>
             <th scope="row">Visible</th>
-            <td><input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
-                     [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}"></td>
+            <td><input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}"
+                       name="confirmation"
+                       [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}"/>
+            </td>
           </tr>
-
+          <tr>
+            <th scope="row">Supprimer</th>
+            <td><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" width="30px"
+                                                                            src="/assets/img/delete.png"
+                                                                            alt="Logo supprimer"></a></td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -40,24 +47,28 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th scope="col-3">Atelier</th>
-            <th scope="col-5">Commentaire</th>
-            <th scope="col-2">Utilisateur</th>
-            <th scope="col-1">Date/Heure</th>
-            <th scope="col-1">Visible</th>
+            <th scope="col">Atelier</th>
+            <th scope="col">Commentaire</th>
+            <th scope="col">Utilisateur</th>
+            <th scope="col">Date/Heure</th>
+            <th scope="col">Visible</th>
           </tr>
           </thead>
           <tbody *ngFor="let workshop of workshops">
           <tr *ngFor="let comment of workshop.comments">
             <td>{{ workshop.title }}</td>
-            <td>{{ comment.comment }}</td>
+            <td [innerHTML]="comment.comment | nl2br"></td>
             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
             <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
             <td class="text-end td-edit">
-              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}" name="confirmation"
+              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}"
+                     name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
             </td>
-              <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
+            <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" width="30px"
+                                                                                              src="/assets/img/delete.png"
+                                                                                              alt="Logo supprimer"></a>
+            </td>
           </tr>
           </tbody>
         </table>

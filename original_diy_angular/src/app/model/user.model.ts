@@ -12,4 +12,5 @@ export class DiyUser {
     roles?: any;
     badges?: DiyBadge[];
     badgesSelected?: number[];
+    birthday?: Date;
 }

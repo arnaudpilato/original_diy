@@ -88,10 +88,6 @@ public class WorkshopController {
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
-            for (DiyWorkshop workshop : workshopsNew) {
-
-            }
-
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -152,34 +148,12 @@ public class WorkshopController {
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @PostMapping("/new")
-    public ResponseEntity<?> createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest) {
+    public ResponseEntity<?> createWorkshopUserAndAdmin(@Valid @RequestBody WorkshopRequest workshopRequest,
+                                                        Authentication authentication) {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
-            workshop.setTitle(workshopRequest.getTitle());
-
-            if (workshopRequest.getPicturePath() == null) {
-                workshop.setPicturePath("/assets/img/static-picture.png");
-            } else {
-                workshop.setPicturePath(workshopRequest.getPicturePath());
-            }
-
-            workshop.setStreetNumber(workshopRequest.getStreetNumber());
-            workshop.setStreet(workshopRequest.getStreet());
-            workshop.setPostCode(workshopRequest.getPostCode());
-            workshop.setCity(workshopRequest.getCity());
-            workshop.setDescription(workshopRequest.getDescription());
-            workshop.setConfirmation(true);
-
-            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
-            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
-
-            workshop.setLatitude(latitude);
-            workshop.setLongitude(longitude);
-            workshop.setDiyUser(workshopRequest.getDiyUser());
-            workshop.setDate(workshopRequest.getDate());
-            workshopRepository.save(workshop);
+            DiyUser user = userRepository.getUserByUsername(authentication.getName());
+           workshopService.createWorkshop(workshopRequest, workshop , user);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
         } catch (Exception e) {
@@ -199,7 +173,7 @@ public class WorkshopController {
             workshop.setTitle(workshopRequest.getTitle());
 
             if (workshopRequest.getPicturePath() == null) {
-                workshop.setPicturePath("/assets/img/static-picture.png");
+                workshop.setPicturePath(workshop.getPicturePath());
             } else {
                 workshop.setPicturePath(workshopRequest.getPicturePath());
             }
@@ -210,6 +184,7 @@ public class WorkshopController {
             workshop.setCity(workshopRequest.getCity());
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
+            workshop.setDate(workshopRequest.getDate());
 
             workshopRepository.save(workshop);
 

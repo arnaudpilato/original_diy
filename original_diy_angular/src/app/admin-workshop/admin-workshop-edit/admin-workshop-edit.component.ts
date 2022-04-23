@@ -85,6 +85,7 @@ export class AdminWorkshopEditComponent implements OnInit {
       longitude: this.workshop.longitude,
       latitude: this.workshop.latitude,
       confirmation: this.workshop.confirmation,
+      date: new Date((new Date(this.workshop.date)).getTime() + (60 * 60 * 1000)),
     }
 
     if (this.selectedFiles != null) {

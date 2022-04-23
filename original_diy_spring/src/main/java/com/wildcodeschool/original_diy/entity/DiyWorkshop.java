@@ -22,18 +22,6 @@ public class DiyWorkshop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
-    private String picturePath;
-
-    private Long streetNumber;
-
-    private String street;
-
-    private Long postCode;
-
-    private String city;
-
     @ManyToMany
     private List<DiyUser> reservationUser;
 
@@ -48,6 +36,18 @@ public class DiyWorkshop {
     @OrderBy("id DESC")
     @JsonManagedReference("workshopComment")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
+
+    private String title;
+
+    private String picturePath;
+
+    private Long streetNumber;
+
+    private String street;
+
+    private Long postCode;
+
+    private String city;
 
     private Double longitude;
 
