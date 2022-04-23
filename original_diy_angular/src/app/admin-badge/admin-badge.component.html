@@ -35,6 +35,11 @@
                         <td>{{ badge.name }}</td>
                         <td>{{ badge.description }}</td>
                         <td>
+                            <ul>
+                                <li *ngFor="let user of badge.users">
+                                    {{ user }}
+                                </li>
+                            </ul>
                         {{ badge.name}}
                         </td>
                         <td class="text-end td-edit">
