@@ -84,12 +84,11 @@ public class FooterController {
             footer.setName(footerRequest.getName());
 
             if (footerRequest.getPicturePath() == null) {
-                footer.setPicturePath("/assets/img/static-picture.png");
+                footer.setPicturePath(footer.getPicturePath());
             } else {
                 footer.setPicturePath(footerRequest.getPicturePath());
             }
 
-            footer.setPicturePath(footerRequest.getPicturePath());
             footer.setVisible(footerRequest.isVisible());
 
             footerRepository.save(footer);

@@ -168,7 +168,7 @@ public class UserController {
                 });
             }
 
-            if (userRequest.getBadgesSelected().length > 0) {
+
                 Set<DiyBadge> badges = new HashSet<>();
                 for (Long badgeId : userRequest.getBadgesSelected()) {
                     DiyBadge badge = badgeRepository.getById(badgeId);
@@ -183,8 +183,8 @@ public class UserController {
                     badgeRepository.save(badge);
                 }*/
 
-                user.getBadges().addAll(badges);
-            }
+                user.setBadges(badges);
+
 
             user.setRoles(roles);
 

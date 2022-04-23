@@ -1,7 +1,7 @@
 package com.wildcodeschool.original_diy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,9 +23,21 @@ public class DiyBadge {
 
     private int step;
 
-    @ManyToMany(mappedBy = "badges")
-    @JsonManagedReference
+    @ManyToMany(mappedBy = "badges", cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
+    @JsonIgnore
     private Set<DiyUser> users = new HashSet<>();
+
+    //TODO Voir le système de suppression des badges quand ils sont attribués
+    /*@PreRemove
+    public void removeUsersFromBadge() {
+        this.setUsers(new HashSet<>());
+    }*/
 
     public Long getId() {
         return id;

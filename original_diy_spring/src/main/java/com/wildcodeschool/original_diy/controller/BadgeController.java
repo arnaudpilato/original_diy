@@ -1,7 +1,6 @@
 package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyBadge;
-import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.repository.BadgeRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.request.BadgeRequest;
@@ -66,16 +65,6 @@ public class BadgeController {
 
             badgeRepository.save(badge);
 
-            /*if (badgeRequest.getPeoples().length > 0) {
-                System.out.println("Elle est bonne la condition");
-                for (Long userId : badgeRequest.getPeoples()) {
-                    DiyUser user = userRepository.getById(userId);
-                    user.getBadges().add(badge);
-
-                    userRepository.save(user);
-                }
-            }*/
-
             return new ResponseEntity<>(badge, HttpStatus.CREATED);
         } catch (Exception e) {
 
@@ -109,6 +98,12 @@ public class BadgeController {
                 badge.setPicturePath(badge.getPicturePath());
             } else {
                 badge.setPicturePath(badgeRequest.getPicturePath());
+            }
+
+            if (badgeRequest.getCondition().equals("manual")) {
+                badge.setStep(0);
+            } else {
+                badge.setStep(badgeRequest.getStep());
             }
 
             badge.setDescription(badgeRequest.getDescription());

@@ -18,6 +18,19 @@
                     <label class="form-label" for="picture">Image du badge :</label>
                     <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
                 </div>
+                <div class="mb-3 row">
+                    <div class="{{badge.condition == 'manual' ? 'col-md-12' : 'col-md-10'}}">
+                        <label class="form-label" for="condition">Condition :</label>
+                        <select class="form-control" id="condition" name="condition" [(ngModel)]="badge.condition" #condition>
+                            <option value="manual" [selected]="badge.condition ? badge.condition == 'manual' : undefined">Manuellement</option>
+                            <option value="after" [selected]="badge.condition ? badge.condition == 'after' : undefined">Nombre d'ateliers participés</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" *ngIf="badge.condition != 'manual'">
+                        <label class="form-label" for="step">Nb :</label>
+                        <input class="form-control" id="step" name="step" [(ngModel)]="badge.step"  type="number" min="0" [readOnly]="badge.condition == 'manual'">
+                    </div>
+                </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Description :</label>
                     <textarea class="form-control" id="description" name="name" rows="4" [(ngModel)]="badge.description"  type="text"></textarea>

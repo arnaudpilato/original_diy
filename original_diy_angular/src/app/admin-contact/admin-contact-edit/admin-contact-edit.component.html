@@ -49,7 +49,7 @@
                     <label class="form-label" for="badge-checkbox">Badges :</label>
                     <div class="form-check" id="badge-checkbox">
                         <div *ngFor="let badge of badges">
-                            <input class="form-check-input" (change)="onChange(badge.id)" type="checkbox" value="{{ badge.id }}" /><img class="badge-picture mb-2" src="{{ s3 + badge.picturePath}}" alt="Badge"><span class="badge-name">{{badge.name}}</span>
+                            <input class="form-check-input" (change)="onChange(badge.id)" type="checkbox" value="{{ badge.id }}" id="{{badge.id}}" [checked]="toggleCheckBox(badge.id)" /><img class="badge-picture mb-2" src="{{ s3 + badge.picturePath}}" alt="Badge"><span class="badge-name">{{badge.name}}</span>
                         </div>
                     </div>
                 </div>

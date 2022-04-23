@@ -1,11 +1,8 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
     <h1 class="text-center my-4">Ajouter un badge</h1>
-
     <div class="text-end d-flex justify-content-end">
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
-
-
     <div class="row justify-content-center">
         <div class="col-11 col-md-5">
             <form method="post" class="my-3" (ngSubmit)="badgeNewForm.form.valid && onSubmit()" #badgeNewForm="ngForm" name="form" novalidate>

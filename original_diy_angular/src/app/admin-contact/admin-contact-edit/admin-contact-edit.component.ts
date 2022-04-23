@@ -22,9 +22,10 @@ export class AdminContactEditComponent implements OnInit {
   public badges: DiyBadge[] | undefined;
   public eRoles = DiyRole;
   public role: string[] = [];
-  public all_selected_values: string[] = [];
+  public all_selected_values: number[] = [];
   public searchBadge: string = "";
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
+  public badgeIds: DiyBadge[] | undefined;
 
   constructor(
     private title: Title,
@@ -48,13 +49,22 @@ export class AdminContactEditComponent implements OnInit {
     }
   }
 
+  toggleCheckBox($event: any){
+    return (this.all_selected_values.indexOf($event) != -1);
+  }
+
   getUser(id: string): void {
     this.userService.getById(id).subscribe({
       next: (data) => {
         this.user = data;
         this.role[0] = this.user.roles[0].name == "ROLE_USER" ? "user" : "admin";
-        console.log(this.role);
-        },
+        this.badgeIds = data.badges;
+        this.badgeIds?.forEach(value => {
+          if (value.id != null) {
+            this.all_selected_values.push(value.id);
+          }
+        })
+      },
 
       error: (e) => console.error(e)
     });
@@ -66,7 +76,6 @@ export class AdminContactEditComponent implements OnInit {
     } else {
       this.all_selected_values.push(value);
     }
-    console.log(this.all_selected_values);
   }
 
   getAllBadges(): void {
@@ -96,7 +105,6 @@ export class AdminContactEditComponent implements OnInit {
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
-
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
         this.router.navigate(['/admin/contact'])
       },
