@@ -1,8 +1,36 @@
 .background-home {
   background-image: url("/assets/img/home-background.jpg");
   background-size: cover;
+  padding: 50px;
 }
 
 .card-title{
   color: #E55934;
+}
+
+/*.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}*/
+
+.workshop-picture {
+  width: 100%;
+  height: 200px;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px 4px 0 0;
+}
+
+.card {
+  padding: 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+  transition: 0.3s;
 }
