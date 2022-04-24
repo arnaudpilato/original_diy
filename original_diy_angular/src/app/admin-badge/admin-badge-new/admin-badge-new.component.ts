@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { DiyBadge } from "../../model/badge.model";
 import { BadgeService } from "../../service/badge.service";
 import { AmazonS3Service } from "../../service/amazon-s3.service";
+import {UserService} from "../../service/user.service";
+import {DiyUser} from "../../model/user.model";
 
 @Component({
   selector: 'app-admin-badge-new',
@@ -17,6 +19,7 @@ export class AdminBadgeNewComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
   public model: DiyBadge = new DiyBadge();
+  public users: DiyUser[] | undefined;
   public currentFileUpload: any;
   public selectedFiles: any;
   public nameFile: any = null;
@@ -26,7 +29,8 @@ export class AdminBadgeNewComponent implements OnInit {
       private tokenStorageService: TokenStorageService,
       private router: Router,
       private badgeService: BadgeService,
-      private amazonS3Service: AmazonS3Service,) { }
+      private amazonS3Service: AmazonS3Service,
+      private userService: UserService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -35,6 +39,7 @@ export class AdminBadgeNewComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.model.condition = 'manual';
     }
   }
 
@@ -52,7 +57,9 @@ export class AdminBadgeNewComponent implements OnInit {
     const data = {
       name: this.model.name,
       picturePath: this.nameFile,
-      description: this.model.description
+      description: this.model.description,
+      condition: this.model.condition,
+      step: this.model.step,
     };
 
     if (this.selectedFiles != null) {
@@ -65,7 +72,7 @@ export class AdminBadgeNewComponent implements OnInit {
     this.badgeService.create(data).subscribe({
       next: (data) => {
         console.log(data)
-        this.router.navigate(['/admin/badge']);
+        window.location.href="/admin/badge"
       },
 
       error: (e) => {

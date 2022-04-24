@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorageService.getUser().roles;
-        this.reloadPage();
+        window.setTimeout(function() {
+          window.location.href = "/home";
+        }, 1000);
       }
     });
   }

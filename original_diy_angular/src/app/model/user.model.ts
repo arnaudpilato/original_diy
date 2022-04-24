@@ -1,3 +1,5 @@
+import { DiyBadge } from "./badge.model";
+
 export class DiyUser {
     id?: number;
     username?: string;
@@ -8,5 +10,7 @@ export class DiyUser {
     role?: any;
     password?: string;
     roles?: any;
+    badges?: DiyBadge[];
+    badgesSelected?: number[];
     birthday?: Date;
 }

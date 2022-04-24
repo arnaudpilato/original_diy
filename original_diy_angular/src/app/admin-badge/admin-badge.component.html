@@ -1,30 +1,40 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Administration des badges</h1>
+    <h1 class="text-center my-4">Administration des badges</h1>
 
-  <div class="text-end d-flex justify-content-end">
-      <div><a class="btn btn-primary m-1" routerLink="/admin/badge/new">Ajouter un badge</a></div>
-      <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
-  </div>
+    <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-primary m-1" routerLink="/admin/badge/new">Ajouter un badge</a></div>
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+    </div>
 
-  <div class="row">
-    <div class="col">
-        <div class="table-responsive d-none d-md-block my-2">
-            <table class="table table-hover">
-                <thead>
+    <div class="col-md-4 d-flex">
+
+        <div class="col-md-5">
+            <label class="form-label">Badge</label>
+            <input class="form-control" type="search" name="searchBadge" placeholder="Rechercher" [(ngModel)]="searchBadge" (keyup.enter)="getAllBadges()">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive d-none d-md-block my-2">
+                <table class="table table-hover">
+                    <thead>
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Badge</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Nb d'ateliers à réaliser</th>
                         <th scope="col" colspan="2">Modifier</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr *ngFor="let badge of badges; let index = index">
                         <td>{{ index + 1 }}</td>
                         <td><img class="badge-picture" src="{{ s3 + badge.picturePath }}" alt="Badge"></td>
                         <td>{{ badge.name }}</td>
                         <td>{{ badge.description }}</td>
+                        <td>{{ badge.step}}</td>
                         <td class="text-end td-edit">
                             <a routerLink="/admin/badge/edit/{{badge.id}}" class="link">
                                 <img class="icon" src="/assets/img/edit.png" alt="Logo éditer">
@@ -36,13 +46,13 @@
                             </a>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-  </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

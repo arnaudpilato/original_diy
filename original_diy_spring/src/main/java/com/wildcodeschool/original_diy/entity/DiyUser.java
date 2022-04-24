@@ -16,8 +16,6 @@ import java.util.*;
  * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
-
-
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -77,12 +75,14 @@ public class DiyUser {
     @JsonIgnore
     private List<DiyWorkshop> workshops;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_badges",
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
+    @JoinTable(
+            name = "user_badges",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "badge_id")
     )
-    private Set<DiyBadge> badges = new HashSet<>();
+    private Set<DiyBadge> badges;
 
     public DiyUser() {
     }
@@ -173,13 +173,9 @@ public class DiyUser {
         this.workshops = workshops;
     }
 
-    public Set<DiyBadge> getBadges() {
-        return badges;
-    }
+    public Set<DiyBadge> getBadges() { return badges; }
 
-    public void setBadges(Set<DiyBadge> badges) {
-        this.badges = badges;
-    }
+    public void setBadges(Set<DiyBadge> badges) { this.badges = badges; }
 
     public Date getBirthday() {
         return birthday;
