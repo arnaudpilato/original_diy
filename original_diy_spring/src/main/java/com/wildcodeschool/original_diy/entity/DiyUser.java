@@ -1,9 +1,6 @@
 package com.wildcodeschool.original_diy.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -75,14 +72,12 @@ public class DiyUser {
     @JsonIgnore
     private List<DiyWorkshop> workshops;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST })
-    @JoinTable(
-            name = "user_badges",
+    @ManyToMany
+    @JoinTable(name = "user_badges",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "badge_id")
     )
-    private Set<DiyBadge> badges;
+    private Set<DiyBadge> badges = new HashSet<>();
 
     public DiyUser() {
     }

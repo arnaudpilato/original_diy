@@ -82,6 +82,7 @@ public class FooterController {
             DiyFooter footer = footerData.get();
 
             footer.setName(footerRequest.getName());
+            footer.setSocialNetworkPath(footerRequest.getSocialNetworkPath());
 
             if (footerRequest.getPicturePath() == null) {
                 footer.setPicturePath(footer.getPicturePath());
