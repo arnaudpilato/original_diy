@@ -61,7 +61,7 @@
             </tr>
           </thead>
           <tbody *ngFor="let user of users; let index = index">
-            <tr >
+            <tr>
               <th scope="row">{{ index + 1 }}</th>
               <td>{{ user.username }}</td>
               <td>{{ user.lastName }}</td>
@@ -72,7 +72,7 @@
               <td class="text-end td-edit"><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
               <td class="td-delete"><a class="link" (click)="deleteUser(user.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
             </tr>
-          <tr>
+          <tr *ngIf="user.badges?.length != 0">
               <th>Badges :</th>
               <td colspan="8">
                   <ul class="d-flex">

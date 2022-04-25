@@ -76,6 +76,8 @@ export class AdminContactEditComponent implements OnInit {
     } else {
       this.all_selected_values.push(value);
     }
+
+    console.log(this.all_selected_values);
   }
 
   getAllBadges(): void {
