@@ -65,7 +65,6 @@ export class AdminWorkshopEditComponent implements OnInit {
     this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
-        console.log(data);
       },
 
       error: (err) => console.error(err)
@@ -77,6 +76,7 @@ export class AdminWorkshopEditComponent implements OnInit {
       title: this.workshop.title,
       picturePath: this.nameFile,
       streetNumber: this.workshop.streetNumber,
+      places: this.workshop.limitedPlaces,
       street: this.workshop.street,
       postCode: this.workshop.postCode,
       city: this.workshop.city,

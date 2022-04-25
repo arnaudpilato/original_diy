@@ -52,15 +52,16 @@ public class WorkshopService {
             // j'ajoute dans la liste des ateliers les reservations qui sont représenter par une liste de users dans
             // l'entité workshop et j'ajoute ensuite le user actuel qui vien de reserver dans la liste des users
             users.addAll(workshop.getReservationUser());
-            users.add(user);
+            if (users.size() < workshop.getLimitedPlaces()) {
+                users.add(user);
 
-            // j'effectue ensuite un controle qui vérifie si le user actuel et contenus dans la liste des reservations
-            // de l'atelier, s'il n'est pas dans la liste alors on peut effectuer la reservation
-            if ((!workshop.getReservationUser().contains(user))) {
-                workshop.setReservationUser(users);
-                workshopRepository.save(workshop);
+                // j'effectue ensuite un controle qui vérifie si le user actuel et contenus dans la liste des reservations
+                // de l'atelier, s'il n'est pas dans la liste alors on peut effectuer la reservation
+                if ((!workshop.getReservationUser().contains(user))) {
+                    workshop.setReservationUser(users);
+                    workshopRepository.save(workshop);
+                }
             }
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -91,6 +92,7 @@ public class WorkshopService {
         workshop.setPostCode(workshopRequest.getPostCode());
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
+        workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
 
         Set<DiyRole> roles = new HashSet<>();
         roles = user.getRoles();
