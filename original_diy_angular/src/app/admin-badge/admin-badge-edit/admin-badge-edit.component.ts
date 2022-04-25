@@ -54,6 +54,7 @@ export class AdminBadgeEditComponent implements OnInit {
     this.badgeService.getById(id).subscribe({
       next: (data) => {
         this.badge = data;
+        this.badge.step == 0 ? this.badge.condition = 'manual' : this.badge.condition = 'after';
         console.log(data);
       },
 
@@ -61,11 +62,15 @@ export class AdminBadgeEditComponent implements OnInit {
     });
   }
 
+  //TODO Il manque une partie du formulaire comme la partie add des badges
+
   onSubmit() {
     const data = {
       name: this.badge.name,
       picturePath: this.nameFile,
-      description: this.badge.description
+      description: this.badge.description,
+      condition: this.badge.condition,
+      step: this.badge.step
     };
 
     if (this.selectedFiles != null) {
@@ -78,10 +83,11 @@ export class AdminBadgeEditComponent implements OnInit {
     this.badgeService.update(this.badge.id, data).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin/badge']);
+        window.location.href="/admin/badge";
       },
 
       error: (err) => console.error(err)
     });
   }
+
 }

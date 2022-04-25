@@ -2,6 +2,7 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.repository.BadgeRepository;
+import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.request.BadgeRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,9 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -21,12 +20,21 @@ public class BadgeController {
     @Autowired
     BadgeRepository badgeRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
-    public ResponseEntity<List<DiyBadge>> gettAllBadges() {
+    public ResponseEntity<List<DiyBadge>> getAllBadges(@RequestParam(name = "searchBadge") String searchBadge) {
+        System.out.println(searchBadge);
         try {
             List<DiyBadge> badges = new ArrayList<>();
-            badgeRepository.findAll().forEach(badges::add);
+
+            if (!Objects.equals(searchBadge, "")) {
+                badgeRepository.getBadgesByFilter(searchBadge).forEach(badges::add);
+            } else {
+                badgeRepository.findAll().forEach(badges::add);
+            }
 
             if (badges.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -48,6 +56,12 @@ public class BadgeController {
             badge.setName(badgeRequest.getName());
             badge.setPicturePath(badgeRequest.getPicturePath());
             badge.setDescription(badgeRequest.getDescription());
+
+            if (badgeRequest.getCondition().equals("manual")) {
+                badge.setStep(0);
+            } else {
+                badge.setStep(badgeRequest.getStep());
+            }
 
             badgeRepository.save(badge);
 
@@ -79,7 +93,19 @@ public class BadgeController {
             DiyBadge badge = badgeData.get();
 
             badge.setName(badgeRequest.getName());
-            badge.setPicturePath(badgeRequest.getPicturePath());
+
+            if (badgeRequest.getPicturePath() == null) {
+                badge.setPicturePath(badge.getPicturePath());
+            } else {
+                badge.setPicturePath(badgeRequest.getPicturePath());
+            }
+
+            if (badgeRequest.getCondition().equals("manual")) {
+                badge.setStep(0);
+            } else {
+                badge.setStep(badgeRequest.getStep());
+            }
+
             badge.setDescription(badgeRequest.getDescription());
 
             return new ResponseEntity<>(badgeRepository.save(badge), HttpStatus.OK);

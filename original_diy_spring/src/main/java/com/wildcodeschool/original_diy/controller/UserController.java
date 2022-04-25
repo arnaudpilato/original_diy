@@ -1,10 +1,12 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyRole;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.model.ERole;
+import com.wildcodeschool.original_diy.repository.BadgeRepository;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,11 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private BadgeRepository badgeRepository;
+
+    @Autowired
     private CommentRepository commentRepository;
+
     @Autowired
     private WorkshopRepository workshopRepository;
 
@@ -172,6 +177,24 @@ public class UserController {
                     }
                 });
             }
+
+
+                Set<DiyBadge> badges = new HashSet<>();
+                for (Long badgeId : userRequest.getBadgesSelected()) {
+                    DiyBadge badge = badgeRepository.getById(badgeId);
+                    badges.add(badge);
+                }
+
+                /*for (Long badgeId : userRequest.getBadgesSelected()) {
+                    DiyBadge badge = badgeRepository.getById(badgeId);
+                    System.out.println(badge.getName());
+                    badge.getUsers().add(userRepository.getById(id));
+                    System.out.println(badge);
+                    badgeRepository.save(badge);
+                }*/
+
+                user.setBadges(badges);
+
 
             user.setRoles(roles);
 
