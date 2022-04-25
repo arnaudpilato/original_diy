@@ -179,8 +179,6 @@ public class UserController {
             }
 
             try {
-
-
                 Set<DiyBadge> badges = new HashSet<>();
                 for (Long badgeId : userRequest.getBadgesSelected()) {
                     DiyBadge badge = badgeRepository.getById(badgeId);
