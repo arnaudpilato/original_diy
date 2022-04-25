@@ -58,7 +58,7 @@ public class DiyWorkshop {
 
     private boolean confirmation = false;
 
-    private int limitedPlaces;
+    private Long limitedPlaces;
 
 
     public DiyWorkshop() {
@@ -176,11 +176,11 @@ public class DiyWorkshop {
         this.reservationUser = reservationUser;
     }
 
-    public int getLimitedPlaces() {
+    public Long getLimitedPlaces() {
         return limitedPlaces;
     }
 
-    public void setLimitedPlaces(int limitedPlaces) {
+    public void setLimitedPlaces(Long limitedPlaces) {
         this.limitedPlaces = limitedPlaces;
     }
 }

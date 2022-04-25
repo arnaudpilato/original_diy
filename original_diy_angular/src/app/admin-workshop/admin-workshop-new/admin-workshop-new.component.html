@@ -14,6 +14,10 @@
             <input class="form-control" id="title" name="title" [(ngModel)]="model.title" type="text" placeholder="Nom de l'atelier">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="places">Nombre de place :</label>
+            <input class="form-control" id="places" name="places" [(ngModel)]="model.limitedPlaces" type="number" placeholder="4">
+          </div>
+          <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>
             <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
           </div>

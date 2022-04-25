@@ -87,6 +87,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       title: this.model.title,
       picturePath: this.nameFile,
       streetNumber: this.model.streetNumber,
+      limitedPlaces: this.model.limitedPlaces,
       street: this.model.street,
       postCode: this.model.postCode,
       city: this.model.city,

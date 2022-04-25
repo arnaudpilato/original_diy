@@ -185,6 +185,7 @@ public class WorkshopController {
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
             workshop.setDate(workshopRequest.getDate());
+            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
 
             workshopRepository.save(workshop);
 
