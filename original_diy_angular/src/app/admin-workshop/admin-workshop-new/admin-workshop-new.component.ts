@@ -96,6 +96,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       date: new Date((new Date(this.model.date)).getTime() + (60 * 60 * 1000)),
       diyUser: this.authuser,
     }
+    console.log("data : "+data)
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);

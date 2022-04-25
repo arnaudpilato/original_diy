@@ -92,8 +92,12 @@ public class WorkshopService {
         workshop.setPostCode(workshopRequest.getPostCode());
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
-        workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
-
+        System.out.println("place limite : " + workshopRequest.getLimitedPlaces());
+        if (workshopRequest.getLimitedPlaces() == null) {
+            workshop.setLimitedPlaces(1L);
+        } else {
+            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
+        }
         Set<DiyRole> roles = new HashSet<>();
         roles = user.getRoles();
 

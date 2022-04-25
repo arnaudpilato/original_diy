@@ -58,6 +58,7 @@ public class DiyWorkshop {
 
     private boolean confirmation = false;
 
+
     private Long limitedPlaces;
 
 
@@ -80,9 +81,13 @@ public class DiyWorkshop {
         this.title = title;
     }
 
-    public String getPicturePath() { return picturePath; }
+    public String getPicturePath() {
+        return picturePath;
+    }
 
-    public void setPicturePath(String picturePath) { this.picturePath = picturePath; }
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 
     public Long getStreetNumber() {
         return streetNumber;
