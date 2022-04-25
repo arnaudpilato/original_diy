@@ -42,7 +42,6 @@
         <th scope="col" class="text-center">status</th>
         <th scope="col" class="text-center">Date et heure</th>
         <th scope="col" class="text-center">Adresse</th>
-        <th scope="col" class="text-center">Date de création</th>
         <th scope="col" class="text-center">Nombres de participants</th>
         <th scope="col" class="text-center">Détails</th>
 
@@ -58,16 +57,18 @@
                  alt="Image de l'atelier">
           </a>
         </th>
-        <td class=" text-center align-middle  text-truncate  col-4 " style="max-width: 200px;" [innerHTML]="workshop.description | nl2br"></td>
+        <td class=" text-center align-middle  text-truncate  col-4 " style="max-width: 200px;"
+            [innerHTML]="workshop.description | nl2br"></td>
         <td class="text-center align-middle col-2">{{ workshop.confirmation ? "en cours" : "terminer" }}</td>
         <td class="text-center align-middle"><p> {{workshop.date | date : 'dd-MM-yyyy' }}</p>
           <p>à {{workshop.date | date : 'HH' }} h {{workshop.date | date : 'mm' }}</p>
-           </td>
-        <td class="text-center align-middle col-2"> <p>{{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</p>
+        </td>
+        <td class="text-center align-middle col-2">
+          <p>{{workshop.streetNumber}} {{workshop.street}} {{workshop.city}}</p>
           <p> {{workshop.postCode}} {{workshop.city}} </p>
-       </td><td class="text-center align-middle col-2"> En attente</td>
-        <td class="text-center align-middle"> En attente </td>
-        <td class="text-center align-middle"> <i class="bi bi-search"></i>
+        </td>
+        <td class="text-center align-middle"> En attente</td>
+        <td class="text-center align-middle"><a href="/workshop/{{ workshop.id }}"><i class="bi bi-search"></i></a>
         </td>
       </tr>
       </tbody>

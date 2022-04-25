@@ -178,23 +178,17 @@ public class UserController {
                 });
             }
 
-
+            try {
                 Set<DiyBadge> badges = new HashSet<>();
                 for (Long badgeId : userRequest.getBadgesSelected()) {
                     DiyBadge badge = badgeRepository.getById(badgeId);
                     badges.add(badge);
                 }
 
-                /*for (Long badgeId : userRequest.getBadgesSelected()) {
-                    DiyBadge badge = badgeRepository.getById(badgeId);
-                    System.out.println(badge.getName());
-                    badge.getUsers().add(userRepository.getById(id));
-                    System.out.println(badge);
-                    badgeRepository.save(badge);
-                }*/
-
                 user.setBadges(badges);
-
+            }catch (Exception e) {
+                System.out.println(e);
+            }
 
             user.setRoles(roles);
 
@@ -209,22 +203,23 @@ public class UserController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         try {
-        DiyUser user = userRepository.getById(id);
-        List<DiyComment> commentList = user.getComments();
-        List<DiyWorkshop> workshopList = user.getWorkshops();
+            DiyUser user = userRepository.getById(id);
+            List<DiyComment> commentList = user.getComments();
+            List<DiyWorkshop> workshopList = user.getWorkshops();
 
-        for (DiyComment comment : commentList
-        ) {
-            commentRepository.deleteById(comment.getId());;
-        }
-        for (DiyWorkshop workshop : workshopList
-        ) {
-            workshopRepository.deleteById(workshop.getId());
-        }
+            for (DiyComment comment : commentList
+            ) {
+                commentRepository.deleteById(comment.getId());
+                ;
+            }
+            for (DiyWorkshop workshop : workshopList
+            ) {
+                workshopRepository.deleteById(workshop.getId());
+            }
 
             userRepository.deleteById(id);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

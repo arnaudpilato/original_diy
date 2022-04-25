@@ -26,7 +26,6 @@ public class BadgeController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public ResponseEntity<List<DiyBadge>> getAllBadges(@RequestParam(name = "searchBadge") String searchBadge) {
-        System.out.println(searchBadge);
         try {
             List<DiyBadge> badges = new ArrayList<>();
 

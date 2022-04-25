@@ -33,6 +33,7 @@ import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-in
 import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
 import {WorkshopReservationComponent} from "./workshop-reservation/workshop-reservation.component";
 import {AdminBadgeEditComponent} from "./admin-badge/admin-badge-edit/admin-badge-edit.component";
+import {AdminReservationComponent} from "./admin-reservation/admin-reservation.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'admin/badge/edit/:id', component: AdminBadgeEditComponent },
   { path: 'admin/background', component: AdminBackgroundComponent },
   { path: 'admin/commentary', component: AdminCommentaryComponent },
+  { path: 'admin/reservation', component: AdminReservationComponent },
 
   { path: 'error', component: ErrorComponent },
   { path: 'error/401', component: Error401Component },
