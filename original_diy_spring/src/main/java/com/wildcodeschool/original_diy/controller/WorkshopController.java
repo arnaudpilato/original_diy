@@ -153,7 +153,7 @@ public class WorkshopController {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
-           workshopService.createWorkshop(workshopRequest, workshop , user);
+            workshopService.createWorkshop(workshopRequest, workshop, user);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
         } catch (Exception e) {
@@ -250,10 +250,8 @@ public class WorkshopController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("reservation/deleteByUsername/{username}/{workshopId}")
-    public ResponseEntity<HttpStatus> workshopReservationDeleteByUsername(@PathVariable("username") String username,@PathVariable("workshopId") Long workshopId,
-                                                                Authentication authentication) {
-        System.out.println(workshopId +" workshopID");
-        System.out.println(username +" username");
+    public ResponseEntity<HttpStatus> workshopReservationDeleteByUsername(@PathVariable("username") String username, @PathVariable("workshopId") Long workshopId,
+                                                                          Authentication authentication) {
         try {
             DiyUser user = userRepository.getUserByUsername(username);
             DiyWorkshop workshop = workshopRepository.getById(workshopId);
