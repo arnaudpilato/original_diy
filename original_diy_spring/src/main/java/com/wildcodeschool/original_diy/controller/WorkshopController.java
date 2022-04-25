@@ -248,6 +248,25 @@ public class WorkshopController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("reservation/deleteByUsername/{username}/{workshopId}")
+    public ResponseEntity<HttpStatus> workshopReservationDeleteByUsername(@PathVariable("username") String username,@PathVariable("workshopId") Long workshopId,
+                                                                Authentication authentication) {
+        System.out.println(workshopId +" workshopID");
+        System.out.println(username +" username");
+        try {
+            DiyUser user = userRepository.getUserByUsername(username);
+            DiyWorkshop workshop = workshopRepository.getById(workshopId);
+
+            workshopService.reservationDelete(user, workshop);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/reservation-by-current-user")
     public ResponseEntity<List<DiyWorkshop>> workshopReservationByCurrentUser(Authentication authentication) {
