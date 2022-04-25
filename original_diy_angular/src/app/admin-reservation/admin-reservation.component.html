@@ -18,10 +18,9 @@
           <tr *ngFor="let user of workshop.reservationUser ; let index = index">
             <td *ngIf="index < 1">{{ workshop.title }}</td>
             <td *ngIf="index >= 1"></td>
-            <div hidden *ngIf="index < 1 ? index+1 : index" ></div>
+            <div hidden *ngIf="index < 1 ? index+1 : index"></div>
             <td [innerHTML]="user.username != null ? user.username : user | nl2br"></td>
-            <!-- <td class="text-center td-edit">
-             </td>-->
+
             <td class="td-delete"><a class="link"
                                      (click)="deleteReservation(user.username != null ? user.username : user, workshop.id)"><img
               class="icon" width="30px"
@@ -31,7 +30,7 @@
           </tr>
           </tbody>
         </table>
-     </div>
+      </div>
     </div>
   </div>
 </div>
