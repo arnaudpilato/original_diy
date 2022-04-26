@@ -33,12 +33,6 @@ public class DiyBadge {
     @JsonIgnore
     private Set<DiyUser> users = new HashSet<>();
 
-    //TODO Voir le système de suppression des badges quand ils sont attribués
-    /*@PreRemove
-    public void removeUsersFromBadge() {
-        this.setUsers(new HashSet<>());
-    }*/
-
     public Long getId() {
         return id;
     }

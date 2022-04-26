@@ -15,6 +15,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<DiyComment, Long> {
 
 @Query( value = "SELECT w FROM DiyComment  w WHERE w.diyWorkshop = :diyWorkshop")
-    public List<DiyComment> getCommentByWorkshop(@Param("diyWorkshop") DiyWorkshop diyWorkshop);
+    List<DiyComment> getCommentByWorkshop(@Param("diyWorkshop") DiyWorkshop diyWorkshop);
 
 }
