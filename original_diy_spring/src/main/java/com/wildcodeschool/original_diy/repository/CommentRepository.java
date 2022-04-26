@@ -16,5 +16,4 @@ public interface CommentRepository extends JpaRepository<DiyComment, Long> {
 
 @Query( value = "SELECT w FROM DiyComment  w WHERE w.diyWorkshop = :diyWorkshop")
     List<DiyComment> getCommentByWorkshop(@Param("diyWorkshop") DiyWorkshop diyWorkshop);
-
 }

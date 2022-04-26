@@ -1,12 +1,9 @@
 package com.wildcodeschool.original_diy.request;
 
-import com.wildcodeschool.original_diy.entity.DiyRole;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 public class UserRequest {
