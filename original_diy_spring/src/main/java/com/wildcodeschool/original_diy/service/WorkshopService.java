@@ -1,10 +1,12 @@
 package com.wildcodeschool.original_diy.service;
 
 import com.wildcodeschool.original_diy.entity.DiyRole;
+import com.wildcodeschool.original_diy.entity.DiySubCategory;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.model.ERole;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
+import com.wildcodeschool.original_diy.repository.SubCategoryRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class WorkshopService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    SubCategoryRepository subCategoryRepository;
 
 
     public void workshopControl(List<DiyWorkshop> workshops) {
@@ -84,20 +89,28 @@ public class WorkshopService {
         } else {
             workshop.setPicturePath(workshopRequest.getPicturePath());
         }
-
         workshop.setStreetNumber(workshopRequest.getStreetNumber());
         workshop.setStreet(workshopRequest.getStreet());
         workshop.setPostCode(workshopRequest.getPostCode());
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
+
+       Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
+
+        if (subCategory.isEmpty()) {
+          // EXECPTION
+        }
+
+        DiySubCategory subCategoryReal = subCategory.get();
+        workshop.setSubCategory(subCategoryReal);
         if ((workshopRequest.getLimitedPlaces() == null) || (workshopRequest.getLimitedPlaces() < 1)) {
             workshop.setLimitedPlaces(1L);
         } else {
             workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
         }
+
         Set<DiyRole> roles = new HashSet<>();
         roles = user.getRoles();
-
         for (DiyRole role : roles
         ) {
             if (role.getName() == ERole.ROLE_ADMIN) {
@@ -106,7 +119,6 @@ public class WorkshopService {
                 workshop.setConfirmation(false);
             }
         }
-
         double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                 workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
         double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
@@ -114,6 +126,7 @@ public class WorkshopService {
 
         workshop.setLatitude(latitude);
         workshop.setLongitude(longitude);
+
         workshop.setDiyUser(workshopRequest.getDiyUser());
         workshop.setDate(workshopRequest.getDate());
         workshopRepository.save(workshop);

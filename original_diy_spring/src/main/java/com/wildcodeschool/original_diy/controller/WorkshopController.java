@@ -1,13 +1,9 @@
 package com.wildcodeschool.original_diy.controller;
 
-import com.wildcodeschool.original_diy.entity.DiyBadge;
-import com.wildcodeschool.original_diy.entity.DiyComment;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.entity.DiyWorkshop;
-import com.wildcodeschool.original_diy.repository.BadgeRepository;
-import com.wildcodeschool.original_diy.repository.CommentRepository;
-import com.wildcodeschool.original_diy.repository.UserRepository;
-import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.DTO.WorkshopDTO;
+import com.wildcodeschool.original_diy.entity.*;
+import com.wildcodeschool.original_diy.repository.*;
+
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import com.wildcodeschool.original_diy.service.APIGouvService;
 import com.wildcodeschool.original_diy.service.WorkshopService;
@@ -31,6 +27,8 @@ public class WorkshopController {
     @Autowired
     APIGouvService gouvService;
     @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
     UserRepository userRepository;
     @Autowired
     WorkshopService workshopService;
@@ -40,6 +38,9 @@ public class WorkshopController {
 
     @Autowired
     BadgeRepository badgeRepository;
+
+    @Autowired
+    SubCategoryRepository subCategoryRepository;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
@@ -57,6 +58,7 @@ public class WorkshopController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PreAuthorize("permitAll()")
     @GetMapping("/allConfirmed")
@@ -82,22 +84,31 @@ public class WorkshopController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/last-workshops")
-    public ResponseEntity<List<DiyWorkshop>> getLastWorkshops(Authentication authentication) {
+    public ResponseEntity<List<WorkshopDTO>> getLastWorkshops(Authentication authentication) {
 
         try {
             List<DiyWorkshop> workshops = new ArrayList<>();
-
             workshops.addAll(workshopRepository.getThreeLastWorkshops());
             workshopService.workshopControl(workshops);
 
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
+            List<WorkshopDTO> workshopsDTO = new ArrayList<>();
+
+            for (DiyWorkshop workshop : workshopsNew
+            ) {
+                WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
+                        workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
+                        workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
+                        workshop.getSubCategory().getCategory());
+                workshopsDTO.add(workshopDTO);
+            }
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
+            return new ResponseEntity<>(workshopsDTO, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -192,7 +203,13 @@ public class WorkshopController {
             workshop.setConfirmation(workshopRequest.isConfirmation());
             workshop.setDate(workshopRequest.getDate());
             workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
+            Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
 
+            if (subCategory.isEmpty()) {
+                // EXECPTION
+            }
+            DiySubCategory subCategoryReal = subCategory.get();
+            workshop.setSubCategory(subCategoryReal);
             workshopRepository.save(workshop);
 
             return new ResponseEntity<>(workshopRepository.save(workshop), HttpStatus.OK);
@@ -290,4 +307,26 @@ public class WorkshopController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/all/category")
+    public ResponseEntity<List<DiyCategory>> getAllCategories() {
+        try {
+
+            List<DiyCategory> categories = new ArrayList<>();
+
+            categories = categoryRepository.findAll();
+
+            if (categories.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

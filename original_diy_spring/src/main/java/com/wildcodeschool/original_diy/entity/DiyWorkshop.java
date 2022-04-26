@@ -7,14 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "workshops")
 public class DiyWorkshop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,6 +57,8 @@ public class DiyWorkshop {
 
     private Long limitedPlaces;
 
+    @ManyToOne
+    private DiySubCategory subCategory;
 
     public DiyWorkshop() {
     }
@@ -184,5 +185,13 @@ public class DiyWorkshop {
 
     public void setLimitedPlaces(Long limitedPlaces) {
         this.limitedPlaces = limitedPlaces;
+    }
+
+    public DiySubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(DiySubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 }

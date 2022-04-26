@@ -1,4 +1,4 @@
-export class DiyWorkshop {
+export class WorkshopDTO {
   id?: number;
   title?: string;
   picturePath?: string;
@@ -14,6 +14,7 @@ export class DiyWorkshop {
   diyUser?: any;
   date?: any;
   categorie?: any;
+  subCategory?: any;
   limitedPlaces?: number;
 
 }

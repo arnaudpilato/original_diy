@@ -17,6 +17,19 @@
             <label class="form-label" for="places">Nombre de place :</label>
             <input class="form-control" id="places" name="places" min="1" [(ngModel)]="model.limitedPlaces" type="number" placeholder="4">
           </div>
+          <label for="workshop-categorie">Categorie d'atelier : </label>
+         <div class="mb-3">
+           <select
+            [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie">
+            <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">
+              <option
+                *ngFor=" let subcategory of category.subCategories; let index = index"
+                value="{{ subcategory.id }}">
+                {{ subcategory.name }}
+              </option>
+            </optgroup>
+          </select>
+         </div>
           <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>
             <input class="form-control" id="picture" (change)="selectFile($event)" type="file">

@@ -41,6 +41,8 @@ public class WorkshopRequest {
         this.date = date;
     }
 
+    public int subCategoryId;
+
     public WorkshopRequest() {
     }
 
@@ -130,6 +132,14 @@ public class WorkshopRequest {
 
     public void setDiyUser(DiyUser diyUser) {
         this.diyUser = diyUser;
+    }
+
+    public int getSubCategoryId() {
+        return subCategoryId;
+    }
+
+    public void setSubCategoryId(int subCategoryId) {
+        this.subCategoryId = subCategoryId;
     }
 
     public Long getLimitedPlaces() {
