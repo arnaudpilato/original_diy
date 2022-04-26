@@ -42,7 +42,6 @@ public class WorkshopService {
         }
     }
 
-
     public void reservationWorkshop(DiyUser user, DiyWorkshop workshop) {
         try {
 
@@ -75,7 +74,6 @@ public class WorkshopService {
             System.err.println(e.getMessage());
         }
     }
-
 
     public void createWorkshop(@Valid @RequestBody WorkshopRequest workshopRequest, DiyWorkshop workshop, DiyUser user) {
 
@@ -119,7 +117,6 @@ public class WorkshopService {
         workshop.setDiyUser(workshopRequest.getDiyUser());
         workshop.setDate(workshopRequest.getDate());
         workshopRepository.save(workshop);
-
     }
 }
 

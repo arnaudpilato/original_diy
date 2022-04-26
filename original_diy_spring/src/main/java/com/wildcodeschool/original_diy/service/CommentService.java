@@ -9,18 +9,15 @@ import com.wildcodeschool.original_diy.request.CommentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
     @Autowired
     CommentRepository commentRepository;
+
     @Autowired
     WorkshopRepository workshopRepository;
-
 
     public DiyComment commentControl(CommentRequest commentRequest, DiyUser user) {
         DiyComment comment = new DiyComment();
@@ -33,7 +30,5 @@ public class CommentService {
         commentRepository.save(comment);
         return comment;
     }
-
-
 }
 

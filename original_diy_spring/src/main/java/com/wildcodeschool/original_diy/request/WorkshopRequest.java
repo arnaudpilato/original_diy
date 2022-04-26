@@ -3,9 +3,7 @@ package com.wildcodeschool.original_diy.request;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 import java.util.Date;
-
 
 public class WorkshopRequest {
     private String title;
