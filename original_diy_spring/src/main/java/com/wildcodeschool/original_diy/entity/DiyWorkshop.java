@@ -6,9 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 /*@JsonIdentityInfo(
@@ -17,6 +15,7 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "workshops")
 public class DiyWorkshop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -59,6 +58,8 @@ public class DiyWorkshop {
 
     private int limitedPlaces;
 
+    @ManyToOne
+    private DiySubCategory subCategorycategorie;
 
     public DiyWorkshop() {
     }
@@ -79,9 +80,13 @@ public class DiyWorkshop {
         this.title = title;
     }
 
-    public String getPicturePath() { return picturePath; }
+    public String getPicturePath() {
+        return picturePath;
+    }
 
-    public void setPicturePath(String picturePath) { this.picturePath = picturePath; }
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 
     public Long getStreetNumber() {
         return streetNumber;
@@ -181,5 +186,13 @@ public class DiyWorkshop {
 
     public void setLimitedPlaces(int limitedPlaces) {
         this.limitedPlaces = limitedPlaces;
+    }
+
+    public DiySubCategory getSubCategorycategorie() {
+        return subCategorycategorie;
+    }
+
+    public void setSubCategorycategorie(DiySubCategory subCategorycategorie) {
+        this.subCategorycategorie = subCategorycategorie;
     }
 }

@@ -1,10 +1,12 @@
 package com.wildcodeschool.original_diy.service;
 
 import com.wildcodeschool.original_diy.entity.DiyRole;
+import com.wildcodeschool.original_diy.entity.DiySubCategory;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.model.ERole;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
+import com.wildcodeschool.original_diy.repository.SubCategoryRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class WorkshopService {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    SubCategoryRepository subCategoryRepository;
 
 
     public void workshopControl(List<DiyWorkshop> workshops) {
@@ -92,9 +97,20 @@ public class WorkshopService {
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
 
+
+       Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
+        System.out.println("test");
+        if (subCategory.isEmpty()) {
+          // EXECPTION
+        }
+        System.out.println("test2");
+        DiySubCategory subCategoryReal = subCategory.get();
+        System.out.println("test3");
+        workshop.setSubCategorycategorie(subCategoryReal);
+        System.out.println("test4");
         Set<DiyRole> roles = new HashSet<>();
         roles = user.getRoles();
-
+        System.out.println("test4");
         for (DiyRole role : roles
         ) {
             if (role.getName() == ERole.ROLE_ADMIN) {
@@ -103,7 +119,7 @@ public class WorkshopService {
                 workshop.setConfirmation(false);
             }
         }
-
+        System.out.println("zebi7");
         double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                 workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
         double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
@@ -111,6 +127,7 @@ public class WorkshopService {
 
         workshop.setLatitude(latitude);
         workshop.setLongitude(longitude);
+        System.out.println("zebi8");
         workshop.setDiyUser(workshopRequest.getDiyUser());
         workshop.setDate(workshopRequest.getDate());
         workshopRepository.save(workshop);

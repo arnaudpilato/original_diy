@@ -1,8 +1,10 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyCategory;
 import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.CategoryRepository;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
@@ -29,6 +31,8 @@ public class WorkshopController {
     @Autowired
     APIGouvService gouvService;
     @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
     UserRepository userRepository;
     @Autowired
     WorkshopService workshopService;
@@ -52,6 +56,8 @@ public class WorkshopController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
     @PreAuthorize("permitAll()")
     @GetMapping("/allConfirmed")
@@ -150,6 +156,7 @@ public class WorkshopController {
     @PostMapping("/new")
     public ResponseEntity<?> createWorkshopUserAndAdmin(@Valid @RequestBody WorkshopRequest workshopRequest,
                                                         Authentication authentication) {
+
         try {
             DiyWorkshop workshop = new DiyWorkshop();
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
@@ -266,4 +273,26 @@ public class WorkshopController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/all/category")
+    public ResponseEntity<List<DiyCategory>> getAllCategories() {
+        try {
+
+            List<DiyCategory> categories = new ArrayList<>();
+
+            categories = categoryRepository.findAll();
+
+            if (categories.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }
