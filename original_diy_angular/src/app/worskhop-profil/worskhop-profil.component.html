@@ -4,7 +4,7 @@
         <div><a class="btn btn-primary my-4" routerLink="/creation-atelier">Ajout d'un atelier</a></div>
     </div>
     <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
+        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index" (click)="workshopDetails(workshop.id)">
             <thead>
                 <tr>
                     <th scope="col">{{ "Atelier " +  (index + 1) }}</th>
@@ -62,9 +62,7 @@
             <tbody>
                 <tr *ngFor="let workshop of workshops; let index = index" (click)="workshopDetails(workshop.id)">
                     <td>
-                        <a href="/workshop/{{ workshop.id }}">
-                            <img class="workshop-picture align-middle" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
-                        </a>
+                        <img class="workshop-picture align-middle" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
                     </td>
                     <td style="max-width: 200px;" [innerHTML]="workshop.description | nl2br"></td>
                     <td>{{ workshop.confirmation ? "En cours" : "Terminer" }}</td>
@@ -76,7 +74,9 @@
                         <p><i class="bi bi-geo-alt-fill"></i> : {{workshop.streetNumber}} {{workshop.street}}</p>
                         <p><i class="bi bi-house-fill"></i> : {{workshop.postCode}} {{workshop.city}} </p>
                     </td>
-                    <td><i class="bi bi-person-fill"></i> : {{ workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}</td>
+                    <td>
+                        <i class="bi bi-person-fill"></i> : {{ workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}
+                    </td>
                 </tr>
             </tbody>
         </table>
