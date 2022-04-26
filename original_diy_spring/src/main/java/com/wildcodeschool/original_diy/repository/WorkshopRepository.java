@@ -26,4 +26,10 @@ public interface WorkshopRepository extends JpaRepository<DiyWorkshop, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM workshops AS w JOIN workshops_reservation_user AS wru ON wru.diy_workshop_id = w.id WHERE wru.reservation_user_id = :diyUserId ")
     public List<DiyWorkshop> getDiyWorkshopByReservationUser(@Param("diyUserId") Long diyUserId);
 
+    @Query(nativeQuery = true, value = "SELECT * FROM workshops AS w " +
+            "JOIN workshops_reservation_user AS wru ON w.id = wru.diy_workshop_id " +
+            "JOIN users AS u ON wru.reservation_user_id = u.id " +
+            "WHERE wru.reservation_user_id = :id AND w.date < CURRENT_DATE")
+    List<DiyWorkshop> getBadgesByReservations(@Param("id") Long id);
+
 }
