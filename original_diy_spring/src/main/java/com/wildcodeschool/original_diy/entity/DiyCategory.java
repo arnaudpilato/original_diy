@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -48,5 +49,4 @@ public class DiyCategory {
     public void setSubCategories(List<DiySubCategory> subCategories) {
         this.subCategories = subCategories;
     }
-
 }

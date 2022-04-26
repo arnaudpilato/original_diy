@@ -1,68 +1,77 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
-  <div class="row justify-content-center">
-    <div class="col-11 col-md-5">
-      <form method="post" class="my-3" name="form" (ngSubmit)="userEditForm.form.valid && onSubmit()" #userEditForm="ngForm" novalidate>
-        <div class="alert alert-success text-center" *ngIf="userEditForm.submitted">{{ message }}</div>
-        <div class="mb-3">
-          <label class="form-label" for="username">Username :</label>
-          <input class="form-control" id="username" name="username" [(ngModel)]="user.username" type="text"
-                 placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
+    <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-5">
+            <form method="post" class="my-3" name="form" (ngSubmit)="userEditForm.form.valid && onSubmit()" #userEditForm="ngForm" novalidate>
+                <div class="alert alert-success text-center" *ngIf="userEditForm.submitted">{{ message }}</div>
+                <div class="mb-3">
+                    <label class="form-label" for="username">Username :</label>
+                    <input class="form-control" id="username" name="username" [(ngModel)]="user.username" type="text"
+                           placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
+                </div>
+                <div class="form-control alert-danger my-2" *ngIf="username.errors && userEditForm.submitted">
+                    <div *ngIf="username.errors['required']">Le nom est requis !</div>
+                    <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>
+                    <div *ngIf="username.errors['maxlength']">L'identifiant doit faire moins de 100 caractères !</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="lastName">Nom :</label>
+                    <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" type="text"
+                           placeholder="Doe" value="{{ user.lastName }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="firstName">Prenom :</label>
+                    <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" type="text"
+                           placeholder="John" value="{{  user.firstName }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">Mail :</label>
+                    <input class="form-control" id="email" name="email" [(ngModel)]="user.email" type="email"
+                           placeholder="john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
+                </div>
+                <div class="form-control alert-danger my-2" *ngIf="email.errors && userEditForm.submitted">
+                    <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
+                    <div *ngIf="email.errors['email']">L'adresse email doit être une adresse valide !</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="phone">Telephone :</label>
+                    <input class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" type="number"
+                           placeholder="0698754321" value="{{ user.phone }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="role">Role :</label>
+                    <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
+                        <option value="user" [selected]="user.roles ? user.roles[0].name == 'ROLE_USER' : undefined">Utilisateur</option>
+                        <option value="admin" [selected]="user.roles ? user.roles[0].name == 'ROLE_ADMIN' : undefined">Administrateur</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="badge-checkbox">Badges :</label>
+                    <div class="form-check" id="badge-checkbox">
+                        <div *ngFor="let badge of badges">
+                            <div *ngIf="badge.step == 0">
+                                <input class="form-check-input" (change)="onChange(badge.id)" type="checkbox" value="{{ badge.id }}" id="{{badge.id}}" [checked]="toggleCheckBox(badge.id)" /><img class="badge-picture mb-2" src="{{ s3 + badge.picturePath}}" alt="Badge"><span class="badge-name">{{badge.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Mot de passe :</label>
+                    <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password" minlength="1" required #password="ngModel" value="{{ user.password }}">
+                </div>
+                <div class="form-control alert-danger my-2" *ngIf="password.errors && userEditForm.submitted">
+                    <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
+                    <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
+                </div>
+                <div class="text-center my-3">
+                    <button class="btn btn-primary m-1">Modifier</button>
+                    <button class="btn btn-secondary m-1" routerLink="/admin/contact">Retour</button>
+                </div>
+            </form>
         </div>
-        <div class="form-control alert-danger my-2" *ngIf="username.errors && userEditForm.submitted">
-          <div *ngIf="username.errors['required']">Le nom est requis !</div>
-          <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>
-          <div *ngIf="username.errors['maxlength']">L'identifiant doit faire moins de 100 caractères !</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="lastName">Nom :</label>
-          <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" type="text"
-                 placeholder="Doe" value="{{ user.lastName }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="firstName">Prenom :</label>
-          <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" type="text"
-                 placeholder="John" value="{{  user.firstName }}">
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="email">Mail :</label>
-          <input class="form-control" id="email" name="email" [(ngModel)]="user.email" type="email"
-                 placeholder="john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
-        </div>
-        <div class="form-control alert-danger my-2" *ngIf="email.errors && userEditForm.submitted">
-          <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
-          <div *ngIf="email.errors['email']">L'adresse email doit être une adresse valide !</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="phone">Telephone :</label>
-          <input class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" type="number"
-                 placeholder="0698754321" value="{{ user.phone }}">
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label" for="role">Role :</label>
-          <select id="role" class="form-select" name="roles" (change)="getRole(role.value)" #role>
-            <option value="user" [selected]="user.roles ? user.roles[0].name == 'ROLE_USER' : undefined">Utilisateur</option>
-            <option value="admin" [selected]="user.roles ? user.roles[0].name == 'ROLE_ADMIN' : undefined">Administrateur</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="password">Mot de passe :</label>
-          <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password" minlength="1" required #password="ngModel" value="{{ user.password }}">
-        </div>
-        <div class="form-control alert-danger my-2" *ngIf="password.errors && userEditForm.submitted">
-          <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
-          <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
-        </div>
-        <div class="text-center my-3">
-          <button class="btn btn-primary m-1">Modifier</button>
-          <button class="btn btn-secondary m-1" routerLink="/admin/contact">Retour</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

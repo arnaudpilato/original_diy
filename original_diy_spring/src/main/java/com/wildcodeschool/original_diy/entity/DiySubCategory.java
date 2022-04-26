@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.List;
@@ -16,7 +17,9 @@ public class DiySubCategory {
     private int id;
 
     private String name;
+
     @ManyToOne
+    @JsonIgnore
     private DiyCategory category;
 
     public DiySubCategory() {

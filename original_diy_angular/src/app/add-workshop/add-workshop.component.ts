@@ -98,6 +98,8 @@ export class AddWorkshopComponent implements OnInit {
       date: new Date((new Date(this.model.date)).getTime() + (60 * 60 * 1000)),
       diyUser: this.authuser,
       subCategoryId: this.subCategoryId,
+      limitedPlaces: this.model.limitedPlaces,
+
 
     }
 

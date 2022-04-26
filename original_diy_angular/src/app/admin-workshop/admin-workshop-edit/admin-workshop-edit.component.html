@@ -15,6 +15,24 @@
                    placeholder="Nom de l'atelier" value="{{ workshop.title }}">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="places">Nombre de place : </label>
+            <input min="1" class="form-control" id="places" name="places" [(ngModel)]="workshop.limitedPlaces" type="number"
+                   placeholder="{{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}">
+          </div>
+          <div class="mb-3">
+            <label for="workshop-categorie">Categorie d'atelier : </label>
+            <select
+              [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie">
+              <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">
+                <option
+                  *ngFor=" let subcategory of category.subCategories; let index = index"
+                  value="{{ subcategory.id }}">
+                  {{ subcategory.name }}
+                </option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>
             <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
           </div>
@@ -42,7 +60,7 @@
             <label class="form-label" for="date">Date :</label>
             {{ workshop.date  | date:'dd-MM-yyyy HH-mm'}}
             <input class="form-control" type="datetime-local"
-                      name="date" id="date" [(ngModel)]="workshop.date" required/>
+                      name="date" id="date" [(ngModel)]="workshop.date" required />
           </div>
           <div class="mb-3">
             <label class="form-label" for="description">Description :</label>

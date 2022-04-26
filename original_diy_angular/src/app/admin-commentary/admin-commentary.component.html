@@ -60,7 +60,7 @@
             <td [innerHTML]="comment.comment | nl2br"></td>
             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
             <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
-            <td class="text-end td-edit">
+            <td class="text-center td-edit">
               <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}"
                      name="confirmation"
                      [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">

@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import {TokenStorageService} from "../../service/token-storage.service";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {categorieService} from "../../service/categorie.service";
 
 @Component({
   selector: 'app-admin-workshop-new',
@@ -27,8 +28,10 @@ export class AdminWorkshopNewComponent implements OnInit {
   public changeImage = false;
   public authuser: any;
   public minDatetimeLocal: any;
-
+  public subCategoryId: number | undefined;
   public Editor = ClassicEditor;
+  public categories: any[] | undefined;
+
 
 
   constructor(
@@ -36,12 +39,14 @@ export class AdminWorkshopNewComponent implements OnInit {
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service,
     private router: Router,
-    private token: TokenStorageService) {
+    private token: TokenStorageService,
+    private categoryService: categorieService) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.token.getToken();
+    this.getAllCategories()
     this.Editor.defaultConfig = {
       toolbar: {
         items: [
@@ -87,6 +92,7 @@ export class AdminWorkshopNewComponent implements OnInit {
       title: this.model.title,
       picturePath: this.nameFile,
       streetNumber: this.model.streetNumber,
+      limitedPlaces: this.model.limitedPlaces,
       street: this.model.street,
       postCode: this.model.postCode,
       city: this.model.city,
@@ -94,7 +100,10 @@ export class AdminWorkshopNewComponent implements OnInit {
       confirmation: this.model.confirmation,
       date: new Date((new Date(this.model.date)).getTime() + (60 * 60 * 1000)),
       diyUser: this.authuser,
+      subCategoryId: this.subCategoryId,
+
     }
+    console.log("data : "+data)
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -113,5 +122,20 @@ export class AdminWorkshopNewComponent implements OnInit {
         this.errorMessage = e.error.message;
       }
     });
+  }
+  getAllCategories(): any {
+    this.categoryService.getAll().subscribe({
+        next: (datas) => {
+          console.log(datas)
+          this.categories = datas;
+          this.categories.forEach((category) => {
+            console.log("category = " + category.subCategory)
+          })
+
+        },
+
+        error: (e) => console.log(e)
+      }
+    )
   }
 }

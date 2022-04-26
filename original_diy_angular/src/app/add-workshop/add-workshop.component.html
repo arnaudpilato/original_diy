@@ -16,6 +16,11 @@
                    placeholder="Nom de l'atelier">
           </div>
           <div class="mb-3">
+            <label class="form-label" for="places">Nombre de place : </label>
+            <input min="1" class="form-control" id="places" name="places" [(ngModel)]="model.limitedPlaces" type="number"
+                   placeholder="{{ model.limitedPlaces }}" value="{{ model.limitedPlaces }}">
+          </div>
+          <div class="mb-3">
             <label for="workshop-categorie">Categorie d'atelier : </label>
             <select
               [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie">

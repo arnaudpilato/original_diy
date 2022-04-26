@@ -1,21 +1,23 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyRole;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import com.wildcodeschool.original_diy.model.ERole;
+import com.wildcodeschool.original_diy.repository.BadgeRepository;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
+import com.wildcodeschool.original_diy.service.BadgeVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,13 +38,22 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private BadgeRepository badgeRepository;
+
+    @Autowired
     private CommentRepository commentRepository;
+
     @Autowired
     private WorkshopRepository workshopRepository;
+
+    @Autowired
+    private BadgeVerificationService badgeVerificationService;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyUser>> getAllUsers() {
+        badgeVerificationService.badgesVerification();
+
         try {
             List<DiyUser> users = new ArrayList<>();
             userRepository.findAll().forEach(users::add);
@@ -173,6 +184,18 @@ public class UserController {
                 });
             }
 
+            try {
+                Set<DiyBadge> badges = new HashSet<>();
+                for (Long badgeId : userRequest.getBadgesSelected()) {
+                    DiyBadge badge = badgeRepository.getById(badgeId);
+                    badges.add(badge);
+                }
+
+                user.setBadges(badges);
+            }catch (Exception e) {
+                System.out.println(e);
+            }
+
             user.setRoles(roles);
 
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
@@ -186,22 +209,23 @@ public class UserController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) {
         try {
-        DiyUser user = userRepository.getById(id);
-        List<DiyComment> commentList = user.getComments();
-        List<DiyWorkshop> workshopList = user.getWorkshops();
+            DiyUser user = userRepository.getById(id);
+            List<DiyComment> commentList = user.getComments();
+            List<DiyWorkshop> workshopList = user.getWorkshops();
 
-        for (DiyComment comment : commentList
-        ) {
-            commentRepository.deleteById(comment.getId());;
-        }
-        for (DiyWorkshop workshop : workshopList
-        ) {
-            workshopRepository.deleteById(workshop.getId());
-        }
+            for (DiyComment comment : commentList
+            ) {
+                commentRepository.deleteById(comment.getId());
+                ;
+            }
+            for (DiyWorkshop workshop : workshopList
+            ) {
+                workshopRepository.deleteById(workshop.getId());
+            }
 
             userRepository.deleteById(id);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

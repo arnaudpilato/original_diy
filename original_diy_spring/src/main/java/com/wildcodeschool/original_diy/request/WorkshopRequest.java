@@ -30,6 +30,8 @@ public class WorkshopRequest {
 
     private DiyUser diyUser;
 
+    private Long limitedPlaces;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm ")
     private Date date;
 
@@ -140,5 +142,13 @@ public class WorkshopRequest {
 
     public void setSubCategoryId(int subCategoryId) {
         this.subCategoryId = subCategoryId;
+    }
+
+    public Long getLimitedPlaces() {
+        return limitedPlaces;
+    }
+
+    public void setLimitedPlaces(Long limitedPlaces) {
+        this.limitedPlaces = limitedPlaces;
     }
 }

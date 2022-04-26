@@ -1,13 +1,9 @@
 package com.wildcodeschool.original_diy.controller;
 
-import com.wildcodeschool.original_diy.entity.DiyCategory;
-import com.wildcodeschool.original_diy.entity.DiyComment;
-import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.entity.DiyWorkshop;
-import com.wildcodeschool.original_diy.repository.CategoryRepository;
-import com.wildcodeschool.original_diy.repository.CommentRepository;
-import com.wildcodeschool.original_diy.repository.UserRepository;
-import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.DTO.WorkshopDTO;
+import com.wildcodeschool.original_diy.entity.*;
+import com.wildcodeschool.original_diy.repository.*;
+
 import com.wildcodeschool.original_diy.request.WorkshopRequest;
 import com.wildcodeschool.original_diy.service.APIGouvService;
 import com.wildcodeschool.original_diy.service.WorkshopService;
@@ -40,6 +36,12 @@ public class WorkshopController {
     @Autowired
     CommentRepository commentRepository;
 
+    @Autowired
+    BadgeRepository badgeRepository;
+
+    @Autowired
+    SubCategoryRepository subCategoryRepository;
+
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyWorkshop>> getAllWorkshops() {
@@ -56,7 +58,6 @@ public class WorkshopController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
 
     @PreAuthorize("permitAll()")
@@ -83,22 +84,31 @@ public class WorkshopController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/last-workshops")
-    public ResponseEntity<List<DiyWorkshop>> getLastWorkshops(Authentication authentication) {
+    public ResponseEntity<List<WorkshopDTO>> getLastWorkshops(Authentication authentication) {
 
         try {
             List<DiyWorkshop> workshops = new ArrayList<>();
-
             workshops.addAll(workshopRepository.getThreeLastWorkshops());
             workshopService.workshopControl(workshops);
 
             List<DiyWorkshop> workshopsNew = new ArrayList<>();
             workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
 
+            List<WorkshopDTO> workshopsDTO = new ArrayList<>();
+
+            for (DiyWorkshop workshop : workshopsNew
+            ) {
+                WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
+                        workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
+                        workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
+                        workshop.getSubCategory().getCategory());
+                workshopsDTO.add(workshopDTO);
+            }
             if (workshops.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
+            return new ResponseEntity<>(workshopsDTO, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -160,7 +170,7 @@ public class WorkshopController {
         try {
             DiyWorkshop workshop = new DiyWorkshop();
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
-           workshopService.createWorkshop(workshopRequest, workshop , user);
+            workshopService.createWorkshop(workshopRequest, workshop, user);
             return new ResponseEntity<>(workshop, HttpStatus.CREATED);
 
         } catch (Exception e) {
@@ -192,7 +202,14 @@ public class WorkshopController {
             workshop.setDescription(workshopRequest.getDescription());
             workshop.setConfirmation(workshopRequest.isConfirmation());
             workshop.setDate(workshopRequest.getDate());
+            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
+            Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
 
+            if (subCategory.isEmpty()) {
+                // EXECPTION
+            }
+            DiySubCategory subCategoryReal = subCategory.get();
+            workshop.setSubCategory(subCategoryReal);
             workshopRepository.save(workshop);
 
             return new ResponseEntity<>(workshopRepository.save(workshop), HttpStatus.OK);
@@ -245,6 +262,23 @@ public class WorkshopController {
         try {
             DiyUser user = userRepository.getUserByUsername(authentication.getName());
             DiyWorkshop workshop = workshopRepository.getById(id);
+
+            workshopService.reservationDelete(user, workshop);
+
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("reservation/deleteByUsername/{username}/{workshopId}")
+    public ResponseEntity<HttpStatus> workshopReservationDeleteByUsername(@PathVariable("username") String username, @PathVariable("workshopId") Long workshopId,
+                                                                          Authentication authentication) {
+        try {
+            DiyUser user = userRepository.getUserByUsername(username);
+            DiyWorkshop workshop = workshopRepository.getById(workshopId);
 
             workshopService.reservationDelete(user, workshop);
 

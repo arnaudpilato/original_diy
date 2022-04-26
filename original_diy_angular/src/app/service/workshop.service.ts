@@ -61,4 +61,8 @@ export class WorkshopService {
     return this.http.delete(this.baseUrl + "reservation/delete/" + id);
   }
 
+  deleteReservationByUsername(username: any, workshopId: any): Observable<any> {
+    return this.http.delete(this.baseUrl + "reservation/deleteByUsername/" + username + "/" + workshopId)
+  }
+
 }

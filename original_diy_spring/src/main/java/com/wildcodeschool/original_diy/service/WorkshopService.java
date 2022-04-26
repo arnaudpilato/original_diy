@@ -57,15 +57,16 @@ public class WorkshopService {
             // j'ajoute dans la liste des ateliers les reservations qui sont représenter par une liste de users dans
             // l'entité workshop et j'ajoute ensuite le user actuel qui vien de reserver dans la liste des users
             users.addAll(workshop.getReservationUser());
-            users.add(user);
+            if (users.size() < workshop.getLimitedPlaces()) {
+                users.add(user);
 
-            // j'effectue ensuite un controle qui vérifie si le user actuel et contenus dans la liste des reservations
-            // de l'atelier, s'il n'est pas dans la liste alors on peut effectuer la reservation
-            if ((!workshop.getReservationUser().contains(user))) {
-                workshop.setReservationUser(users);
-                workshopRepository.save(workshop);
+                // j'effectue ensuite un controle qui vérifie si le user actuel et contenus dans la liste des reservations
+                // de l'atelier, s'il n'est pas dans la liste alors on peut effectuer la reservation
+                if ((!workshop.getReservationUser().contains(user))) {
+                    workshop.setReservationUser(users);
+                    workshopRepository.save(workshop);
+                }
             }
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
@@ -90,27 +91,28 @@ public class WorkshopService {
         } else {
             workshop.setPicturePath(workshopRequest.getPicturePath());
         }
-
         workshop.setStreetNumber(workshopRequest.getStreetNumber());
         workshop.setStreet(workshopRequest.getStreet());
         workshop.setPostCode(workshopRequest.getPostCode());
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
 
-
        Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
-        System.out.println("test");
+
         if (subCategory.isEmpty()) {
           // EXECPTION
         }
-        System.out.println("test2");
+
         DiySubCategory subCategoryReal = subCategory.get();
-        System.out.println("test3");
-        workshop.setSubCategorycategorie(subCategoryReal);
-        System.out.println("test4");
+        workshop.setSubCategory(subCategoryReal);
+        if ((workshopRequest.getLimitedPlaces() == null) || (workshopRequest.getLimitedPlaces() < 1)) {
+            workshop.setLimitedPlaces(1L);
+        } else {
+            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
+        }
+
         Set<DiyRole> roles = new HashSet<>();
         roles = user.getRoles();
-        System.out.println("test4");
         for (DiyRole role : roles
         ) {
             if (role.getName() == ERole.ROLE_ADMIN) {
@@ -119,7 +121,6 @@ public class WorkshopService {
                 workshop.setConfirmation(false);
             }
         }
-        System.out.println("zebi7");
         double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
                 workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
         double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
@@ -127,7 +128,7 @@ public class WorkshopService {
 
         workshop.setLatitude(latitude);
         workshop.setLongitude(longitude);
-        System.out.println("zebi8");
+
         workshop.setDiyUser(workshopRequest.getDiyUser());
         workshop.setDate(workshopRequest.getDate());
         workshopRepository.save(workshop);

@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,10 +57,11 @@ public class DiyWorkshop {
 
     private boolean confirmation = false;
 
-    private int limitedPlaces;
+
+    private Long limitedPlaces;
 
     @ManyToOne
-    private DiySubCategory subCategorycategorie;
+    private DiySubCategory subCategory;
 
     public DiyWorkshop() {
     }
@@ -180,19 +182,19 @@ public class DiyWorkshop {
         this.reservationUser = reservationUser;
     }
 
-    public int getLimitedPlaces() {
+    public Long getLimitedPlaces() {
         return limitedPlaces;
     }
 
-    public void setLimitedPlaces(int limitedPlaces) {
+    public void setLimitedPlaces(Long limitedPlaces) {
         this.limitedPlaces = limitedPlaces;
     }
 
-    public DiySubCategory getSubCategorycategorie() {
-        return subCategorycategorie;
+    public DiySubCategory getSubCategory() {
+        return subCategory;
     }
 
-    public void setSubCategorycategorie(DiySubCategory subCategorycategorie) {
-        this.subCategorycategorie = subCategorycategorie;
+    public void setSubCategory(DiySubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 }

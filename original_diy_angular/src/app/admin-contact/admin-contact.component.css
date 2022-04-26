@@ -1,5 +1,4 @@
 /***** Picture *****/
-
 .badge-picture {
   width: 100%;
   object-fit: cover;
@@ -10,7 +9,6 @@
 }
 
 /***** Icons *****/
-
 .icon {
   width: 32px;
   height: auto;
@@ -26,7 +24,6 @@
 }
 
 /***** Lines *****/
-
 th, td {
   vertical-align: middle;
   line-height: 40px;
@@ -39,7 +36,6 @@ ul {
 }
 
 /***** Columns *****/
-
 .td-edit {
   width: 60px;
 }
@@ -47,3 +43,5 @@ ul {
 .td-delete {
   width: 80px;
 }
+
+/*# sourceMappingURL=admin-contact.component.css.map */

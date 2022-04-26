@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   public workshop: any | undefined;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
+  public workshopDTO : any[] | undefined;
 
   constructor(
     private title: Title,
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit {
     this.workshopService.getLastWorkshop().subscribe({
         next: (datas) => {
           this.workshops = datas;
+          console.log(this.workshops)
         },
 
         error: (e) => console.log(e)

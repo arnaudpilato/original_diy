@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {WorkshopService} from "../../service/workshop.service";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {categorieService} from "../../service/categorie.service";
 
 @Component({
   selector: 'app-admin-workshop-edit',
@@ -26,6 +27,8 @@ export class AdminWorkshopEditComponent implements OnInit {
   public file: any;
   public changeImage = false;
   public Editor = ClassicEditor;
+  public subCategoryId: number | undefined;
+  public categories: any[] | undefined;
 
 
   constructor(
@@ -34,7 +37,8 @@ export class AdminWorkshopEditComponent implements OnInit {
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private categoryService: categorieService
   ) {
     this.title.setTitle("OriginalDIY - Admin - workshop - edit");
   }
@@ -42,6 +46,8 @@ export class AdminWorkshopEditComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     console.log(this.workshop)
+    this.getAllCategories()
+
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -65,7 +71,6 @@ export class AdminWorkshopEditComponent implements OnInit {
     this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
-        console.log(data);
       },
 
       error: (err) => console.error(err)
@@ -77,6 +82,7 @@ export class AdminWorkshopEditComponent implements OnInit {
       title: this.workshop.title,
       picturePath: this.nameFile,
       streetNumber: this.workshop.streetNumber,
+      limitedPlaces: this.workshop.limitedPlaces,
       street: this.workshop.street,
       postCode: this.workshop.postCode,
       city: this.workshop.city,
@@ -86,6 +92,8 @@ export class AdminWorkshopEditComponent implements OnInit {
       latitude: this.workshop.latitude,
       confirmation: this.workshop.confirmation,
       date: new Date((new Date(this.workshop.date)).getTime() + (60 * 60 * 1000)),
+      subCategoryId: this.subCategoryId,
+
     }
 
     if (this.selectedFiles != null) {
@@ -106,4 +114,21 @@ export class AdminWorkshopEditComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
+
+  getAllCategories(): any {
+    this.categoryService.getAll().subscribe({
+        next: (datas) => {
+          console.log(datas)
+          this.categories = datas;
+          this.categories.forEach((category) => {
+            console.log("category = " + category.subCategory)
+          })
+
+        },
+
+        error: (e) => console.log(e)
+      }
+    )
+  }
+
 }

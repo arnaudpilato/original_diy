@@ -49,6 +49,7 @@
         <th scope="col">#</th>
         <th scope="col" colspan="2">Image</th>
         <th scope="col">Description</th>
+        <th scope="col">Places</th>
         <th scope="col">Visible</th>
         <th scope="col" colspan="2">Modifier</th>
       </tr>
@@ -65,6 +66,7 @@
           </a>
         </th>
         <td class="text-wrap" [innerHTML]="workshop.description | nl2br"></td>
+        <td>{{ workshop.reservationUser.length }}/{{ workshop.limitedPlaces}}</td>
         <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
         <td class="text-end td-edit">
           <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link"><img class="icon" src="/assets/img/edit.png"

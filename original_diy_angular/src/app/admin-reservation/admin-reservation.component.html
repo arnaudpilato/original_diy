@@ -1,0 +1,40 @@
+<div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
+  <h1 class="text-center my-4">Gestion des Réservations</h1>
+  <div class="row justify-content-center">
+    <div class="col-11">
+      <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+      </div>
+      <div class="table-responsive d-block my-2">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Atelier</th>
+            <th scope="col">Utilisateur</th>
+            <th scope="col">Supprimer</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let workshop of workshops">
+          <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+            <td *ngIf="index < 1">{{ workshop.title }}</td>
+            <td *ngIf="index >= 1"></td>
+            <div hidden *ngIf="index < 1 ? index+1 : index"></div>
+            <td [innerHTML]="user.username != null ? user.username : user | nl2br"></td>
+
+            <td class="td-delete"><a class="link"
+                                     (click)="deleteReservation(user.username != null ? user.username : user, workshop.id)"><img
+              class="icon" width="30px"
+              src="/assets/img/delete.png"
+              alt="Logo supprimer"></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <app-error401></app-error401>
+</ng-template>

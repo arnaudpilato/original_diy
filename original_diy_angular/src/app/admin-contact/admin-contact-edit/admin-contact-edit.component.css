@@ -1,5 +1,4 @@
 /***** Picture *****/
-
 .badge-picture {
   width: 100%;
   object-fit: cover;
@@ -11,3 +10,5 @@
 .badge-name {
   padding-left: 10px;
 }
+
+/*# sourceMappingURL=admin-contact-edit.component.css.map */

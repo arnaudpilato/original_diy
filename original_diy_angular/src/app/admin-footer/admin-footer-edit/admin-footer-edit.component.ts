@@ -50,7 +50,7 @@ export class AdminFooterEditComponent implements OnInit {
     const data =  {
       name: this.socialNetwork.name,
       socialNetworkPath: this.socialNetwork.socialNetworkPath,
-      picturePath: this.socialNetwork.picturePath,
+      picturePath: this.nameFile,
       visible: this.socialNetwork.visible
     }
 

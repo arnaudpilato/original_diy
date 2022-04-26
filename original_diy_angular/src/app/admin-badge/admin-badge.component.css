@@ -2,8 +2,8 @@
 .badge-picture {
   width: 100%;
   object-fit: cover;
-  max-width: 64px;
-  max-height: 64px;
+  max-width: 35px;
+  max-height: 35px;
 }
 
 /***** Icons *****/
