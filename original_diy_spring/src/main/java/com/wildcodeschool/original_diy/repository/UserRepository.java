@@ -20,5 +20,5 @@ public interface UserRepository extends JpaRepository<DiyUser, Long> {
     Boolean existsByEmail(String email);
 
     @Query("SELECT u FROM DiyUser u WHERE u.username = :username")
-    public DiyUser getUserByUsername(@Param("username") String username);
+    DiyUser getUserByUsername(@Param("username") String username);
 }

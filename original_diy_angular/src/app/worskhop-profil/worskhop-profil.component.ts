@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
 import {TokenStorageService} from "../service/token-storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-worskhop-profil',
@@ -21,7 +22,8 @@ export class WorskhopProfilComponent implements OnInit {
   public static: string = '/assets/img/static-picture.png';
 
   constructor(private title: Title, private workshopService: WorkshopService,
-              private token: TokenStorageService) {
+              private token: TokenStorageService,
+              private router: Router) {
     this.title.setTitle("OriginalDIY - Mes - Ateliers")
   }
 
@@ -36,6 +38,10 @@ export class WorskhopProfilComponent implements OnInit {
 
 
     }
+  }
+
+  workshopDetails($event: number) {
+    this.router.navigate(['/workshop/' + $event]);
   }
 
   userWorkshop():any {
