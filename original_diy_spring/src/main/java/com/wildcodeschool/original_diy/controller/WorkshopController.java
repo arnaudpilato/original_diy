@@ -1,8 +1,10 @@
 package com.wildcodeschool.original_diy.controller;
 
+import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.entity.DiyComment;
 import com.wildcodeschool.original_diy.entity.DiyUser;
 import com.wildcodeschool.original_diy.entity.DiyWorkshop;
+import com.wildcodeschool.original_diy.repository.BadgeRepository;
 import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
@@ -35,6 +37,9 @@ public class WorkshopController {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    BadgeRepository badgeRepository;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
@@ -150,6 +155,7 @@ public class WorkshopController {
     @PostMapping("/new")
     public ResponseEntity<?> createWorkshopUserAndAdmin(@Valid @RequestBody WorkshopRequest workshopRequest,
                                                         Authentication authentication) {
+
         try {
             DiyWorkshop workshop = new DiyWorkshop();
             DiyUser user = userRepository.getUserByUsername(authentication.getName());

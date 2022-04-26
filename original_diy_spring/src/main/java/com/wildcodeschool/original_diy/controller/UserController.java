@@ -13,6 +13,7 @@ import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
+import com.wildcodeschool.original_diy.service.BadgeVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +46,14 @@ public class UserController {
     @Autowired
     private WorkshopRepository workshopRepository;
 
+    @Autowired
+    private BadgeVerificationService badgeVerificationService;
+
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
     public ResponseEntity<List<DiyUser>> getAllUsers() {
+        badgeVerificationService.badgesVerification();
+
         try {
             List<DiyUser> users = new ArrayList<>();
             userRepository.findAll().forEach(users::add);
