@@ -10,9 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-/*@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "workshops")
 public class DiyWorkshop {

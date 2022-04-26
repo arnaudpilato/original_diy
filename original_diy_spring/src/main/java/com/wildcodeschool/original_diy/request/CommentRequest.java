@@ -1,7 +1,6 @@
 package com.wildcodeschool.original_diy.request;
 
 import com.wildcodeschool.original_diy.entity.DiyUser;
-import com.wildcodeschool.original_diy.entity.DiyWorkshop;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
