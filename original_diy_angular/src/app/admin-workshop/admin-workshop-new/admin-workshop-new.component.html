@@ -15,7 +15,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="places">Nombre de place :</label>
-            <input class="form-control" id="places" name="places" [(ngModel)]="model.limitedPlaces" type="number" placeholder="4">
+            <input class="form-control" id="places" name="places" min="1" [(ngModel)]="model.limitedPlaces" type="number" placeholder="4">
           </div>
           <div class="mb-3">
             <label class="form-label" for="picture">Photo :</label>

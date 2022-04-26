@@ -76,7 +76,7 @@ export class AdminWorkshopEditComponent implements OnInit {
       title: this.workshop.title,
       picturePath: this.nameFile,
       streetNumber: this.workshop.streetNumber,
-      places: this.workshop.limitedPlaces,
+      limitedPlaces: this.workshop.limitedPlaces,
       street: this.workshop.street,
       postCode: this.workshop.postCode,
       city: this.workshop.city,
