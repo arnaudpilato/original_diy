@@ -92,8 +92,7 @@ public class WorkshopService {
         workshop.setPostCode(workshopRequest.getPostCode());
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
-        System.out.println("place limite : " + workshopRequest.getLimitedPlaces());
-        if (workshopRequest.getLimitedPlaces() == null) {
+        if ((workshopRequest.getLimitedPlaces() == null) || (workshopRequest.getLimitedPlaces() < 1)) {
             workshop.setLimitedPlaces(1L);
         } else {
             workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
