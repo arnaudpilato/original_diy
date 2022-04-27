@@ -24,6 +24,17 @@ public class WorkshopDTO {
 
     private DiyCategory diyCategory;
 
+    private Long streetNumber;
+
+    private String street;
+
+    private Long postCode;
+
+    private String city;
+
+    private Double longitude;
+
+    private Double latitude;
 
     public WorkshopDTO(Long id, List<DiyUser> reservationUser, Date date, String description, String title,
                        String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory) {
@@ -36,6 +47,27 @@ public class WorkshopDTO {
         this.limitedPlaces = limitedPlaces;
         this.subCategory = subCategory;
         this.diyCategory = diyCategory;
+    }
+
+    public WorkshopDTO(Long id, List<DiyUser> reservationUser, Date date, String description, String title,
+                       String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory,
+                       Long streetNumber, String street, Long postCode, String city, Double longitude, Double latitude)
+    {
+        this.id = id;
+        this.reservationUser = reservationUser;
+        this.date = date;
+        this.description = description;
+        this.title = title;
+        this.picturePath = picturePath;
+        this.limitedPlaces = limitedPlaces;
+        this.subCategory = subCategory;
+        this.diyCategory = diyCategory;
+        this.streetNumber = streetNumber;
+        this.street = street;
+        this.postCode = postCode;
+        this.city = city;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Long getId() {
@@ -108,5 +140,53 @@ public class WorkshopDTO {
 
     public void setDiyCategory(DiyCategory diyCategory) {
         this.diyCategory = diyCategory;
+    }
+
+    public Long getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(Long streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public Long getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(Long postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }

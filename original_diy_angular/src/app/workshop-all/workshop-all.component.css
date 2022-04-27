@@ -1,3 +1,77 @@
+.custom-card {
+  position: relative;
+  cursor: pointer;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+}
 
+.custom-card .face {
+  width: 300px;
+  height: 200px;
+  transition: 0.5s;
+}
+
+.custom-card .face.face1 {
+  position: relative;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  transform: translateY(100px);
+}
+
+.custom-card:hover .face.face1 {
+  transform: translateY(0);
+}
+
+.custom-card .face.face1 .content {
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.custom-card:hover .face.face1 .content {
+  opacity: 1;
+}
+
+.custom-card .face.face1 .content img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.custom-card .face.face1 .content h3 {
+  color: #fff;
+  font-size: 1em;
+  position: absolute;
+  top: 170px;
+  left: 15px;
+}
+
+.custom-card .face.face2 {
+  position: relative;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  transform: translateY(-100px);
+}
+
+.custom-card:hover .face.face2 {
+  transform: translateY(0);
+}
+
+.custom-card .face.face2 .content p {
+  margin: 0;
+  padding: 0;
+}
+
+.icon {
+  margin-right: 20px;
+}
 
 /*# sourceMappingURL=workshop-all.component.css.map */

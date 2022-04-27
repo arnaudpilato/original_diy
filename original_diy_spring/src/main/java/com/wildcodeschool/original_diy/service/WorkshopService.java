@@ -1,5 +1,6 @@
 package com.wildcodeschool.original_diy.service;
 
+import com.wildcodeschool.original_diy.DTO.WorkshopDTO;
 import com.wildcodeschool.original_diy.entity.DiyRole;
 import com.wildcodeschool.original_diy.entity.DiySubCategory;
 import com.wildcodeschool.original_diy.entity.DiyUser;
@@ -131,5 +132,51 @@ public class WorkshopService {
         workshop.setDate(workshopRequest.getDate());
         workshopRepository.save(workshop);
     }
+
+
+    public List<WorkshopDTO> showWorkshopDTO (){
+        List<DiyWorkshop> workshops = new ArrayList<>();
+        workshops.addAll(workshopRepository.getThreeLastWorkshops());
+        workshopControl(workshops);
+
+        List<DiyWorkshop> workshopsNew = new ArrayList<>();
+        workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
+
+        List<WorkshopDTO> workshopsSortDTO = new ArrayList<>();
+
+        for (DiyWorkshop workshop : workshopsNew
+        ) {
+            WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
+                    workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
+                    workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
+                    workshop.getSubCategory().getCategory());
+            workshopsSortDTO.add(workshopDTO);
+        }
+        return workshopsSortDTO;
+    }
+
+    public List<WorkshopDTO> showWorkshopConfirmedDTO (){
+        List<DiyWorkshop> workshops = new ArrayList<>();
+
+        workshops.addAll(workshopRepository.getAllConfirmedWorkshops());
+        workshopControl(workshops);
+
+        List<DiyWorkshop> workshopsNew = new ArrayList<>();
+        workshopsNew.addAll(workshopRepository.getAllConfirmedWorkshops());
+
+        List<WorkshopDTO> workshopsSortDTO = new ArrayList<>();
+
+        for (DiyWorkshop workshop : workshopsNew
+        ) {
+            WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
+                    workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
+                    workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
+                    workshop.getSubCategory().getCategory(), workshop.getStreetNumber(), workshop.getStreet(),
+                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude());
+            workshopsSortDTO.add(workshopDTO);
+        }
+        return workshopsSortDTO;
+    }
+
 }
 

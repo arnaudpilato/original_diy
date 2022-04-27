@@ -62,21 +62,16 @@ public class WorkshopController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/allConfirmed")
-    public ResponseEntity<List<DiyWorkshop>> getAllWorkshopsConfirmed() {
+    public ResponseEntity<List<WorkshopDTO>> getAllWorkshopsConfirmed() {
         try {
-            List<DiyWorkshop> workshops = new ArrayList<>();
+            List<WorkshopDTO> workshopsDTOConfirmed = workshopService.showWorkshopConfirmedDTO();
 
-            workshops.addAll(workshopRepository.getAllConfirmedWorkshops());
-            workshopService.workshopControl(workshops);
 
-            List<DiyWorkshop> workshopsNew = new ArrayList<>();
-            workshopsNew.addAll(workshopRepository.getAllConfirmedWorkshops());
-
-            if (workshops.isEmpty()) {
+            if (workshopsDTOConfirmed.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(workshopsNew, HttpStatus.OK);
+            return new ResponseEntity<>(workshopsDTOConfirmed, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -87,24 +82,8 @@ public class WorkshopController {
     public ResponseEntity<List<WorkshopDTO>> getLastWorkshops(Authentication authentication) {
 
         try {
-            List<DiyWorkshop> workshops = new ArrayList<>();
-            workshops.addAll(workshopRepository.getThreeLastWorkshops());
-            workshopService.workshopControl(workshops);
-
-            List<DiyWorkshop> workshopsNew = new ArrayList<>();
-            workshopsNew.addAll(workshopRepository.getThreeLastWorkshops());
-
-            List<WorkshopDTO> workshopsDTO = new ArrayList<>();
-
-            for (DiyWorkshop workshop : workshopsNew
-            ) {
-                WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
-                        workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
-                        workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
-                        workshop.getSubCategory().getCategory());
-                workshopsDTO.add(workshopDTO);
-            }
-            if (workshops.isEmpty()) {
+            List<WorkshopDTO> workshopsDTO = workshopService.showWorkshopDTO();
+            if (workshopsDTO.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 

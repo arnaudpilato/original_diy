@@ -1,0 +1,34 @@
+.workshop-picture {
+  width: 100%;
+  object-fit: cover;
+  max-width: 250px;
+  max-height: 150px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+}
+
+/***** Icons *****/
+.icon {
+  width: 32px;
+  height: auto;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.icon:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  width: 35px;
+  height: auto;
+  border-radius: 50px;
+}
+
+/***** Columns *****/
+.td-edit {
+  width: 60px;
+}
+
+.td-delete {
+  width: 80px;
+}
+
+/*# sourceMappingURL=admin-workshop.component.css.map */
