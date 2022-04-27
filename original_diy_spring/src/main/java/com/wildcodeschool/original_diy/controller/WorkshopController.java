@@ -203,13 +203,12 @@ public class WorkshopController {
             workshop.setConfirmation(workshopRequest.isConfirmation());
             workshop.setDate(workshopRequest.getDate());
             workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
-            Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
-
-            if (subCategory.isEmpty()) {
-                // EXECPTION
+            if (workshopRequest.getSubCategoryId() == 0) {
+                workshop.setSubCategory(workshop.getSubCategory());
+            } else {
+                workshop.setSubCategory(subCategoryRepository.getById(workshopRequest.getSubCategoryId()));
             }
-            DiySubCategory subCategoryReal = subCategory.get();
-            workshop.setSubCategory(subCategoryReal);
+
             workshopRepository.save(workshop);
 
             return new ResponseEntity<>(workshopRepository.save(workshop), HttpStatus.OK);
