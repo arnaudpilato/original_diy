@@ -10,7 +10,7 @@ public class WorkshopDTO {
 
     private Long id;
     private List<DiyUser> reservationUser;
-
+    private DiyUser user;
     private Date date;
 
     private String description;
@@ -51,7 +51,7 @@ public class WorkshopDTO {
 
     public WorkshopDTO(Long id, List<DiyUser> reservationUser, Date date, String description, String title,
                        String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory,
-                       Long streetNumber, String street, Long postCode, String city, Double longitude, Double latitude)
+                       Long streetNumber, String street, Long postCode, String city, Double longitude, Double latitude, DiyUser user)
     {
         this.id = id;
         this.reservationUser = reservationUser;
@@ -68,6 +68,7 @@ public class WorkshopDTO {
         this.city = city;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.user = user;
     }
 
     public Long getId() {
@@ -188,5 +189,13 @@ public class WorkshopDTO {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public DiyUser getUser() {
+        return user;
+    }
+
+    public void setUser(DiyUser user) {
+        this.user = user;
     }
 }
