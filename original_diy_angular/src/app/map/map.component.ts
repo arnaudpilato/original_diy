@@ -28,8 +28,9 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.workshopService.getAllConfirmed().subscribe({
       next: (datas) => {
         this.workshops = datas;
+        console.log(this.workshops)
 
-        const greenIcon = L.icon({
+        const blueIcon = L.icon({
           iconUrl: 'assets/img/markericons.png',
 
           iconSize: [40, 60], // size of the icon
@@ -39,6 +40,38 @@ export class MapComponent implements OnInit, AfterViewInit {
           popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
+        const yellowIcon = L.icon({
+          iconUrl: 'assets/img/markericonsJaune.png',
+
+          iconSize: [40, 60], // size of the icon
+          shadowSize: [50, 64], // size of the shadow
+          iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        const orangeIcon = L.icon({
+          iconUrl: 'assets/img/markericonsOrange.png',
+
+          iconSize: [40, 60], // size of the icon
+          shadowSize: [50, 64], // size of the shadow
+          iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        const purpleIcon = L.icon({
+          iconUrl: 'assets/img/markericonsViolet.png',
+
+          iconSize: [40, 60], // size of the icon
+          shadowSize: [50, 64], // size of the shadow
+          iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+          shadowAnchor: [4, 62],  // the same for the shadow
+          popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+
+
         this.workshops.forEach((data) => {
           const id = data.id;
           const date = new Date(data.date);
@@ -47,13 +80,45 @@ export class MapComponent implements OnInit, AfterViewInit {
           const hours = date.getUTCHours() >= 10 ? `${date.getUTCHours()}` : `0${date.getUTCHours()}`;
           const minutes = date.getUTCMinutes() >= 10 ? `${date.getUTCMinutes()}` : `0${date.getUTCMinutes()}`;
 
-          const marker = L.marker([data.latitude, data.longitude], {icon: greenIcon}).addTo(this.map)
-            .bindPopup(`<p class='my-2'>${data.title}</p>`
-              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-              `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
-            .openPopup;
+          switch (data.diyCategory.name){
+            case "Aménagements intérieurs":
+              const markerBlue = L.marker([data.latitude, data.longitude], {icon: blueIcon}).addTo(this.map)
+                .bindPopup(`<p class='my-2'>${data.title}</p>`
+                  + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+                  `<p> à : ${hours} H ${minutes}</p>`
+                  + "<br/>" +
+                  `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+                .openPopup;
+              break
+            case "Aménagements extérieurs":
+              const markerYellow = L.marker([data.latitude, data.longitude], {icon: yellowIcon}).addTo(this.map)
+                .bindPopup(`<p class='my-2'>${data.title}</p>`
+                  + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+                  `<p> à : ${hours} H ${minutes}</p>`
+                  + "<br/>" +
+                  `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+                .openPopup;
+              break
+            case "Les Animaux de compagnie":
+              const markerOrange = L.marker([data.latitude, data.longitude], {icon: orangeIcon}).addTo(this.map)
+                .bindPopup(`<p class='my-2'>${data.title}</p>`
+                  + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+                  `<p> à : ${hours} H ${minutes}</p>`
+                  + "<br/>" +
+                  `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+                .openPopup;
+              break
+
+            case "Les fêtes de l'année":
+              const markerPurple = L.marker([data.latitude, data.longitude], {icon: purpleIcon}).addTo(this.map)
+                .bindPopup(`<p class='my-2'>${data.title}</p>`
+                  + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+                  `<p> à : ${hours} H ${minutes}</p>`
+                  + "<br/>" +
+                  `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+                .openPopup;
+              break
+          }
         });
       },
       error: (err) => console.log(err)
@@ -105,13 +170,4 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   }
 
-  showWorkshop(id: any): void {
-    this.workshopService.getById(id).subscribe({
-      next: (datas) => {
-        this.workshop = datas;
-      },
-
-      error: (err) => console.error(err)
-    });
-  }
 }

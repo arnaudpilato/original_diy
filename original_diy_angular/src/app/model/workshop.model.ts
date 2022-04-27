@@ -15,5 +15,4 @@ export class DiyWorkshop {
   date?: any;
   categorie?: any;
   limitedPlaces?: number;
-
 }
