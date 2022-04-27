@@ -172,7 +172,7 @@ public class WorkshopService {
                     workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
                     workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
                     workshop.getSubCategory().getCategory(), workshop.getStreetNumber(), workshop.getStreet(),
-                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude());
+                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude(), workshop.getDiyUser());
             workshopsSortDTO.add(workshopDTO);
         }
         return workshopsSortDTO;
