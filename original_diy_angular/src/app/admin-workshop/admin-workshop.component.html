@@ -69,13 +69,13 @@
         <td>{{ workshop.reservationUser.length }}/{{ workshop.limitedPlaces}}</td>
         <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
         <td class="text-end td-edit">
-          <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link"><img class="icon" src="/assets/img/edit.png"
-                                                                                 alt="Logo éditer"></a>
+          <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link">
+              <img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
         </td>
         <td class="td-delete">
-          <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon"
-                                                                                           src="/assets/img/delete.png"
-                                                                                           alt="Logo supprimer"></a>
+          <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)">
+              <img class="icon" src="/assets/img/delete.png" alt="Logo supprimer">
+          </a>
         </td>
       </tr>
       </tbody>

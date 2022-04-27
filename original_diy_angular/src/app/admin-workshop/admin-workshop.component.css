@@ -8,7 +8,6 @@
 }
 
 /***** Icons *****/
-
 .icon {
   width: 32px;
   height: auto;
@@ -24,7 +23,6 @@
 }
 
 /***** Columns *****/
-
 .td-edit {
   width: 60px;
 }
@@ -32,3 +30,5 @@
 .td-delete {
   width: 80px;
 }
+
+/*# sourceMappingURL=admin-workshop.component.css.map */

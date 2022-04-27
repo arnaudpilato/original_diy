@@ -20,7 +20,7 @@
                    placeholder="{{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}">
           </div>
           <div class="mb-3">
-            <label for="workshop-categorie">Categorie d'atelier : </label>
+            <label for="workshop-categorie">Categorie d'atelier : {{workshop.subCategory.name}}</label>
             <select
               [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie">
               <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">

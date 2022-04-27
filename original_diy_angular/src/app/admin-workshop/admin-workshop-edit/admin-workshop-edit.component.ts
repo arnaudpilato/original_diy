@@ -45,16 +45,13 @@ export class AdminWorkshopEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.workshop)
-    this.getAllCategories()
-
-
     if (this.isLoggedIn) {
+      this.getWorkshop(this.route.snapshot.params["id"]);
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.getWorkshop(this.route.snapshot.params["id"]);
     }
+    this.getAllCategories();
   }
 
   selectFile(event: any) {
@@ -71,8 +68,8 @@ export class AdminWorkshopEditComponent implements OnInit {
     this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
+        this.subCategoryId = this.workshop.subCategory.id;
       },
-
       error: (err) => console.error(err)
     });
   }
@@ -93,7 +90,6 @@ export class AdminWorkshopEditComponent implements OnInit {
       confirmation: this.workshop.confirmation,
       date: new Date((new Date(this.workshop.date)).getTime() + (60 * 60 * 1000)),
       subCategoryId: this.subCategoryId,
-
     }
 
     if (this.selectedFiles != null) {
@@ -123,9 +119,7 @@ export class AdminWorkshopEditComponent implements OnInit {
           this.categories.forEach((category) => {
             console.log("category = " + category.subCategory)
           })
-
         },
-
         error: (e) => console.log(e)
       }
     )

@@ -22,7 +22,7 @@ public class BadgeVerificationService {
     public void badgesVerification() {
         for (DiyUser user: userRepository.findAll()) {
             for (DiyBadge badge: badgeRepository.findAll()) {
-                if (!user.getBadges().contains(badge) && workshopRepository.getBadgesByReservations(user.getId()).size() >= badge.getStep()) {
+                if (!user.getBadges().contains(badge) && workshopRepository.getBadgesByReservations(user.getId()).size() >= badge.getStep() && badge.getStep() > 0) {
                     user.getBadges().add(badge);
                     userRepository.save(user);
                 }
