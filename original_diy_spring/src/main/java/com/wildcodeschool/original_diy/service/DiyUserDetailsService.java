@@ -60,7 +60,7 @@ public class DiyUserDetailsService implements UserDetailsService {
         }
     }
 
-    public DiyUser get(String resetPasswordToken) {
+    public DiyUser getByToken(String resetPasswordToken) {
         return userRepository.findByResetPasswordToken(resetPasswordToken);
     }
 

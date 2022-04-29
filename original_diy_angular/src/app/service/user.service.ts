@@ -35,4 +35,8 @@ export class UserService {
   updateMail(data: any): Observable<any> {
     return this.http.put(this.baseUrl + "recoverPassword", data);
   }
+
+  updatePassword(data: any): Observable<any> {
+    return this.http.put(this.baseUrl + "newPassword", data)
+  }
 }

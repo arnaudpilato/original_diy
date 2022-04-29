@@ -44,6 +44,7 @@ import {TruncatePipe} from "./TruncatePipe";
 import { AdminReservationComponent } from './admin-reservation/admin-reservation.component';
 import { WorkshopAllComponent } from './workshop-all/workshop-all.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     TruncatePipe,
     AdminReservationComponent,
     WorkshopAllComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

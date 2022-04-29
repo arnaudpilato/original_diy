@@ -22,7 +22,8 @@ public interface UserRepository extends JpaRepository<DiyUser, Long> {
     @Query("SELECT u FROM DiyUser u WHERE u.username = :username")
     DiyUser getUserByUsername(@Param("username") String username);
 
-    public DiyUser findByResetPasswordToken(String token);
+    @Query("SELECT u FROM DiyUser u WHERE u.resetPasswordToken = :token")
+    DiyUser findByResetPasswordToken(@Param("token") String token);
 
     @Query("SELECT u FROM DiyUser u WHERE u.email = :email")
     DiyUser findByEmail(@Param("email") String email);
