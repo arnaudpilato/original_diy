@@ -266,10 +266,10 @@ public class UserController {
     @PreAuthorize("permitAll()")
     @PutMapping("/newPassword")
     public ResponseEntity<?> newPassword(@Valid @RequestBody PasswordRequest passwordRequest) {
-        DiyUser user = userRepository.findByResetPasswordToken(passwordRequest.getToken());
-        diyUserDetailsService.updatePassword(user,passwordRequest.getPassword());
-
+        if (!passwordRequest.getToken().isEmpty()) {
+            DiyUser user = userRepository.findByResetPasswordToken(passwordRequest.getToken());
+            diyUserDetailsService.updatePassword(user,passwordRequest.getPassword());
+        }
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 }

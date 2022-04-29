@@ -13,6 +13,7 @@ export class ResetPasswordComponent implements OnInit {
 
   public token: string = this.route.snapshot.queryParams['token'];
   changePassword: boolean = false;
+  passwordFail: boolean = false;
   public model: any = new password();
   passwordConfirm: string | undefined;
 
@@ -23,19 +24,24 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    const data: any = {
-      password: this.model.password,
-      token: this.token
-    }
-    this.userService.updatePassword(data).subscribe({
-      next: (data) => {
-        this.changePassword = true;
-        window.setTimeout(function () {
-          window.location.href = "/home";
-        }, 1000)
-      },
+    console.log(this.model.password +" et "+this.passwordConfirm)
+    if (this.model.password == this.passwordConfirm) {
+      const data: any = {
+        password: this.model.password,
+        token: this.token
+      }
+      this.userService.updatePassword(data).subscribe({
+        next: (data) => {
+          this.changePassword = true;
+          window.setTimeout(function () {
+            window.location.href = "/home";
+          }, 1000)
+        },
 
-      error: (e) => console.log(e + "e")
-    });
+        error: (e) => console.log(e + "e")
+      });
+    } else {
+      this.passwordFail = true;
+    }
   }
 }

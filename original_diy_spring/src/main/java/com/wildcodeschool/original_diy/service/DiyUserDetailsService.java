@@ -60,16 +60,13 @@ public class DiyUserDetailsService implements UserDetailsService {
         }
     }
 
-    public DiyUser getByToken(String resetPasswordToken) {
-        return userRepository.findByResetPasswordToken(resetPasswordToken);
-    }
 
     public void updatePassword(DiyUser user, String newPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodePassword = passwordEncoder.encode(newPassword);
 
         user.setPassword(encodePassword);
-        user.setResetPasswordToken(null);
+        user.setResetPasswordToken("");
 
         userRepository.save(user);
     }
