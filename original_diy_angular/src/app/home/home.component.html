@@ -1,10 +1,48 @@
 <div class="min-vh-100 background-home">
     <div class="container">
         <div class="row">
-            <h1 class="text-center my-4">Bienvenue !</h1>
+            <div class="my-4">
+                <ul class="title d-flex justify-content-center">
+                    <li class="letter"><input type="checkbox" /><div class="yellow">B</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="green">I</div></li >
+                    <li class="letter"><input type="checkbox" /><div class="turquoise">E</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="green">V</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="turquoise">E</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                    <li class="letter"><input type="checkbox" /><div class="green">U</div></li >
+                    <li class="letter"><input type="checkbox" /><div class="turquoise">E</div></li>
+                </ul>
+            </div>
+            <div class="description-section row justify-content-center mt-3 mb-5">
+                <div class="col-10 description">
+                    "Bienvenue à l'atelier des bricolages créatifs
+                    Vous avez envie de fabriquer des objets originaux de vos propres mains mais vous ne savez pas comment faire et n'avez pas les outils nécessaire.
+                    Pas de panique ! Avec nos ateliers, venez les mains dans les poches parce que chez nous, tout est inclus.
+                    Les outils et les matériaux sont mis à votre disposition pour vous permettre de repartir avec des créations uniques et personnalisées.
+                    Pendant les ateliers, on prendra soin de vous mais aussi de la planète puisque toutes vos créations seront confectionnées à partir de matériaux issus du réemploi et du recyclage.
+                    Qu'attendez-vous ? Créez vous !"
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="my-4 p-4"  style="background-color: #f8f7f7;">
+        <div class="container">
+            <div class="row d-flex justify-content-around my-5">
+                <div class="text-center col-6">
+                    <a class="link" routerLink="/map"><img class="icon" src="/assets/img/map-icon.png" alt="Icône carte"></a>
+                    <div class="text-center mt-3"><h4>Carte</h4></div>
+                </div>
+                <div class="text-center col-6">
+                    <a class="link" routerLink="/les-ateliers"><img class="icon" src="/assets/img/tools-icon.png" alt="Icône ateliers"></a>
+                    <div class="text-center mt-3"><h4>Ateliers</h4></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
         <div class="row my-4">
-            <h2 class="text-center">Les nouveaux ateliers</h2>
+            <h2 class="text-center my-4">Les nouveaux ateliers</h2>
         </div>
         <div class="row justify-content-around mb-4">
             <div *ngFor="let workshop of workshops" class="card col-11 col-md-3 my-4">
@@ -12,14 +50,22 @@
                 <div class="card-body">
                     <h5 class="card-title text-center mb-3">{{workshop.title}}</h5>
                     <p class="card-text col text-truncate mb-1" [innerHTML]="workshop.description | nl2br | truncate:[33, '...'] "></p>
-                    <div class="text-muted my-2"><i class="bi bi-calendar3"></i> {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}</div>
-                    <div class="text-muted my-2"> Nombre de places restantes : {{ workshop.limitedPlaces - workshop.reservationUser.length }} sur {{ workshop.limitedPlaces }}</div>
+                    <div class="text-muted my-2">
+                        <i class="bi bi-calendar3 icon"></i>
+                        {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}
+                    </div>
+                    <div class="text-muted my-2">
+                        <i class="bi bi-person-fill icon"></i>
+                        {{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }} places disponibles
+                    </div>
+                    <div class="text-muted my-2">
+                        <i class="bi bi-tag-fill icon"></i>
+                        {{ workshop.diyCategory.name }}
+                    </div>
                     <div class="justify-content-center text-center">
                         <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)" class="btn btn-primary my-3">Voir les détails</a>
                     </div>
-                  <div > Catégorie : {{ workshop.diyCategory.name }}</div>
                 </div>
-
             </div>
         </div>
     </div>
