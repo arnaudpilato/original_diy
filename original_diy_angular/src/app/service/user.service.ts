@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {DiyUser} from "../model/user.model";
 import { environment } from "../../environments/environment";
+import {UserPagination} from "../model/userPagination";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<DiyUser[]> {
-    return this.http.get<DiyUser[]>(this.baseUrl + "all");
+  getAll(params: any): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "all", {params});
   }
 
   getById(id: any): Observable<DiyUser> {

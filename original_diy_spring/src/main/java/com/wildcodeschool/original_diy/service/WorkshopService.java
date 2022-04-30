@@ -1,6 +1,6 @@
 package com.wildcodeschool.original_diy.service;
 
-import com.wildcodeschool.original_diy.DTO.WorkshopDTO;
+import com.wildcodeschool.original_diy.dto.WorkshopDTO;
 import com.wildcodeschool.original_diy.entity.DiyRole;
 import com.wildcodeschool.original_diy.entity.DiySubCategory;
 import com.wildcodeschool.original_diy.entity.DiyUser;

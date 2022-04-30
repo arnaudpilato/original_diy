@@ -43,6 +43,7 @@ import { AdminBadgeEditComponent } from './admin-badge/admin-badge-edit/admin-ba
 import {TruncatePipe} from "./TruncatePipe";
 import { AdminReservationComponent } from './admin-reservation/admin-reservation.component';
 import { WorkshopAllComponent } from './workshop-all/workshop-all.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { WorkshopAllComponent } from './workshop-all/workshop-all.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxPaginationModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

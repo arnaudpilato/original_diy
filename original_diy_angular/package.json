@@ -27,6 +27,7 @@
     "express": "^4.17.3",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
+    "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.2.2",
     "path": "^0.12.7",
     "rxjs": "~7.4.0",
