@@ -18,7 +18,11 @@ export class AdminBadgeComponent implements OnInit {
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public searchBadge: string = "";
 
-  constructor(private tokenStorageService: TokenStorageService, private router: Router, private badgeService: BadgeService, public amazonS3Service: AmazonS3Service) { }
+  constructor(
+      private tokenStorageService: TokenStorageService,
+      private router: Router,
+      private badgeService: BadgeService,
+      public amazonS3Service: AmazonS3Service) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

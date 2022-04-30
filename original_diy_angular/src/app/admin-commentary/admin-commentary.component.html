@@ -22,7 +22,6 @@
             <th scope="row">Comments {{ index + 1 }}</th>
             <td [innerHTML]="comment.comment | nl2br"></td>
           </tr>
-
           <tr>
             <th scope="row">Date</th>
             <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>

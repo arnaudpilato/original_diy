@@ -17,10 +17,10 @@ export class CommentaryComponent implements OnInit {
   public Editor = ClassicEditor;
   @Input() isLoggedIn: any;
 
-  constructor(private commentaryService: CommentaryService, private route: ActivatedRoute, private router: Router,
-) {
-
-  }
+  constructor(
+      private commentaryService: CommentaryService,
+      private route: ActivatedRoute,
+      private router: Router) { }
 
   ngOnInit(): void {
     this.diyWorkshopId = this.route.snapshot.params["id"];

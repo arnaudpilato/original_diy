@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error500.component.scss']
 })
 export class Error500Component implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

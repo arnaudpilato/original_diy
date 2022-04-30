@@ -4,7 +4,6 @@ import {TokenStorageService} from "../service/token-storage.service";
 import {WorkshopService} from "../service/workshop.service";
 import {DiyWorkshop} from "../model/workshop.model";
 import {ActivatedRoute} from "@angular/router";
-import {DiyUser} from "../model/user.model";
 
 @Component({
   selector: 'app-workshop',
@@ -40,7 +39,6 @@ export class WorkshopComponent implements OnInit {
     }
   }
 
-
   getWorkshop(id: number): void {
     this.workshopService.getByIdHome(id).subscribe({
       next: (data) => {
@@ -73,5 +71,4 @@ export class WorkshopComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
-
 }

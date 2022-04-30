@@ -89,5 +89,4 @@ export class AdminBadgeEditComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
 }

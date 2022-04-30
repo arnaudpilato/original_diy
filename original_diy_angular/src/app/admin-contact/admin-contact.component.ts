@@ -17,13 +17,17 @@ export class AdminContactComponent implements OnInit {
   public users: DiyUser[] = [];
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
 
+  constructor(
+      private title: Title,
+      private tokenStorageService:TokenStorageService,
+      private userService:UserService,
+      private router: Router) {
+    this.title.setTitle('OriginalDIY - Admin - Contacts');
+  }
+
   public page = 1;
   public count = 0;
   public pageSize = 5;
-
-  constructor(private title: Title, private tokenStorageService:TokenStorageService, private userService:UserService, private router: Router) {
-    this.title.setTitle('OriginalDIY - Admin - Contacts');
-  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -81,9 +85,6 @@ export class AdminContactComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
-
-
-
 
   pageChanged(event: number) {
     this.page = event;

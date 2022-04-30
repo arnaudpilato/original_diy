@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   public workshop: any | undefined;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
-  public workshopDTO : any[] | undefined;
 
   constructor(
     private title: Title,
@@ -34,9 +33,7 @@ export class HomeComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
     }
-
   }
 
   getAllWorkshopsConfirmed(): any {
@@ -60,6 +57,5 @@ export class HomeComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
 }
 

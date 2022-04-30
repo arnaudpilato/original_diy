@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import {TokenStorageService} from "../../service/token-storage.service";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {categorieService} from "../../service/categorie.service";
+import {CategoryService} from "../../service/category.service";
 
 @Component({
   selector: 'app-admin-workshop-new',
@@ -40,7 +40,7 @@ export class AdminWorkshopNewComponent implements OnInit {
     private amazonS3Service: AmazonS3Service,
     private router: Router,
     private token: TokenStorageService,
-    private categoryService: categorieService) {
+    private categoryService: CategoryService) {
     this.title.setTitle("OriginalDIY - Admin - Workshop - New");
   }
 

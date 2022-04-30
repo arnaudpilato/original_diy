@@ -10,11 +10,8 @@ import {WorkshopService} from "../service/workshop.service";
 })
 export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
-
   public workshops: any[] | undefined;
-
   public workshop: any;
-
 
   constructor(private title: Title, private workshopService: WorkshopService) {
     this.title.setTitle("OriginalDIY - Admin - Workshops")
@@ -80,7 +77,6 @@ export class MapComponent implements OnInit, AfterViewInit {
           popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
-
         this.workshops.forEach((data) => {
           const id = data.id;
 
@@ -138,7 +134,6 @@ export class MapComponent implements OnInit, AfterViewInit {
                 `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
               .openPopup;
           }
-
         });
       },
       error: (err) => console.log(err)
@@ -184,10 +179,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     L.control.layers(baseLayers, overlays).addTo(this.map);
   }
 
-
   ngAfterViewInit(): void {
     this.initMap();
-
   }
-
 }

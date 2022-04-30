@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-workshop-index.component.scss']
 })
 export class UserWorkshopIndexComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
