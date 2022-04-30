@@ -11,7 +11,6 @@ import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
-import com.wildcodeschool.original_diy.request.CommentRequest;
 import com.wildcodeschool.original_diy.request.EmailRequest;
 import com.wildcodeschool.original_diy.request.PasswordRequest;
 import com.wildcodeschool.original_diy.request.UserRequest;
@@ -20,15 +19,16 @@ import com.wildcodeschool.original_diy.service.BadgeVerificationService;
 import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -65,19 +65,29 @@ public class UserController {
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
-    public ResponseEntity<List<DiyUser>> getAllUsers() {
+    public ResponseEntity<Map<String, Object>> getAllUsers(
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "5") int size
+    ) {
         badgeVerificationService.badgesVerification();
 
         try {
-            List<DiyUser> users = new ArrayList<>();
-            userRepository.findAll().forEach(users::add);
+            Pageable paging = PageRequest.of(page, size);
 
-            if (users.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
+            Page<DiyUser> pageUsers;
+            pageUsers = userRepository.findAllByOrderByIdDesc(paging);
 
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            List<DiyUser> users = pageUsers.getContent();
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("users", users);
+            response.put("currentPage", pageUsers.getNumber());
+            response.put("totalItems", pageUsers.getTotalElements());
+            response.put("totalPages", pageUsers.getTotalPages());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

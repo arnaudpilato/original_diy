@@ -1,6 +1,6 @@
 package com.wildcodeschool.original_diy.controller;
 
-import com.wildcodeschool.original_diy.DTO.WorkshopDTO;
+import com.wildcodeschool.original_diy.dto.WorkshopDTO;
 import com.wildcodeschool.original_diy.entity.*;
 import com.wildcodeschool.original_diy.repository.*;
 

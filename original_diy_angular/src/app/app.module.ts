@@ -43,9 +43,9 @@ import { AdminBadgeEditComponent } from './admin-badge/admin-badge-edit/admin-ba
 import {TruncatePipe} from "./TruncatePipe";
 import { AdminReservationComponent } from './admin-reservation/admin-reservation.component';
 import { WorkshopAllComponent } from './workshop-all/workshop-all.component';
+import {NgxPaginationModule} from "ngx-pagination";
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
 
 @NgModule({
   declarations: [
@@ -94,7 +94,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    CKEditorModule
+    CKEditorModule,
+    NgxPaginationModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

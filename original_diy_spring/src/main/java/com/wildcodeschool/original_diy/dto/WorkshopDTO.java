@@ -1,8 +1,7 @@
-package com.wildcodeschool.original_diy.DTO;
+package com.wildcodeschool.original_diy.dto;
 
 import com.wildcodeschool.original_diy.entity.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
