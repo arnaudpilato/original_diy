@@ -79,6 +79,10 @@ public class DiyUser {
     )
     private Set<DiyBadge> badges = new HashSet<>();
 
+    private String resetPasswordToken;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
+    private Date tokenDate;
     public DiyUser() {
     }
 
@@ -178,5 +182,21 @@ public class DiyUser {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Date getTokenDate() {
+        return tokenDate;
+    }
+
+    public void setTokenDate(Date tokenDate) {
+        this.tokenDate = tokenDate;
     }
 }

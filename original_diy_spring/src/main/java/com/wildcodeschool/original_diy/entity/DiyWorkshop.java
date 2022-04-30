@@ -25,6 +25,7 @@ public class DiyWorkshop {
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
 
+
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 

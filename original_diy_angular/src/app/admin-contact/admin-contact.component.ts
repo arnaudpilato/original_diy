@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { TokenStorageService } from "../service/token-storage.service";
 import { DiyUser } from "../model/user.model";
@@ -14,7 +14,7 @@ export class AdminContactComponent implements OnInit {
   private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
-  public users: DiyUser[] | undefined;
+  public users: DiyUser[] = [];
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
 
   constructor(
@@ -24,6 +24,10 @@ export class AdminContactComponent implements OnInit {
       private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
+
+  public page = 1;
+  public count = 0;
+  public pageSize = 5;
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -36,11 +40,36 @@ export class AdminContactComponent implements OnInit {
     }
   }
 
+  getRequestParams(page: number, pageSize: number): any {
+    let params: any = {};
+    if (page) {
+      params[`page`] = page - 1;
+    }
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+    return params;
+  }
+
+  config = {
+    id: 'custom',
+    itemsPerPage: 5,
+    currentPage: 1,
+    totalItems: 5
+  };
+
   getAllUsers(): void {
-    this.userService.getAll().subscribe({
+    const params = this.getRequestParams(this.page, this.pageSize);
+    console.log("valeur du param " + params);
+    this.userService.getAll(params).subscribe({
       next: (data) => {
-        this.users = data;
-        console.log(data);
+        this.users = data.users;
+        this.count = data.totalItems;
+        console.log(data.users);
+        console.log(this.users)
+        console.log("page actuelle " + data.currentPage)
+        console.log("taille de la page " + data.totalItems)
+        console.log("Nombre de pages " + data.totalPages)
         },
 
       error: (e) => console.error(e)
@@ -55,5 +84,10 @@ export class AdminContactComponent implements OnInit {
 
       error: (e) => console.error(e)
     });
+  }
+
+  pageChanged(event: number) {
+    this.page = event;
+    this.getAllUsers();
   }
 }

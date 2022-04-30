@@ -35,6 +35,18 @@ import {Error401Component} from "./error/error401/error401.component";
 import {Error404Component} from "./error/error404/error404.component";
 import {Error500Component} from "./error/error500/error500.component";
 
+import {ErrorComponent} from "./error/error.component";
+import {WorskhopProfilComponent} from "./worskhop-profil/worskhop-profil.component";
+import {AddWorkshopComponent} from "./add-workshop/add-workshop.component";
+import {UserWorkshopIndexComponent} from "./user-workshop-index/user-workshop-index.component";
+import {AdminCommentaryComponent} from "./admin-commentary/admin-commentary.component";
+import {WorkshopReservationComponent} from "./workshop-reservation/workshop-reservation.component";
+import {AdminBadgeEditComponent} from "./admin-badge/admin-badge-edit/admin-badge-edit.component";
+import {AdminReservationComponent} from "./admin-reservation/admin-reservation.component";
+import {WorkshopAllComponent} from "./workshop-all/workshop-all.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -69,6 +81,8 @@ const routes: Routes = [
   {path: 'mes-inscriptions', component: WorkshopReservationComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'workshop/:id', component: WorkshopComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

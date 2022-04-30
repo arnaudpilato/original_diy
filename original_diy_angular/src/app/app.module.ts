@@ -48,6 +48,9 @@ import { ErrorComponent } from './error/error.component';
 import { Error401Component } from './error/error401/error401.component';
 import { Error404Component } from './error/error404/error404.component';
 import { Error500Component } from './error/error500/error500.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -87,13 +90,17 @@ import { Error500Component } from './error/error500/error500.component';
     Error401Component,
     Error404Component,
     Error500Component
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     CKEditorModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule,
+    NgxPaginationModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
