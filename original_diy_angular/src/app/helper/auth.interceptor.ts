@@ -48,7 +48,6 @@ export class AuthInterceptor implements HttpInterceptor {
       })
     )
   }
-
 }
 
 export const authInterceptorProviders = [{

@@ -5,12 +5,11 @@ import {TokenStorageService} from "../service/token-storage.service";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-worskhop-profil',
-  templateUrl: './worskhop-profil.component.html',
-  styleUrls: ['./worskhop-profil.component.scss']
+  selector: 'app-workshop-profile',
+  templateUrl: './workshop-profile.component.html',
+  styleUrls: ['./workshop-profile.component.scss']
 })
-export class WorskhopProfilComponent implements OnInit {
-
+export class WorkshopProfileComponent implements OnInit {
   private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
@@ -35,8 +34,6 @@ export class WorskhopProfilComponent implements OnInit {
       this.authuser = this.token.getUser().user;
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
-
     }
   }
 

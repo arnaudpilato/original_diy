@@ -8,7 +8,6 @@ import {WorkshopService} from "../service/workshop.service";
   styleUrls: ['./workshop-reservation.component.scss']
 })
 export class WorkshopReservationComponent implements OnInit {
-
   private roles: string[] = [];
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
@@ -56,7 +55,6 @@ export class WorkshopReservationComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
 
   deleteReservation(id: any): void {
 

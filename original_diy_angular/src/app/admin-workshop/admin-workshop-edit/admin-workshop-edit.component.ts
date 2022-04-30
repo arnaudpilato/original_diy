@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {WorkshopService} from "../../service/workshop.service";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {categorieService} from "../../service/categorie.service";
+import {CategoryService} from "../../service/category.service";
 
 @Component({
   selector: 'app-admin-workshop-edit',
@@ -30,7 +30,6 @@ export class AdminWorkshopEditComponent implements OnInit {
   public subCategoryId: number | undefined;
   public categories: any[] | undefined;
 
-
   constructor(
     private title: Title,
     private tokenStorageService: TokenStorageService,
@@ -38,7 +37,7 @@ export class AdminWorkshopEditComponent implements OnInit {
     private amazonS3Service: AmazonS3Service,
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: categorieService
+    private categoryService: CategoryService
   ) {
     this.title.setTitle("OriginalDIY - Admin - workshop - edit");
   }
@@ -124,5 +123,4 @@ export class AdminWorkshopEditComponent implements OnInit {
       }
     )
   }
-
 }

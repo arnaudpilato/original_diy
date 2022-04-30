@@ -17,7 +17,12 @@ export class AdminCommentaryComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public workshops: DiyWorkshop[] | undefined;
 
-  constructor(private title: Title, private tokenStorageService: TokenStorageService, private workshopService: WorkshopService, private commentaryService: CommentaryService, private router: Router) {
+  constructor(
+      private title: Title,
+      private tokenStorageService: TokenStorageService,
+      private workshopService: WorkshopService,
+      private commentaryService: CommentaryService,
+      private router: Router) {
     this.title.setTitle('OriginalDIY - Admin - Contacts');
   }
 

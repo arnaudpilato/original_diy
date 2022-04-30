@@ -8,19 +8,17 @@ import {WorkshopService} from "../service/workshop.service";
   styleUrls: ['./admin-reservation.component.scss']
 })
 export class AdminReservationComponent implements OnInit {
-
   public workshops: any[] | undefined;
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
-  isLoggedIn: boolean | undefined;
+  public isLoggedIn: boolean | undefined;
   private roles: any;
-  showAdminBoard: any;
+  public showAdminBoard: any;
   private currentUser: any;
 
   constructor(private tokenStorageService: TokenStorageService, private workshopService: WorkshopService) {
   }
 
   ngOnInit(): void {
-
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -45,7 +43,6 @@ export class AdminReservationComponent implements OnInit {
   }
 
   deleteReservation(username: any, workshopId: any): void {
-
     this.workshopService.deleteReservationByUsername(username, workshopId).subscribe({
       next: (res) => {
         window.location.reload();

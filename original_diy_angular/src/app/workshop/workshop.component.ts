@@ -4,7 +4,6 @@ import {TokenStorageService} from "../service/token-storage.service";
 import {WorkshopService} from "../service/workshop.service";
 import {DiyWorkshop} from "../model/workshop.model";
 import {ActivatedRoute} from "@angular/router";
-import {DiyUser} from "../model/user.model";
 
 @Component({
   selector: 'app-workshop',
@@ -20,7 +19,6 @@ export class WorkshopComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public currentUser: any;
   private roles: string[] = [];
-
 
   constructor(private title: Title, private tokenStorageService: TokenStorageService,
               private workshopService: WorkshopService, private route: ActivatedRoute) {
@@ -40,7 +38,6 @@ export class WorkshopComponent implements OnInit {
       console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
     }
   }
-
 
   getWorkshop(id: number): void {
     this.workshopService.getByIdHome(id).subscribe({
@@ -74,5 +71,4 @@ export class WorkshopComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
-
 }

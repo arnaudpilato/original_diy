@@ -1,56 +1,52 @@
 <div class="container">
-
-
-  <div class="row justify-content-center my-4">
-    <h1 class="text-center">Mes reservations d'ateliers</h1>
-  </div>
-
-  <div class="row justify-content-around d-flex my-5">
-
-    <div class="card col-md-3 my-2 p-0 " *ngFor="let workshop of workshops; let index = index">
-      <a href="#" class="">
-        <img class="workshop-picture  w-100 img-fluid"
-             src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
-             alt="Image de l'atelier">
-      </a>
-      <div class="card-body">
-        <h5 class="card-title">{{ workshop.title }}</h5>
-        <p class="card-text col text-truncate my-3"
-           [innerHTML]="workshop.description | nl2br | truncate:[40, '...'] "></p>
-        <div class="text-muted my-2">
-          date : {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}
-        </div>
-        <div class="row justify-content-around d-flex">
-          <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
-             class="btn btn-primary col-lg-5 ">Détails</a>
-          <button type="button" class="btn btn-danger  col-lg-5" data-bs-toggle="modal"
-                  [attr.data-bs-target]="'#modal' + index">
-            Annuler
-          </button>
-        </div>
-      </div>
-      <div class="modal fade" [attr.id]="'modal' + index" tabindex="-1" aria-labelledby="modalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Annuler votre reservation</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p class="my-5">Voulez-vous vraiment annuler votre reservation à l'atelier {{ workshop.title }} </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success"
-                      data-bs-dismiss="modal" (click)="deleteReservation(workshop.id)">Oui
-              </button>
-              <button type="button" (click)="refresh()" class="btn btn-danger">Non</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row justify-content-center my-4">
+        <h1 class="text-center">Mes reservations d'ateliers</h1>
     </div>
-  </div>
+    <div class="row justify-content-around d-flex my-5">
+        <div class="card col-md-3 my-2 p-0 " *ngFor="let workshop of workshops; let index = index">
+            <a href="#" class="">
+                <img class="workshop-picture  w-100 img-fluid"
+                     src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+                     alt="Image de l'atelier">
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ workshop.title }}</h5>
+                <p class="card-text col text-truncate my-3"
+                   [innerHTML]="workshop.description | nl2br | truncate:[40, '...'] ">
+                </p>
+                <div class="text-muted my-2">
+                    date : {{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}
+                </div>
+                <div class="row justify-content-around d-flex">
+                    <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
+                       class="btn btn-primary col-lg-5 ">Détails</a>
+                    <button type="button" class="btn btn-danger  col-lg-5" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modal' + index">Annuler
+                    </button>
+                </div>
+            </div>
+            <div class="modal fade" [attr.id]="'modal' + index" tabindex="-1" aria-labelledby="modalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Annuler votre reservation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="my-5">Voulez-vous vraiment annuler votre reservation à l'atelier {{ workshop.title }} </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success"
+                                    data-bs-dismiss="modal" (click)="deleteReservation(workshop.id)">Oui
+                            </button>
+                            <button type="button" (click)="refresh()" class="btn btn-danger">Non</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

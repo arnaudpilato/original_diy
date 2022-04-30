@@ -1,47 +1,47 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-11 col-md-4 mt-5" *ngIf="isLoggedIn">
-      <div class="alert alert-success text-center">Connexion réussi, bienvenue {{ userName }}.</div>
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border text-info" role="status">
-                <span class="sr-only">Chargement...</span>
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-4 mt-5" *ngIf="isLoggedIn">
+            <div class="alert alert-success text-center">Connexion réussi, bienvenue {{ userName }}.</div>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Chargement...</span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-11 col-md-4">
+                <form class="row justify-content-center" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <h1 class="text-center my-4">Connexion</h1>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">Login failed: {{ errorMessage }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Utilisateur :</label>
+                        <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" placeholder="Utilisateur" required #username="ngModel"/>
+                        <div>
+                            <div class="form-control alert-danger my-2" role="alert" *ngIf="username.errors && f.submitted">L'identifiant est requis !</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="password">Mot de passe</label>
+                        <input class="form-control" id="password" name="password" [(ngModel)]="form.password" type="password" placeholder="Mot de passe" required minlength="1" #password="ngModel"/>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="password.errors && f.submitted">
+                            <div *ngIf="password.errors['required']">Le mot de passe est requis !</div>
+                            <div *ngIf="password.errors['minlength']">Le mot de passe doit contenir au moins 1 caractère !</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center my-4">
+                        <div class="mx-2">
+                            <button class="btn btn-primary">Se connecter</button>
+                        </div>
+                        <div class="mx-2">
+                            <button class="btn btn-secondary" routerLink="/register">Créer un compte</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center mt-5">
-      <div class="col-11 col-md-4">
-        <form class="row justify-content-center" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-          <h1 class="text-center my-4">Connexion</h1>
-          <div class="form-group">
-            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">Login failed: {{ errorMessage }}</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="username">Utilisateur :</label>
-            <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" placeholder="Utilisateur" required #username="ngModel"/>
-            <div>
-              <div class="form-control alert-danger my-2" role="alert" *ngIf="username.errors && f.submitted">L'identifiant est requis !</div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="password">Mot de passe</label>
-            <input class="form-control" id="password" name="password" [(ngModel)]="form.password" type="password" placeholder="Mot de passe" required minlength="1" #password="ngModel"/>
-            <div class="form-control alert-danger my-2" role="alert" *ngIf="password.errors && f.submitted">
-              <div *ngIf="password.errors['required']">Le mot de passe est requis !</div>
-              <div *ngIf="password.errors['minlength']">Le mot de passe doit contenir au moins 1 caractère !</div>
-            </div>
-          </div>
-          <div class="d-flex justify-content-center my-4">
-            <div class="mx-2">
-              <button class="btn btn-primary">Se connecter</button>
-            </div>
-            <div class="mx-2">
-              <button class="btn btn-secondary" routerLink="/register">Créer un compte</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
 
 

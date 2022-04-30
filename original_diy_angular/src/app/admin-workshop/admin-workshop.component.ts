@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
@@ -17,7 +16,6 @@ export class AdminWorkshopComponent implements OnInit {
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public static: string = '/assets/img/static-picture.png';
   public workshops:any[] | undefined ;
-
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -42,7 +40,6 @@ export class AdminWorkshopComponent implements OnInit {
     this.workshopService.getAll().subscribe({
       next: (data) => {
         this.workshops = data;
-
       },
 
       error: (err) => console.log(err)

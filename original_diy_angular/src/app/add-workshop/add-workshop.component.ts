@@ -6,8 +6,7 @@ import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../service/token-storage.service";
-import {categorieService} from "../service/categorie.service";
-import {category} from "../model/category.model";
+import {CategoryService} from "../service/category.service";
 
 @Component({
   selector: 'app-add-workshop',
@@ -32,14 +31,13 @@ export class AddWorkshopComponent implements OnInit {
   public Editor = ClassicEditor;
   public subCategoryId: number | undefined;
 
-
   constructor(
     private title: Title,
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service,
     private router: Router,
     private token: TokenStorageService,
-    private categoryService: categorieService) {
+    private categoryService: CategoryService) {
     this.title.setTitle("OriginalDIY Création - Atelier");
   }
 
@@ -84,7 +82,6 @@ export class AddWorkshopComponent implements OnInit {
     this.changeImage = true;
   }
 
-
   onSubmit() {
     const data: any = {
       title: this.model.title,
@@ -99,8 +96,6 @@ export class AddWorkshopComponent implements OnInit {
       diyUser: this.authuser,
       subCategoryId: this.subCategoryId,
       limitedPlaces: this.model.limitedPlaces,
-
-
     }
 
     console.log(data)
@@ -139,6 +134,4 @@ export class AddWorkshopComponent implements OnInit {
       }
     )
   }
-
-
 }
