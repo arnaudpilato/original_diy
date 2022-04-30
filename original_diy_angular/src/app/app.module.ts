@@ -9,11 +9,15 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { NgxPaginationModule } from "ngx-pagination";
 import { nl2brPipe } from './nl2br.pipe';
 import { TruncatePipe } from "./TruncatePipe";
 
@@ -48,9 +52,6 @@ import { ErrorComponent } from './error/error.component';
 import { Error401Component } from './error/error401/error401.component';
 import { Error404Component } from './error/error404/error404.component';
 import { Error500Component } from './error/error500/error500.component';
-import {NgxPaginationModule} from "ngx-pagination";
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     FooterComponent,
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
     nl2brPipe,
     TruncatePipe,
     AdminBadgeComponent,
@@ -90,8 +93,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     Error401Component,
     Error404Component,
     Error500Component
-    ForgotPasswordComponent,
-    ResetPasswordComponent
   ],
   imports: [
     AppRoutingModule,
@@ -99,7 +100,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     CKEditorModule,
     FormsModule,
     HttpClientModule,
-    CKEditorModule,
     NgxPaginationModule
   ],
   providers: [authInterceptorProviders],
