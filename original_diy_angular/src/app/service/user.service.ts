@@ -31,4 +31,12 @@ export class UserService {
   delete(id: any): Observable<any> {
     return this.http.delete(this.baseUrl + "delete/" + id);
   }
+
+  updateMail(data: any): Observable<any> {
+    return this.http.put(this.baseUrl + "recoverPassword", data);
+  }
+
+  updatePassword(data: any): Observable<any> {
+    return this.http.put(this.baseUrl + "newPassword", data)
+  }
 }
