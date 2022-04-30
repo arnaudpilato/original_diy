@@ -35,6 +35,8 @@ import {WorkshopReservationComponent} from "./workshop-reservation/workshop-rese
 import {AdminBadgeEditComponent} from "./admin-badge/admin-badge-edit/admin-badge-edit.component";
 import {AdminReservationComponent} from "./admin-reservation/admin-reservation.component";
 import {WorkshopAllComponent} from "./workshop-all/workshop-all.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -71,6 +73,8 @@ const routes: Routes = [
   {path: 'mes-ateliers', component: UserWorkshopIndexComponent},
   {path: 'mes-inscriptions', component: WorkshopReservationComponent},
   {path: 'les-ateliers', component: WorkshopAllComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

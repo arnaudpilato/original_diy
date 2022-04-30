@@ -21,7 +21,6 @@ export class WorkshopComponent implements OnInit {
   public currentUser: any;
   private roles: string[] = [];
 
-
   constructor(private title: Title, private tokenStorageService: TokenStorageService,
               private workshopService: WorkshopService, private route: ActivatedRoute) {
     this.title.setTitle("OriginalDIY - Atelier");

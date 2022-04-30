@@ -11,13 +11,18 @@ import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.RoleRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
+import com.wildcodeschool.original_diy.request.EmailRequest;
+import com.wildcodeschool.original_diy.request.PasswordRequest;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
 import com.wildcodeschool.original_diy.service.BadgeVerificationService;
+import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -51,6 +56,12 @@ public class UserController {
 
     @Autowired
     private BadgeVerificationService badgeVerificationService;
+
+    @Autowired
+    private DiyUserDetailsService diyUserDetailsService;
+
+    @Value("${angular.url}")
+    private String frontUrl;
 
     @PreAuthorize("permitAll()")
     @GetMapping("/all")
@@ -205,7 +216,7 @@ public class UserController {
                 }
 
                 user.setBadges(badges);
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e);
             }
 
@@ -243,5 +254,32 @@ public class UserController {
 
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PreAuthorize("permitAll()")
+    @PutMapping("/recoverPassword")
+    public ResponseEntity<?> recoverPassword(@Valid @RequestBody EmailRequest emailRequest) {
+        String email = emailRequest.getEmail();
+        String token = RandomString.make(45);
+        try {
+
+            diyUserDetailsService.updateResetPassword(token, email);
+            String resetPasswordLink = frontUrl+"reset-password?token="+token;
+            diyUserDetailsService.sendEmail(email, resetPasswordLink);
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("permitAll()")
+    @PutMapping("/newPassword")
+    public ResponseEntity<?> newPassword(@Valid @RequestBody PasswordRequest passwordRequest) {
+        if (!passwordRequest.getToken().isEmpty()) {
+            DiyUser user = userRepository.findByResetPasswordToken(passwordRequest.getToken());
+            diyUserDetailsService.updatePassword(user,passwordRequest.getPassword());
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
