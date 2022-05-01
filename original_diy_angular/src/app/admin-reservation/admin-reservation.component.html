@@ -1,40 +1,118 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Gestion des Réservations</h1>
-  <div class="row justify-content-center">
-    <div class="col-11">
-      <div class="text-end d-flex justify-content-end">
-        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
-      </div>
-      <div class="table-responsive d-block my-2">
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th scope="col">Atelier</th>
-            <th scope="col">Utilisateur</th>
-            <th scope="col">Supprimer</th>
-          </tr>
-          </thead>
-          <tbody *ngFor="let workshop of workshops">
-          <tr *ngFor="let user of workshop.reservationUser ; let index = index">
-            <td *ngIf="index < 1">{{ workshop.title }}</td>
-            <td *ngIf="index >= 1"></td>
-            <div hidden *ngIf="index < 1 ? index+1 : index"></div>
-            <td [innerHTML]="user.username != null ? user.username : user | nl2br"></td>
-
-            <td class="td-delete"><a class="link"
-                                     (click)="deleteReservation(user.username != null ? user.username : user, workshop.id)"><img
-              class="icon" width="30px"
-              src="/assets/img/delete.png"
-              alt="Logo supprimer"></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <h1 class="text-center my-4">Gestion des Réservations</h1>
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="text-end d-flex justify-content-end">
+                <div><a class="btn btn-secondary" routerLink="/admin/home">Retour</a></div>
+            </div>
+            <div class="table-responsive d-block d-md-none my-4">
+                <table class="table table-bordered border-dark my-4" *ngFor="let workshop of workshops;">
+                    <thead>
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <th *ngIf="index < 1" scope="col">{{ "Atelier " +  (index + 1) }}</th>
+                            <th *ngIf="index < 1" scope="col">{{ workshop.title }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-size">
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <th *ngIf="index < 1" scope="row" class="align-middle">Date</th>
+                            <td *ngIf="index < 1">{{ workshop.date | date : 'dd/MM/yyyy' }}</td>
+                        </tr>
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <th *ngIf="index < 1" scope="row">Heure</th>
+                            <td *ngIf="index < 1">{{workshop.date | date : 'HH:mm' }}</td>
+                        </tr>
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <th *ngIf="index < 1" scope="row">Places</th>
+                            <td *ngIf="index < 1">
+                                <div>
+                                    <div class="text-muted" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length == 0">
+                                        <span class="text-danger">{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}</span>
+                                    </div>
+                                    <div class="text-muted" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length != 0">
+                                        <span class="text-success">{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <th scope="row" class="align-middle">{{index == 0 ? 'Utilisateur ' : ''}}</th>
+                            <td class="d-flex align-middle">
+                                <div class="col-8 align-middle">
+                                    {{ user.username != null ? user.username : user }}
+                                </div>
+                                <div class="col-4">
+                                    <a class="link" (click)="deleteReservation(user.username != null ? user.username : user, workshop.id)">
+                                        <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive d-none d-md-block my-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Atelier</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Heure</th>
+                            <th scope="col">Places</th>
+                            <th scope="col">Utilisateur</th>
+                            <th scope="col" class="reservation-delete">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let workshop of workshops">
+                        <tr *ngFor="let user of workshop.reservationUser ; let index = index">
+                            <td class="align-middle" *ngIf="index < 1">{{ workshop.title }}</td>
+                            <td *ngIf="index < 1">
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-calendar3 icon text-black"></i>
+                                    <span class="text-black">
+                                        {{workshop.date | date : 'dd/MM/yyyy' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td *ngIf="index < 1">
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-stopwatch icon text-black"></i>
+                                    <span class="text-black">
+                                        {{workshop.date | date : 'HH:mm' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td *ngIf="index < 1">
+                                <div>
+                                    <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length == 0">
+                                        <i class="bi bi-person-fill icon text-danger"></i>
+                                        <span class="text-danger">{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}</span>
+                                    </div>
+                                    <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length != 0">
+                                        <i class="bi bi-person-fill icon text-success"></i>
+                                        <span class="text-success">{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td *ngIf="index >= 1"></td>
+                            <td *ngIf="index >= 1"></td>
+                            <td *ngIf="index >= 1"></td>
+                            <td *ngIf="index >= 1"></td>
+                            <div hidden *ngIf="index < 1 ? index + 1 : index"></div>
+                            <td class="align-middle">{{ user.username != null ? user.username : user }}</td>
+                            <td class="td-delete">
+                                <a class="link" (click)="deleteReservation(user.username != null ? user.username : user, workshop.id)">
+                                    <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>
