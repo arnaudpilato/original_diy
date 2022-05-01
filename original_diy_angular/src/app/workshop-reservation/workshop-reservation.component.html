@@ -1,6 +1,21 @@
 <div class="container">
-    <div class="row justify-content-center my-4">
-        <h1 class="text-center">Mes reservations d'ateliers</h1>
+    <div class="row justify-content-center">
+        <div class="my-4">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox" /><div class="yellow">R</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">E</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">S</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">E</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">R</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">V</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">T</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">O</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">S</div></li>
+            </ul>
+        </div>
     </div>
     <div class="row justify-content-around d-flex my-5">
         <div class="card col-md-3 my-2 p-0 " *ngFor="let workshop of workshops; let index = index">
