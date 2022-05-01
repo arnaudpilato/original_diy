@@ -1,12 +1,12 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
     <h1 class="text-center my-4">Gestion des Réservations</h1>
     <div class="row justify-content-center">
-        <div class="col-11">
+        <div class="col-11 my-4">
             <div class="text-end d-flex justify-content-end">
                 <div><a class="btn btn-secondary" routerLink="/admin/home">Retour</a></div>
             </div>
-            <div class="table-responsive d-block d-md-none my-4">
-                <table class="table table-bordered border-dark my-4" *ngFor="let workshop of workshops;">
+            <div class="table-responsive d-block d-md-none">
+                <table class="table table-bordered border-dark" *ngFor="let workshop of workshops;">
                     <thead>
                         <tr *ngFor="let user of workshop.reservationUser ; let index = index">
                             <th *ngIf="index < 1" scope="col">{{ "Atelier " +  (index + 1) }}</th>

@@ -1,81 +1,131 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Gestion des Commentaires</h1>
-  <div class="row justify-content-center">
-    <div class="col-11">
-      <div class="text-end d-flex justify-content-end">
-        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
-      </div>
-      <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops">
-          <thead *ngIf="workshop.comments.length >= 1 ">
-          <tr>
-            <th class="text-danger" scope="col">{{ workshop.title }}</th>
-            <th scope="col">information</th>
-          </tr>
-          </thead>
-          <tbody *ngFor="let comment of workshop.comments; let index = index">
-          <tr>
-            <th scope="row">Utilisateur</th>
-            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
-          </tr>
-          <tr>
-            <th scope="row">Comments {{ index + 1 }}</th>
-            <td [innerHTML]="comment.comment | nl2br"></td>
-          </tr>
-          <tr>
-            <th scope="row">Date</th>
-            <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
-          </tr>
-          <tr>
-            <th scope="row">Visible</th>
-            <td><input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}"
-                       name="confirmation"
-                       [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}"/>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Supprimer</th>
-            <td><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" width="30px"
-                                                                            src="/assets/img/delete.png"
-                                                                            alt="Logo supprimer"></a></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-responsive d-none d-md-block my-2">
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th scope="col">Atelier</th>
-            <th scope="col">Commentaire</th>
-            <th scope="col">Utilisateur</th>
-            <th scope="col">Date/Heure</th>
-            <th scope="col">Visible</th>
-          </tr>
-          </thead>
-          <tbody *ngFor="let workshop of workshops">
-          <tr *ngFor="let comment of workshop.comments">
-            <td>{{ workshop.title }}</td>
-            <td [innerHTML]="comment.comment | nl2br"></td>
-            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
-            <td>{{ comment.createdAt | date : 'dd-MM-yy HH:mm' }}</td>
-            <td class="text-center td-edit">
-              <input (click)="confirm(comment.id)" class="form-check-input" id="flexSwitchCheckChecked{{comment.id}}"
-                     name="confirmation"
-                     [(ngModel)]="comment.confirmed" type="checkbox" value="{{ comment.confirmed }}">
-            </td>
-            <td class="td-delete"><a class="link" (click)="deleteCommentary(comment.id)"><img class="icon" width="30px"
-                                                                                              src="/assets/img/delete.png"
-                                                                                              alt="Logo supprimer"></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <h1 class="text-center my-4">Gestion des Commentaires</h1>
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="text-end d-flex justify-content-end">
+                <div><a class="btn btn-secondary" routerLink="/admin/home">Retour</a></div>
+            </div>
+            <div class="table-responsive d-block d-md-none my-4">
+                <table class="table table-bordered border-dark my-1" *ngFor="let workshop of workshops">
+                    <thead *ngIf="workshop.comments.length >= 1 ">
+                        <tr>
+                            <th scope="col">Atelier</th>
+                            <th scope="col" class="text-center">{{ workshop.title }}</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let comment of workshop.comments; let index = index">
+                        <tr>
+                            <th scope="row">Utilisateur</th>
+                            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Date</th>
+                            <td>
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-calendar3 icon text-black"></i>
+                                    <span class="text-black">
+                                        {{ comment.createdAt | date : 'dd/MM/yy' }}
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Heure</th>
+                            <td>
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-stopwatch icon text-black"></i>
+                                    <span class="text-black">
+                                        {{ comment.createdAt | date : 'HH:mm' }}
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Comments {{ index + 1 }}</th>
+                            <td [innerHTML]="comment.comment | nl2br"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Visible</th>
+                            <td class="td-edit align-middle">
+                                <div class="form-check form-switch">
+                                    <input (click)="confirm(comment.id)"
+                                           class="form-check-input essai"
+                                           id="flexSwitchCheckChecked{{comment.id}}"
+                                           name="confirmation" [(ngModel)]="comment.confirmed"
+                                           type="checkbox" value="{{ comment.confirmed }}">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2">
+                                <div class="d-flex justify-content-around">
+                                    <div class="col-5">
+                                        <a (click)="deleteCommentary(comment.id)" class="btn btn-danger col-12">
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive d-none d-md-block my-2">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Atelier</th>
+                            <th scope="col">Commentaire</th>
+                            <th scope="col">Utilisateur</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Heure</th>
+                            <th scope="col">Visible</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let workshop of workshops">
+                        <tr *ngFor="let comment of workshop.comments">
+                            <td>{{ workshop.title }}</td>
+                            <td [innerHTML]="comment.comment | nl2br"></td>
+                            <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
+                            <td>
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-calendar3 icon text-black"></i>
+                                    <span class="text-black">
+                                        {{ comment.createdAt | date : 'dd/MM/yy' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-muted my-2">
+                                    <i class="bi bi-stopwatch icon text-black"></i>
+                                    <span class="text-black">
+                                        {{ comment.createdAt | date : 'HH:mm' }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center td-edit align-middle">
+                                <div class="form-check form-switch">
+                                    <input (click)="confirm(comment.id)"
+                                           class="form-check-input"
+                                           id="flexSwitchCheckChecked{{comment.id}}"
+                                           name="confirmation" [(ngModel)]="comment.confirmed"
+                                           type="checkbox" value="{{ comment.confirmed }}">
+                                </div>
+                            </td>
+                            <td class="td-delete">
+                                <a class="link" (click)="deleteCommentary(comment.id)">
+                                    <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>
