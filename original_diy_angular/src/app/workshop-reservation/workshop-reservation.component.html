@@ -17,11 +17,11 @@
             </ul>
         </div>
     </div>
-
-
-
+    <div class="text-end d-flex justify-content-end">
+        <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+    </div>
     <div class="row justify-content-around mb-4">
-        <div *ngFor="let workshop of workshops; let index = index" class="card col-11 col-md-3 my-4">
+        <div *ngFor="let workshop of workshops; let index = index" class="card col-11 col-md-3 my-4 mx-1">
             <img class="workshop-picture" src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
             <div class="card-body">
                 <h5 class="card-title text-center mb-3">{{workshop.title}}</h5>
@@ -36,11 +36,11 @@
                         <span class="text-danger">Complet</span>
                     </div>
                     <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length != 0">
-                        <i class="bi bi-person-fill icon text-success"></i>
-                        <span class="text-success">{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }} places disponibles</span>
+                        <i class="bi bi-person-fill icon"></i>
+                        <span>{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }} places disponibles</span>
                     </div>
                 </div>
-                <div class="row justify-content-around my-4">
+                <div class="row justify-content-around mt-4 mb-2">
                     <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
                        class="btn btn-primary col-5 ">Détails</a>
                     <button type="button" class="btn btn-danger col-5" data-bs-toggle="modal"
