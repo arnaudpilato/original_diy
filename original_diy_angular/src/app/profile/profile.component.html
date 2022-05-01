@@ -1,5 +1,14 @@
 <div class="container" *ngIf="currentUser && isLoggedIn; else loggedOut">
-    <h1 class="text-center my-4">{{ "Modification de " + user.username  }}</h1>
+    <div class="my-4">
+        <ul class="title d-flex justify-content-center">
+            <li class="letter"><input type="checkbox" /><div class="yellow">P</div></li>
+            <li class="letter"><input type="checkbox" /><div class="green">R</div></li >
+            <li class="letter"><input type="checkbox" /><div class="turquoise">O</div></li>
+            <li class="letter"><input type="checkbox" /><div class="yellow">F</div></li>
+            <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
+            <li class="letter"><input type="checkbox" /><div class="turquoise">L</div></li>
+        </ul>
+    </div>
     <div class="row justify-content-center">
         <div class="col-11 col-md-5">
             <form class="my-3" name="form" (ngSubmit)="onSubmit()" #userProfileForm="ngForm" novalidate>

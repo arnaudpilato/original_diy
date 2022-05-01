@@ -7,34 +7,34 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="home">Accueil</a>
+                    <a class="nav-link" routerLink="home" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="les-ateliers">Nos ateliers</a>
+                    <a class="nav-link" routerLink="les-ateliers" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Nos ateliers</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="map">Carte</a>
+                    <a class="nav-link" routerLink="map" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Carte</a>
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="!isLoggedIn">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="register">Inscription</a>
+                    <a class="nav-link" routerLink="register" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Inscription</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="login">Connexion</a>
+                    <a class="nav-link" routerLink="login" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Connexion</a>
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="showAdminBoard">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="admin/home">Administration</a>
+                    <a class="nav-link" routerLink="admin/home" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">Administration</a>
                 </li>
             </ul>
             <ul class="navbar-nav" *ngIf="isLoggedIn">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="profile" *ngIf="!showAdminBoard">Profil</a>
+                    <a class="nav-link" routerLink="profile" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" *ngIf="!showAdminBoard">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="mes-ateliers" *ngIf="showAdminBoard || !showAdminBoard ">Mes Ateliers</a>
+                    <a class="nav-link" routerLink="mes-ateliers" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" *ngIf="showAdminBoard || !showAdminBoard ">Mes Ateliers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)="logout()">Déconnexion</a>

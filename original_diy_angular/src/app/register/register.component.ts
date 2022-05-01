@@ -32,6 +32,9 @@ export class RegisterComponent implements OnInit {
       next: data => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        window.setTimeout(function() {
+          window.location.href = "/home";
+        }, 1000);
       },
 
       error: err => {

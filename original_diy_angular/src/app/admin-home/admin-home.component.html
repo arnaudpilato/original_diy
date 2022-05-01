@@ -1,6 +1,37 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Espace Administrateur</h1>
-  <div class="row justify-content-center">
+    <div class="row">
+        <div class="my-4 d-md-none">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">D</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">M</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+            </ul>
+        </div>
+        <div class="my-4 d-none d-md-block">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">D</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">M</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">S</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">T</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">R</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">T</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">O</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+            </ul>
+        </div>
+    </div>
+
+  <div class="row justify-content-center mb-4">
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
         <a routerLink="/admin/workshop"><img class="picture rounded" src="/assets/img/workshop.jpg" alt="Image atelier"></a>
