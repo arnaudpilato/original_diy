@@ -8,10 +8,22 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center">
             <div class="col-11 col-md-4">
-                <form class="row justify-content-center" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                    <h1 class="text-center my-4">Connexion</h1>
+                <form class="row justify-content-center mb-4" *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="my-4">
+                        <ul class="title d-flex justify-content-center">
+                            <li class="letter"><input type="checkbox" /><div class="yellow">C</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="green">O</div></li >
+                            <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="green">E</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="turquoise">X</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="yellow">I</div></li>
+                            <li class="letter"><input type="checkbox" /><div class="green">O</div></li >
+                            <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+                        </ul>
+                    </div>
                     <div class="form-group">
                         <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">Login failed: {{ errorMessage }}</div>
                     </div>
