@@ -4,7 +4,7 @@
         <div><a class="btn btn-primary m-1" routerLink="/admin/badge/new">Ajouter un badge</a></div>
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
-    <div class="col-md-4 d-flex my-3">
+    <div class="col-md-4 d-flex mt-5">
         <div class="col-md-5">
             <input class="form-control" type="search" name="searchBadge" placeholder="Rechercher" [(ngModel)]="searchBadge" (keyup.enter)="getAllBadges()">
         </div>
@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col">
             <div class="table-responsive d-block d-md-none my-2">
-                <table class="table table-bordered border-dark my-4" *ngFor="let badge of badges; let index = index">
+                <table class="table table-bordered border-white my-4" *ngFor="let badge of badges; let index = index">
                     <thead>
                         <tr>
                             <th scope="col">{{ "Badge " + (index + 1) }}</th>
@@ -47,7 +47,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-responsive d-none d-md-block my-2">
+            <div class="table-responsive d-none d-md-block mb-5">
                 <table class="table table-hover">
                     <thead>
                         <tr>

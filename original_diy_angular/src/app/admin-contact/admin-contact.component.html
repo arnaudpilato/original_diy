@@ -7,7 +7,7 @@
                 <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
             </div>
             <div class="table-responsive d-block d-md-none my-2">
-                <table class="table table-bordered border-dark" *ngFor="let user of users | paginate: {
+                <table class="table table-bordered border-white my-5" *ngFor="let user of users | paginate: {
                     itemsPerPage: pageSize,
                     currentPage: page,
                     totalItems: count

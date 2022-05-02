@@ -6,11 +6,11 @@
                 <div><a class="btn btn-secondary" routerLink="/admin/home">Retour</a></div>
             </div>
             <div class="table-responsive d-block d-md-none my-4">
-                <table class="table table-bordered border-dark my-1" *ngFor="let workshop of workshops">
+                <table class="table table-bordered border-white my-2" *ngFor="let workshop of workshops">
                     <thead *ngIf="workshop.comments.length >= 1 ">
                         <tr>
                             <th scope="col">Atelier</th>
-                            <th scope="col" class="text-center">{{ workshop.title }}</th>
+                            <th scope="col">{{ workshop.title }}</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let comment of workshop.comments; let index = index">
@@ -41,7 +41,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">Comments {{ index + 1 }}</th>
+                            <th scope="row">Texte</th>
                             <td [innerHTML]="comment.comment | nl2br"></td>
                         </tr>
                         <tr>
