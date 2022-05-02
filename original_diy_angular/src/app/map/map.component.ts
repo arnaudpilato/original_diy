@@ -131,7 +131,8 @@ export class MapComponent implements OnInit, AfterViewInit {
                 + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
                 `<p> à : ${hours} H ${minutes}</p>`
                 + "<br/>" +
-                `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+                `<a class='btn btn-primary text-white'
+                    href='/workshop/${id}'>details</a>`)
               .openPopup;
           }
         });

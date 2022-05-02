@@ -35,6 +35,14 @@ ul {
   padding: 0;
 }
 
+.table-size td {
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: hidden;
+  max-width: 210px;
+  min-width: 210px;
+}
+
 /***** Columns *****/
 .td-edit {
   width: 60px;
@@ -42,6 +50,16 @@ ul {
 
 .td-delete {
   width: 80px;
+}
+
+/***** Pagination *****/
+.pagination a {
+  border: none;
+}
+
+.pagination .div-actual-page {
+  background-color: #75bd9f;
+  border: none;
 }
 
 /*# sourceMappingURL=admin-contact.component.css.map */

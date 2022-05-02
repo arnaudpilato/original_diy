@@ -1,28 +1,20 @@
 /***** Import *****/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
 /***** Picture *****/
-.workshop-picture {
+.picture {
   width: 100%;
+  height: auto;
   object-fit: cover;
-  max-width: 250px;
-  max-height: 150px;
-  border-radius: 10px;
+}
+
+.picture-link {
   box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+  transition: 0.3s;
 }
 
-/***** Icons *****/
-.bi-pencil-fill, .bi-trash {
-  color: white;
-}
-
-.bi-check-lg {
-  color: green;
-  font-size: 1.1rem;
-}
-
-.bi-x-lg {
-  color: red;
-  font-size: 1.1rem;
+.picture-link:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+  transition: 0.3s;
 }
 
 /***** Letter *****/
@@ -142,23 +134,18 @@ div .letter-empty {
     border-radius: 10px;
   }
 }
-@media (max-width: 500px) {
-  .icon {
-    height: 70px;
-    width: 70px;
-  }
-
+@media (max-width: 765px) {
   .letter input[type=checkbox] {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
   }
 
   .letter div {
-    height: 30px;
-    width: 30px;
-    font-size: 15px;
-    border-radius: 5px;
+    height: 35px;
+    width: 35px;
+    font-size: 25px;
+    border-radius: 10px;
   }
 }
 
-/*# sourceMappingURL=admin-workshop.component.css.map */
+/*# sourceMappingURL=admin-home.component.css.map */

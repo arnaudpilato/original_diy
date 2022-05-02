@@ -119,8 +119,8 @@ public class WorkshopController {
     @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
-        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
+        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
@@ -128,6 +128,8 @@ public class WorkshopController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
 
     @PreAuthorize("permitAll()")
     @GetMapping("/get-atelier/{id}")
