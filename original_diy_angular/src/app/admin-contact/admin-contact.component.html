@@ -42,8 +42,16 @@
                     <tr>
                         <th scope="row" colspan="2">
                             <div class="d-flex justify-content-around">
-                                <div><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></div>
-                                <div><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></div>
+                                <div class="col-5">
+                                    <a routerLink="/admin/contact/edit/{{ user.id }}" class="link btn btn-warning col-12">
+                                        Modifier
+                                    </a>
+                                </div>
+                                <div class="col-5">
+                                    <a (click)="deleteUser(user.id)" class="btn btn-danger col-12">
+                                        Supprimer
+                                    </a>
+                                </div>
                             </div>
                         </th>
                     </tr>
@@ -77,8 +85,16 @@
                             <td>{{ user.email }}</td>
                             <td>{{ user.phone }}</td>
                             <td *ngIf="user.roles?.length > 0">{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
-                            <td class="text-end td-edit"><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
-                            <td class="td-delete"><a class="link" (click)="deleteUser(user.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
+                            <td class="text-end td-edit">
+                                <a routerLink="/admin/contact/edit/{{ user.id }}" class="link">
+                                    <div class="btn btn-warning"><i class="bi bi-pencil-fill"></i></div>
+                                </a>
+                            </td>
+                            <td class="td-delete">
+                                <a class="link" (click)="deleteUser(user.id)">
+                                    <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                                </a>
+                            </td>
                         </tr>
                         <tr *ngIf="user.badges?.length != 0">
                             <th>Badges :</th>

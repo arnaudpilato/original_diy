@@ -4,14 +4,49 @@
         <div><a class="btn btn-primary m-1" routerLink="/admin/badge/new">Ajouter un badge</a></div>
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
-    <div class="col-md-4 d-flex">
+    <div class="col-md-4 d-flex my-3">
         <div class="col-md-5">
-            <label class="form-label">Badge</label>
             <input class="form-control" type="search" name="searchBadge" placeholder="Rechercher" [(ngModel)]="searchBadge" (keyup.enter)="getAllBadges()">
         </div>
     </div>
     <div class="row">
         <div class="col">
+            <div class="table-responsive d-block d-md-none my-2">
+                <table class="table table-bordered border-dark my-4" *ngFor="let badge of badges; let index = index">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ "Badge " + (index + 1) }}</th>
+                            <th scope="col">{{ badge.name }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-size">
+                        <tr>
+                            <th scope="row">Nb d'ateliers</th>
+                            <td>{{ badge.step }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description</th>
+                            <td>{{ badge.description }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="2">
+                                <div class="d-flex justify-content-around">
+                                    <div class="col-5">
+                                        <a routerLink="/admin/badge/edit/{{badge.id}}" class="link btn btn-warning col-12">
+                                            Modifier
+                                        </a>
+                                    </div>
+                                    <div class="col-5">
+                                        <a (click)="deleteBadge(badge.id, badge.picturePath)" class="btn btn-danger col-12">
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="table-responsive d-none d-md-block my-2">
                 <table class="table table-hover">
                     <thead>
@@ -33,12 +68,12 @@
                             <td>{{ badge.step}}</td>
                             <td class="text-end td-edit">
                                 <a routerLink="/admin/badge/edit/{{badge.id}}" class="link">
-                                    <img class="icon" src="/assets/img/edit.png" alt="Logo éditer">
+                                    <div class="btn btn-warning"><i class="bi bi-pencil-fill"></i></div>
                                 </a>
                             </td>
                             <td class="td-delete">
-                                <a class="link" (click)="deleteBadge(badge.id, badge.picturePath)">
-                                    <img class="icon" src="/assets/img/delete.png" alt="Logo supprimer">
+                                <a (click)="deleteBadge(badge.id, badge.picturePath)">
+                                    <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
                                 </a>
                             </td>
                         </tr>

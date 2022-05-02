@@ -66,8 +66,4 @@ export class WorkshopReservationComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
-
-  refresh():void {
-    window.location.reload();
-  }
 }
