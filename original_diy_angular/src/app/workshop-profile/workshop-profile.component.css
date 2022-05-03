@@ -1,5 +1,15 @@
 /***** Import *****/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
+/***** Picture *****/
+.workshop-picture {
+  width: 100%;
+  object-fit: cover;
+  max-width: 250px;
+  max-height: 150px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+}
+
 /***** Letter *****/
 .title {
   padding: 20px;
@@ -136,4 +146,4 @@ div .letter-empty {
   }
 }
 
-/*# sourceMappingURL=profile.component.css.map */
+/*# sourceMappingURL=workshop-profile.component.css.map */

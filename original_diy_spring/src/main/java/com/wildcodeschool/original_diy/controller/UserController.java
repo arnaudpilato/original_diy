@@ -17,6 +17,7 @@ import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
 import com.wildcodeschool.original_diy.service.BadgeVerificationService;
 import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
+import com.wildcodeschool.original_diy.service.MailService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +30,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -59,6 +62,9 @@ public class UserController {
 
     @Autowired
     private DiyUserDetailsService diyUserDetailsService;
+
+    @Autowired
+    private MailService mailService;
 
     @Value("${angular.url}")
     private String frontUrl;
@@ -263,9 +269,9 @@ public class UserController {
         String token = RandomString.make(45);
         try {
 
-            diyUserDetailsService.updateResetPassword(token, email);
+            mailService.updateResetPassword(token, email);
             String resetPasswordLink = frontUrl+"reset-password?token="+token;
-            diyUserDetailsService.sendEmail(email, resetPasswordLink);
+            mailService.passwordRecoveryEmail(email, resetPasswordLink);
             return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (Exception e) {
@@ -278,8 +284,15 @@ public class UserController {
     public ResponseEntity<?> newPassword(@Valid @RequestBody PasswordRequest passwordRequest) {
         if (!passwordRequest.getToken().isEmpty()) {
             DiyUser user = userRepository.findByResetPasswordToken(passwordRequest.getToken());
-            diyUserDetailsService.updatePassword(user,passwordRequest.getPassword());
+            mailService.updatePassword(user,passwordRequest.getPassword());
         }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PreAuthorize("permitAll()")
+    @PutMapping("/contact")
+    public ResponseEntity<?> contactFromForm(@Valid @RequestBody EmailRequest emailRequest) throws MessagingException, UnsupportedEncodingException {
+        mailService.mailFromContactForm(emailRequest.getEmail(), emailRequest.getMessage());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

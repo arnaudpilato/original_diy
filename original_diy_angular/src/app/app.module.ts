@@ -52,6 +52,7 @@ import { ErrorComponent } from './error/error.component';
 import { Error401Component } from './error/error401/error401.component';
 import { Error404Component } from './error/error404/error404.component';
 import { Error500Component } from './error/error500/error500.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { Error500Component } from './error/error500/error500.component';
     ErrorComponent,
     Error401Component,
     Error404Component,
-    Error500Component
+    Error500Component,
+    ContactUsComponent
   ],
   imports: [
     AppRoutingModule,

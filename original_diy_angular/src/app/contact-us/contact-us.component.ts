@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../service/user.service";
 import {EmailModel} from "../model/email.model";
+import {UserService} from "../service/user.service";
 
 @Component({
-  selector: 'app-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  selector: 'app-contact-us',
+  templateUrl: './contact-us.component.html',
+  styleUrls: ['./contact-us.component.scss']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ContactUsComponent implements OnInit {
+  public mailSend: boolean = false;
   public model: any = new EmailModel();
-  mailSend: boolean = false;
 
   constructor(private userService: UserService) { }
 
@@ -19,16 +19,15 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmit() {
     const data: any = {
       email: this.model.email,
-      message: this.model.message
+      message: this.model.message,
     }
-    this.userService.updateMail(data).subscribe({
+    this.userService.contact(data).subscribe({
       next: (data) => {
         this.mailSend = true;
         window.setTimeout(function() {
           window.location.href = "/home";
         }, 1000)
         },
-
       error: (e) => console.log(e+"e")
     });
   }
