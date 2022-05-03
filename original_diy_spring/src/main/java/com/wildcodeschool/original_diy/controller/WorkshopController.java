@@ -189,6 +189,13 @@ public class WorkshopController {
             } else {
                 workshop.setSubCategory(subCategoryRepository.getById(workshopRequest.getSubCategoryId()));
             }
+            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
 
             workshopRepository.save(workshop);
 

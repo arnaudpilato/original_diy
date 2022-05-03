@@ -149,7 +149,7 @@ public class WorkshopService {
             WorkshopDTO workshopDTO = new WorkshopDTO(workshop.getId(), workshop.getReservationUser(),
                     workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
                     workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
-                    workshop.getSubCategory().getCategory());
+                    workshop.getSubCategory().getCategory(), workshop.isConfirmation());
             workshopsSortDTO.add(workshopDTO);
         }
         return workshopsSortDTO;
@@ -172,7 +172,8 @@ public class WorkshopService {
                     workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
                     workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
                     workshop.getSubCategory().getCategory(), workshop.getStreetNumber(), workshop.getStreet(),
-                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude(), workshop.getDiyUser());
+                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude(),
+                    workshop.getDiyUser(), workshop.isConfirmation(), workshop.getDiyUser().getRoles());
             workshopsSortDTO.add(workshopDTO);
         }
         return workshopsSortDTO;

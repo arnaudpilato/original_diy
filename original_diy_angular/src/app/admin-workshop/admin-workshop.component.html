@@ -1,22 +1,11 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-    <div class="my-4">
-        <ul class="title d-flex justify-content-center">
-            <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
-            <li class="letter"><input type="checkbox" /><div class="green">T</div></li >
-            <li class="letter"><input type="checkbox" /><div class="turquoise">E</div></li>
-            <li class="letter"><input type="checkbox" /><div class="yellow">L</div></li>
-            <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
-            <li class="letter"><input type="checkbox" /><div class="turquoise">E</div></li>
-            <li class="letter"><input type="checkbox" /><div class="yellow">R</div></li>
-            <li class="letter"><input type="checkbox" /><div class="green">S</div></li >
-        </ul>
-    </div>
+    <h1 class="text-center my-4">Gestion des Ateliers</h1>
     <div class="text-end d-flex justify-content-end">
         <div><a class="btn btn-primary m-1" routerLink="/admin/workshop/new">Ajout d'un atelier</a></div>
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
     <div class="table-responsive d-block d-md-none">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
+        <table class="table table-bordered border-white my-5" *ngFor="let workshop of workshops; let index = index">
             <thead>
                 <tr>
                     <th>{{ "Atelier " + (index + 1) }}</th>

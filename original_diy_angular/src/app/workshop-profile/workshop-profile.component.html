@@ -16,7 +16,7 @@
         <div><a class="btn btn-secondary m-1 mt-4" routerLink="/mes-ateliers">Retour</a></div>
     </div>
     <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index" (click)="workshopDetails(workshop.id)">
+        <table class="table table-bordered border-white" *ngFor="let workshop of workshops; let index = index" (click)="workshopDetails(workshop.id)">
             <thead>
             <tr>
                 <th scope="col">{{ "Atelier " +  (index + 1) }}</th>

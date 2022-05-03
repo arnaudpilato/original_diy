@@ -28,7 +28,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         console.log(this.workshops)
 
         const blueIcon = L.icon({
-          iconUrl: 'assets/img/markericons.png',
+          iconUrl: 'assets/img/marker-icon.png',
 
           iconSize: [40, 60], // size of the icon
           shadowSize: [50, 64], // size of the shadow
@@ -37,8 +37,8 @@ export class MapComponent implements OnInit, AfterViewInit {
           popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
-        const yellowIcon = L.icon({
-          iconUrl: 'assets/img/markericonsJaune.png',
+        const greenIcon = L.icon({
+          iconUrl: 'assets/img/markerIconsGreen.png',
 
           iconSize: [40, 60], // size of the icon
           shadowSize: [50, 64], // size of the shadow
@@ -57,8 +57,8 @@ export class MapComponent implements OnInit, AfterViewInit {
           popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
 
-        const purpleIcon = L.icon({
-          iconUrl: 'assets/img/markericonsViolet.png',
+        const redIcon = L.icon({
+          iconUrl: 'assets/img/markerIconsRed.png',
 
           iconSize: [40, 60], // size of the icon
           shadowSize: [50, 64], // size of the shadow
@@ -85,56 +85,58 @@ export class MapComponent implements OnInit, AfterViewInit {
           const day = date.getUTCDate() >= 10 ? `${date.getUTCDate()}` : `0${date.getUTCDate()}`;
           const hours = date.getUTCHours() >= 10 ? `${date.getUTCHours()}` : `0${date.getUTCHours()}`;
           const minutes = date.getUTCMinutes() >= 10 ? `${date.getUTCMinutes()}` : `0${date.getUTCMinutes()}`;
-          if (data.user.roles[0].name == "ROLE_ADMIN") {
-            switch (data.diyCategory.name) {
-              case "Aménagements intérieurs":
-                const markerBlue = L.marker([data.latitude, data.longitude], {icon: iconMarron }).addTo(this.map)
-                  .bindPopup(`<p class='my-2'>${data.title}</p>`
-                    + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-                    `<p> à : ${hours} H ${minutes}</p>`
-                    + "<br/>" +
-                    `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
-                  .openPopup;
-                break
-              case "Aménagements extérieurs":
-                const markerYellow = L.marker([data.latitude, data.longitude], {icon: yellowIcon}).addTo(this.map)
-                  .bindPopup(`<p class='my-2'>${data.title}</p>`
-                    + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-                    `<p> à : ${hours} H ${minutes}</p>`
-                    + "<br/>" +
-                    `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
-                  .openPopup;
-                break
-              case "Les Animaux de compagnie":
-                const markerOrange = L.marker([data.latitude, data.longitude], {icon: orangeIcon}).addTo(this.map)
-                  .bindPopup(`<p class='my-2'>${data.title}</p>`
-                    + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-                    `<p> à : ${hours} H ${minutes}</p>`
-                    + "<br/>" +
-                    `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
-                  .openPopup;
-                break
 
-              case "Les fêtes de l'année":
-                const markerPurple = L.marker([data.latitude, data.longitude], {icon: purpleIcon}).addTo(this.map)
-                  .bindPopup(`<p class='my-2'>${data.title}</p>`
-                    + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-                    `<p> à : ${hours} H ${minutes}</p>`
-                    + "<br/>" +
-                    `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
-                  .openPopup;
-                break
-            }
-          } else {
-            const markerBlue = L.marker([data.latitude, data.longitude], {icon: blueIcon}).addTo(this.map)
-              .bindPopup(`<p class='my-2'>${data.title}</p>`
-                + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-                `<p> à : ${hours} H ${minutes}</p>`
-                + "<br/>" +
-                `<a class='btn btn-primary text-white'
-                    href='/workshop/${id}'>details</a>`)
-              .openPopup;
-          }
+    if (data.roles[0].name == "ROLE_ADMIN"){
+      switch (data.diyCategory.name) {
+        case "Aménagements intérieurs":
+          const markerMarron = L.marker([data.latitude, data.longitude], {icon: iconMarron }).addTo(this.map)
+            .bindPopup(`<p class='my-2'>${data.title}</p>`
+              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+              `<p> à : ${hours} H ${minutes}</p>`
+              + "<br/>" +
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .openPopup;
+          break
+        case "Aménagements extérieurs":
+          const markerRed = L.marker([data.latitude, data.longitude], {icon: redIcon}).addTo(this.map)
+            .bindPopup(`<p class='my-2'>${data.title}</p>`
+              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+              `<p> à : ${hours} H ${minutes}</p>`
+              + "<br/>" +
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .openPopup;
+          break
+        case "Les Animaux de compagnie":
+          const markerOrange = L.marker([data.latitude, data.longitude], {icon: orangeIcon}).addTo(this.map)
+            .bindPopup(`<p class='my-2'>${data.title}</p>`
+              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+              `<p> à : ${hours} H ${minutes}</p>`
+              + "<br/>" +
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .openPopup;
+          break
+        case "Les fêtes de l'année":
+          const markerGreen = L.marker([data.latitude, data.longitude], {icon: greenIcon}).addTo(this.map)
+            .bindPopup(`<p class='my-2'>${data.title}</p>`
+              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+              `<p> à : ${hours} H ${minutes}</p>`
+              + "<br/>" +
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .openPopup;
+          break
+      }
+
+    } else {
+
+      const markerBlue = L.marker([data.latitude, data.longitude], {icon: blueIcon}).addTo(this.map)
+        .bindPopup(`<p class='my-2'>${data.title}</p>`
+          + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
+          `<p> à : ${hours} H ${minutes}</p>`
+          + "<br/>" +
+          `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+        .openPopup;
+    }
+
         });
       },
       error: (err) => console.log(err)

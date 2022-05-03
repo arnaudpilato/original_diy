@@ -1,3 +1,10 @@
+/***** Icons *****/
+.icon {
+  margin-right: 5px;
+}
 
+.reservation-delete {
+  max-width: 50px;
+}
 
 /*# sourceMappingURL=admin-commentary.component.css.map */
