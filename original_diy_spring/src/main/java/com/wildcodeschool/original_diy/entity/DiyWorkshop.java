@@ -1,12 +1,12 @@
 package com.wildcodeschool.original_diy.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -25,7 +25,6 @@ public class DiyWorkshop {
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
 
-
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 
@@ -34,20 +33,28 @@ public class DiyWorkshop {
     @JsonManagedReference("workshopComment")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
 
+    @NotNull
     private String title;
 
     private String picturePath;
 
+    @NotNull
+    @Size(min = 1)
     private Long streetNumber;
 
+    @NotNull
     private String street;
 
+    @NotNull
     private Long postCode;
 
+    @NotNull
     private String city;
 
+    @NotNull
     private Double longitude;
 
+    @NotNull
     private Double latitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,10 +62,10 @@ public class DiyWorkshop {
 
     private boolean confirmation = false;
 
-
     private Long limitedPlaces;
 
     @ManyToOne
+    @NotNull
     private DiySubCategory subCategory;
 
     public DiyWorkshop() {
