@@ -66,10 +66,14 @@
                 <td class="text-wrap">{{ socialNetwork.name }}</td>
                 <td>{{ socialNetwork.visible ? "oui" : "non" }}</td>
                 <td class="text-end td-edit">
-                    <a routerLink="/admin/footer/edit/{{ socialNetwork.id }}" class="link"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a>
+                    <a routerLink="/admin/footer/edit/{{ socialNetwork.id }}" class="link">
+                        <div class="btn btn-warning"><i class="bi bi-pencil-fill"></i></div>
+                    </a>
                 </td>
                 <td class="td-delete">
-                    <a class="link" (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a>
+                    <a class="link" (click)="deleteSocialNetwork(socialNetwork.id, socialNetwork.picturePath)">
+                        <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                    </a>
                 </td>
             </tr>
             </tbody>

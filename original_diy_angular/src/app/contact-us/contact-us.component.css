@@ -1,21 +1,3 @@
-<<<<<<< HEAD
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
-.commentary {
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
-}
-=======
-
->>>>>>> ccb3d8ba708e80107f4454062835facc1ed40a04
-
-.picture-workshop {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/***** Letter *****/
 .title {
   padding: 20px;
   margin: 20px 20px;
@@ -151,4 +133,4 @@ div .letter-empty {
   }
 }
 
-/*# sourceMappingURL=workshop.component.css.map */
+/*# sourceMappingURL=contact-us.component.css.map */

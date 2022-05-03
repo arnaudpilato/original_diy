@@ -1,89 +1,114 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Modification de {{ workshop.title }}</h1>
-  <div class="row justify-content-center">
-    <div class="col-11 col-md-8 col-lg-5">
-      <form method="post" class="my-3" (ngSubmit)="workshopEditForm.form.valid && onSubmit()" #workshopEditForm="ngForm"
-            name="form" novalidate>
-        <div class="row">
-          <div class="justify-content-between"
-               *ngIf="workshopEditForm.submitted && isSignUpFailed">
-            <div class="alert alert-warning">Modification échouée !<br/>{{ errorMessage }}</div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="title">Nom de l'atelier :</label>
-            <input class="form-control" id="title" name="title" [(ngModel)]="workshop.title" type="text"
-                   placeholder="Nom de l'atelier" value="{{ workshop.title }}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="places">Nombre de place : </label>
-            <input min="1" class="form-control" id="places" name="places" [(ngModel)]="workshop.limitedPlaces" type="number"
-                   placeholder="{{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}">
-          </div>
-          <div class="mb-3">
-            <label for="workshop-categorie">Categorie d'atelier : {{workshop.subCategory.name}}</label>
-            <select
-              [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie">
-              <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">
-                <option
-                  *ngFor=" let subcategory of category.subCategories; let index = index"
-                  value="{{ subcategory.id }}">
-                  {{ subcategory.name }}
-                </option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="picture">Photo :</label>
-            <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label class="form-label" for="streetNumber">N° de rue :</label>
-            <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="workshop.streetNumber"
-                   type="number" placeholder="1" value="{{ workshop.streetNumber }}">
-          </div>
-          <div class="col-md-9 mb-3">
-            <label class="form-label" for="street">Rue/Avenue/Allée :</label>
-            <input class="form-control" id="street" name="street" [(ngModel)]="workshop.street" type="text"
-                   placeholder="Avenue du Champ de Mars" value="{{ workshop.street }}">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label class="form-label" for="postCode">Code Postal :</label>
-            <input class="form-control" id="postCode" name="postCode" [(ngModel)]="workshop.postCode" type="number"
-                   placeholder="45074" value="{{ workshop.postCode }}">
-          </div>
-          <div class="col-md-9 mb-3">
-            <label class="form-label" for="city">Ville :</label>
-            <input class="form-control" id="city" name="city" [(ngModel)]="workshop.city" type="text"
-                   placeholder="Orléans" value="{{ workshop.city }}">
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="date">Date :</label>
-            {{ workshop.date  | date:'dd-MM-yyyy HH-mm'}}
-            <input class="form-control" type="datetime-local"
-                      name="date" id="date" [(ngModel)]="workshop.date" required />
-          </div>
-          <div class="mb-3">
-            <label class="form-label" for="description">Description :</label>
-            <ckeditor [editor]="Editor" name="description" id="description"
-                      [(ngModel)]="workshop.description"></ckeditor>
-          </div>
-          <div class="mb-3">
-            <div class="form-check form-switch">
-              <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
-              <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation"
-                     [(ngModel)]="workshop.confirmation" type="checkbox" value="{{ workshop.confirmation }}">
-            </div>
-          </div>
-          <div class="text-center my-3">
-            <button class="btn btn-primary m-1">Modifier</button>
-            <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
-          </div>
+    <h1 class="text-center my-4">Modification de {{ workshop.title }}</h1>
+    <div class="row justify-content-center">
+        <div class="col-11 col-md-8 col-lg-5">
+            <form method="post" class="my-3" (ngSubmit)="workshopEditForm.form.valid && onSubmit()" #workshopEditForm="ngForm"
+                  name="form" novalidate>
+                <div class="row">
+                    <div class="justify-content-between"
+                         *ngIf="workshopEditForm.submitted && isSignUpFailed">
+                        <div class="alert alert-warning">Modification échouée !<br/>{{ errorMessage }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="title">Nom de l'atelier :</label>
+                        <input class="form-control" id="title" name="title" [(ngModel)]="workshop.title" type="text"
+                               placeholder="Nom de l'atelier" value="{{ workshop.title }}" required #title="ngModel">
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="title.errors && workshopEditForm.submitted">
+                            <div *ngIf="title.errors['required']">Le nom de l'atelier est requis !</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="places">Nombre de place : </label>
+                        <input min="1" class="form-control" id="places" name="places" [(ngModel)]="workshop.limitedPlaces" type="number"
+                               placeholder="{{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}" minlength="1" required #places="ngModel">
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="places.errors && workshopEditForm.submitted">
+                            <div *ngIf="places.errors['required']">Le nombre de places est requis !</div>
+                            <div *ngIf="places.errors['minlength']">Le nombre de places doit être supérieur à 1 !</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="workshop-categorie">Categorie d'atelier : {{workshop.subCategory.name}}</label>
+                        <select [(ngModel)]="subCategoryId" class="form-control" id="workshop-categorie" name="workshop-categorie" required #category="ngModel">
+                            <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">
+                                <option
+                                        *ngFor=" let subcategory of category.subCategories; let index = index"
+                                        value="{{ subcategory.id }}">
+                                    {{ subcategory.name }}
+                                </option>
+                            </optgroup>
+                        </select>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="category.errors && workshopEditForm.submitted">
+                            <div *ngIf="category.errors['required']">La catégorie est requise !</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="picture">Photo :</label>
+                        <input class="form-control" id="picture" (change)="selectFile($event)" type="file">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="streetNumber">N° de rue :</label>
+                        <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="workshop.streetNumber"
+                               type="number" placeholder="1" value="{{ workshop.streetNumber }}" minlength="1" required #streetNumber="ngModel">
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <label class="form-label" for="street">Rue/Avenue/Allée :</label>
+                        <input class="form-control" id="street" name="street" [(ngModel)]="workshop.street" type="text"
+                               placeholder="Avenue du Champ de Mars" value="{{ workshop.street }}" required #street="ngModel">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label" for="postCode">Code Postal :</label>
+                        <input class="form-control" id="postCode" name="postCode" [(ngModel)]="workshop.postCode" type="number"
+                               placeholder="45074" value="{{ workshop.postCode }}" minlength="1" required #postCode="ngModel">
+                    </div>
+                    <div class="col-md-9 mb-3">
+                        <label class="form-label" for="city">Ville :</label>
+                        <input class="form-control" id="city" name="city" [(ngModel)]="workshop.city" type="text"
+                               placeholder="Orléans" value="{{ workshop.city }}" #city="ngModel">
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="streetNumber.errors && workshopEditForm.submitted">
+                            <div *ngIf="streetNumber.errors['required']">Le n° de rue est requis !</div>
+                            <div *ngIf="streetNumber.errors['minlength']">Le n° de rue ne doit pas être inferieur à 1 !</div>
+                        </div>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="street.errors && workshopEditForm.submitted">
+                            <div *ngIf="street.errors['required']">Le nom de rue est requis !</div>
+                        </div>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="postCode.errors && workshopEditForm.submitted">
+                            <div *ngIf="postCode.errors['required']">Le code postal est requis !</div>
+                            <div *ngIf="postCode.errors['minlength']">Le code postal ne doit pas être inferieur à 1 !</div>
+                        </div>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="city.errors && workshopEditForm.submitted">
+                            <div *ngIf="city.errors['required']">Le nom de la ville est requise !</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="date">Date :</label>
+                        {{ workshop.date  | date:'dd-MM-yyyy HH-mm'}}
+                        <input class="form-control" type="datetime-local"
+                               name="date" id="date" [(ngModel)]="workshop.date" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="description">Description :</label>
+                        <ckeditor [editor]="Editor" name="description" id="description"
+                                  [(ngModel)]="workshop.description"></ckeditor>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="flexSwitchCheckChecked">Visible</label>
+                            <input class="form-check-input" id="flexSwitchCheckChecked" name="confirmation"
+                                   [(ngModel)]="workshop.confirmation" type="checkbox" value="{{ workshop.confirmation }}">
+                        </div>
+                    </div>
+                    <div class="text-center my-3">
+                        <button class="btn btn-primary m-1">Modifier</button>
+                        <a class="btn btn-secondary m-1" routerLink="/admin/workshop">Retour</a>
+                    </div>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

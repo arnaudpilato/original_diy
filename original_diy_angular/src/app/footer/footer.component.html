@@ -3,13 +3,16 @@
         <div class="row justify-content-center">
             <div class="col-1 text-center essai" *ngFor="let socialNetwork of socialNetworks">
                 <a href="{{ socialNetwork.socialNetworkPath }}" *ngIf="socialNetwork.visible" target="_blank">
-                    <img class="social-network-icon" src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}" alt="Image de {{ socialNetwork.name }}">
+                    <img class="social-network-icon"
+                         src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}"
+                         alt="Image de {{ socialNetwork.name }}">
                 </a>
             </div>
         </div>
-        <div class="row">
+        <div >
             <div class="text-center">
-                2022 | Wild Code School
+                <a class="text-decoration-none text-black" href="https://www.wildcodeschool.com/fr-FR" target="_blank">2022 - Wild Code School</a> |
+                <a class="text-decoration-none text-black" href="/contact">Contactez-nous</a>
             </div>
         </div>
     </div>

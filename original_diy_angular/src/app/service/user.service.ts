@@ -40,4 +40,8 @@ export class UserService {
   updatePassword(data: any): Observable<any> {
     return this.http.put(this.baseUrl + "newPassword", data)
   }
+
+  contact(data: any): Observable<any> {
+    return this.http.put(this.baseUrl + "contact", data)
+  }
 }
