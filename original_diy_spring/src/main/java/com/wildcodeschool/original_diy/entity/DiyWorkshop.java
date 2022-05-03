@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -39,7 +40,7 @@ public class DiyWorkshop {
     private String picturePath;
 
     @NotNull
-    @Size(min = 1)
+    @Min(1)
     private Long streetNumber;
 
     @NotNull
