@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="workshop-category">Categorie d'atelier : </label>
+                        <label class="form-label" for="workshop-category">Categorie d'atelier : </label>
                         <select [(ngModel)]="subCategoryId"
                                 class="form-control" id="workshop-category" name="workshop-category" required #category="ngModel">
                             <optgroup *ngFor=" let category of categories; let index = index" label="{{ category.name }}">
