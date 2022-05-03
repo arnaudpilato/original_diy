@@ -9,6 +9,8 @@ import java.util.Date;
 public class EmailRequest {
     private String email;
 
+    private String message;
+
     public EmailRequest() {
     }
 
@@ -18,5 +20,13 @@ public class EmailRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

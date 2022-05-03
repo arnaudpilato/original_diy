@@ -37,6 +37,7 @@ import { ErrorComponent } from "./error/error.component";
 import { Error401Component } from "./error/error401/error401.component";
 import { Error404Component } from "./error/error404/error404.component";
 import { Error500Component } from "./error/error500/error500.component";
+import {ContactUsComponent} from "./contact-us/contact-us.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -75,6 +76,7 @@ const routes: Routes = [
   { path: 'mes-inscriptions', component: WorkshopReservationComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'workshop/:id', component: WorkshopComponent },
+  { path: 'contact', component: ContactUsComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

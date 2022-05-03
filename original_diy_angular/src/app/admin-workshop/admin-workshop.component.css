@@ -1,3 +1,4 @@
+/***** Picture *****/
 .workshop-picture {
   width: 100%;
   object-fit: cover;
@@ -8,27 +9,18 @@
 }
 
 /***** Icons *****/
-.icon {
-  width: 32px;
-  height: auto;
-  object-fit: cover;
-  transition: 0.3s;
+.bi-pencil-fill, .bi-trash {
+  color: white;
 }
 
-.icon:hover {
-  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
-  width: 35px;
-  height: auto;
-  border-radius: 50px;
+.bi-check-lg {
+  color: green;
+  font-size: 1.1rem;
 }
 
-/***** Columns *****/
-.td-edit {
-  width: 60px;
-}
-
-.td-delete {
-  width: 80px;
+.bi-x-lg {
+  color: red;
+  font-size: 1.1rem;
 }
 
 /*# sourceMappingURL=admin-workshop.component.css.map */
