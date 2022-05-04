@@ -3,7 +3,9 @@ package com.wildcodeschool.original_diy.dto;
 import com.wildcodeschool.original_diy.entity.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class WorkshopDTO {
 
@@ -35,8 +37,13 @@ public class WorkshopDTO {
 
     private Double latitude;
 
+    private boolean confirmation = false;
+
+    private Set<DiyRole> roles = new HashSet<>();
+
     public WorkshopDTO(Long id, List<DiyUser> reservationUser, Date date, String description, String title,
-                       String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory) {
+                       String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory,
+                       boolean confirmation) {
         this.id = id;
         this.reservationUser = reservationUser;
         this.date = date;
@@ -46,11 +53,13 @@ public class WorkshopDTO {
         this.limitedPlaces = limitedPlaces;
         this.subCategory = subCategory;
         this.diyCategory = diyCategory;
+        this.confirmation = confirmation;
     }
 
     public WorkshopDTO(Long id, List<DiyUser> reservationUser, Date date, String description, String title,
                        String picturePath, Long limitedPlaces, DiySubCategory subCategory, DiyCategory diyCategory,
-                       Long streetNumber, String street, Long postCode, String city, Double longitude, Double latitude, DiyUser user)
+                       Long streetNumber, String street, Long postCode, String city, Double longitude, Double latitude,
+                       DiyUser user, boolean confirmation, Set<DiyRole> roles)
     {
         this.id = id;
         this.reservationUser = reservationUser;
@@ -68,6 +77,9 @@ public class WorkshopDTO {
         this.longitude = longitude;
         this.latitude = latitude;
         this.user = user;
+        this.confirmation = confirmation;
+        this.roles = roles;
+
     }
 
     public Long getId() {
@@ -196,5 +208,21 @@ public class WorkshopDTO {
 
     public void setUser(DiyUser user) {
         this.user = user;
+    }
+
+    public boolean isConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(boolean confirmation) {
+        this.confirmation = confirmation;
+    }
+
+    public Set<DiyRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<DiyRole> roles) {
+        this.roles = roles;
     }
 }

@@ -119,8 +119,8 @@ public class WorkshopController {
     @PreAuthorize("permitAll()")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyWorkshop> getWorkshopById(@PathVariable("id") long id, Authentication authentication) {
-        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
+        Optional<DiyWorkshop> workshop = workshopRepository.findById(id);
 
         if (workshop.isPresent()) {
             return new ResponseEntity<>(workshop.get(), HttpStatus.OK);
@@ -128,6 +128,8 @@ public class WorkshopController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+
 
     @PreAuthorize("permitAll()")
     @GetMapping("/get-atelier/{id}")
@@ -187,6 +189,13 @@ public class WorkshopController {
             } else {
                 workshop.setSubCategory(subCategoryRepository.getById(workshopRequest.getSubCategoryId()));
             }
+            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
 
             workshopRepository.save(workshop);
 
