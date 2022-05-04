@@ -22,7 +22,7 @@ export class AdminWorkshopComponent implements OnInit {
     private title: Title,
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service) {
-    this.title.setTitle("OriginalDIY - Admin - Workshops")
+    this.title.setTitle('Gestion des ateliers');
   }
 
   ngOnInit(): void {

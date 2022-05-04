@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) {
-    this.title.setTitle("OriginalDIY - profil")
+    this.title.setTitle('Profil');
   }
 
   ngOnInit(): void {

@@ -46,7 +46,7 @@ public class FooterController {
             footer.setSocialNetworkPath(footerRequest.getSocialNetworkPath());
 
             if (footerRequest.getPicturePath() == null) {
-                footer.setPicturePath("/assets/img/static-picture.png");
+                footer.setPicturePath("/assets/img/social-network.png");
             } else {
                 footer.setPicturePath(footerRequest.getPicturePath());
             }

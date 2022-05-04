@@ -4,6 +4,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {BadgeService} from "../../service/badge.service";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-badge-edit',
@@ -27,7 +28,10 @@ export class AdminBadgeEditComponent implements OnInit {
       private router: Router,
       private badgeService: BadgeService,
       private amazonS3Service: AmazonS3Service,
-      private route: ActivatedRoute) { }
+      private route: ActivatedRoute,
+      private title: Title) {
+    this.title.setTitle('Modifier un badge');
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -61,8 +65,6 @@ export class AdminBadgeEditComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
-  //TODO Il manque une partie du formulaire comme la partie add des badges
 
   onSubmit() {
     const data = {

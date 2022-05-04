@@ -1,7 +1,7 @@
 <div class="container-fluid footer mt-auto py-2 footer-color">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-1 text-center essai" *ngFor="let socialNetwork of socialNetworks">
+            <div class="col-1 text-center icon" *ngFor="let socialNetwork of socialNetworks">
                 <a href="{{ socialNetwork.socialNetworkPath }}" *ngIf="socialNetwork.visible" target="_blank">
                     <img class="social-network-icon"
                          src="{{ socialNetwork.picturePath == static  ? socialNetwork.picturePath : s3 + socialNetwork.picturePath }}"

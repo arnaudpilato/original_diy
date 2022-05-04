@@ -24,7 +24,7 @@ export class AdminContactNewComponent implements OnInit {
       private title: Title,
       private userService: UserService,
       private router: Router) {
-    this.title.setTitle("OriginalDIY - Admin - contact - new")
+    this.title.setTitle('Ajouter un contact');
   }
 
   ngOnInit(): void {

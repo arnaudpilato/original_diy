@@ -13,8 +13,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   public workshops: any[] | undefined;
   public workshop: any;
 
-  constructor(private title: Title, private workshopService: WorkshopService) {
-    this.title.setTitle("OriginalDIY - Admin - Workshops")
+  constructor(
+      private title: Title,
+      private workshopService: WorkshopService) {
+    this.title.setTitle('Carte')
   }
 
   ngOnInit(): void {

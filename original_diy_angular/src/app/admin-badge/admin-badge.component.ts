@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {BadgeService} from "../service/badge.service";
 import {DiyBadge} from "../model/badge.model";
 import {AmazonS3Service} from "../service/amazon-s3.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-badge',
@@ -22,7 +23,10 @@ export class AdminBadgeComponent implements OnInit {
       private tokenStorageService: TokenStorageService,
       private router: Router,
       private badgeService: BadgeService,
-      public amazonS3Service: AmazonS3Service) { }
+      public amazonS3Service: AmazonS3Service,
+      public title: Title) {
+    this.title.setTitle('Gestion des badges')
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();

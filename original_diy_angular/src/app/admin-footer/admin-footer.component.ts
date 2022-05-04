@@ -16,7 +16,7 @@ export class AdminFooterComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
   public socialNetworks: DiyFooter[] | undefined;
-  public static: string = '/assets/img/static-picture.png';
+  public static: string = '/assets/img/social-network.png';
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public file: any;
 
@@ -26,7 +26,7 @@ export class AdminFooterComponent implements OnInit {
     private amazonS3Service: AmazonS3Service,
     private http: HttpClient,
     private tokenStorageService:TokenStorageService) {
-      this.title.setTitle("OriginalDIY - Admin - footer")
+      this.title.setTitle('Gestion des réseaux sociaux')
   }
 
   ngOnInit(): void {

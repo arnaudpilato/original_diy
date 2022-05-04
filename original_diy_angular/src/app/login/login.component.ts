@@ -20,8 +20,11 @@ export class LoginComponent implements OnInit {
   public roles: string[] = [];
   public userName: string = '';
 
-  constructor(private title: Title, private authService: AuthService, private tokenStorageService: TokenStorageService) {
-    this.title.setTitle("OriginalDIY - Connexion")
+  constructor(
+      private title: Title,
+      private authService: AuthService,
+      private tokenStorageService: TokenStorageService) {
+    this.title.setTitle('Connexion');
   }
 
   ngOnInit(): void {

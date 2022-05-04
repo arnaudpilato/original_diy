@@ -1,5 +1,5 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-    <h1 class="text-center my-4">Ajout d'un nouvel atelier</h1>
+    <h1 class="text-center my-4">Ajouter un atelier</h1>
     <div class="row justify-content-center">
         <div class="col-11 col-md-8 col-lg-5">
             <form method="post" class="my-3" (ngSubmit)="workshopNewForm.form.valid && onSubmit()" #workshopNewForm="ngForm" name="form" novalidate>
