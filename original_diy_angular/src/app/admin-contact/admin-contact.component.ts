@@ -22,7 +22,7 @@ export class AdminContactComponent implements OnInit {
       private tokenStorageService:TokenStorageService,
       private userService:UserService,
       private router: Router) {
-    this.title.setTitle('OriginalDIY - Admin - Contacts');
+    this.title.setTitle('Gestion des contacts');
   }
 
   public page = 1;

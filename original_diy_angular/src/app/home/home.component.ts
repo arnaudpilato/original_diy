@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     private title: Title,
     private tokenStorageService: TokenStorageService,
     private workshopService: WorkshopService) {
-    this.title.setTitle("OriginalDIY - Accueil");
+    this.title.setTitle('Accueil');
   }
 
   ngOnInit(): void {

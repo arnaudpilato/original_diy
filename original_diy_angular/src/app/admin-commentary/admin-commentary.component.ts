@@ -23,7 +23,7 @@ export class AdminCommentaryComponent implements OnInit {
       private workshopService: WorkshopService,
       private commentaryService: CommentaryService,
       private router: Router) {
-    this.title.setTitle('OriginalDIY - Admin - Contacts');
+    this.title.setTitle('Commentaires');
   }
 
   ngOnInit(): void {

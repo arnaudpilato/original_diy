@@ -23,7 +23,7 @@ export class WorkshopProfileComponent implements OnInit {
   constructor(private title: Title, private workshopService: WorkshopService,
               private token: TokenStorageService,
               private router: Router) {
-    this.title.setTitle("OriginalDIY - Mes - Ateliers")
+    this.title.setTitle('Liste de mes ateliers');
   }
 
   ngOnInit(): void {

@@ -32,8 +32,6 @@ export class AdminWorkshopNewComponent implements OnInit {
   public Editor = ClassicEditor;
   public categories: any[] | undefined;
 
-
-
   constructor(
     private title: Title,
     private workshopService: WorkshopService,
@@ -41,7 +39,7 @@ export class AdminWorkshopNewComponent implements OnInit {
     private router: Router,
     private token: TokenStorageService,
     private categoryService: CategoryService) {
-    this.title.setTitle("OriginalDIY - Admin - Workshop - New");
+    this.title.setTitle('Ajouter un atelier');
   }
 
   ngOnInit(): void {

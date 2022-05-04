@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-workshop-all',
@@ -14,8 +15,10 @@ export class WorkshopAllComponent implements OnInit {
 
   constructor(
     private workshopService: WorkshopService,
-    private amazonS3Service: AmazonS3Service
-  ) {}
+    private amazonS3Service: AmazonS3Service,
+    private title: Title) {
+    this.title.setTitle('Nos ateliers');
+  }
 
   ngOnInit(): void {
     this.getAllConfirmed()

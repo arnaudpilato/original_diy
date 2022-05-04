@@ -39,7 +39,7 @@ export class AdminWorkshopEditComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService
   ) {
-    this.title.setTitle("OriginalDIY - Admin - workshop - edit");
+    this.title.setTitle('Modifier un atelier');
   }
 
   ngOnInit(): void {

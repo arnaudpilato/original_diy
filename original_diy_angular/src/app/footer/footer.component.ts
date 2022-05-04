@@ -9,7 +9,7 @@ import {DiyFooter} from "../model/footer.model";
 })
 export class FooterComponent implements OnInit {
   public socialNetworks: DiyFooter[] | undefined;
-  public static: string = '/assets/img/static-picture.png';
+  public static: string = '/assets/img/social-network.png';
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   constructor(private footerService: FooterService) { }
 

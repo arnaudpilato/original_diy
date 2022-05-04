@@ -12,8 +12,10 @@ export class AdminHomeComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public showAdminBoard: boolean = false;
 
-  constructor(private tokenStorageService: TokenStorageService, private title: Title) {
-    this.title.setTitle('OriginalDIY - Admin - Index');
+  constructor(
+      private tokenStorageService: TokenStorageService,
+      private title: Title) {
+    this.title.setTitle('Administration');
   }
 
   ngOnInit(): void {

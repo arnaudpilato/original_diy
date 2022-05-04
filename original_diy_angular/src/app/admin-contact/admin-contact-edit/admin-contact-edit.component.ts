@@ -34,7 +34,7 @@ export class AdminContactEditComponent implements OnInit {
     private route: ActivatedRoute,
     private badgeService: BadgeService,
     private router: Router) {
-      this.title.setTitle("OriginalDIY - Admin - contact - edit")
+      this.title.setTitle('Modifier un contact');
   }
 
   ngOnInit(): void {

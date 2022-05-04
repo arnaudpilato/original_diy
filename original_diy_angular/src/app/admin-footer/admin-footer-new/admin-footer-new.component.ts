@@ -29,7 +29,7 @@ export class AdminFooterNewComponent implements OnInit {
     private title: Title,
     private footerService: FooterService,
     private amazonS3Service: AmazonS3Service) {
-      this.title.setTitle("OriginalDIY - admin - footer - new");
+      this.title.setTitle('Ajouter un réseau social');
   }
 
   ngOnInit(): void {
@@ -39,6 +39,7 @@ export class AdminFooterNewComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.footer.visible = true;
     }
   }
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../service/token-storage.service";
 import {WorkshopService} from "../service/workshop.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-reservation',
@@ -15,7 +16,11 @@ export class AdminReservationComponent implements OnInit {
   public showAdminBoard: any;
   private currentUser: any;
 
-  constructor(private tokenStorageService: TokenStorageService, private workshopService: WorkshopService) {
+  constructor(
+      private tokenStorageService: TokenStorageService,
+      private workshopService: WorkshopService,
+      private title: Title) {
+    this.title.setTitle('Réservations');
   }
 
   ngOnInit(): void {

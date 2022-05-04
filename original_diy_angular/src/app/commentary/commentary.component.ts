@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {CommentaryService} from "../service/commentary.service";
 import {Router} from "@angular/router";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-commentary',
@@ -20,7 +21,10 @@ export class CommentaryComponent implements OnInit {
   constructor(
       private commentaryService: CommentaryService,
       private route: ActivatedRoute,
-      private router: Router) { }
+      private router: Router,
+      private title: Title) {
+    this.title.setTitle('Commentaires');
+  }
 
   ngOnInit(): void {
     this.diyWorkshopId = this.route.snapshot.params["id"];
