@@ -3,6 +3,7 @@ package com.wildcodeschool.original_diy.controller;
 import com.wildcodeschool.original_diy.entity.DiyFooter;
 import com.wildcodeschool.original_diy.repository.FooterRepository;
 import com.wildcodeschool.original_diy.request.FooterRequest;
+import com.wildcodeschool.original_diy.service.FooterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,13 @@ public class FooterController {
     @Autowired
     FooterRepository footerRepository;
 
+    @Autowired
+    FooterService footerService;
+
     @GetMapping("/all")
     public ResponseEntity<List<DiyFooter>> getAllSocialNetworks() {
         try {
-            List<DiyFooter> socialNetworks = new ArrayList<>();
-            footerRepository.findAll().forEach(socialNetworks::add);
+            List<DiyFooter> socialNetworks = footerService.getAllSocialNetworks();
 
             if (socialNetworks.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -32,6 +35,7 @@ public class FooterController {
 
             return new ResponseEntity<>(socialNetworks, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -40,23 +44,11 @@ public class FooterController {
     @PostMapping("/new")
     public ResponseEntity<?> createsocialNetwork(@Valid @RequestBody FooterRequest footerRequest) {
         try {
-            DiyFooter footer = new DiyFooter();
-
-            footer.setName(footerRequest.getName());
-            footer.setSocialNetworkPath(footerRequest.getSocialNetworkPath());
-
-            if (footerRequest.getPicturePath() == null) {
-                footer.setPicturePath("/assets/img/social-network.png");
-            } else {
-                footer.setPicturePath(footerRequest.getPicturePath());
-            }
-
-            footer.setVisible(footerRequest.isVisible());
-
-            footerRepository.save(footer);
+            DiyFooter footer = footerService.createsocialNetwork(footerRequest);
 
             return new ResponseEntity<>(footer, HttpStatus.CREATED);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -64,11 +56,12 @@ public class FooterController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyFooter> getSocialNetworkById(@PathVariable("id") long id) {
-        Optional<DiyFooter> socialNetwork = footerRepository.findById(id);
+        try {
+            DiyFooter socialNetwork = footerService.getSocialNetworkById(id);
 
-        if (socialNetwork.isPresent()) {
-            return new ResponseEntity<>(socialNetwork.get(), HttpStatus.OK);
-        } else {
+            return new ResponseEntity<>(socialNetwork, HttpStatus.OK);
+        } catch (Exception e) {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -76,26 +69,11 @@ public class FooterController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyFooter> updateSocialNetwork(@PathVariable("id") long id, @RequestBody FooterRequest footerRequest) {
-        Optional<DiyFooter> footerData = footerRepository.findById(id);
-
-        if (footerData.isPresent()) {
-            DiyFooter footer = footerData.get();
-
-            footer.setName(footerRequest.getName());
-            footer.setSocialNetworkPath(footerRequest.getSocialNetworkPath());
-
-            if (footerRequest.getPicturePath() == null) {
-                footer.setPicturePath(footer.getPicturePath());
-            } else {
-                footer.setPicturePath(footerRequest.getPicturePath());
-            }
-
-            footer.setVisible(footerRequest.isVisible());
-
-            footerRepository.save(footer);
+        try {
+            DiyFooter footer = footerService.updateSocialNetwork(id, footerRequest);
 
             return new ResponseEntity<>(footerRepository.save(footer), HttpStatus.OK);
-        } else {
+        } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -105,7 +83,7 @@ public class FooterController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteSocialNetwork(@PathVariable("id") Long id) {
         try {
-            footerRepository.deleteById(id);
+            footerService.deleteSocialNetwork(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
