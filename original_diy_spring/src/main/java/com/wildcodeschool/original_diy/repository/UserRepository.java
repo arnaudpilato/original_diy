@@ -18,6 +18,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<DiyUser, Long> {
     Optional<DiyUser> findByUsername(String username);
+
+    @Query("SELECT u FROM DiyUser u ORDER BY u.username ASC")
     Page<DiyUser> findAllByOrderByIdDesc(Pageable pageable);
 
     Boolean existsByUsername(String username);
