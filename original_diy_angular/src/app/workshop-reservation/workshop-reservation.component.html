@@ -43,7 +43,7 @@
                 <div class="row justify-content-around mt-4 mb-2">
                     <a routerLink="/workshop/{{ workshop.id }}" (click)="showWorkshop(workshop.id)"
                        class="btn btn-primary col-5 ">Détails</a>
-                    <button type="button" class="btn btn-danger col-5" data-bs-toggle="modal"
+                    <button *ngIf="workshop.confirmation == true" type="button" class="btn btn-danger col-5" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modal' + index">Annuler
                     </button>
                 </div>
