@@ -76,7 +76,7 @@ export class AdminBadgeNewComponent implements OnInit {
     this.badgeService.create(data).subscribe({
       next: (data) => {
         console.log(data)
-        window.location.href="/admin/badge"
+        window.location.href="/admin/badge";
       },
 
       error: (e) => {
