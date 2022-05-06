@@ -45,7 +45,7 @@
             <p class="my-4 col-12" [innerHTML]="workshop.description | nl2br"></p>
         </div>
     </div>
-    <div class="text-center my-4" *ngIf="isLoggedIn && !userReservation.includes(currentUser.username)">
+    <div class="text-center my-4" *ngIf="isLoggedIn && !userReservation.includes(currentUser.username); else elseBlock">
         <button type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
@@ -69,10 +69,42 @@
                 </div>
             </div>
         </div>
-        <div class="my-5">
-            <app-commentary [isLoggedIn]="isLoggedIn"></app-commentary>
-        </div>
     </div>
+  <ng-template #elseBlock>
+    <div *ngIf="isLoggedIn" class="row justify-content-around mt-4 mb-2">
+                    <button *ngIf="workshop.confirmation == true" type="button" class="btn btn-danger col-5" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modal'">Annuler votre reservation
+                    </button>
+                </div>
+                <div class="modal fade" [attr.id]="'modal'" tabindex="-1" aria-labelledby="modalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Annuler votre reservation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="my-3 text-center">Voulez-vous vraiment annuler votre reservation suivante ?</p>
+                                <p class="text-center fw-bold">{{ workshop.title }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success"
+                                        data-bs-dismiss="modal" (click)="deleteReservationUser(workshop.id)">Oui
+                                </button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  </ng-template>
+  <div class=" row justify-content-center my-3" *ngIf="!isLoggedIn">
+    <a href="/login" class="btn btn-danger"> Connectez-vous pour vous inscrire</a>
+  </div>
+  <div class="my-5">
+    <app-commentary [isLoggedIn]="isLoggedIn"></app-commentary>
+  </div>
+
 </div>
 
 

@@ -59,7 +59,7 @@ export class WorkshopComponent implements OnInit {
     this.workshopService.reservation(id, this.model).subscribe({
       next: (data) => {
         this.model = data;
-
+        window.location.reload();
       },
 
       error: (err) => console.error(err)
