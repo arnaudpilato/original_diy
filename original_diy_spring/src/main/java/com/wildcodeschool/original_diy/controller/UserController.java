@@ -7,6 +7,8 @@ import com.wildcodeschool.original_diy.request.PasswordRequest;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
 import com.wildcodeschool.original_diy.service.BadgeVerificationService;
+import com.wildcodeschool.original_diy.service.BadgeService;
+import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import com.wildcodeschool.original_diy.service.MailService;
 import com.wildcodeschool.original_diy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,22 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private BadgeVerificationService badgeVerificationService;
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BadgeRepository badgeRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private WorkshopRepository workshopRepository;
+
+    @Autowired
+    private BadgeService badgeService;
 
     @Autowired
     private UserService userService;
@@ -38,7 +55,10 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllUsers(
             @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "5") int size) {
+            @RequestParam(name = "size", defaultValue = "5") int size
+    ) {
+        badgeService.badgesVerification();
+
         try {
             badgeVerificationService.badgesVerification();
             Map<String, Object> response = userService.getAllUsers(page, size);
