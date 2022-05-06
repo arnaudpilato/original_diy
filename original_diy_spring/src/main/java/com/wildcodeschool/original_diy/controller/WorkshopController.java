@@ -164,43 +164,12 @@ public class WorkshopController {
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyWorkshop> updateWorkshop(@PathVariable("id") long id, @RequestBody WorkshopRequest workshopRequest) {
         Optional<DiyWorkshop> workshopData = workshopRepository.findById(id);
-
         if (workshopData.isPresent()) {
-            DiyWorkshop workshop = workshopData.get();
+            DiyWorkshop workshop = workshopService.editWorkshop(workshopData, workshopRequest);
 
-            workshop.setTitle(workshopRequest.getTitle());
-
-            if (workshopRequest.getPicturePath() == null) {
-                workshop.setPicturePath(workshop.getPicturePath());
-            } else {
-                workshop.setPicturePath(workshopRequest.getPicturePath());
-            }
-
-            workshop.setStreetNumber(workshopRequest.getStreetNumber());
-            workshop.setStreet(workshopRequest.getStreet());
-            workshop.setPostCode(workshopRequest.getPostCode());
-            workshop.setCity(workshopRequest.getCity());
-            workshop.setDescription(workshopRequest.getDescription());
-            workshop.setConfirmation(workshopRequest.isConfirmation());
-            workshop.setDate(workshopRequest.getDate());
-            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
-            if (workshopRequest.getSubCategoryId() == 0) {
-                workshop.setSubCategory(workshop.getSubCategory());
-            } else {
-                workshop.setSubCategory(subCategoryRepository.getById(workshopRequest.getSubCategoryId()));
-            }
-            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
-            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
-                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
-
-            workshop.setLatitude(latitude);
-            workshop.setLongitude(longitude);
-
-            workshopRepository.save(workshop);
-
-            return new ResponseEntity<>(workshopRepository.save(workshop), HttpStatus.OK);
-        } else {
+            return new ResponseEntity<>(workshop, HttpStatus.OK);
+        }
+        else {
 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
