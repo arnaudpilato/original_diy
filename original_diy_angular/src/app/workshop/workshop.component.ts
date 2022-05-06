@@ -48,8 +48,6 @@ export class WorkshopComponent implements OnInit {
     this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
-        console.log(data);
-        console.log("TOTO");
         this.userReservation = this.workshop.reservationUser.map((el: { username: any; }) => el.username);
       },
 
