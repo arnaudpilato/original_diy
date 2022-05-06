@@ -25,43 +25,30 @@ import java.util.List;
 @RequestMapping("/api/test/comment")
 public class CommentController {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private WorkshopRepository workshopRepository;
-    @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
     private CommentService commentService;
-
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/confirm/{id}")
     public ResponseEntity<Object> changeConfirmation(@PathVariable("id") Long id) {
         try {
-            DiyComment comment = commentRepository.getById(id);
-            boolean status = comment.isConfirmed();
-            if (status) {
-                comment.setConfirmed(false);
-            } else {
-                comment.setConfirmed(true);
-            }
-            commentRepository.save(comment);
+            commentService.changeConfirmation(id);
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping("/new")
-    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
-
+    public ResponseEntity<DiyComment> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
         try {
-            DiyUser user = userRepository.getUserByUsername(authentication.getName());
-            DiyComment comment = commentService.commentControl(commentRequest, user);
+            DiyComment comment = commentService.createComment(commentRequest, authentication);
+
             return new ResponseEntity<>(comment, HttpStatus.CREATED);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -70,11 +57,7 @@ public class CommentController {
     @GetMapping("/comment-by-workshop/{id}")
     public ResponseEntity<List<DiyComment>> getCommentByWorkshop(@PathVariable("id") Long id) {
         try {
-
-            List<DiyComment> comments = new ArrayList<>();
-            DiyWorkshop workshop = workshopRepository.getById(id);
-
-            comments.addAll(commentRepository.getCommentByWorkshop(workshop));
+            List<DiyComment> comments = commentService.getCommentByWorkshop(id);
 
             if (comments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -82,6 +65,7 @@ public class CommentController {
 
             return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -90,10 +74,11 @@ public class CommentController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
         try {
-            DiyComment comment = commentRepository.getById(id);
-            commentRepository.delete(comment);
+            commentService.delete(id);
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
