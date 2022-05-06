@@ -15,7 +15,7 @@ import com.wildcodeschool.original_diy.request.EmailRequest;
 import com.wildcodeschool.original_diy.request.PasswordRequest;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
-import com.wildcodeschool.original_diy.service.BadgeVerificationService;
+import com.wildcodeschool.original_diy.service.BadgeService;
 import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import com.wildcodeschool.original_diy.service.MailService;
 import net.bytebuddy.utility.RandomString;
@@ -58,7 +58,7 @@ public class UserController {
     private WorkshopRepository workshopRepository;
 
     @Autowired
-    private BadgeVerificationService badgeVerificationService;
+    private BadgeService badgeService;
 
     @Autowired
     private DiyUserDetailsService diyUserDetailsService;
@@ -75,7 +75,7 @@ public class UserController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "5") int size
     ) {
-        badgeVerificationService.badgesVerification();
+        badgeService.badgesVerification();
 
         try {
             Pageable paging = PageRequest.of(page, size);
