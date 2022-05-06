@@ -1,5 +1,8 @@
+/***** Imports *****/
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
 
+/***** Commentary *****/
 
 .commentary {
  border-width:1px;
@@ -7,10 +10,19 @@
  border-color:black;
  }
 
-.picture-workshop {
+/***** Picture *****/
+
+.workshop-picture {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+/***** Icon *****/
+
+.icon {
+  margin-right: 10px;
 }
 
 /***** Letter *****/
