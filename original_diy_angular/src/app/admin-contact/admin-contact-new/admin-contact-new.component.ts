@@ -19,8 +19,12 @@ export class AdminContactNewComponent implements OnInit {
   public model: DiyUser = new DiyUser();
   public role: string[] = ['ROLE_USER'];
 
-  constructor(private tokenStorageService: TokenStorageService, private title: Title, private userService: UserService, private router: Router) {
-    this.title.setTitle("OriginalDIY - Admin - contact - new")
+  constructor(
+      private tokenStorageService: TokenStorageService,
+      private title: Title,
+      private userService: UserService,
+      private router: Router) {
+    this.title.setTitle('Ajouter un contact');
   }
 
   ngOnInit(): void {

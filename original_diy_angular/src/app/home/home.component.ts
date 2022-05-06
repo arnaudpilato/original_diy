@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {TokenStorageService} from "../service/token-storage.service";
-import * as L from "leaflet";
 import {WorkshopService} from "../service/workshop.service";
-import {DiyWorkshop} from "../model/workshop.model";
 
 @Component({
   selector: 'app-home',
@@ -24,7 +22,7 @@ export class HomeComponent implements OnInit {
     private title: Title,
     private tokenStorageService: TokenStorageService,
     private workshopService: WorkshopService) {
-    this.title.setTitle("OriginalDIY - Accueil");
+    this.title.setTitle('Accueil');
   }
 
   ngOnInit(): void {
@@ -35,15 +33,14 @@ export class HomeComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-
     }
-
   }
 
   getAllWorkshopsConfirmed(): any {
     this.workshopService.getLastWorkshop().subscribe({
         next: (datas) => {
           this.workshops = datas;
+          console.log(this.workshops)
         },
 
         error: (e) => console.log(e)
@@ -60,6 +57,5 @@ export class HomeComponent implements OnInit {
       error: (err) => console.error(err)
     });
   }
-
 }
 

@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="row">
+            <div class="my-4">
+                <ul class="title d-flex justify-content-center">
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="yellow">C</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="green">O</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="turquoise">N</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="yellow">T</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="green">A</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="turquoise">C</div>
+                    </li>
+                    <li class="letter"><input type="checkbox"/>
+                        <div class="green">T</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-11 col-md-4 mb-4" *ngIf="mailSend">
+            <div class="alert alert-success text-center">Votre message à été envoyé.</div>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Chargement...</span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-4">
+            <div class="col-11 col-md-4">
+                <form class="row justify-content-center" name="form" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Votre e-mail :</label>
+                        <input class="form-control" id="email" name="email" [(ngModel)]="model.email" type="email"
+                               placeholder="JohnDoe@gmail.com" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="message">Votre question :</label>
+                        <textarea rows="8" class="form-control" id="message" name="message" [(ngModel)]="model.message"
+                                  type="text" placeholder="Votre message ici...">
+                        </textarea>
+                    </div>
+                    <div class="d-flex justify-content-center my-4">
+                        <div class="mx-2">
+                            <button class="btn btn-primary">Envoyer la demande</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

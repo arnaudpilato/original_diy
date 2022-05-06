@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-error',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
-
-  constructor() { }
+  constructor(private title: Title) {
+    this.title.setTitle('Erreur');
+  }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,21 +1,40 @@
 package com.wildcodeschool.original_diy.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "badges")
 public class DiyBadge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String name;
 
     private String picturePath;
 
     private String description;
+
+    private int step;
+
+    @ManyToMany
+    @JoinTable(name = "user_badges",
+            joinColumns = @JoinColumn(name = "badge_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnore
+    private Set<DiyUser> users = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -47,5 +66,21 @@ public class DiyBadge {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    public Set<DiyUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<DiyUser> users) {
+        this.users = users;
     }
 }

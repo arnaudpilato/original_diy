@@ -8,6 +8,7 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class WorkshopService {
+
   baseUrl = environment.baseUrl + '/test/workshop/';
 
   constructor(private http: HttpClient) { }
@@ -60,5 +61,8 @@ export class WorkshopService {
     return this.http.delete(this.baseUrl + "reservation/delete/" + id);
   }
 
+  deleteReservationByUsername(username: any, workshopId: any): Observable<any> {
+    return this.http.delete(this.baseUrl + "reservation/deleteByUsername/" + username + "/" + workshopId)
+  }
 
 }

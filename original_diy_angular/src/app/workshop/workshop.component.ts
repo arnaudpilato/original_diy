@@ -21,10 +21,12 @@ export class WorkshopComponent implements OnInit {
   public currentUser: any;
   private roles: string[] = [];
 
-
-  constructor(private title: Title, private tokenStorageService: TokenStorageService,
-              private workshopService: WorkshopService, private route: ActivatedRoute) {
-    this.title.setTitle("OriginalDIY - Atelier");
+  constructor(
+      private title: Title,
+      private tokenStorageService: TokenStorageService,
+      private workshopService: WorkshopService,
+      private route: ActivatedRoute) {
+    this.title.setTitle('Atelier');
   }
 
   ngOnInit(): void {
@@ -40,7 +42,6 @@ export class WorkshopComponent implements OnInit {
       console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
     }
   }
-
 
   getWorkshop(id: number): void {
     this.workshopService.getByIdHome(id).subscribe({
@@ -74,5 +75,4 @@ export class WorkshopComponent implements OnInit {
       error: (e) => console.error(e)
     });
   }
-
 }

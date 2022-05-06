@@ -7,6 +7,7 @@ import com.wildcodeschool.original_diy.repository.CommentRepository;
 import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.repository.WorkshopRepository;
 import com.wildcodeschool.original_diy.request.CommentRequest;
+import com.wildcodeschool.original_diy.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,53 +20,34 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test/comment")
 public class CommentController {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private WorkshopRepository workshopRepository;
-    @Autowired
-    private CommentRepository commentRepository;
-
+    private CommentService commentService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/confirm/{id}")
     public ResponseEntity<Object> changeConfirmation(@PathVariable("id") Long id) {
         try {
-            DiyComment comment = commentRepository.getById(id);
-            boolean status = comment.isConfirmed();
-            if (status) {
-                comment.setConfirmed(false);
-            } else {
-                comment.setConfirmed(true);
-            }
-            commentRepository.save(comment);
+            commentService.changeConfirmation(id);
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @RequestMapping("/new")
-    public ResponseEntity<?> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
-
+    public ResponseEntity<DiyComment> createComment(@Valid @RequestBody CommentRequest commentRequest, Authentication authentication) {
         try {
-            DiyComment comment = new DiyComment();
-            comment.setComment(commentRequest.getComment());
-            DiyUser user = userRepository.getUserByUsername(authentication.getName());
-            comment.setDiyUser(user);
-            DiyWorkshop workshop = workshopRepository.getById(commentRequest.getDiyWorkshopId());
-            comment.setDiyWorkshop(workshop);
-            comment.setConfirmed(false);
-            comment.setCreatedAt(new Date());
-            commentRepository.save(comment);
+            DiyComment comment = commentService.createComment(commentRequest, authentication);
+
             return new ResponseEntity<>(comment, HttpStatus.CREATED);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -74,11 +56,7 @@ public class CommentController {
     @GetMapping("/comment-by-workshop/{id}")
     public ResponseEntity<List<DiyComment>> getCommentByWorkshop(@PathVariable("id") Long id) {
         try {
-
-            List<DiyComment> comments = new ArrayList<>();
-            DiyWorkshop workshop = workshopRepository.getById(id);
-
-            comments.addAll(commentRepository.getCommentByWorkshop(workshop));
+            List<DiyComment> comments = commentService.getCommentByWorkshop(id);
 
             if (comments.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -86,6 +64,7 @@ public class CommentController {
 
             return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -93,12 +72,12 @@ public class CommentController {
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
-        System.out.println("id:::::"+ id);
         try {
-            DiyComment comment = commentRepository.getById(id);
-            commentRepository.delete(comment);
+            commentService.delete(id);
+
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

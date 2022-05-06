@@ -5,18 +5,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.Size;
+import java.util.*;
 
 @Entity
-/*@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "workshops")
 public class DiyWorkshop {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,20 +34,28 @@ public class DiyWorkshop {
     @JsonManagedReference("workshopComment")
     private final List<DiyComment> comments = new ArrayList<DiyComment>();
 
+    @NotNull
     private String title;
 
     private String picturePath;
 
+    @NotNull
+    @Min(1)
     private Long streetNumber;
 
+    @NotNull
     private String street;
 
+    @NotNull
     private Long postCode;
 
+    @NotNull
     private String city;
 
+    @NotNull
     private Double longitude;
 
+    @NotNull
     private Double latitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -57,8 +63,11 @@ public class DiyWorkshop {
 
     private boolean confirmation = false;
 
-    private int limitedPlaces;
+    private Long limitedPlaces;
 
+    @ManyToOne
+    @NotNull
+    private DiySubCategory subCategory;
 
     public DiyWorkshop() {
     }
@@ -79,9 +88,13 @@ public class DiyWorkshop {
         this.title = title;
     }
 
-    public String getPicturePath() { return picturePath; }
+    public String getPicturePath() {
+        return picturePath;
+    }
 
-    public void setPicturePath(String picturePath) { this.picturePath = picturePath; }
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
 
     public Long getStreetNumber() {
         return streetNumber;
@@ -175,11 +188,19 @@ public class DiyWorkshop {
         this.reservationUser = reservationUser;
     }
 
-    public int getLimitedPlaces() {
+    public Long getLimitedPlaces() {
         return limitedPlaces;
     }
 
-    public void setLimitedPlaces(int limitedPlaces) {
+    public void setLimitedPlaces(Long limitedPlaces) {
         this.limitedPlaces = limitedPlaces;
+    }
+
+    public DiySubCategory getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(DiySubCategory subCategory) {
+        this.subCategory = subCategory;
     }
 }

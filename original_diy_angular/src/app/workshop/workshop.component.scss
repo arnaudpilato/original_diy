@@ -1,5 +1,172 @@
+/***** Imports *****/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap');
+
+/***** Commentary *****/
+
 .commentary {
  border-width:1px;
  border-style:solid;
  border-color:black;
  }
+
+/***** Picture *****/
+
+.workshop-picture {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/***** Icon *****/
+
+.icon {
+  margin-right: 10px;
+}
+
+/***** Letter *****/
+
+.title {
+  padding: 20px;
+  margin: 20px 20px;
+  list-style-type: none;
+}
+
+.letter ul {
+  position: relative;
+  display: flex;
+}
+
+.letter li {
+  list-style: none;
+}
+
+.letter label {
+  position: relative;
+}
+
+.letter input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 70px;
+  width: 70px;
+  z-index: 100;
+}
+
+.letter div {
+  position: relative;
+  height: 70px;
+  width: 70px;
+  color: #fcf9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 46px;
+  cursor: pointer;
+  margin: 0 4px;
+  border-radius: 20px;
+  box-shadow: -1px -1px 4px rgba(255, 255, 255, 0.05),
+  4px 4px 6px rgba(0, 0, 0, 0.2),
+  inset -1px -1px 4px rgba(255, 255, 255, 0.05),
+  inset 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+div .yellow {
+  background: hsl(50, 75%, 55%);
+}
+
+div .green {
+  background: hsl(135, 35%, 55%);
+}
+
+div .turquoise {
+  background: hsl(155, 35%, 60%);
+}
+
+div .letter-empty {
+  background-color: white;
+  box-shadow: 0 0 0 0;
+  border: none;
+  color: white;
+}
+
+.letter input[type="checkbox"]:checked ~ div {
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.05),
+  inset 4px 4px 6px rgba(0, 0, 0, 0.2);
+  color: yellow;
+  text-shadow: 0 0 15px yellow, 0 0 25px yellow;
+  animation: glow 1.5s linear infinite;
+}
+
+@keyframes glow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+@media (max-width: 1400px) {
+  .letter input[type="checkbox"] {
+    height: 60px;
+    width: 60px;
+  }
+
+  .letter div {
+    height: 60px;
+    width: 60px;
+    font-size: 30px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .letter input[type="checkbox"] {
+    height: 50px;
+    width: 50px;
+  }
+
+  .letter div {
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .letter input[type="checkbox"] {
+    height: 40px;
+    width: 40px;
+  }
+
+  .letter div {
+    height: 40px;
+    width: 40px;
+    font-size: 25px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .icon {
+    height: 70px;
+    width: 70px;
+  }
+
+  .letter input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+  }
+
+  .letter div {
+    height: 30px;
+    width: 30px;
+    font-size: 15px;
+    border-radius: 5px;
+  }
+}
+

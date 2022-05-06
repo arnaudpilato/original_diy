@@ -13,4 +13,7 @@ export class DiyWorkshop {
   confirmation?: boolean;
   diyUser?: any;
   date?: any;
+  categorie?: any;
+  limitedPlaces?: number;
+  subCategory?: any;
 }

@@ -1,84 +1,142 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Gestion des Contacts</h1>
-  <div class="row justify-content-center">
-    <div class="col-11">
-        <div class="text-end d-flex justify-content-end">
-            <div><a class="btn btn-primary m-1" routerLink="/admin/contact/new">Ajouter un contact</a></div>
-            <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+    <h1 class="text-center my-4">Gestion des Contacts</h1>
+    <div class="row justify-content-center">
+        <div class="col-11">
+            <div class="text-end d-flex justify-content-end">
+                <div><a class="btn btn-primary m-1" routerLink="/admin/contact/new">Ajouter un contact</a></div>
+                <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
+            </div>
+            <div class="table-responsive d-block d-md-none my-2">
+                <table class="table table-bordered border-white my-5" *ngFor="let user of users | paginate: {
+                    itemsPerPage: pageSize,
+                    currentPage: page,
+                    totalItems: count
+                    }; let index = index">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ "Contact " +  (((page - 1) * 5) + (index + 1)) }}</th>
+                        <th scope="col">{{ user.username }}</th>
+                    </tr>
+                </thead>
+                <tbody class="table-size">
+                    <tr>
+                        <th scope="row">Nom</th>
+                        <td>{{ user.lastName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Prénom</th>
+                        <td>{{ user.firstName }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Telephone</th>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Role</th>
+                        <td *ngIf="user.roles?.length > 0">{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">
+                            <div class="d-flex justify-content-around">
+                                <div class="col-5">
+                                    <a routerLink="/admin/contact/edit/{{ user.id }}" class="link btn btn-warning col-12">
+                                        Modifier
+                                    </a>
+                                </div>
+                                <div class="col-5">
+                                    <a (click)="deleteUser(user.id)" class="btn btn-danger col-12">
+                                        Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            <div class="table-responsive d-none d-md-block my-2">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Surnom</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prenom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Role</th>
+                            <th scope="col" colspan="2">Modifier</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let user of users | paginate: {
+                        itemsPerPage: pageSize,
+                        currentPage: page,
+                        totalItems: count
+                        }; let index = index">
+                        <tr>
+                            <th scope="row">{{ ((page - 1) * 5) + (index + 1) }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td *ngIf="user.roles?.length > 0">{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
+                            <td class="text-end td-edit">
+                                <a routerLink="/admin/contact/edit/{{ user.id }}" class="link">
+                                    <div class="btn btn-warning"><i class="bi bi-pencil-fill"></i></div>
+                                </a>
+                            </td>
+                            <td class="td-delete">
+                                <a class="link" (click)="deleteUser(user.id)">
+                                    <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="user.badges?.length != 0">
+                            <th>Badges :</th>
+                            <td colspan="8">
+                                <ul class="d-flex">
+                                    <li class="badge-list" *ngFor="let badge of user.badges"><img class="badge-picture" src="{{ s3 + badge.picturePath }}" alt="badge"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-      <div class="table-responsive d-block d-md-none my-2">
-        <table class="table table-bordered border-dark" *ngFor="let user of users; let index = index">
-          <thead>
-            <tr>
-              <th scope="col">{{ "Contact " +  (index + 1) }}</th>
-              <th scope="col">{{ user.username }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Nom</th>
-              <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Prénom</th>
-              <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Email</th>
-              <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Telephone</th>
-              <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Role</th>
-              <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
-            </tr>
-            <tr>
-              <th scope="row" colspan="2">
-                <div class="d-flex justify-content-around">
-                  <div><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></div>
-                  <div><a class="link" href="#"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></div>
-                </div>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-responsive d-none d-md-block my-2">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Surnom</th>
-              <th scope="col">Nom</th>
-              <th scope="col">Prenom</th>
-              <th scope="col">Email</th>
-              <th scope="col">Telephone</th>
-              <th scope="col">Role</th>
-              <th scope="col" colspan="2">Modifier</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of users">
-              <th scope="row">Index</th>
-              <td>{{ user.username }}</td>
-              <td>{{ user.lastName }}</td>
-              <td>{{ user.firstName }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.phone }}</td>
-              <td>{{ user.roles[0]?.name === 'ROLE_USER' ? 'Utilisateur' : 'Administrateur' }}</td>
-              <td class="text-end td-edit"><a class="link" routerLink="/admin/contact/edit/{{ user.id }}"><img class="icon" src="/assets/img/edit.png" alt="Logo éditer"></a></td>
-              <td class="td-delete"><a class="link" (click)="deleteUser(user.id)"><img class="icon" src="/assets/img/delete.png" alt="Logo supprimer"></a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
-  </div>
+    <pagination-template #p="paginationApi" (pageChange)="pageChanged($event)">
+        <ul class="pagination justify-content-center my-4">
+            <li class="{{!p.isFirstPage() ? 'page-item' : 'page-item disabled'}}">
+                <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                    <a class="page-link" (click)="p.previous()">&laquo;</a>
+                </div>
+            </li>
+            <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+                <li class="page-item" *ngIf="p.getCurrent() !== page.value">
+                    <a class="page-link text-black" (click)="p.setCurrent(page.value)">
+                        <span>{{ page.label }}</span>
+                    </a>
+                </li>
+                <li class="page-item active" *ngIf="p.getCurrent() === page.value">
+                    <div class="page-link div-actual-page">
+                        <span class="actual-page">{{ page.label }}</span>
+                    </div>
+                </li>
+            </div>
+            <li class="{{!p.isLastPage() ? 'page-item' : 'page-item disabled'}}">
+                <div class="pagination-next" [class.disabled]="p.isLastPage()">
+                    <a class="page-link" (click)="p.next()">&raquo;</a>
+                </div>
+            </li>
+        </ul>
+    </pagination-template>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

@@ -1,31 +1,24 @@
 package com.wildcodeschool.original_diy.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Pil : Added constraints to make the username and email table unique <br>
  * - The username, email and password are required
  */
-
-
 @Entity
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "username")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "users",uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")})
 public class DiyUser {
@@ -48,6 +41,8 @@ public class DiyUser {
     @Size(max = 100)
     private String email;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date birthday;
     @NotBlank
     @Size(max = 100)
     private String password;
@@ -61,10 +56,11 @@ public class DiyUser {
 
     @JsonIgnore
     @OneToMany(
+            mappedBy = "diyUser",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<DiyComment> diyComments = new ArrayList<>();
+    private List<DiyComment> comments;
 
 
     @OneToMany(
@@ -76,13 +72,17 @@ public class DiyUser {
     @JsonIgnore
     private List<DiyWorkshop> workshops;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "user_badges",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "badge_id")
     )
     private Set<DiyBadge> badges = new HashSet<>();
 
+    private String resetPasswordToken;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
+    private Date tokenDate;
     public DiyUser() {
     }
 
@@ -156,12 +156,12 @@ public class DiyUser {
         this.roles = roles;
     }
 
-    public List<DiyComment> getDiyComments() {
-        return diyComments;
+    public List<DiyComment> getComments() {
+        return comments;
     }
 
-    public void setDiyComments(List<DiyComment> diyComments) {
-        this.diyComments = diyComments;
+    public void setComments(List<DiyComment> comments) {
+        this.comments = comments;
     }
 
     public List<DiyWorkshop> getWorkshops() {
@@ -172,11 +172,31 @@ public class DiyUser {
         this.workshops = workshops;
     }
 
-    public Set<DiyBadge> getBadges() {
-        return badges;
+    public Set<DiyBadge> getBadges() { return badges; }
+
+    public void setBadges(Set<DiyBadge> badges) { this.badges = badges; }
+
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBadges(Set<DiyBadge> badges) {
-        this.badges = badges;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getResetPasswordToken() {
+        return resetPasswordToken;
+    }
+
+    public void setResetPasswordToken(String resetPasswordToken) {
+        this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public Date getTokenDate() {
+        return tokenDate;
+    }
+
+    public void setTokenDate(Date tokenDate) {
+        this.tokenDate = tokenDate;
     }
 }

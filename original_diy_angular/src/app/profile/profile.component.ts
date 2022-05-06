@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) {
-    this.title.setTitle("OriginalDIY - profil")
+    this.title.setTitle('Profil');
   }
 
   ngOnInit(): void {
@@ -56,10 +56,12 @@ export class ProfileComponent implements OnInit {
       phone: this.user.phone,
       email: this.user.email,
       password: this.user.password,
+      birthday: this.user.birthday
     }
 
     this.userService.update(this.user.id, data).subscribe({
       next: (res) => {
+
         this.message = res.message ? res.message : 'Vos données ont bien été mises à jour !';
         this.router.navigate(['/home'])
       },

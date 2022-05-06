@@ -1,6 +1,37 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Espace Administrateur</h1>
-  <div class="row justify-content-center">
+    <div class="row">
+        <div class="my-4 d-md-none">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">D</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">M</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+            </ul>
+        </div>
+        <div class="my-4 d-none d-md-block">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox" /><div class="yellow">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">D</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">M</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="turquoise">N</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">I</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">S</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">T</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">R</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">A</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">T</div></li>
+                <li class="letter"><input type="checkbox" /><div class="green">I</div></li >
+                <li class="letter"><input type="checkbox" /><div class="turquoise">O</div></li>
+                <li class="letter"><input type="checkbox" /><div class="yellow">N</div></li>
+            </ul>
+        </div>
+    </div>
+
+  <div class="row justify-content-center mb-4">
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
         <a routerLink="/admin/workshop"><img class="picture rounded" src="/assets/img/workshop.jpg" alt="Image atelier"></a>
@@ -9,19 +40,22 @@
     </div>
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
-        <a routerLink="/admin/contact"><img class="picture rounded" src="/assets/img/contact.jpeg" alt="Image utilisateur"></a>
+        <a routerLink="/admin/contact"><img class="picture rounded" src="/assets/img/contact.jpeg"
+                                            alt="Image utilisateur"></a>
       </div>
       <h3 class="text-center my-2">Administration des utilisateurs</h3>
     </div>
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
-        <a href="#"><img class="picture rounded" src="/assets/img/reservation.jpeg" alt="Image réservation"></a>
+        <a href="/admin/reservation"><img class="picture rounded" src="/assets/img/reservation.jpeg"
+                                          alt="Image réservation"></a>
       </div>
       <h3 class="text-center my-2">Administration des réservations</h3>
     </div>
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
-        <a routerLink="/admin/commentary"><img class="picture rounded" src="/assets/img/comments.jpg" alt="Image commentaires"></a>
+        <a routerLink="/admin/commentary"><img class="picture rounded" src="/assets/img/comments.jpg"
+                                               alt="Image commentaires"></a>
       </div>
       <h3 class="text-center my-2">Administration des commentaires</h3>
     </div>
@@ -29,7 +63,7 @@
       <div class="picture-link rounded">
         <a routerLink="/admin/footer"><img class="picture rounded" src="/assets/img/footer.jpg" alt="Image footer"></a>
       </div>
-      <h3 class="text-center my-2">Administration du footer</h3>
+      <h3 class="text-center my-2">Administration des réseaux sociaux</h3>
     </div>
     <div class="col-11 col-md-4 my-3">
       <div class="picture-link rounded">
@@ -37,12 +71,6 @@
       </div>
       <h3 class="text-center my-2">Administration des badges</h3>
     </div>
-      <div class="col-11 col-md-4 my-3">
-          <div class="picture-link rounded">
-              <a routerLink="/admin/background"><img class="picture rounded" src="/assets/img/background.jpg" alt="Image badge"></a>
-          </div>
-          <h3 class="text-center my-2">Administration des fonds d'écran</h3>
-      </div>
   </div>
 </div>
 

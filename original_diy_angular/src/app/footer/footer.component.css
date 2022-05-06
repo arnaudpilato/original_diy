@@ -1,0 +1,18 @@
+.footer-color {
+  background-color: var(--primary-color);
+}
+
+.essai {
+  width: 60px;
+  height: 60px;
+  padding: 5px 10px;
+}
+
+.social-network-icon {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/*# sourceMappingURL=footer.component.css.map */

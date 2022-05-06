@@ -1,3 +1,14 @@
+/***** Picture *****/
+
+.badge-picture {
+  width: 100%;
+  object-fit: cover;
+  max-width: 32px;
+  max-height: 32px;
+  margin-right: 15px;
+  padding: 0;
+}
+
 /***** Icons *****/
 
 .icon {
@@ -16,9 +27,18 @@
 
 /***** Lines *****/
 
-th, td {
-  vertical-align: middle;
-  line-height: 40px;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.table-size td {
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow: hidden;
+  max-width: 210px;
+  min-width: 210px;
 }
 
 /***** Columns *****/
@@ -29,4 +49,15 @@ th, td {
 
 .td-delete {
   width: 80px;
+}
+
+/***** Pagination *****/
+
+.pagination a {
+  border: none;
+}
+
+.pagination .div-actual-page {
+  background-color: #75bd9f;
+  border: none;
 }

@@ -3,6 +3,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {DiyFooter} from "../../model/footer.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FooterService} from "../../service/footer.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-footer-edit',
@@ -23,7 +24,10 @@ export class AdminFooterEditComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService,
               private footerService: FooterService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) {
+    this.title.setTitle('Modifier un réseau social');
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -50,7 +54,7 @@ export class AdminFooterEditComponent implements OnInit {
     const data =  {
       name: this.socialNetwork.name,
       socialNetworkPath: this.socialNetwork.socialNetworkPath,
-      picturePath: this.socialNetwork.picturePath,
+      picturePath: this.nameFile,
       visible: this.socialNetwork.visible
     }
 

@@ -18,8 +18,10 @@ export class RegisterComponent implements OnInit {
   public isSignUpFailed: boolean = false;
   public errorMessage: string = '';
 
-  constructor(private title: Title, private authService: AuthService) {
-    this.title.setTitle("OriginalDIY - Inscription")
+  constructor(
+      private title: Title,
+      private authService: AuthService) {
+    this.title.setTitle('Inscription');
   }
 
   ngOnInit(): void {
@@ -32,6 +34,9 @@ export class RegisterComponent implements OnInit {
       next: data => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        window.setTimeout(function() {
+          window.location.href = "/home";
+        }, 1000);
       },
 
       error: err => {

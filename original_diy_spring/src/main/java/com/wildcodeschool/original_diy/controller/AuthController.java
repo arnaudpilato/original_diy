@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 /**
  * Pil : This controller provide APIs for register and login actions
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

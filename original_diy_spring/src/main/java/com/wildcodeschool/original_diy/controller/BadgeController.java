@@ -2,7 +2,9 @@ package com.wildcodeschool.original_diy.controller;
 
 import com.wildcodeschool.original_diy.entity.DiyBadge;
 import com.wildcodeschool.original_diy.repository.BadgeRepository;
+import com.wildcodeschool.original_diy.repository.UserRepository;
 import com.wildcodeschool.original_diy.request.BadgeRequest;
+import com.wildcodeschool.original_diy.service.BadgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,30 +12,25 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("api/test/badge")
 public class BadgeController {
     @Autowired
-    BadgeRepository badgeRepository;
+    BadgeService badgeService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
-    public ResponseEntity<List<DiyBadge>> gettAllBadges() {
+    public ResponseEntity<List<DiyBadge>> getAllBadges(@RequestParam(name = "searchBadge") String searchBadge) {
         try {
-            List<DiyBadge> badges = new ArrayList<>();
-            badgeRepository.findAll().forEach(badges::add);
+            List<DiyBadge> badges = badgeService.getAllBadges(searchBadge);
 
             if (badges.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
             return new ResponseEntity<>(badges, HttpStatus.OK);
-
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -43,13 +40,7 @@ public class BadgeController {
     @PostMapping("/new")
     public ResponseEntity<?> createBadge(@Valid @RequestBody BadgeRequest badgeRequest) {
         try {
-            DiyBadge badge = new DiyBadge();
-
-            badge.setName(badgeRequest.getName());
-            badge.setPicturePath(badgeRequest.getPicturePath());
-            badge.setDescription(badgeRequest.getDescription());
-
-            badgeRepository.save(badge);
+            DiyBadge badge = badgeService.newBadge(badgeRequest);
 
             return new ResponseEntity<>(badge, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -61,11 +52,12 @@ public class BadgeController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get/{id}")
     public ResponseEntity<DiyBadge> getBadgeById(@PathVariable("id") long id) {
-        Optional<DiyBadge> badge = badgeRepository.findById(id);
+        try {
+            Optional<DiyBadge> badge = badgeService.getBadgeById(id);
 
-        if (badge.isPresent()) {
             return new ResponseEntity<>(badge.get(), HttpStatus.OK);
-        } else {
+        } catch (Exception e) {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -73,17 +65,11 @@ public class BadgeController {
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit/{id}")
     public ResponseEntity<DiyBadge> updateBadge(@PathVariable("id") long id, @RequestBody BadgeRequest badgeRequest) {
-        Optional<DiyBadge> badgeData = badgeRepository.findById(id);
+        try {
+            Optional<DiyBadge> badge = badgeService.updateBadge(id, badgeRequest);
 
-        if (badgeData.isPresent()) {
-            DiyBadge badge = badgeData.get();
-
-            badge.setName(badgeRequest.getName());
-            badge.setPicturePath(badgeRequest.getPicturePath());
-            badge.setDescription(badgeRequest.getDescription());
-
-            return new ResponseEntity<>(badgeRepository.save(badge), HttpStatus.OK);
-        } else {
+            return new ResponseEntity<>(badge.get(), HttpStatus.OK);
+        } catch (Exception e) {
 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -93,7 +79,7 @@ public class BadgeController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<DiyBadge> deleteBadge(@PathVariable("id") Long id) {
         try {
-            badgeRepository.deleteById(id);
+            badgeService.deleteBadge(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DiyWorkshop} from "../model/workshop.model";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {Title} from "@angular/platform-browser";
@@ -6,6 +6,7 @@ import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../service/token-storage.service";
+import {CategoryService} from "../service/category.service";
 
 @Component({
   selector: 'app-add-workshop',
@@ -26,21 +27,23 @@ export class AddWorkshopComponent implements OnInit {
   public changeImage = false;
   public authuser: any;
   public minDatetimeLocal: any;
-
+  public categories: any[] | undefined;
   public Editor = ClassicEditor;
-
+  public subCategoryId: number | undefined;
 
   constructor(
     private title: Title,
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service,
     private router: Router,
-    private token: TokenStorageService) {
+    private token: TokenStorageService,
+    private categoryService: CategoryService) {
     this.title.setTitle("OriginalDIY Création - Atelier");
   }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.token.getToken();
+    this.getAllCategories()
     this.Editor.defaultConfig = {
       toolbar: {
         items: [
@@ -91,7 +94,12 @@ export class AddWorkshopComponent implements OnInit {
       confirmation: this.model.confirmation,
       date: new Date((new Date(this.model.date)).getTime() + (60 * 60 * 1000)),
       diyUser: this.authuser,
+      subCategoryId: this.subCategoryId,
+      limitedPlaces: this.model.limitedPlaces,
     }
+
+    console.log(data)
+    console.log(this.subCategoryId);
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -111,4 +119,19 @@ export class AddWorkshopComponent implements OnInit {
     });
   }
 
+  getAllCategories(): any {
+    this.categoryService.getAll().subscribe({
+        next: (datas) => {
+          console.log(datas)
+          this.categories = datas;
+          this.categories.forEach((category) => {
+            console.log("category = " + category.subCategory)
+          })
+
+        },
+
+        error: (e) => console.log(e)
+      }
+    )
+  }
 }

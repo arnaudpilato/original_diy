@@ -1,0 +1,39 @@
+/***** Picture *****/
+.social-network-picture {
+  width: 100%;
+  object-fit: cover;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+/***** Icons *****/
+.bi-pencil-fill, .bi-trash {
+  color: white;
+}
+
+.bi-check-lg {
+  color: green;
+  font-size: 1.5rem;
+}
+
+.bi-x-lg {
+  color: red;
+  font-size: 1.5rem;
+}
+
+/***** Lines *****/
+th, td {
+  vertical-align: middle;
+  line-height: 40px;
+}
+
+/***** Columns *****/
+.td-edit {
+  width: 60px;
+}
+
+.td-delete {
+  width: 80px;
+}
+
+/*# sourceMappingURL=admin-footer.component.css.map */

@@ -4,6 +4,7 @@ import {TokenStorageService} from "../../service/token-storage.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {BadgeService} from "../../service/badge.service";
 import {AmazonS3Service} from "../../service/amazon-s3.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-admin-badge-edit',
@@ -27,7 +28,10 @@ export class AdminBadgeEditComponent implements OnInit {
       private router: Router,
       private badgeService: BadgeService,
       private amazonS3Service: AmazonS3Service,
-      private route: ActivatedRoute) { }
+      private route: ActivatedRoute,
+      private title: Title) {
+    this.title.setTitle('Modifier un badge');
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -54,6 +58,7 @@ export class AdminBadgeEditComponent implements OnInit {
     this.badgeService.getById(id).subscribe({
       next: (data) => {
         this.badge = data;
+        this.badge.step == 0 ? this.badge.condition = 'manual' : this.badge.condition = 'after';
         console.log(data);
       },
 
@@ -65,7 +70,9 @@ export class AdminBadgeEditComponent implements OnInit {
     const data = {
       name: this.badge.name,
       picturePath: this.nameFile,
-      description: this.badge.description
+      description: this.badge.description,
+      condition: this.badge.condition,
+      step: this.badge.step
     };
 
     if (this.selectedFiles != null) {
@@ -78,7 +85,7 @@ export class AdminBadgeEditComponent implements OnInit {
     this.badgeService.update(this.badge.id, data).subscribe({
       next: (data) => {
         console.log(data);
-        this.router.navigate(['/admin/badge']);
+        window.location.href="/admin/badge";
       },
 
       error: (err) => console.error(err)

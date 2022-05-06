@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-user-workshop-index',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-workshop-index.component.scss']
 })
 export class UserWorkshopIndexComponent implements OnInit {
-
-  constructor() { }
+  constructor(private title: Title) {
+    this.title.setTitle('Mes ateliers')
+  }
 
   ngOnInit(): void {
   }
-
 }

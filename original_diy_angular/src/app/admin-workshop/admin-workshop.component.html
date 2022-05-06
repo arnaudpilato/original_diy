@@ -1,89 +1,140 @@
 <div class="container" *ngIf="isLoggedIn && showAdminBoard; else loggedOut">
-  <h1 class="text-center my-4">Gestion des ateliers</h1>
+    <h1 class="text-center my-4">Gestion des Ateliers</h1>
     <div class="text-end d-flex justify-content-end">
         <div><a class="btn btn-primary m-1" routerLink="/admin/workshop/new">Ajout d'un atelier</a></div>
         <div><a class="btn btn-secondary m-1" routerLink="/admin/home">Retour</a></div>
     </div>
-  <div class="table-responsive d-block d-md-none my-2">
-    <table class="table table-bordered border-dark" *ngFor="let workshop of workshops; let index = index">
-      <thead>
-      <tr>
-        <th>{{ "Atelier " + (index + 1) }}</th>
-        <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row">Image</th>
-        <td class="text-center">
-          <img class="workshop-picture"
-               src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
-               alt="Image de l'atelier">
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Description</th>
-        <td class="text-wrap">{{ workshop.description }}</td>
-      </tr>
-      <tr>
-        <th scope="row" colspan="2">
-          <div class="d-flex justify-content-around">
-            <div><a routerLink="/admin/workshop/edit" class="link"><img class="icon" src="/assets/img/edit.png"
-                                                                        alt="Logo éditer"></a>
-            </div>
-            <div>
-              <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon"
-                                                                                  src="/assets/img/delete.png"
-                                                                                  alt="Logo supprimer"></a>
-            </div>
-          </div>
-        </th>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="table-responsive-md d-none d-md-block my-2">
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col" colspan="2">Image</th>
-        <th scope="col">Description</th>
-        <th scope="col">Visible</th>
-        <th scope="col" colspan="2">Modifier</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr *ngFor="let workshop of workshops; let index = index">
-        <th scope="row">{{ index + 1 }}</th>
-        <th colspan="2">
-          <a href="#">
-            <img class="workshop-picture rounded img-fluid"
-                 src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
-                 alt="Image de l'atelier">
-          </a>
-        </th>
-        <td class="text-wrap" [innerHTML]="workshop.description | nl2br"></td>
-        <td>{{ workshop.confirmation ? "oui" : "non" }}</td>
-        <td class="text-end td-edit">
-          <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link"><img class="icon" src="/assets/img/edit.png"
-                                                                                 alt="Logo éditer"></a>
-        </td>
-        <td class="td-delete">
-          <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)"><img class="icon"
-                                                                                           src="/assets/img/delete.png"
-                                                                                           alt="Logo supprimer"></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div *ngFor="let workshop of workshops">
-  </div>
+    <div class="table-responsive d-block d-md-none">
+        <table class="table table-bordered border-white my-5" *ngFor="let workshop of workshops; let index = index">
+            <thead>
+                <tr>
+                    <th>{{ "Atelier " + (index + 1) }}</th>
+                    <th class="wrap-responsive" scope="col">{{ workshop.title }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Image</th>
+                    <td class="text-center">
+                        <img class="workshop-picture"
+                             src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+                             alt="Image de l'atelier">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Status</th>
+                    <td class="text-wrap">
+                        <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }}">
+                            {{ workshop.confirmation ? "En cours" : "Terminer" }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Places</th>
+                    <td class="{{workshop.reservationUser.length == workshop.limitedPlaces ? 'text-danger' : 'text-success'}}">
+                        <i class="bi bi-person-fill"></i> : {{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Visible</th>
+                    <td class="text-wrap">
+                        <i class="{{ workshop.confirmation ? 'bi bi-check-lg' : 'bi-x-lg' }}"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Date</th>
+                    <td>
+                        <p><i class="bi bi-calendar3"></i> : {{workshop.date | date : 'dd/MM/yy' }}</p>
+                        <p><i class="bi bi-stopwatch"></i> : {{workshop.date | date : 'HH' }} h {{workshop.date | date : 'mm' }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Adresse</th>
+                    <td class="text-wrap">
+                        <p><i class="bi bi-geo-alt-fill"></i> : {{workshop.streetNumber}} {{workshop.street}}</p>
+                        <p><i class="bi bi-house-fill"></i> : {{workshop.postCode}} {{workshop.city}} </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Description</th>
+                    <td class="text-wrap" [innerHTML]="workshop.description | nl2br"></td>
+                </tr>
+                <tr>
+                    <th scope="row" colspan="2">
+                        <div class="d-flex justify-content-around">
+                            <div class="col-5">
+                                <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link btn btn-warning col-12">
+                                    Modifier
+                                </a>
+                            </div>
+                            <div class="col-5">
+                                <a (click)="deleteWorkshop(workshop.id, workshop.picturePath)" class="btn btn-danger col-12">
+                                    Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive-md d-none d-md-block my-2">
+        <table class="table mb-5">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date et heure</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col"><i class="bi bi-eye-fill"></i></th>
+                    <th scope="col">Places</th>
+                    <th scope="col" colspan="2">Modifier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workshop of workshops; let index = index">
+                    <th scope="row">{{ index + 1 }}</th>
+                    <th>
+                        <img class="workshop-picture rounded img-fluid"
+                             src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
+                             alt="Image de l'atelier">
+                    </th>
+                    <td class="text-break" [innerHTML]="workshop.description | nl2br"></td>
+                    <td>
+                        <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }}">
+                        {{ workshop.confirmation ? "En cours" : "Terminer" }}
+                        </span>
+                    </td>
+                    <td>
+                        <p><i class="bi bi-calendar3"></i> : {{workshop.date | date : 'dd/MM/yy' }}</p>
+                        <p><i class="bi bi-stopwatch"></i> : {{workshop.date | date : 'HH' }} h {{workshop.date | date : 'mm' }}</p>
+                    </td>
+                    <td>
+                        <p><i class="bi bi-geo-alt-fill"></i> : {{workshop.streetNumber}} {{workshop.street}}</p>
+                        <p><i class="bi bi-house-fill"></i> : {{workshop.postCode}} {{workshop.city}} </p>
+                    </td>
+                    <td><i class="{{ workshop.confirmation ? 'bi bi-check-lg' : 'bi-x-lg' }}"></i></td>
+                    <td class="{{workshop.reservationUser.length == workshop.limitedPlaces ? 'text-danger' : 'text-success'}}">
+                        <i class="bi bi-person-fill"></i> : {{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}
+                    </td>
+                    <td class="text-end td-edit">
+                        <a routerLink="/admin/workshop/edit/{{workshop.id}}" class="link">
+                            <div class="btn btn-warning"><i class="bi bi-pencil-fill"></i></div>
+                        </a>
+                    </td>
+                    <td class="td-delete">
+                        <a class="link" (click)="deleteWorkshop(workshop.id, workshop.picturePath)">
+                            <div class="btn btn-danger"><i class="bi bi-trash"></i></div>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <ng-template #loggedOut>
-  <app-error401></app-error401>
+    <app-error401></app-error401>
 </ng-template>

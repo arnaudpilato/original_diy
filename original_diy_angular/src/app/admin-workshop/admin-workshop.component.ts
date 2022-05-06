@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DiyWorkshop} from "../model/workshop.model";
 import {Title} from "@angular/platform-browser";
 import {WorkshopService} from "../service/workshop.service";
 import {AmazonS3Service} from "../service/amazon-s3.service";
@@ -18,13 +17,12 @@ export class AdminWorkshopComponent implements OnInit {
   public static: string = '/assets/img/static-picture.png';
   public workshops:any[] | undefined ;
 
-
   constructor(
     private tokenStorageService: TokenStorageService,
     private title: Title,
     private workshopService: WorkshopService,
     private amazonS3Service: AmazonS3Service) {
-    this.title.setTitle("OriginalDIY - Admin - Workshops")
+    this.title.setTitle('Gestion des ateliers');
   }
 
   ngOnInit(): void {
@@ -42,7 +40,6 @@ export class AdminWorkshopComponent implements OnInit {
     this.workshopService.getAll().subscribe({
       next: (data) => {
         this.workshops = data;
-
       },
 
       error: (err) => console.log(err)
