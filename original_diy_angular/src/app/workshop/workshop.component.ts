@@ -20,6 +20,7 @@ export class WorkshopComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public currentUser: any;
   private roles: string[] = [];
+  public userReservation: any = [];
 
   constructor(
       private title: Title,
@@ -44,11 +45,12 @@ export class WorkshopComponent implements OnInit {
   }
 
   getWorkshop(id: number): void {
-    this.workshopService.getByIdHome(id).subscribe({
+    this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
-
         console.log(data);
+        console.log("TOTO");
+        this.userReservation = this.workshop.reservationUser.map((el: { username: any; }) => el.username);
       },
 
       error: (err) => console.error(err)
