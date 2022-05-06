@@ -6,9 +6,7 @@ import com.wildcodeschool.original_diy.request.EmailRequest;
 import com.wildcodeschool.original_diy.request.PasswordRequest;
 import com.wildcodeschool.original_diy.request.UserRequest;
 import com.wildcodeschool.original_diy.response.MessageResponse;
-import com.wildcodeschool.original_diy.service.BadgeVerificationService;
 import com.wildcodeschool.original_diy.service.BadgeService;
-import com.wildcodeschool.original_diy.service.DiyUserDetailsService;
 import com.wildcodeschool.original_diy.service.MailService;
 import com.wildcodeschool.original_diy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +26,6 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private BadgeRepository badgeRepository;
-
-    @Autowired
-    private CommentRepository commentRepository;
-
-    @Autowired
-    private WorkshopRepository workshopRepository;
-
-    @Autowired
     private BadgeService badgeService;
 
     @Autowired
@@ -55,12 +38,9 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<Map<String, Object>> getAllUsers(
             @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "5") int size
-    ) {
-        badgeService.badgesVerification();
-
+            @RequestParam(name = "size", defaultValue = "5") int size) {
         try {
-            badgeVerificationService.badgesVerification();
+            badgeService.badgesVerification();
             Map<String, Object> response = userService.getAllUsers(page, size);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
