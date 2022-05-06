@@ -96,10 +96,10 @@ public class WorkshopService {
         workshop.setCity(workshopRequest.getCity());
         workshop.setDescription(workshopRequest.getDescription());
 
-       Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
+        Optional<DiySubCategory> subCategory = subCategoryRepository.findById(workshopRequest.getSubCategoryId());
 
         if (subCategory.isEmpty()) {
-          // EXECPTION
+            // EXECPTION
         }
 
         DiySubCategory subCategoryReal = subCategory.get();
@@ -134,7 +134,7 @@ public class WorkshopService {
     }
 
 
-    public List<WorkshopDTO> showWorkshopDTO (){
+    public List<WorkshopDTO> showWorkshopDTO() {
         List<DiyWorkshop> workshops = new ArrayList<>();
         workshops.addAll(workshopRepository.getThreeLastWorkshops());
         workshopControl(workshops);
@@ -155,7 +155,7 @@ public class WorkshopService {
         return workshopsSortDTO;
     }
 
-    public List<WorkshopDTO> showWorkshopConfirmedDTO (){
+    public List<WorkshopDTO> showWorkshopConfirmedDTO() {
         List<DiyWorkshop> workshops = new ArrayList<>();
 
         workshops.addAll(workshopRepository.getAllConfirmedWorkshops());
@@ -172,12 +172,51 @@ public class WorkshopService {
                     workshop.getDate(), workshop.getDescription(), workshop.getTitle(),
                     workshop.getPicturePath(), workshop.getLimitedPlaces(), workshop.getSubCategory(),
                     workshop.getSubCategory().getCategory(), workshop.getStreetNumber(), workshop.getStreet(),
-                    workshop.getPostCode(),workshop.getCity(), workshop.getLongitude(), workshop.getLatitude(),
+                    workshop.getPostCode(), workshop.getCity(), workshop.getLongitude(), workshop.getLatitude(),
                     workshop.getDiyUser(), workshop.isConfirmation(), workshop.getDiyUser().getRoles());
             workshopsSortDTO.add(workshopDTO);
         }
         return workshopsSortDTO;
     }
 
+    public DiyWorkshop editWorkshop(Optional<DiyWorkshop> workshopData, WorkshopRequest workshopRequest) {
+        if (workshopData.isPresent()) {
+            DiyWorkshop workshop = workshopData.get();
+
+            workshop.setTitle(workshopRequest.getTitle());
+
+            if (workshopRequest.getPicturePath() == null) {
+                workshop.setPicturePath(workshop.getPicturePath());
+            } else {
+                workshop.setPicturePath(workshopRequest.getPicturePath());
+            }
+
+            workshop.setStreetNumber(workshopRequest.getStreetNumber());
+            workshop.setStreet(workshopRequest.getStreet());
+            workshop.setPostCode(workshopRequest.getPostCode());
+            workshop.setCity(workshopRequest.getCity());
+            workshop.setDescription(workshopRequest.getDescription());
+            workshop.setConfirmation(workshopRequest.isConfirmation());
+            workshop.setDate(workshopRequest.getDate());
+            workshop.setLimitedPlaces(workshopRequest.getLimitedPlaces());
+            if (workshopRequest.getSubCategoryId() == 0) {
+                workshop.setSubCategory(workshop.getSubCategory());
+            } else {
+                workshop.setSubCategory(subCategoryRepository.getById(workshopRequest.getSubCategoryId()));
+            }
+            double latitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(1).asDouble();
+            double longitude = gouvService.getAdressAsJson(workshop.getStreet(), workshop.getPostCode(),
+                    workshop.getStreetNumber()).get("features").get(0).get("geometry").get("coordinates").get(0).asDouble();
+
+            workshop.setLatitude(latitude);
+            workshop.setLongitude(longitude);
+
+            workshopRepository.save(workshop);
+            return workshop;
+        }
+
+        return null;
+    }
 }
 

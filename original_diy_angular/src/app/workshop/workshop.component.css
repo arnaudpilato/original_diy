@@ -1,18 +1,23 @@
-<<<<<<< HEAD
+/***** Imports *****/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
+/***** Commentary *****/
 .commentary {
   border-width: 1px;
   border-style: solid;
   border-color: black;
 }
-=======
 
->>>>>>> ccb3d8ba708e80107f4454062835facc1ed40a04
-
-.picture-workshop {
+/***** Picture *****/
+.workshop-picture {
   width: 100%;
   height: auto;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+/***** Icon *****/
+.icon {
+  margin-right: 10px;
 }
 
 /***** Letter *****/
