@@ -3,7 +3,7 @@ services:
   mysqldb:
     image: mysql:5.7
     restart: unless-stopped
-    env_file: ./original_diy_spring/.env
+    env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
@@ -16,7 +16,7 @@ services:
       - mysqldb
     build: ./original_diy_spring
     restart: on-failure
-    env_file: ./original_diy_spring/.env
+    env_file: ./.env
     ports:
       - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
     environment:
@@ -41,7 +41,7 @@ services:
     image: angular-nginx-docker
     build: ./original_diy_angular
     environment:
-      NODE_ENV: production
+      NODE_ENV: prod
     ports:
       - 80:80
 volumes:
