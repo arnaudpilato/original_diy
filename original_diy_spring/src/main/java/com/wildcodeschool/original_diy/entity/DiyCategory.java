@@ -20,7 +20,7 @@ public class DiyCategory {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy= "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<DiySubCategory> subCategories;
 
     public DiyCategory() {
