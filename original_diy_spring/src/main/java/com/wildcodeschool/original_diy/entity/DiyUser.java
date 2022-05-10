@@ -79,6 +79,14 @@ public class DiyUser {
     )
     private Set<DiyBadge> badges = new HashSet<>();
 
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(name = "workshops_reservation_user",
+            joinColumns = @JoinColumn(name = "reservation_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "diy_workshop_id")
+    )
+    private List<DiyUser> diyWorkshop;
+
     private String resetPasswordToken;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
@@ -198,5 +206,13 @@ public class DiyUser {
 
     public void setTokenDate(Date tokenDate) {
         this.tokenDate = tokenDate;
+    }
+
+    public List<DiyUser> getDiyWorkshop() {
+        return diyWorkshop;
+    }
+
+    public void setDiyWorkshop(List<DiyUser> diyWorkshop) {
+        this.diyWorkshop = diyWorkshop;
     }
 }
