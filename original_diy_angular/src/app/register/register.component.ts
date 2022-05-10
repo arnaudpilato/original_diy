@@ -61,10 +61,7 @@ console.log(username);
       next: (data) => {
         const datas = data;
         this.usernames = datas.users.map((el: { username: any; }) => el.username);
-        console.log(this.usernames);
-        console.log(this.usernames.includes("jf"));
       },
-
       error: (e) => console.error(e)
     });
   }
