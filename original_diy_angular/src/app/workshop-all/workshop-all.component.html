@@ -1,84 +1,98 @@
-<div class="min-vh-100 background-home">
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="my-4">
-        <ul class="title d-flex justify-content-center">
-          <li class="letter"><input type="checkbox"/>
-            <div class="yellow">N</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="green">O</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="turquoise">S</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="letter-empty"></div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="yellow">A</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="green">T</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="turquoise">E</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="yellow">L</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="green">I</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="turquoise">E</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="yellow">R</div>
-          </li>
-          <li class="letter"><input type="checkbox"/>
-            <div class="green">S</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="row justify-content-around mb-4 ">
-      <div *ngFor="let workshop of workshops" class="custom-card">
-        <div class="custom-card">
-          <div class="face face1">
-            <div class="content">
-              <img class="essai"
-                   src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}"
-                   alt="Image de l'atelier">
-              <h3>{{workshop.title}}</h3>
-            </div>
-          </div>
-          <div class="face face2">
-            <div class="content">
-              <div class="text-muted my-2"><i class="bi bi-calendar3 icon"></i>
-                <span>{{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}</span>
-              </div>
-              <div>
-                <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length == 0">
-                  <i class="bi bi-person-fill icon text-danger"></i>
-                  <span class="text-danger">Complet</span>
-                </div>
-                <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length != 0">
-                  <i class="bi bi-person-fill icon"></i>
-                  <span>{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}
-                    places disponibles</span>
-                </div>
-                <div class="text-muted my-2"><i class="bi bi-hourglass-split icon"></i> <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }} my-2">
-                {{ workshop.confirmation ? "En cours" : "Terminer" }}</span></div>
-              </div>
-              <div class="justify-content-center text-center">
-                <a routerLink="/workshop/{{ workshop.id }}" class="btn btn-primary my-3">Voir les détails</a>
-              </div>
-
-            </div>
-          </div>
+        <div class="my-4">
+            <ul class="title d-flex justify-content-center">
+                <li class="letter"><input type="checkbox"/>
+                    <div class="yellow">N</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="green">O</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="turquoise">S</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="letter-empty"></div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="yellow">A</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="green">T</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="turquoise">E</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="yellow">L</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="green">I</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="turquoise">E</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="yellow">R</div>
+                </li>
+                <li class="letter"><input type="checkbox"/>
+                    <div class="green">S</div>
+                </li>
+            </ul>
         </div>
-      </div>
     </div>
-  </div>
+    <div class="row justify-content-around mb-4 " *ngIf="workshops != null; else workshopEmpty">
+        <div *ngFor="let workshop of workshops" class="custom-card">
+            <div class="custom-card">
+                <div class="face face1">
+                    <div class="content">
+                        <img class="essai"
+                             src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}"
+                             alt="Image de l'atelier">
+                        <h3>{{workshop.title}}</h3>
+                    </div>
+                </div>
+                <div class="face face2">
+                    <div class="content">
+                        <div class="text-muted my-2"><i class="bi bi-calendar3 icon"></i>
+                            <span>{{workshop.date | date : 'dd/MM/yyyy' }} à {{workshop.date | date : 'HH:mm' }}</span>
+                        </div>
+                        <div>
+                            <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length == 0">
+                                <i class="bi bi-person-fill icon text-danger"></i>
+                                <span class="text-danger">Complet</span>
+                            </div>
+                            <div class="text-muted my-2" *ngIf="workshop.limitedPlaces - workshop.reservationUser.length != 0">
+                                <i class="bi bi-person-fill icon"></i>
+                                <span>{{ workshop.limitedPlaces - workshop.reservationUser.length }} / {{ workshop.limitedPlaces }}
+                                    places disponibles</span>
+                            </div>
+                            <div class="text-muted my-2">
+                                <i class="bi bi-hourglass-split icon"></i>
+                                <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }} my-2">
+                                    {{ workshop.confirmation ? "En cours" : "Terminer" }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="justify-content-center text-center">
+                            <a routerLink="/workshop/{{ workshop.id }}" class="btn btn-primary my-3">Voir les détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<ng-template #workshopEmpty>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-8">
+                <h1 class="text-center">Cette section est vide</h1>
+                <div class="text-center my-5">
+                    <a class="btn btn-primary" href="/">Retour à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
