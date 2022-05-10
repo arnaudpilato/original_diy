@@ -39,24 +39,3 @@ INSERT INTO sub_category(name, category_id) VALUE ('Décoration d''Anniversaire'
 INSERT INTO sub_category(name, category_id) VALUE ('Décoration de Kermesse', 4);
 
 
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 1);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 2);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 3);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 4);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 5);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (1, 6);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 7);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 8);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 9);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 10);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 11);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 12);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (2, 13);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (3, 14);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (3, 15);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (3, 16);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (3, 17);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (4, 18);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (4, 19);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (4, 20);
-INSERT INTO category_sub_categories(diy_category_id, sub_categories_id) VALUES (4, 21);

@@ -38,4 +38,5 @@ build/
 ### Database ###
 .env
 src/main/resources/public/static/data/*
+
 .m2
