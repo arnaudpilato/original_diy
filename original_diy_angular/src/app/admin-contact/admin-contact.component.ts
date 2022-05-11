@@ -60,16 +60,10 @@ export class AdminContactComponent implements OnInit {
 
   getAllUsers(): void {
     const params = this.getRequestParams(this.page, this.pageSize);
-    console.log("valeur du param " + params);
     this.userService.getAll(params).subscribe({
       next: (data) => {
         this.users = data.users;
         this.count = data.totalItems;
-        console.log(data.users);
-        console.log(this.users)
-        console.log("page actuelle " + data.currentPage)
-        console.log("taille de la page " + data.totalItems)
-        console.log("Nombre de pages " + data.totalPages)
         },
 
       error: (e) => console.error(e)

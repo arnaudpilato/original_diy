@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
     this.workshopService.getLastWorkshop().subscribe({
         next: (datas) => {
           this.workshops = datas;
-          console.log(this.workshops)
         },
 
         error: (e) => console.log(e)
