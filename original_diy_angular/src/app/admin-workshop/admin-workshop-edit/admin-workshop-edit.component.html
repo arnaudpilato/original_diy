@@ -90,7 +90,10 @@
                     <div class="mb-3">
                         <label class="form-label" for="description">Description :</label>
                         <ckeditor [editor]="Editor" name="description" id="description"
-                                  [(ngModel)]="workshop.description"></ckeditor>
+                                  [(ngModel)]="workshop.description" required #description="ngModel"></ckeditor>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="description.errors && workshopEditForm.submitted">
+                            <div *ngIf="description.errors['required']">La description est requise !</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-check form-switch">
