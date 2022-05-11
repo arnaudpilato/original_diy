@@ -67,7 +67,7 @@ public class MailService {
         String subject = "Nouveau message de : "+email;
 
         helper.setFrom("projet.original.diy@gmail.com", "Original DIY");
-        helper.setTo(username);
+        helper.setTo("originaldiycreezvous@orange.fr");
         helper.setSubject(subject);
         helper.setText(body, true);
 

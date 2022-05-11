@@ -32,12 +32,12 @@
                 <div class="mb-3">
                     <label class="form-label" for="firstName">Prenom :</label>
                     <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" type="text"
-                           placeholder="John" value="{{  user.firstName }}">
+                           placeholder="ex : John" value="{{  user.firstName }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">Mail :</label>
                     <input class="form-control" id="email" name="email" [(ngModel)]="user.email" type="email"
-                           placeholder="john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
+                           placeholder="ex : john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
                 </div>
                 <div class="form-control alert-danger my-2" *ngIf="email.errors && userProfileForm.submitted">
                     <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
@@ -46,7 +46,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="phone">Telephone :</label>
                     <input class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" type="number"
-                           placeholder="0698754321" value="{{ user.phone }}">
+                           placeholder="ex : 0698754321" value="{{ user.phone }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="birthday">Anniversaire :</label>
