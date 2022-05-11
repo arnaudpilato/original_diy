@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="title">Nom de l'atelier :</label>
                         <input class="form-control" id="title" name="title" [(ngModel)]="model.title" type="text"
-                               placeholder="Nom de l'atelier" required #title="ngModel">
+                               placeholder="ex : Nom de l'atelier" required #title="ngModel">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="title.errors && workshopNewForm.submitted">
                             <div *ngIf="title.errors['required']">Le nom de l'atelier est requis !</div>
                         </div>
@@ -20,7 +20,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="places">Nombre de place :</label>
                         <input class="form-control" id="places" name="places" min="1" [(ngModel)]="model.limitedPlaces"
-                               type="number" placeholder="4" minlength="1" required #places="ngModel">
+                               type="number" placeholder="ex : 4" minlength="1" required #places="ngModel">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="places.errors && workshopNewForm.submitted">
                             <div *ngIf="places.errors['required']">Le nombre de places est requis !</div>
                             <div *ngIf="places.errors['minlength']">Le nombre de places doit être supérieur à 1 !</div>
@@ -49,22 +49,22 @@
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="streetNumber">N° de rue :</label>
                         <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="model.streetNumber"
-                               type="number" placeholder="1" minlength="1" required #streetNumber="ngModel">
+                               type="number" placeholder="ex : 1" minlength="1" required #streetNumber="ngModel">
                     </div>
                     <div class="col-md-9 mb-3">
                         <label class="form-label" for="street">Rue/Avenue/Allée :</label>
                         <input class="form-control" id="street" name="street" [(ngModel)]="model.street" type="text"
-                               placeholder="Avenue du Champ de Mars" required #street="ngModel">
+                               placeholder="ex : Avenue du Champ de Mars" required #street="ngModel">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="postCode">Code Postal :</label>
                         <input class="form-control" id="postCode" name="postCode" [(ngModel)]="model.postCode" type="number"
-                               placeholder="45074" minlength="1" required #postCode="ngModel">
+                               placeholder="ex : 45000" minlength="1" required #postCode="ngModel">
                     </div>
                     <div class="col-md-9 mb-3">
                         <label class="form-label" for="city">Ville :</label>
                         <input class="form-control" id="city" name="city" [(ngModel)]="model.city" type="text"
-                               placeholder="Orléans" required #city="ngModel">
+                               placeholder="ex : Orléans" required #city="ngModel">
                     </div>
                     <div class="mb-3">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="streetNumber.errors && workshopNewForm.submitted">

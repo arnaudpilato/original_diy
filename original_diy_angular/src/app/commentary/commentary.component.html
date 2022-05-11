@@ -24,7 +24,7 @@
         </div>
     </div>
 </div>
-<div class="container" *ngIf="comments.length >= 1">
+<div class="container" *ngIf="confirmComment.includes(true)">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 my-3">
             <div class="row my-3">
@@ -34,7 +34,7 @@
                 <div class="col-11" *ngFor="let comment of comments">
                     <div *ngIf="comment.confirmed" class="row">
                         <div>
-                            <i class="bi bi-person-fill icon"></i><span class="text-user">{{ comment.diyUser.username }}</span>
+                            <i class="bi bi-person-fill icon"></i><span class="text-user">{{ comment.diyUser.username ? comment.diyUser.username : comment.diyUser }}</span>
                             <span class="fst-italic mx-2">le {{comment.createdAt | date : 'dd-MM-yy à HH:mm'}}</span>
                         </div>
                     </div>

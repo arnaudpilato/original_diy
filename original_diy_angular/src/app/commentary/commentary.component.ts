@@ -16,6 +16,7 @@ export class CommentaryComponent implements OnInit {
   public model: any = new DiyComment();
   public diyWorkshopId: number | undefined;
   public Editor = ClassicEditor;
+  public confirmComment: any = [];
   @Input() isLoggedIn: any;
 
   constructor(
@@ -52,6 +53,8 @@ export class CommentaryComponent implements OnInit {
     this.commentaryService.getCommentaryByWorkshop(id).subscribe({
       next: (data) => {
         this.comments = data;
+        this.confirmComment = this.comments.map((el: { confirmed: any; }) => el.confirmed);
+        console.log(this.comments);
       },
       error: (err) => console.error(err)
     })

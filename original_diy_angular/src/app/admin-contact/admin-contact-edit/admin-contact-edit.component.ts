@@ -26,6 +26,7 @@ export class AdminContactEditComponent implements OnInit {
   public searchBadge: string = "";
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public badgeIds: DiyBadge[] | undefined;
+  public currentUser: DiyUser = new DiyUser();
 
   constructor(
     private title: Title,
@@ -41,8 +42,8 @@ export class AdminContactEditComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
+      this.currentUser = this.tokenStorageService.getUser();
+      this.roles = this.currentUser.roles;
       this.getUser(this.route.snapshot.params["id"]);
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.getAllBadges();

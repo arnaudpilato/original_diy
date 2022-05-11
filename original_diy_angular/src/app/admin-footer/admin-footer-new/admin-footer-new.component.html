@@ -10,7 +10,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="name">Nom du réseau social :</label>
-                        <input class="form-control" id="name" name="name" [(ngModel)]="footer.name" type="text" placeholder="Pinterest" required #name="ngModel">
+                        <input class="form-control" id="name" name="name" [(ngModel)]="footer.name" type="text" placeholder="ex : Pinterest" required #name="ngModel">
                         <div class="form-control alert-danger my-2" *ngIf="name.errors && footerNewForm.submitted">
                             <div *ngIf="name.errors['required']">Le nom du badge est requis !</div>
                         </div>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="socialNetworkPath">Url :</label>
-                        <input class="form-control" id="socialNetworkPath" name="socialNetworkPath" [(ngModel)]="footer.socialNetworkPath" type="string" placeholder="https://www.pinterest.fr/">
+                        <input class="form-control" id="socialNetworkPath" name="socialNetworkPath" [(ngModel)]="footer.socialNetworkPath" type="string" placeholder="ex : https://www.pinterest.fr/">
                     </div>
                     <div>
                         <div class="form-check form-switch">
