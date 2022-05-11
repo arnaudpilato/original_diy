@@ -98,9 +98,6 @@ export class AddWorkshopComponent implements OnInit {
       limitedPlaces: this.model.limitedPlaces,
     }
 
-    console.log(data)
-    console.log(this.subCategoryId);
-
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
       this.amazonS3Service.pushFileToStorage(this.currentFileUpload).subscribe(event => {
@@ -122,10 +119,8 @@ export class AddWorkshopComponent implements OnInit {
   getAllCategories(): any {
     this.categoryService.getAll().subscribe({
         next: (datas) => {
-          console.log(datas)
           this.categories = datas;
           this.categories.forEach((category) => {
-            console.log("category = " + category.subCategory)
           })
 
         },

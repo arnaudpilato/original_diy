@@ -50,7 +50,6 @@ export class AdminBadgeNewComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -75,7 +74,6 @@ export class AdminBadgeNewComponent implements OnInit {
 
     this.badgeService.create(data).subscribe({
       next: (data) => {
-        console.log(data)
         window.location.href="/admin/badge";
       },
 

@@ -78,14 +78,12 @@ export class AdminContactEditComponent implements OnInit {
       this.all_selected_values.push(value);
     }
 
-    console.log(this.all_selected_values);
   }
 
   getAllBadges(): void {
     this.badgeService.getAll(this.searchBadge).subscribe({
       next: (data) => {
         this.badges = data;
-        console.log(this.searchBadge);
       },
 
       error: (e) => console.error(e)
@@ -118,6 +116,5 @@ export class AdminContactEditComponent implements OnInit {
 
   getRole(role: string) {
     this.role[0] = role;
-    console.log("Le role est " + this.roles);
   }
 }

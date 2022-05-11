@@ -31,7 +31,6 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMsg = '';
         if (error.error instanceof ErrorEvent) {
-          console.log('this is client side error');
           errorMsg = `Error: ${error.error.message}`;
         }
         else {
@@ -43,7 +42,6 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate(['/error']);
           }
         }
-        console.log(errorMsg);
         return throwError(errorMsg);
       })
     )

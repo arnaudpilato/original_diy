@@ -52,7 +52,6 @@ export class AdminCommentaryComponent implements OnInit {
   }
 
   deleteCommentary(id: number) {
-    console.log(id);
     this.commentaryService.delete(id).subscribe({
       next: () => {
         window.location.reload();

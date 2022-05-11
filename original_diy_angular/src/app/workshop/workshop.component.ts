@@ -39,8 +39,6 @@ export class WorkshopComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.currentUser = this.tokenStorageService.getUser();
-      console.log('Est ce que l\'utilisateur à le role admin ' + this.showAdminBoard);
-      console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
     }
   }
 

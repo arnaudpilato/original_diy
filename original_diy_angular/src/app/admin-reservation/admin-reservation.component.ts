@@ -32,7 +32,6 @@ export class AdminReservationComponent implements OnInit {
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.currentUser = this.tokenStorageService.getUser();
     }
-    console.log(this.isLoggedIn + " : login "+this.showAdminBoard+":showadmin")
     this.getWorkshop();
   }
 
@@ -40,7 +39,6 @@ export class AdminReservationComponent implements OnInit {
     this.workshopService.getAll().subscribe({
       next: (datas) => {
         this.workshops = datas;
-        console.log("thisWorkshops = ", this.workshops)
       },
 
       error: (e) => console.log(e)
