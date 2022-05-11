@@ -33,9 +33,6 @@ export class WorkshopReservationComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.currentUser = this.tokenStorageService.getUser();
-      console.log('Est ce que l\'utilisateur à le role admin ' + this.showAdminBoard);
-      console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
-
     }
     this.getWorkshop();
   }
@@ -44,7 +41,6 @@ export class WorkshopReservationComponent implements OnInit {
     this.workshopService.getReservationByCurrentUser().subscribe({
       next: (datas) => {
         this.workshops = datas;
-        console.log("thisWorkshops = ", this.workshops)
       },
 
       error: (e) => console.log(e)

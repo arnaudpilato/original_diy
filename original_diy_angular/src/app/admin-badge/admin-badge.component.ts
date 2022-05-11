@@ -43,7 +43,6 @@ export class AdminBadgeComponent implements OnInit {
     this.badgeService.getAll(this.searchBadge).subscribe({
       next: (data) => {
         this.badges = data;
-        console.log(this.searchBadge);
       },
 
       error: (e) => console.error(e)

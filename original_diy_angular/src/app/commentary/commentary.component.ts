@@ -54,7 +54,6 @@ export class CommentaryComponent implements OnInit {
       next: (data) => {
         this.comments = data;
         this.confirmComment = this.comments.map((el: { confirmed: any; }) => el.confirmed);
-        console.log(this.comments);
       },
       error: (err) => console.error(err)
     })
