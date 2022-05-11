@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Description</th>
-                    <td class="text-wrap" [innerHTML]="workshop.description | nl2br"></td>
+                    <td class="text-wrap" *ngIf="workshop.description != null" [innerHTML]="workshop.description | nl2br"></td>
                 </tr>
                 <tr>
                     <th scope="row" colspan="2">
@@ -101,7 +101,7 @@
                              src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}"
                              alt="Image de l'atelier">
                     </th>
-                    <td class="text-break" [innerHTML]="workshop.description | nl2br"></td>
+                    <td class="text-break" *ngIf="workshop.description != null" [innerHTML]="workshop.description | nl2br"></td>
                     <td>
                         <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }}">
                         {{ workshop.confirmation ? "En cours" : "Terminer" }}
