@@ -82,6 +82,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.workshops.forEach((data) => {
           const id = data.id;
 
+          console.log(data)
           const date = new Date(data.date);
           const month = date.getUTCMonth() >= 10 ? `${date.getUTCMonth()}` : `0${date.getUTCMonth()}`;
           const day = date.getUTCDate() >= 10 ? `${date.getUTCDate()}` : `0${date.getUTCDate()}`;
@@ -95,8 +96,10 @@ export class MapComponent implements OnInit, AfterViewInit {
             .bindPopup(`<p class='my-2'>${data.title}</p>`
               + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
               `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+              +   `<p> Catégorie : ${data.diyCategory.name}</p>` +
+              "<br/>" +
+
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>`)
             .openPopup;
           break
         case "Aménagements extérieurs":
@@ -104,8 +107,10 @@ export class MapComponent implements OnInit, AfterViewInit {
             .bindPopup(`<p class='my-2'>${data.title}</p>`
               + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
               `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+              +   `<p> Catégorie : ${data.diyCategory.name}</p>` +
+              "<br/>" +
+
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>`)
             .openPopup;
           break
         case "Les Animaux de compagnie":
@@ -113,8 +118,10 @@ export class MapComponent implements OnInit, AfterViewInit {
             .bindPopup(`<p class='my-2'>${data.title}</p>`
               + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
               `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+              +   `<p> Catégorie : ${data.diyCategory.name}</p>` +
+              "<br/>" +
+
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>`)
             .openPopup;
           break
         case "Les fêtes de l'année":
@@ -122,8 +129,10 @@ export class MapComponent implements OnInit, AfterViewInit {
             .bindPopup(`<p class='my-2'>${data.title}</p>`
               + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
               `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+              +   `<p> Catégorie : ${data.diyCategory.name}</p>` +
+              "<br/>" +
+
+              `<a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>`)
             .openPopup;
           break
       }
@@ -132,10 +141,12 @@ export class MapComponent implements OnInit, AfterViewInit {
 
       const markerBlue = L.marker([data.latitude, data.longitude], {icon: blueIcon}).addTo(this.map)
         .bindPopup(`<p class='my-2'>${data.title}</p>`
-          + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-          `<p> à : ${hours} H ${minutes}</p>`
-          + "<br/>" +
-          `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+          + `<p> <i class="bi bi-calendar3"></i> :  ${day}/${month}/${date.getFullYear()}</p>` +
+          `<p> <i class="bi bi-stopwatch"></i> : ${hours} H ${minutes}</p>`
+          +   `<p><i class="bi bi-tag-fill icon"></i> : ${data.diyCategory.name}</p>` +
+          "<br/>" +
+
+          `<a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>`)
         .openPopup;
     }
 
@@ -171,9 +182,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       "Satelitte": USGS_USImageryTopo
     };
 
-    const overlays = {
-      "Utilisateurs": cities
-    };
+
 
     this.map = L.map('map', {
       center: [47.902964, 1.909251],
@@ -181,7 +190,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       layers: [tiles, cities]
     });
 
-    L.control.layers(baseLayers, overlays).addTo(this.map);
+    L.control.layers(baseLayers).addTo(this.map);
   }
 
   ngAfterViewInit(): void {
