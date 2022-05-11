@@ -86,7 +86,7 @@
                     <td>
                         <img class="workshop-picture align-middle" src="{{ workshop.picturePath == static  ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
                     </td>
-                    <td style="max-width: 200px;" class="text-break" [innerHTML]="workshop.description | nl2br"></td>
+                    <td class="text-break ckEditor" [innerHTML]="workshop.description | nl2br"></td>
                     <td>
                     <span class="{{ workshop.confirmation ? 'badge bg-success' : 'badge bg-danger' }}">
                         {{ workshop.confirmation ? "En cours" : "Terminer" }}
