@@ -81,8 +81,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         this.workshops.forEach((data) => {
           const id = data.id;
-          const picture = data.picturePath;
-          console.log(data.picturePath);
 
           const date = new Date(data.date);
           const month = date.getUTCMonth() >= 10 ? `${date.getUTCMonth()}` : `0${date.getUTCMonth()}`;
