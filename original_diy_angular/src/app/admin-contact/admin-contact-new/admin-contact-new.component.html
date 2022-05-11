@@ -18,15 +18,15 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="lastName">Nom :</label>
-          <input class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" type="text" placeholder="John">
+          <input class="form-control" id="lastName" name="lastName" [(ngModel)]="model.lastName" type="text" placeholder="ex : John">
         </div>
         <div class="mb-3">
           <label class="form-label" for="firstName">Prenom :</label>
-          <input class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" type="text" placeholder="Doe">
+          <input class="form-control" id="firstName" name="firstName" [(ngModel)]="model.firstName" type="text" placeholder="ex : Doe">
         </div>
         <div class="mb-3">
           <label class="form-label" for="email">Mail :</label>
-          <input class="form-control" id="email" name="email" [(ngModel)]="model.email" type="text" email required placeholder="john.doe@mail.com" #email="ngModel">
+          <input class="form-control" id="email" name="email" [(ngModel)]="model.email" type="text" email required placeholder="ex : john.doe@mail.com" #email="ngModel">
         </div>
         <div class="form-control alert-danger my-2" *ngIf="email.errors && userNewForm.submitted">
           <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
@@ -34,7 +34,7 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="phone">Telephone :</label>
-          <input class="form-control" id="phone" name="phone" [(ngModel)]="model.phone" type="number" placeholder="0698754321">
+          <input class="form-control" id="phone" name="phone" [(ngModel)]="model.phone" type="number" placeholder="ex : 0698754321">
         </div>
         <div class="mb-3">
           <label class="form-label" for="password">Mot de passe :</label>

@@ -29,7 +29,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="username">Utilisateur :</label>
-                        <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" placeholder="Utilisateur" required #username="ngModel"/>
+                        <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text" placeholder="ex : Utilisateur" required #username="ngModel"/>
                         <div>
                             <div class="form-control alert-danger my-2" role="alert" *ngIf="username.errors && f.submitted">L'identifiant est requis !</div>
                         </div>
