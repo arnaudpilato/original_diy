@@ -30,7 +30,7 @@
                 {{ workshop.confirmation ? "En cours" : "Terminer" }}
             </span>
 
-            <div class="my-4" *ngIf="isLoggedIn && !userReservation.includes(currentUser.username)">
+            <div class="my-4 text-md-start text-center" *ngIf="isLoggedIn && !userReservation.includes(currentUser.username)">
                 <button type="button"
                         class="btn btn-primary"
                         data-bs-toggle="modal"
