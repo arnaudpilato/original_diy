@@ -7,4 +7,9 @@
   max-width: 50px;
 }
 
+/***** CkEditor *****/
+.ckEditor {
+  max-width: 400px;
+}
+
 /*# sourceMappingURL=admin-commentary.component.css.map */

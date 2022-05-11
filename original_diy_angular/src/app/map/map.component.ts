@@ -27,7 +27,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.workshopService.getAllConfirmed().subscribe({
       next: (datas) => {
         this.workshops = datas;
-        console.log(this.workshops)
 
         const blueIcon = L.icon({
           iconUrl: 'assets/img/marker-icon.png',
@@ -82,7 +81,6 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.workshops.forEach((data) => {
           const id = data.id;
 
-          console.log(data)
           const date = new Date(data.date);
           const month = date.getUTCMonth() >= 10 ? `${date.getUTCMonth()}` : `0${date.getUTCMonth()}`;
           const day = date.getUTCDate() >= 10 ? `${date.getUTCDate()}` : `0${date.getUTCDate()}`;

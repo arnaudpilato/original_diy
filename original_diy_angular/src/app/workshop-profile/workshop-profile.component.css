@@ -203,4 +203,9 @@ div .letter-empty {
   text-transform: uppercase;
 }
 
+/***** CkEditor *****/
+.ckEditor {
+  max-width: 300px;
+}
+
 /*# sourceMappingURL=workshop-profile.component.css.map */
