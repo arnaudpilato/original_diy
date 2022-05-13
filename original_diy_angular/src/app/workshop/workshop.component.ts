@@ -20,6 +20,7 @@ export class WorkshopComponent implements OnInit {
   public showAdminBoard: boolean = false;
   public currentUser: any;
   private roles: string[] = [];
+  public userReservation: any = [];
 
   constructor(
       private title: Title,
@@ -38,17 +39,14 @@ export class WorkshopComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.currentUser = this.tokenStorageService.getUser();
-      console.log('Est ce que l\'utilisateur à le role admin ' + this.showAdminBoard);
-      console.log('Détails de l\'utilisateur connécté ' + this.currentUser)
     }
   }
 
   getWorkshop(id: number): void {
-    this.workshopService.getByIdHome(id).subscribe({
+    this.workshopService.getById(id).subscribe({
       next: (data) => {
         this.workshop = data;
-
-        console.log(data);
+        this.userReservation = this.workshop.reservationUser.map((el: { username: any; }) => el.username);
       },
 
       error: (err) => console.error(err)
@@ -59,7 +57,7 @@ export class WorkshopComponent implements OnInit {
     this.workshopService.reservation(id, this.model).subscribe({
       next: (data) => {
         this.model = data;
-
+        window.location.reload();
       },
 
       error: (err) => console.error(err)

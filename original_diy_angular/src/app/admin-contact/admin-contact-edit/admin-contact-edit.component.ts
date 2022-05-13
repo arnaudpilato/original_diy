@@ -26,6 +26,7 @@ export class AdminContactEditComponent implements OnInit {
   public searchBadge: string = "";
   public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
   public badgeIds: DiyBadge[] | undefined;
+  public currentUser: DiyUser = new DiyUser();
 
   constructor(
     private title: Title,
@@ -41,8 +42,8 @@ export class AdminContactEditComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
+      this.currentUser = this.tokenStorageService.getUser();
+      this.roles = this.currentUser.roles;
       this.getUser(this.route.snapshot.params["id"]);
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.getAllBadges();
@@ -77,14 +78,12 @@ export class AdminContactEditComponent implements OnInit {
       this.all_selected_values.push(value);
     }
 
-    console.log(this.all_selected_values);
   }
 
   getAllBadges(): void {
     this.badgeService.getAll(this.searchBadge).subscribe({
       next: (data) => {
         this.badges = data;
-        console.log(this.searchBadge);
       },
 
       error: (e) => console.error(e)
@@ -117,6 +116,5 @@ export class AdminContactEditComponent implements OnInit {
 
   getRole(role: string) {
     this.role[0] = role;
-    console.log("Le role est " + this.roles);
   }
 }

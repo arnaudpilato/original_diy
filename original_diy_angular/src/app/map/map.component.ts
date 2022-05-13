@@ -12,6 +12,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
   public workshops: any[] | undefined;
   public workshop: any;
+  public s3: string = 'https://wcs-2-be-or-not-2-be.s3.eu-west-3.amazonaws.com/';
 
   constructor(
       private title: Title,
@@ -27,7 +28,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.workshopService.getAllConfirmed().subscribe({
       next: (datas) => {
         this.workshops = datas;
-        console.log(this.workshops)
 
         const blueIcon = L.icon({
           iconUrl: 'assets/img/marker-icon.png',
@@ -92,38 +92,74 @@ export class MapComponent implements OnInit, AfterViewInit {
       switch (data.diyCategory.name) {
         case "Aménagements intérieurs":
           const markerMarron = L.marker([data.latitude, data.longitude], {icon: iconMarron }).addTo(this.map)
-            .bindPopup(`<p class='my-2'>${data.title}</p>`
-              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-              `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .bindPopup(`
+                <div class="justify-content-center">
+                    <p class='text-center my-2'>${data.diyCategory.name}</p>
+                    <div>
+                        <img style="width: 100%" class="picture essai" src="${this.s3 + data.picturePath}" 
+                        alt="Image de l'atelier">
+                    </div>
+                    <div class="text-center fw-bold mt-2"><span>${data.title}</span></div>
+                    <div class="mt-3"><i class="bi bi-calendar3"></i><span> : ${day}/${month}/${date.getFullYear()}</span></div>
+                    <div class="my-2"><i class="bi bi-stopwatch"></i><span> : ${hours} H ${minutes}</span></div>
+                </div>
+                <div class="text-center my-4">
+                    <a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>
+                </div>`)
             .openPopup;
           break
         case "Aménagements extérieurs":
           const markerRed = L.marker([data.latitude, data.longitude], {icon: redIcon}).addTo(this.map)
-            .bindPopup(`<p class='my-2'>${data.title}</p>`
-              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-              `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .bindPopup(`
+                <div class="justify-content-center">
+                    <p class='text-center my-2'>${data.diyCategory.name}</p>
+                    <div>
+                        <img style="width: 100%" class="picture essai" src="${this.s3 + data.picturePath}" 
+                        alt="Image de l'atelier">
+                    </div>
+                    <div class="text-center fw-bold mt-2"><span>${data.title}</span></div>
+                    <div class="mt-3"><i class="bi bi-calendar3"></i><span> : ${day}/${month}/${date.getFullYear()}</span></div>
+                    <div class="my-2"><i class="bi bi-stopwatch"></i><span> : ${hours} H ${minutes}</span></div>
+                </div>
+                <div class="text-center my-4">
+                    <a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>
+                </div>`)
             .openPopup;
           break
         case "Les Animaux de compagnie":
           const markerOrange = L.marker([data.latitude, data.longitude], {icon: orangeIcon}).addTo(this.map)
-            .bindPopup(`<p class='my-2'>${data.title}</p>`
-              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-              `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .bindPopup(`
+                <div class="justify-content-center">
+                    <p class='text-center my-2'>${data.diyCategory.name}</p>
+                    <div>
+                        <img style="width: 100%" class="picture essai" src="${this.s3 + data.picturePath}" 
+                        alt="Image de l'atelier">
+                    </div>
+                    <div class="text-center fw-bold mt-2"><span>${data.title}</span></div>
+                    <div class="mt-3"><i class="bi bi-calendar3"></i><span> : ${day}/${month}/${date.getFullYear()}</span></div>
+                    <div class="my-2"><i class="bi bi-stopwatch"></i><span> : ${hours} H ${minutes}</span></div>
+                </div>
+                <div class="text-center my-4">
+                    <a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>
+                </div>`)
             .openPopup;
           break
         case "Les fêtes de l'année":
           const markerGreen = L.marker([data.latitude, data.longitude], {icon: greenIcon}).addTo(this.map)
-            .bindPopup(`<p class='my-2'>${data.title}</p>`
-              + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-              `<p> à : ${hours} H ${minutes}</p>`
-              + "<br/>" +
-              `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+            .bindPopup(`
+                <div class="justify-content-center">
+                    <p class='text-center my-2'>${data.diyCategory.name}</p>
+                    <div>
+                        <img style="width: 100%" class="picture essai" src="${this.s3 + data.picturePath}" 
+                        alt="Image de l'atelier">
+                    </div>
+                    <div class="text-center fw-bold mt-2"><span>${data.title}</span></div>
+                    <div class="mt-3"><i class="bi bi-calendar3"></i><span> : ${day}/${month}/${date.getFullYear()}</span></div>
+                    <div class="my-2"><i class="bi bi-stopwatch"></i><span> : ${hours} H ${minutes}</span></div>
+                </div>
+                <div class="text-center my-4">
+                    <a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>
+                </div>`)
             .openPopup;
           break
       }
@@ -131,11 +167,20 @@ export class MapComponent implements OnInit, AfterViewInit {
     } else {
 
       const markerBlue = L.marker([data.latitude, data.longitude], {icon: blueIcon}).addTo(this.map)
-        .bindPopup(`<p class='my-2'>${data.title}</p>`
-          + `<p> Prévue le :  ${day}/${month}/${date.getFullYear()}</p>` +
-          `<p> à : ${hours} H ${minutes}</p>`
-          + "<br/>" +
-          `<a class='btn btn-primary text-white' href='/workshop/${id}'>details</a>`)
+        .bindPopup(`
+                <div class="justify-content-center">
+                    <p class='text-center my-2'>${data.diyCategory.name}</p>
+                    <div>
+                        <img style="width: 100%" class="picture essai" src="${this.s3 + data.picturePath}" 
+                        alt="Image de l'atelier">
+                    </div>
+                    <div class="text-center fw-bold mt-2"><span>${data.title}</span></div>
+                    <div class="mt-3"><i class="bi bi-calendar3"></i><span> : ${day}/${month}/${date.getFullYear()}</span></div>
+                    <div class="my-2"><i class="bi bi-stopwatch"></i><span> : ${hours} H ${minutes}</span></div>
+                </div>
+                <div class="text-center my-4">
+                    <a class='btn btn-primary text-white' href='/workshop/${id}'>Détails</a>
+                </div>`)
         .openPopup;
     }
 
@@ -171,9 +216,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       "Satelitte": USGS_USImageryTopo
     };
 
-    const overlays = {
-      "Utilisateurs": cities
-    };
+
 
     this.map = L.map('map', {
       center: [47.902964, 1.909251],
@@ -181,7 +224,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       layers: [tiles, cities]
     });
 
-    L.control.layers(baseLayers, overlays).addTo(this.map);
+    L.control.layers(baseLayers).addTo(this.map);
   }
 
   ngAfterViewInit(): void {

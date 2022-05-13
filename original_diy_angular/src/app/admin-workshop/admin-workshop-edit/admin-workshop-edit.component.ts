@@ -56,7 +56,6 @@ export class AdminWorkshopEditComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log(this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -102,7 +101,6 @@ export class AdminWorkshopEditComponent implements OnInit {
 
     this.workshopService.update(this.workshop.id, data).subscribe({
       next: (data) => {
-        console.log(data);
         this.router.navigate(['/admin/workshop']);
       },
 
@@ -113,10 +111,8 @@ export class AdminWorkshopEditComponent implements OnInit {
   getAllCategories(): any {
     this.categoryService.getAll().subscribe({
         next: (datas) => {
-          console.log(datas)
           this.categories = datas;
           this.categories.forEach((category) => {
-            console.log("category = " + category.subCategory)
           })
         },
         error: (e) => console.log(e)

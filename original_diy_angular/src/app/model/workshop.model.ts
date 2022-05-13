@@ -6,7 +6,7 @@ export class DiyWorkshop {
   street?: string;
   postCode?: number;
   city?: string;
-  description?: string;
+  description? = "";
   comments?: any;
   longitude?: any;
   latitude?: any;

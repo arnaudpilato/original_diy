@@ -71,14 +71,12 @@ export class AdminWorkshopNewComponent implements OnInit {
       this.roles = user.roles;
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.minDatetimeLocal = new Date();
-      console.log("console log de this.authuser: ", this.authuser);
     }
   }
 
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -101,7 +99,6 @@ export class AdminWorkshopNewComponent implements OnInit {
       subCategoryId: this.subCategoryId,
 
     }
-    console.log("data : "+data)
 
     if (this.selectedFiles != null) {
       this.currentFileUpload = this.selectedFiles.item(0);
@@ -112,7 +109,6 @@ export class AdminWorkshopNewComponent implements OnInit {
 
     this.workshopService.create(data).subscribe({
       next: (data) => {
-        console.log(data)
         this.router.navigate(['/admin/workshop']);
       },
       error: (e) => {
@@ -124,10 +120,8 @@ export class AdminWorkshopNewComponent implements OnInit {
   getAllCategories(): any {
     this.categoryService.getAll().subscribe({
         next: (datas) => {
-          console.log(datas)
           this.categories = datas;
           this.categories.forEach((category) => {
-            console.log("category = " + category.subCategory)
           })
 
         },

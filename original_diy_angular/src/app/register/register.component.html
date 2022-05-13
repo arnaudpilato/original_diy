@@ -34,7 +34,8 @@
                     <div class="mb-3">
                         <label class="form-label" for="username">Utilisateur :</label>
                         <input class="form-control" id="username" name="username" [(ngModel)]="form.username" type="text"
-                               placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel"/>
+                               placeholder="ex : Utilisateur" required minlength="1" maxlength="100" #username="ngModel"/>
+                        <div class="form-control alert-danger my-2" *ngIf="errorUsername">Cette identifiant est déjà utilisé !</div>
                         <div class="form-control alert-danger my-2" *ngIf="username.errors && registerForm.submitted">
                             <div *ngIf="username.errors['required']">Le nom est requis !</div>
                             <div *ngIf="username.errors['minlength']">L'identifiant doit faire plus de 1 caractère !</div>

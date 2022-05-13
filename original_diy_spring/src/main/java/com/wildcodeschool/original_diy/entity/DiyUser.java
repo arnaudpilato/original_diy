@@ -45,6 +45,7 @@ public class DiyUser {
     private Date birthday;
     @NotBlank
     @Size(max = 100)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -78,6 +79,14 @@ public class DiyUser {
             inverseJoinColumns = @JoinColumn(name = "badge_id")
     )
     private Set<DiyBadge> badges = new HashSet<>();
+
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(name = "workshops_reservation_user",
+            joinColumns = @JoinColumn(name = "reservation_user_id"),
+            inverseJoinColumns = @JoinColumn(name = "diy_workshop_id")
+    )
+    private List<DiyUser> diyWorkshop;
 
     private String resetPasswordToken;
 
@@ -198,5 +207,13 @@ public class DiyUser {
 
     public void setTokenDate(Date tokenDate) {
         this.tokenDate = tokenDate;
+    }
+
+    public List<DiyUser> getDiyWorkshop() {
+        return diyWorkshop;
+    }
+
+    public void setDiyWorkshop(List<DiyUser> diyWorkshop) {
+        this.diyWorkshop = diyWorkshop;
     }
 }

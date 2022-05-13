@@ -20,12 +20,17 @@ public class DiyWorkshop {
     private Long id;
 
     @ManyToMany
+    @JoinTable(name = "workshops_reservation_user",
+            joinColumns = @JoinColumn(name = "diy_workshop_id"),
+            inverseJoinColumns = @JoinColumn(name = "reservation_user_id")
+    )
     private List<DiyUser> reservationUser;
 
     @NotNull
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm ")
     private Date date;
 
+    @NotNull
     @Column(length = 65535, columnDefinition = "TEXT")
     private String description;
 

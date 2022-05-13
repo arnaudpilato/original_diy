@@ -47,7 +47,6 @@ export class AdminBadgeEditComponent implements OnInit {
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
     this.nameFile = this.selectedFiles.item(0).name;
-    console.log("image du s3 : " + this.selectedFiles.item(0).name);
   }
 
   change(event: any) {
@@ -59,7 +58,6 @@ export class AdminBadgeEditComponent implements OnInit {
       next: (data) => {
         this.badge = data;
         this.badge.step == 0 ? this.badge.condition = 'manual' : this.badge.condition = 'after';
-        console.log(data);
       },
 
       error: (err) => console.error(err)
@@ -84,7 +82,6 @@ export class AdminBadgeEditComponent implements OnInit {
 
     this.badgeService.update(this.badge.id, data).subscribe({
       next: (data) => {
-        console.log(data);
         window.location.href="/admin/badge";
       },
 

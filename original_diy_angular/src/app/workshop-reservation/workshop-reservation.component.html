@@ -20,7 +20,7 @@
     <div class="text-end d-flex justify-content-end">
         <div><a class="btn btn-secondary m-1" routerLink="/mes-ateliers">Retour</a></div>
     </div>
-    <div class="row justify-content-around mb-4">
+    <div class="row justify-content-around mb-4" *ngIf="workshops != null; else emptyArray">
         <div *ngFor="let workshop of workshops; let index = index" class="card col-11 col-md-3 my-4 mx-1">
             <img class="workshop-picture" src="{{ workshop.picturePath == static ? workshop.picturePath : s3 + workshop.picturePath }}" alt="Image de l'atelier">
             <div class="card-body">
@@ -72,5 +72,16 @@
         </div>
     </div>
 </div>
+
+<ng-template #emptyArray>
+    <div class="container">
+        <h2 class="title text-center">
+            <span class="title-word title-word-1">Cette </span>
+            <span class="title-word title-word-2">section </span>
+            <span class="title-word title-word-3">est </span>
+            <span class="title-word title-word-4">vide</span>
+        </h2>
+    </div>
+</ng-template>
 
 

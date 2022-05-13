@@ -23,4 +23,9 @@
   font-size: 1.1rem;
 }
 
+/***** CkEditor *****/
+.ckEditor {
+  max-width: 300px;
+}
+
 /*# sourceMappingURL=admin-workshop.component.css.map */

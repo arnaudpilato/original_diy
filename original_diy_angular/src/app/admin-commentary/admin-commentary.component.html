@@ -70,7 +70,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="table-responsive d-none d-md-block my-2">
+            <div class="table-responsive d-none d-md-block my-4">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@
                     <tbody *ngFor="let workshop of workshops">
                         <tr *ngFor="let comment of workshop.comments">
                             <td>{{ workshop.title }}</td>
-                            <td [innerHTML]="comment.comment | nl2br"></td>
+                            <td class="ckEditor" [innerHTML]="comment.comment | nl2br"></td>
                             <td>{{ comment.diyUser.username != null ? comment.diyUser.username : comment.diyUser }}</td>
                             <td>
                                 <div class="text-muted my-2">
@@ -104,7 +104,7 @@
                                     </span>
                                 </div>
                             </td>
-                            <td class="text-center td-edit align-middle">
+                            <td class="text-center td-edit">
                                 <div class="form-check form-switch">
                                     <input (click)="confirm(comment.id)"
                                            class="form-check-input"

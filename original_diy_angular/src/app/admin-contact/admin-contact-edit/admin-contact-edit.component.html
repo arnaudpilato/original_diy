@@ -7,7 +7,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="username">Username :</label>
                     <input class="form-control" id="username" name="username" [(ngModel)]="user.username" type="text"
-                           placeholder="Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
+                           placeholder="ex : Utilisateur" required minlength="1" maxlength="100" #username="ngModel" value="{{ user.username }}">
                 </div>
                 <div class="form-control alert-danger my-2" *ngIf="username.errors && userEditForm.submitted">
                     <div *ngIf="username.errors['required']">Le nom est requis !</div>
@@ -17,17 +17,17 @@
                 <div class="mb-3">
                     <label class="form-label" for="lastName">Nom :</label>
                     <input class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" type="text"
-                           placeholder="Doe" value="{{ user.lastName }}">
+                           placeholder="ex : Doe" value="{{ user.lastName }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="firstName">Prenom :</label>
                     <input class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" type="text"
-                           placeholder="John" value="{{  user.firstName }}">
+                           placeholder="ex : John" value="{{  user.firstName }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="email">Mail :</label>
                     <input class="form-control" id="email" name="email" [(ngModel)]="user.email" type="email"
-                           placeholder="john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
+                           placeholder="ex : john.doe@mail.com" #email="ngModel" value="{{ user.email }}">
                 </div>
                 <div class="form-control alert-danger my-2" *ngIf="email.errors && userEditForm.submitted">
                     <div *ngIf="email.errors['required']">L'adresse email est requise !</div>
@@ -36,7 +36,7 @@
                 <div class="mb-3">
                     <label class="form-label" for="phone">Telephone :</label>
                     <input class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" type="number"
-                           placeholder="0698754321" value="{{ user.phone }}">
+                           placeholder="ex : 0698754321" value="{{ user.phone }}">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="role">Role :</label>
@@ -55,7 +55,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="mb-3">
+              <div *ngIf="user.id == currentUser.id">
+                <div class="mb-3" >
                     <label class="form-label" for="password">Mot de passe :</label>
                     <input class="form-control" id="password" name="password" [(ngModel)]="user.password" type="password" minlength="1" required #password="ngModel" value="{{ user.password }}">
                 </div>
@@ -63,6 +64,7 @@
                     <div *ngIf="password.errors['required']">Le mot de passe est requis</div>
                     <div *ngIf="password.errors['minlength']">Le mot de passe doit faire plus de 1 caractère !</div>
                 </div>
+              </div>
                 <div class="text-center my-3">
                     <button class="btn btn-primary m-1">Modifier</button>
                     <button class="btn btn-secondary m-1" routerLink="/admin/contact">Retour</button>

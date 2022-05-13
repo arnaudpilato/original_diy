@@ -17,6 +17,10 @@ export class UserService {
     return this.http.get<any>(this.baseUrl + "all", {params});
   }
 
+  getAllUser(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "all");
+  }
+
   getById(id: any): Observable<DiyUser> {
     return this.http.get(this.baseUrl + "get/" + id);
   }

@@ -12,7 +12,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="title">Nom de l'atelier :</label>
                         <input class="form-control" id="title" name="title" [(ngModel)]="workshop.title" type="text"
-                               placeholder="Nom de l'atelier" value="{{ workshop.title }}" required #title="ngModel">
+                               placeholder="ex : Nom de l'atelier" value="{{ workshop.title }}" required #title="ngModel">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="title.errors && workshopEditForm.submitted">
                             <div *ngIf="title.errors['required']">Le nom de l'atelier est requis !</div>
                         </div>
@@ -20,7 +20,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="places">Nombre de place : </label>
                         <input min="1" class="form-control" id="places" name="places" [(ngModel)]="workshop.limitedPlaces" type="number"
-                               placeholder="{{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}" minlength="1" required #places="ngModel">
+                               placeholder="ex : {{ workshop.limitedPlaces }}" value="{{ workshop.limitedPlaces }}" minlength="1" required #places="ngModel">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="places.errors && workshopEditForm.submitted">
                             <div *ngIf="places.errors['required']">Le nombre de places est requis !</div>
                             <div *ngIf="places.errors['minlength']">Le nombre de places doit être supérieur à 1 !</div>
@@ -48,22 +48,22 @@
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="streetNumber">N° de rue :</label>
                         <input class="form-control" id="streetNumber" name="streetNumber" [(ngModel)]="workshop.streetNumber"
-                               type="number" placeholder="1" value="{{ workshop.streetNumber }}" minlength="1" required #streetNumber="ngModel">
+                               type="number" placeholder="ex : 1" value="{{ workshop.streetNumber }}" minlength="1" required #streetNumber="ngModel">
                     </div>
                     <div class="col-md-9 mb-3">
                         <label class="form-label" for="street">Rue/Avenue/Allée :</label>
                         <input class="form-control" id="street" name="street" [(ngModel)]="workshop.street" type="text"
-                               placeholder="Avenue du Champ de Mars" value="{{ workshop.street }}" required #street="ngModel">
+                               placeholder="ex : Avenue du Champ de Mars" value="{{ workshop.street }}" required #street="ngModel">
                     </div>
                     <div class="col-md-3 mb-3">
                         <label class="form-label" for="postCode">Code Postal :</label>
                         <input class="form-control" id="postCode" name="postCode" [(ngModel)]="workshop.postCode" type="number"
-                               placeholder="45074" value="{{ workshop.postCode }}" minlength="1" required #postCode="ngModel">
+                               placeholder="ex : 45000" value="{{ workshop.postCode }}" minlength="1" required #postCode="ngModel">
                     </div>
                     <div class="col-md-9 mb-3">
                         <label class="form-label" for="city">Ville :</label>
                         <input class="form-control" id="city" name="city" [(ngModel)]="workshop.city" type="text"
-                               placeholder="Orléans" value="{{ workshop.city }}" #city="ngModel">
+                               placeholder="ex : Orléans" value="{{ workshop.city }}" #city="ngModel">
                     </div>
                     <div class="mb-3">
                         <div class="form-control alert-danger my-2" role="alert" *ngIf="streetNumber.errors && workshopEditForm.submitted">
@@ -90,7 +90,10 @@
                     <div class="mb-3">
                         <label class="form-label" for="description">Description :</label>
                         <ckeditor [editor]="Editor" name="description" id="description"
-                                  [(ngModel)]="workshop.description"></ckeditor>
+                                  [(ngModel)]="workshop.description" required #description="ngModel"></ckeditor>
+                        <div class="form-control alert-danger my-2" role="alert" *ngIf="description.errors && workshopEditForm.submitted">
+                            <div *ngIf="description.errors['required']">La description est requise !</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <div class="form-check form-switch">
