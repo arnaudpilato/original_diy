@@ -60,7 +60,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="my-5">Voulez-vous vraiment participer a l'atelier {{workshop.title}} ? </p>
+                        <p class="my-3 text-center">Voulez-vous vraiment participer a l'atelier suivant ? </p>
+                        <p class="text-center fw-bold">{{ workshop.title }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="reservation(workshop.id)">Oui</button>
