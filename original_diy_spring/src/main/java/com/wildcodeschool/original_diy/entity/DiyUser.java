@@ -45,6 +45,7 @@ public class DiyUser {
     private Date birthday;
     @NotBlank
     @Size(max = 100)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

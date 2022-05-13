@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-2" *ngIf="badge.condition != 'manual'">
                         <label class="form-label" for="step">Nb :</label>
-                        <input class="form-control" id="step" name="step" [(ngModel)]="badge.step"  type="number" [readOnly]="badge.condition == 'manual'">
+                        <input class="form-control" id="step" name="step" [(ngModel)]="badge.step"  type="number" minlength="1" [readOnly]="badge.condition == 'manual'">
                     </div>
                 </div>
                 <div class="mb-3">

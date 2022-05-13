@@ -29,7 +29,7 @@
                             <option value="after">Nombre d'ateliers participés</option>
                         </select>
                     </div>
-                    <div class="col-md-2" *ngIf="model.condition != 'manual'">-
+                    <div class="col-md-2" *ngIf="model.condition != 'manual'">
                         <label class="form-label" for="step">Nb :</label>
                         <input class="form-control" id="step" name="step" [(ngModel)]="model.step"
                                type="number" [readOnly]="model.condition == 'manual'" minlength="1" required>
